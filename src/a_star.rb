@@ -8,6 +8,7 @@ require_relative '../helpers/graph_helper'
 include GraphHelper
 
 FIXNUM_MAX = (2**(0.size * 8 -2) -1)
+COLOR = '#ff0000'
 
 # Simple mapping for the following example: https://pl.wikipedia.org/wiki/Algorytm_A*
 #
@@ -40,9 +41,9 @@ end
 def reconstruct_path(came_from, current_node)
   if came_from.keys.include? current_node
     path = reconstruct_path(came_from, came_from[current_node])
-    return "#{path} -> " << current_node
+    return "#{path} " << current_node
   else
-    puts 'CAME_FROM came_from'
+    puts "CAME_FROM #{came_from}"
     return 'START'
   end
 end
@@ -94,8 +95,11 @@ end
 
 graph = example_graph
 result = a_star(
-  example_graph,
-  example_graph[:graph].get_node('START'),
-  example_graph[:graph].get_node('FINISH'),
+  graph,
+  graph[:graph].get_node('START'),
+  graph[:graph].get_node('FINISH'),
   heuristic_function)
-puts result
+p result.split
+
+result.split.each do { graph[:graph].get_node(ele)[:color] }
+graph[:graph].output( :png => "result.png" )
