@@ -101,5 +101,5 @@ result = a_star(
   heuristic_function)
 p result.split
 
-result.split.each do { graph[:graph].get_node(ele)[:color] }
+result.split.each { |ele| graph[:graph].get_node(ele)[:color] = COLOR }
 graph[:graph].output( :png => "result.png" )
