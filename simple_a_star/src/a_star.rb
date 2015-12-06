@@ -87,7 +87,6 @@ def a_star(graph, start, goal, heuristic_function)
         g_score[neighbour] = tentative_g_score
         f_score[neighbour] = g_score[neighbour] + h_score[neighbour]
       end
-        
     end
   end
   return "FAILURE"
