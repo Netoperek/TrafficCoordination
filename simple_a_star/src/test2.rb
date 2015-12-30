@@ -30,14 +30,22 @@ heuristic_function = Proc.new do |states_vertex|
 end
 
 reconstruct_path_function = Proc.new do |came_from, current_node, start|
-  path ||==[]
+  path ||=[]
   if came_from.keys.include? current_node
-    path = reconstruct_path(came_from, came_from[current_node], start)
-    return path.push[current_node.id.to_s]
+    path = reconstruct_path_function.call(came_from, came_from[current_node], start)
+    path.push current_node
   else
-    return [start]
+    [start]
   end
 end
 
 astar = AStar.new(StatesVertex)
-puts astar.a_star(start_vertex, heuristic_function, win_function, reconstruct_path_function)
+result = astar.a_star(start_vertex, heuristic_function, win_function, reconstruct_path_function)
+result = result.map { |ele| ele.states }
+result = result.map { |states| states.map { |state| state.state } }
+
+result.each_with_index do |ele, index|
+  puts index
+  puts ele
+  puts ""
+end

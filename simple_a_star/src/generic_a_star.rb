@@ -61,14 +61,13 @@ class AStar
 
     while !to_visit_vertices.empty?
       current_node = hash_min(f_score, to_visit_vertices)
-      # TODO
-      # Sth wrong here
+
       if reconstruct_path_function.nil?
         return reconstruct_path(came_from, current_node, start) if win_function.call(current_node)
       else
         return reconstruct_path_function.call(came_from, current_node, start) if win_function.call(current_node)
       end
-      
+
       to_visit_vertices.delete(current_node)
       visited_vertices.add(current_node)
 

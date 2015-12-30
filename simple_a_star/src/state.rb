@@ -5,4 +5,8 @@ class State
     @state = {}
     attributes.zip(values) { |a, b| @state[a.to_sym] = b }
   end
+
+  def to_s
+    "ASD"
+  end
 end
