@@ -1,7 +1,22 @@
 require_relative 'state'
+require_relative 'road'
+require_relative '../helpers/data_helper'
 
 class StatesVertex
-  attr_accessor :attributes, :states
+  FIXNUM_MAX = 100
+  attr_accessor :attributes, :states, :roads
+
+  def id
+    @states.map { |state| state.state.to_s }
+  end
+
+  def roads_data
+    return @@roads unless @@roads.nil?
+    roads = roads_from_file '../roads_file'
+    roads_attributes = roads[:attributes]
+    roads_data = roads[:data]
+    @@roads = roads_data.map! { |ele| Road.new(roads_attributes, ele) }
+  end
 
   def generate_all_states
     car_states = @states.map { |ele| generate_car_states(ele) }
@@ -23,6 +38,19 @@ class StatesVertex
     #
     new_state = state.clone
     new_states.push(new_state)
+
+    # movement with velocity on crossroads
+    #
+    if new_state[:position] <= 0
+      new_state = state.clone
+      cuts = roads_data.map { |ele| ele.state[:cuts].first }
+      raise "WRONG CROSSROADS?" unless cuts.include? new_state[:final_road_nr]
+      new_state[:position] -= new_state[:velocity]
+      new_state[:velocity] += new_state[:acceleration]
+      new_state[:current_road_nr] = new_state[:final_road_nr]
+      new_states.push(new_state)
+      return new_states
+    end
 
     # movement with velocity
     #
@@ -50,10 +78,11 @@ class StatesVertex
   def initialize(attributes, states)
     @attributes = attributes
     @states = states.map { |ele| State.new(attributes, ele) }
+    @@roads = nil
   end
 
   def edge_weight(to)
-    @neighbours[to]
+    return FIXNUM_MAX
   end
 
   def neighbours

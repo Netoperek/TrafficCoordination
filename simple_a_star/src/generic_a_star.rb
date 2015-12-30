@@ -13,12 +13,10 @@ class AStar
   end
 
   def class_is_valid
-    methods = [:neighbours, :id, :edge_weight]
+    methods = [:neighbours, :edge_weight]
     methods.each do |method|
       raise NOT_IMPLEMENTED_ERROR_MSG unless @vertex_class.method_defined? method
     end
-    raise NOT_IMPLEMENTED_ERROR_MSG unless 
-      (@vertex_class.method_defined? :neighbours) && (@vertex_class.method_defined? :id)
   end
 
   def type_check(object)
@@ -37,20 +35,19 @@ class AStar
       min_key
   end
 
-  def reconstruct_path(came_from, current_node)
+  def reconstruct_path(came_from, current_node, start)
     if came_from.keys.include? current_node
-      path = reconstruct_path(came_from, came_from[current_node])
+      path = reconstruct_path(came_from, came_from[current_node], start)
       return "#{path} " << current_node.id.to_s
     else
-      return 'START'
+      return start.id
     end
   end
 
-  def a_star(start, goal, heuristic_function)
+  def a_star(start, heuristic_function, win_function, reconstruct_path_function=nil)
     # Type validation
     # 
     type_check(start)      
-    type_check(goal)      
 
     # Initials
     #
@@ -64,7 +61,13 @@ class AStar
 
     while !to_visit_vertices.empty?
       current_node = hash_min(f_score, to_visit_vertices)
-      return reconstruct_path(came_from, goal) if current_node.id == goal.id
+      # TODO
+      # Sth wrong here
+      if reconstruct_path_function.nil?
+        return reconstruct_path(came_from, current_node, start) if win_function.call(current_node)
+      else
+        return reconstruct_path_function.call(came_from, current_node, start) if win_function.call(current_node)
+      end
       
       to_visit_vertices.delete(current_node)
       visited_vertices.add(current_node)
@@ -72,8 +75,8 @@ class AStar
       current_node.neighbours.each do |neighbour|
         next if visited_vertices.include?(neighbour)
         
-        edge_weight = current_node.edge_weight(neighbour)
-        tentative_g_score = g_score[current_node].to_f + edge_weight
+        # edge_weight = current_node.edge_weight(neighbour)
+        tentative_g_score = g_score[current_node].to_f # + edge_weight
         tentative_is_better = false
 
         if !to_visit_vertices.include?(neighbour)
