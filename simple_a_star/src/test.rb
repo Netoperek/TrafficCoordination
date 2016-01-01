@@ -1,3 +1,5 @@
+# Not used
+#
 require_relative 'my_vertex'
 require_relative 'generic_a_star'
 
