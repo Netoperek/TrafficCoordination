@@ -1,0 +1,92 @@
+[
+  [
+    {
+      "car_nr": 1,
+      "current_road_nr": 1,
+      "position": 3,
+      "velocity": 1,
+      "acceleration": 0,
+      "final_road_nr": 2
+    },
+    {
+      "car_nr": 2,
+      "current_road_nr": 4,
+      "position": 3,
+      "velocity": 1,
+      "acceleration": 0,
+      "final_road_nr": 3
+    }
+  ],
+  [
+    {
+      "car_nr": 1,
+      "current_road_nr": 1,
+      "position": 2,
+      "velocity": 1,
+      "acceleration": 1,
+      "final_road_nr": 2
+    },
+    {
+      "car_nr": 2,
+      "current_road_nr": 4,
+      "position": 2,
+      "velocity": 1,
+      "acceleration": 1,
+      "final_road_nr": 3
+    }
+  ],
+  [
+    {
+      "car_nr": 1,
+      "current_road_nr": 1,
+      "position": 1,
+      "velocity": 2,
+      "acceleration": 1,
+      "final_road_nr": 2
+    },
+    {
+      "car_nr": 2,
+      "current_road_nr": 4,
+      "position": 1,
+      "velocity": 2,
+      "acceleration": 1,
+      "final_road_nr": 3
+    }
+  ],
+  [
+    {
+      "car_nr": 1,
+      "current_road_nr": 1,
+      "position": -1,
+      "velocity": 3,
+      "acceleration": 1,
+      "final_road_nr": 2
+    },
+    {
+      "car_nr": 2,
+      "current_road_nr": 4,
+      "position": -1,
+      "velocity": 3,
+      "acceleration": 1,
+      "final_road_nr": 3
+    }
+  ],
+  [
+    {
+      "car_nr": 1,
+      "current_road_nr": 2,
+      "position": -4,
+      "velocity": 4,
+      "acceleration": 1,
+      "final_road_nr": 2
+    },
+    {
+      "car_nr": 2,
+      "current_road_nr": 3,
+      "position": -4,
+      "velocity": 4,
+      "acceleration": 1,
+      "final_road_nr": 3
+    }
+  ]
+]

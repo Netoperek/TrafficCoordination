@@ -14,7 +14,7 @@
     },
     {
       "name": 3,
-      "road_nr": 1
+      "road_nr": -1
     },
     {
       "name": 2,
@@ -86,7 +86,7 @@
     },
     {
       "name": 3,
-      "road_nr": 4
+      "road_nr": -4
     },
     {
       "name": 2,

@@ -2,6 +2,7 @@ require_relative 'states_vertex'
 require_relative 'generic_a_star'
 require_relative '../helpers/data_helper'
 require_relative 'road'
+require 'json'
 require 'pry'
 
 states = states_from_file '../start_states_file'
@@ -43,9 +44,5 @@ astar = AStar.new(StatesVertex)
 result = astar.a_star(start_vertex, heuristic_function, win_function, reconstruct_path_function)
 result = result.map { |ele| ele.states }
 result = result.map { |states| states.map { |state| state.state } }
-
-result.each_with_index do |ele, index|
-  puts index
-  puts ele
-  puts ""
-end
+result_json = JSON.pretty_generate(result)
+File.open('../../core_out.json', 'w') { |file| file.write(result_json) }
