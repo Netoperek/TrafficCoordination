@@ -63,10 +63,12 @@ class StatesVertex
     new_states = []
 
     state = car_state.state
-    # no movement
+    # no movement -> IMMEDIATE STOP
     #
     new_state = state.clone
     new_states.push(new_state)
+    new_state[:velocity] = 0
+    new_state[:acceleration] = 0
 
     # movement with velocity on crossroads
     #
@@ -74,7 +76,11 @@ class StatesVertex
       new_state = state.clone
       cuts = car_road_cuts(new_state)
       raise "WRONG CROSSROADS?" unless cuts.include?(new_state[:final_road_nr]) || is_on_final_road(new_state)
-      new_state[:position] -= new_state[:velocity]
+      if new_state[:final_road_nr] != new_state[:current_road_nr]
+        new_state[:position] -= new_state[:velocity]
+      else
+        new_state[:position] += new_state[:velocity]
+      end
       new_state[:velocity] += new_state[:acceleration]
       new_state[:current_road_nr] = new_state[:final_road_nr]
       new_states.push(new_state)
@@ -84,7 +90,11 @@ class StatesVertex
     # movement with velocity
     #
     new_state = state.clone
-    new_state[:position] -= new_state[:velocity]
+    if new_state[:final_road_nr] != new_state[:current_road_nr]
+      new_state[:position] -= new_state[:velocity]
+    else
+      new_state[:position] += new_state[:velocity]
+    end
     new_state[:velocity] += new_state[:acceleration]
     new_states.push(new_state)
 
