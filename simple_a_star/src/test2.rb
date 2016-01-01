@@ -1,4 +1,4 @@
-require_relative 'state_vertex'
+require_relative 'states_vertex'
 require_relative 'generic_a_star'
 require_relative '../helpers/data_helper'
 require_relative 'road'
@@ -26,7 +26,7 @@ end
 #
 heuristic_function = Proc.new do |states_vertex|
   result = states_vertex.states.map { |ele| ele.state[:velocity] + ele.state[:acceleration] }
-  1 / result.reduce(:+).to_f
+  100 / result.reduce(:+).to_f
 end
 
 reconstruct_path_function = Proc.new do |came_from, current_node, start|
