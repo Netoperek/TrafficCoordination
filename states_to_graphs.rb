@@ -3,6 +3,7 @@ require_relative 'simple_a_star/src/road'
 require_relative 'simple_a_star/src/states_vertex'
 require 'set'
 require 'json'
+require 'ruby-graphviz'
 require 'pry'
 
 def data_from_files(start_states_file, roads_file)
@@ -89,7 +90,47 @@ def base_json(cars_states, roads_states)
   result = { 'nodes' => nodes, 'links' => links }
 end
 
+def random_hex_color(colors_set)
+  while true
+    color = "#" + "%06x" % (rand * 0xffffff)
+    break unless colors_set.include?(color)
+  end
+  colors_set.add(color)
+  color
+end
+
+def print_graph(outcome, index, colors_roads_hash)
+  colors_set = Set.new
+  g = GraphViz.new(:G, :type => :digraph )
+  nodes = []
+  color = 'black'
+  outcome["nodes"].each do |node|
+    if node[:road_nr].is_a?(Integer) && !colors_roads_hash.keys.include?(node[:road_nr].abs)
+      color = random_hex_color(colors_set)
+      colors_roads_hash[node[:road_nr].abs] = color
+    elsif node[:road_nr].is_a?(Integer)
+      color = colors_roads_hash[node[:road_nr].abs]
+    end
+    node_name_suffix = node[:road_nr].to_s
+    node_name_suffix = node[:road_nr].abs.to_s if node[:road_nr].is_a?(Integer)
+    if node[:road_nr].is_a?(Integer) && node[:road_nr] < 0
+      nodes.push(g.add_nodes(node[:name].to_s + "#" + node_name_suffix, :color => 'red', :fillcolor => color, :style => :filled, :penwidth => 4.0))
+    else
+      nodes.push(g.add_nodes(node[:name].to_s + "#" + node_name_suffix, :color => 'black', :fillcolor => color, :style => :filled, :penwidth => 1.0))
+    end
+  end
+  outcome["links"].each do |link|
+    source = link[:source]
+    target = link[:target]
+    source = nodes[source]
+    target = nodes[target]
+    g.add_edges(source, target, :arrowhead => :none)
+  end
+  g.output( :png => "output/hello_world#{index}.png" )
+end
+
 def apply_changing_states(core_outcome, graph)
+  colors_roads_hash = {}
   file = File.read(core_outcome) 
   cars_states = JSON.parse(file)
   index = 0
@@ -103,14 +144,11 @@ def apply_changing_states(core_outcome, graph)
         end 
       end
     end
-    File.open("simulator/output/#{index}.json", 'w') { |file| file.write(JSON.pretty_generate(graph)) }
+    print_graph(graph, index, colors_roads_hash)
+    # File.open("simulator/output/#{index}.json", 'w') { |file| file.write(JSON.pretty_generate(graph)) }
   end
-  
 end
 
 data = data_from_files('simple_a_star/start_states_file', 'simple_a_star/roads_file')
 outcome = base_json(data[:cars_states], data[:roads_states])
-outcome_json = JSON.pretty_generate(outcome)
-File.open('simulator/out.json', 'w') { |file| file.write(outcome_json) }
-
 apply_changing_states('core_out.json', outcome)
