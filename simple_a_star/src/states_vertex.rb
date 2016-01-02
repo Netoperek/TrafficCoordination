@@ -83,6 +83,7 @@ class StatesVertex
       end
       new_state[:velocity] += new_state[:acceleration]
       new_state[:current_road_nr] = new_state[:final_road_nr]
+      new_state[:position] *= -1 if new_state[:position] < 0
       new_states.push(new_state)
       return new_states
     end

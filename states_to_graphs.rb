@@ -136,6 +136,9 @@ def apply_changing_states(core_outcome, graph)
         if car_state["current_road_nr"] == node[:road_nr] && car_state["position"] == node[:name]
           node[:car_nr] = car_state['car_nr']
         end 
+        if node[:road_nr].is_a?(String) && node[:road_nr].split().include?(car_state["current_road_nr"].to_s) && car_state["position"] == node[:name]
+          node[:car_nr] = car_state['car_nr']
+        end 
       end
     end
     print_graph(graph, index, colors_roads_hash)
