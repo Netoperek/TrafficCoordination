@@ -32,17 +32,11 @@ def base_json(cars_states, roads_states)
     size = road[:size]
     road_nr = road[:road_nr]
     car_state = cars_states.select { |ele| ele.state[:current_road_nr] == road_nr }
-    position = nil
-    unless car_state.first.nil?
-      position = car_state.first.state[:position] if car_state.first.state[:current_road_nr] == road[:road_nr]
-    end
 
     while size > 0
-      if !position.nil? && position == size
-        node = { :name => size, :road_nr => -road[:road_nr] } 
-      else
-        node = { :name => size, :road_nr => road[:road_nr] } 
-      end
+      car_nr = nil
+      car_nr = car_state.first.state[:car_nr] unless car_state.first.nil?
+      node = { :name => size, :road_nr => road[:road_nr], :car_nr => car_nr } 
       nodes.push(node)
       size -= 1
     end
@@ -58,7 +52,7 @@ def base_json(cars_states, roads_states)
     node_road_nr = node[:road_nr]
     next_node_road_nr = next_node[:road_nr]
 
-    if node_road_nr.abs == next_node_road_nr.abs
+    if node_road_nr == next_node_road_nr
       link = { :source => i, :target => i+1 }
       links.push(link)
     end
@@ -66,7 +60,7 @@ def base_json(cars_states, roads_states)
   end
   
   crossing_nodes.values.each do |i|
-    road = roads_states.select { |ele| ele.state[:road_nr] == nodes[i][:road_nr].abs }
+    road = roads_states.select { |ele| ele.state[:road_nr] == nodes[i][:road_nr] }
     cuts = road.first.state[:cuts]
     cuts.push(road.first.state[:road_nr])
     crossroads = cuts.sort.join(" ")
@@ -101,20 +95,20 @@ end
 
 def print_graph(outcome, index, colors_roads_hash)
   colors_set = Set.new
-  g = GraphViz.new(:G, :type => :digraph )
+  g = GraphViz.new(:G, :type => :digraph, :use => 'neato' )
   nodes = []
   color = 'black'
   outcome["nodes"].each do |node|
-    if node[:road_nr].is_a?(Integer) && !colors_roads_hash.keys.include?(node[:road_nr].abs)
+    if node[:road_nr].is_a?(Integer) && !colors_roads_hash.keys.include?(node[:road_nr])
       color = random_hex_color(colors_set)
-      colors_roads_hash[node[:road_nr].abs] = color
+      colors_roads_hash[node[:road_nr]] = color
     elsif node[:road_nr].is_a?(Integer)
-      color = colors_roads_hash[node[:road_nr].abs]
+      color = colors_roads_hash[node[:road_nr]]
     end
     node_name_suffix = node[:road_nr].to_s
-    node_name_suffix = node[:road_nr].abs.to_s if node[:road_nr].is_a?(Integer)
-    if node[:road_nr].is_a?(Integer) && node[:road_nr] < 0
-      nodes.push(g.add_nodes(node[:name].to_s + "#" + node_name_suffix, :color => 'red', :fillcolor => color, :style => :filled, :penwidth => 4.0))
+    node_name_suffix = node[:road_nr].to_s if node[:road_nr].is_a?(Integer)
+    unless node[:car_nr].nil?
+      nodes.push(g.add_nodes('car#' + node[:car_nr].to_s, :color => 'red', :fillcolor => color, :style => :filled, :penwidth => 4.0))
     else
       nodes.push(g.add_nodes(node[:name].to_s + "#" + node_name_suffix, :color => 'black', :fillcolor => color, :style => :filled, :penwidth => 1.0))
     end
@@ -137,10 +131,10 @@ def apply_changing_states(core_outcome, graph)
   cars_states.each do |states|
     index += 1
     graph["nodes"].each do |node|
-      node[:road_nr] *= -1 if node[:road_nr].is_a?(Integer) && node[:road_nr] < 0 
+      node[:car_nr] = nil
       states.each do |car_state|
         if car_state["current_road_nr"] == node[:road_nr] && car_state["position"] == node[:name]
-          node[:road_nr] *= -1
+          node[:car_nr] = car_state['car_nr']
         end 
       end
     end
