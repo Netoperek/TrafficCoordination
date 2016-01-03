@@ -29,19 +29,9 @@ class StatesVertex
   end
 
   def state_vertex_collides(state_vertex)
-    states = state_vertex.states
-    i = -1 
-    j = 0
-    while i < states.size
-      i = i + 1 
-      while j < states.size-1
-        j = j + 1
-        on_crossroads = states[i].state[:position] == 0 && states[j].state[:position] == 0
-        same_crossroads = car_road_cuts(states[i].state) & car_road_cuts(states[j].state)
-        return true if on_crossroads && same_crossroads
-      end
-    end
-    false
+    positions = state_vertex.states.map { |ele| ele.state[:position] }
+    positions.delete_if { |ele| ele != 0 }
+    positions.count > 1 
   end
 
   def mix_states(states, states_result, result, index)   
