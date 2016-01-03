@@ -44,15 +44,30 @@ class StatesVertex
     false
   end
 
+  def mix_states(states, states_result, result, index)   
+    if states_result.size == states.first.size            
+      result.push(states_result)                          
+    else                                                  
+      states.each do |state|                              
+        f_states_dup = states_result.dup                  
+        f_states_dup[index] = state[index]                
+        mix_states(states, f_states_dup, result, index+1)
+      end                                                 
+    end                                                   
+  end                                                     
+
   def generate_all_states
     cars_states = @states.map { |ele| generate_car_states(ele) }
-    binding.pry
-    result = cars_states.shift
-    next_car_states = cars_states.shift
-    while !next_car_states.nil?
-      result = result.product(next_car_states)
-      next_car_states = cars_states.shift
+    final_car_states = []
+    for i in 0..cars_states.size-1
+      final_car_states.push(cars_states.map { |ele| ele[i] })
     end
+    cars_states = final_car_states
+
+    result = []
+    mix_states(cars_states, [], result, 0)
+    binding.pry
+
     result.map! { |ele| ele.map { |e| e.values } }
     result.map! { |ele| StatesVertex.new(@attributes, ele) }
     # deleting states with cars on the same crossroads
