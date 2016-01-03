@@ -10,11 +10,19 @@
     },
     {
       "car_nr": 2,
-      "current_road_nr": 4,
+      "current_road_nr": 2,
       "position": 2,
       "velocity": 1,
       "acceleration": 0,
-      "final_road_nr": 2
+      "final_road_nr": 4
+    },
+    {
+      "car_nr": 3,
+      "current_road_nr": 5,
+      "position": 2,
+      "velocity": 1,
+      "acceleration": 0,
+      "final_road_nr": 6
     }
   ],
   [
@@ -28,11 +36,19 @@
     },
     {
       "car_nr": 2,
-      "current_road_nr": 4,
+      "current_road_nr": 2,
       "position": 1,
       "velocity": 1,
       "acceleration": 1,
-      "final_road_nr": 2
+      "final_road_nr": 4
+    },
+    {
+      "car_nr": 3,
+      "current_road_nr": 5,
+      "position": 1,
+      "velocity": 1,
+      "acceleration": 1,
+      "final_road_nr": 6
     }
   ],
   [
@@ -46,11 +62,19 @@
     },
     {
       "car_nr": 2,
-      "current_road_nr": 4,
+      "current_road_nr": 2,
       "position": 0,
       "velocity": 2,
       "acceleration": 1,
-      "final_road_nr": 2
+      "final_road_nr": 4
+    },
+    {
+      "car_nr": 3,
+      "current_road_nr": 5,
+      "position": 0,
+      "velocity": 2,
+      "acceleration": 1,
+      "final_road_nr": 6
     }
   ],
   [
@@ -64,11 +88,19 @@
     },
     {
       "car_nr": 2,
-      "current_road_nr": 2,
+      "current_road_nr": 4,
       "position": 2,
       "velocity": 3,
       "acceleration": 1,
-      "final_road_nr": 2
+      "final_road_nr": 4
+    },
+    {
+      "car_nr": 3,
+      "current_road_nr": 6,
+      "position": 2,
+      "velocity": 3,
+      "acceleration": 1,
+      "final_road_nr": 6
     }
   ],
   [
@@ -82,11 +114,19 @@
     },
     {
       "car_nr": 2,
-      "current_road_nr": 2,
+      "current_road_nr": 4,
       "position": 5,
       "velocity": 4,
       "acceleration": 1,
-      "final_road_nr": 2
+      "final_road_nr": 4
+    },
+    {
+      "car_nr": 3,
+      "current_road_nr": 6,
+      "position": 5,
+      "velocity": 4,
+      "acceleration": 1,
+      "final_road_nr": 6
     }
   ],
   [
@@ -100,11 +140,19 @@
     },
     {
       "car_nr": 2,
-      "current_road_nr": 2,
+      "current_road_nr": 4,
       "position": 9,
       "velocity": 5,
       "acceleration": 1,
-      "final_road_nr": 2
+      "final_road_nr": 4
+    },
+    {
+      "car_nr": 3,
+      "current_road_nr": 6,
+      "position": 9,
+      "velocity": 5,
+      "acceleration": 1,
+      "final_road_nr": 6
     }
   ]
 ]

@@ -35,7 +35,7 @@ class StatesVertex
     while i < states.size
       i = i + 1 
       while j < states.size-1
-        j = i + 1
+        j = j + 1
         on_crossroads = states[i].state[:position] == 0 && states[j].state[:position] == 0
         same_crossroads = car_road_cuts(states[i].state) & car_road_cuts(states[j].state)
         return true if on_crossroads && same_crossroads
@@ -45,12 +45,12 @@ class StatesVertex
   end
 
   def mix_states(states, states_result, result, index)   
-    if states_result.size == states.first.size            
+    if states_result.size == states.size                  
       result.push(states_result)                          
     else                                                  
-      states.each do |state|                              
+      states[index].each do |state|                       
         f_states_dup = states_result.dup                  
-        f_states_dup[index] = state[index]                
+        f_states_dup[index] = state                       
         mix_states(states, f_states_dup, result, index+1)
       end                                                 
     end                                                   
@@ -58,15 +58,8 @@ class StatesVertex
 
   def generate_all_states
     cars_states = @states.map { |ele| generate_car_states(ele) }
-    final_car_states = []
-    for i in 0..cars_states.size-1
-      final_car_states.push(cars_states.map { |ele| ele[i] })
-    end
-    cars_states = final_car_states
-
     result = []
     mix_states(cars_states, [], result, 0)
-    binding.pry
 
     result.map! { |ele| ele.map { |e| e.values } }
     result.map! { |ele| StatesVertex.new(@attributes, ele) }
