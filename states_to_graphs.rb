@@ -95,7 +95,7 @@ end
 
 def print_graph(outcome, index, colors_roads_hash)
   colors_set = Set.new
-  g = GraphViz.new(:G, :type => :digraph, :use => 'neato' )
+  g = GraphViz.new(:G, :type => :digraph, :use => 'neato')
   nodes = []
   color = 'black'
   outcome["nodes"].each do |node|
@@ -108,7 +108,7 @@ def print_graph(outcome, index, colors_roads_hash)
     node_name_suffix = node[:road_nr].to_s
     node_name_suffix = node[:road_nr].to_s if node[:road_nr].is_a?(Integer)
     unless node[:car_nr].nil?
-      nodes.push(g.add_nodes('car#' + node[:car_nr].to_s, :color => 'red', :fillcolor => color, :style => :filled, :penwidth => 4.0))
+      nodes.push(g.add_nodes('car#' + node[:car_nr].to_s, :color => 'red', :fillcolor => color, :style => :filled, :penwidth => 8.0))
     else
       nodes.push(g.add_nodes(node[:name].to_s + "#" + node_name_suffix, :color => 'black', :fillcolor => color, :style => :filled, :penwidth => 1.0))
     end
@@ -120,7 +120,7 @@ def print_graph(outcome, index, colors_roads_hash)
     target = nodes[target]
     g.add_edges(source, target, :arrowhead => :none)
   end
-  g.output( :png => "output/hello_world#{index}.png" )
+  g.output( :png => "output/#{index}.png" )
 end
 
 def apply_changing_states(core_outcome, graph)
@@ -136,9 +136,12 @@ def apply_changing_states(core_outcome, graph)
         if car_state["current_road_nr"] == node[:road_nr] && car_state["position"] == node[:name]
           node[:car_nr] = car_state['car_nr']
         end 
-        if node[:road_nr].is_a?(String) && node[:road_nr].split().include?(car_state["current_road_nr"].to_s) && car_state["position"] == node[:name]
-          node[:car_nr] = car_state['car_nr']
-        end 
+        if node[:road_nr].is_a?(String) 
+          is_on_crossroads = node[:road_nr].split().include?(car_state["current_road_nr"].to_s) && node[:road_nr].split().include?(car_state["final_road_nr"].to_s)
+          if is_on_crossroads && car_state["position"] == node[:name]
+            node[:car_nr] = car_state['car_nr']
+          end 
+        end
       end
     end
     print_graph(graph, index, colors_roads_hash)
@@ -146,6 +149,7 @@ def apply_changing_states(core_outcome, graph)
   end
 end
 
+FileUtils.rm_rf('output/.', secure: true)
 data = data_from_files('simple_a_star/start_states_file', 'simple_a_star/roads_file')
 outcome = base_json(data[:cars_states], data[:roads_states])
 apply_changing_states('core_out.json', outcome)

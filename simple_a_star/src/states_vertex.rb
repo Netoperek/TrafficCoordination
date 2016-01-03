@@ -46,6 +46,7 @@ class StatesVertex
 
   def generate_all_states
     cars_states = @states.map { |ele| generate_car_states(ele) }
+    binding.pry
     result = cars_states.shift
     next_car_states = cars_states.shift
     while !next_car_states.nil?
@@ -68,7 +69,6 @@ class StatesVertex
     new_state = state.clone
     new_states.push(new_state)
     new_state[:velocity] = 0
-    new_state[:acceleration] = 0
 
     # movement with velocity on crossroads
     #

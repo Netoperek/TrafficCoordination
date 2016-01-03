@@ -41,7 +41,7 @@
       "current_road_nr": 1,
       "position": 1,
       "velocity": 0,
-      "acceleration": 0,
+      "acceleration": 1,
       "final_road_nr": 3
     },
     {
@@ -58,7 +58,7 @@
       "car_nr": 1,
       "current_road_nr": 1,
       "position": 1,
-      "velocity": 0,
+      "velocity": 1,
       "acceleration": 1,
       "final_road_nr": 3
     },
@@ -67,24 +67,6 @@
       "current_road_nr": 2,
       "position": 2,
       "velocity": 3,
-      "acceleration": 1,
-      "final_road_nr": 2
-    }
-  ],
-  [
-    {
-      "car_nr": 1,
-      "current_road_nr": 1,
-      "position": 1,
-      "velocity": 1,
-      "acceleration": 1,
-      "final_road_nr": 3
-    },
-    {
-      "car_nr": 2,
-      "current_road_nr": 2,
-      "position": 5,
-      "velocity": 4,
       "acceleration": 1,
       "final_road_nr": 2
     }
@@ -101,8 +83,8 @@
     {
       "car_nr": 2,
       "current_road_nr": 2,
-      "position": 9,
-      "velocity": 5,
+      "position": 5,
+      "velocity": 4,
       "acceleration": 1,
       "final_road_nr": 2
     }
@@ -119,8 +101,8 @@
     {
       "car_nr": 2,
       "current_road_nr": 2,
-      "position": 14,
-      "velocity": 6,
+      "position": 9,
+      "velocity": 5,
       "acceleration": 1,
       "final_road_nr": 2
     }
