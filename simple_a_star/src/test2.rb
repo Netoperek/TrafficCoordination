@@ -5,6 +5,9 @@ require_relative 'road'
 require 'json'
 require 'pry'
 
+STEPS_TO_STOP = 5
+VALUE_FOR_STOPPING_CAR = 400
+
 states = states_from_file '../start_states_file'
 states_attributes = states[:attributes]
 data = states[:data]

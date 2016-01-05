@@ -34,6 +34,12 @@ class StatesVertex
     positions.count > 1 
   end
 
+  def state_vertex_car_near_crossroads(state_vertex)
+    positions = state_vertex.states.map { |ele| ele.state[:position] }
+    positions.delete_if { |ele| ele > 5 }
+    positions.count > 0
+  end
+
   def mix_states(states, states_result, result, index)   
     if states_result.size == states.size                  
       result.push(states_result)                          
@@ -55,6 +61,8 @@ class StatesVertex
     result.map! { |ele| StatesVertex.new(@attributes, ele) }
     # deleting states with cars on the same crossroads
     #
+    binding.pry
+    # result.delete_if { |state_vertex| !state_vertex_car_near_crossroads(state_vertex) }
     result.delete_if { |state_vertex| state_vertex_collides(state_vertex) }
   end
 
@@ -67,11 +75,21 @@ class StatesVertex
     new_state = state.clone
     new_states.push(new_state)
     new_state[:velocity] = 0
+    new_state[:acceleration] = 0 
+
+    state = car_state.state
+    # slowing down immediatelly
+    #
+    new_state = state.clone
+    new_states.push(new_state)
+    new_state[:position] -= new_state[:velocity]
+    new_state[:velocity] = 1
+    new_state[:acceleration] = 0 
 
     # movement with velocity on crossroads
     #
+    new_state = state.clone
     if new_state[:position] <= 0
-      new_state = state.clone
       cuts = car_road_cuts(new_state)
       raise "WRONG CROSSROADS?" unless cuts.include?(new_state[:final_road_nr]) || is_on_final_road(new_state)
       if new_state[:final_road_nr] != new_state[:current_road_nr]
@@ -104,14 +122,6 @@ class StatesVertex
     new_state[:position] -= new_state[:velocity]
     new_states.push(new_state)
 
-    # acceleration - 1
-    #
-    new_state = state.clone
-    if new_state[:acceleration] > 0
-      new_state[:acceleration] -= 1
-      new_state[:position] -= new_state[:velocity]
-      new_states.push(new_state)
-    end
     new_states
   end
 
