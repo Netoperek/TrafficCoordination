@@ -1,3 +1,4 @@
 car_nr,current_road_nr,position,velocity,acceleration,final_road_nr
-1,1,5,1,0,3
-2,2,5,1,0,4
+1,1,5,1,0,6
+2,2,5,1,0,3
+3,5,5,1,0,4

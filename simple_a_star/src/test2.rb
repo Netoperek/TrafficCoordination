@@ -30,7 +30,7 @@ end
 #
 heuristic_function = Proc.new do |states_vertex|
   result = states_vertex.states.map { |ele| ele.state[:velocity] + ele.state[:acceleration] }
-  100 / result.reduce(:+).to_f
+  (100 / result.reduce(:+).to_f).abs
 end
 
 reconstruct_path_function = Proc.new do |came_from, current_node, start|

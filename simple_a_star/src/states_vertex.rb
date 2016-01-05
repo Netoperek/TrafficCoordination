@@ -31,7 +31,20 @@ class StatesVertex
   def state_vertex_collides(state_vertex)
     positions = state_vertex.states.map { |ele| ele.state[:position] }
     positions.delete_if { |ele| ele != 0 }
-    positions.count > 1 
+    more_than_one_on_crossroads = positions.count > 1 
+
+    states = state_vertex.states
+    for i in 0..states.size-1
+      for j in i+1..states.size-1
+        state_i = states[i].state
+        state_j = states[j].state
+        same_positions = state_i[:position] == state_j[:position]
+        same_velocities = state_i[:velocity] == state_j[:velocity]
+        same_accelerations = state_i[:acceleration] == state_j[:acceleration]
+        return true if same_positions && same_velocities && same_accelerations
+      end
+    end
+    more_than_one_on_crossroads
   end
 
   def state_vertex_car_near_crossroads(state_vertex)
@@ -59,67 +72,50 @@ class StatesVertex
 
     result.map! { |ele| ele.map { |e| e.values } }
     result.map! { |ele| StatesVertex.new(@attributes, ele) }
-    # deleting states with cars on the same crossroads
+    # deleting states with colliding cars
     #
-    binding.pry
-    # result.delete_if { |state_vertex| !state_vertex_car_near_crossroads(state_vertex) }
     result.delete_if { |state_vertex| state_vertex_collides(state_vertex) }
   end
 
   def generate_car_states(car_state)
     new_states = []
-
     state = car_state.state
-    # no movement -> IMMEDIATE STOP
-    #
-    new_state = state.clone
-    new_states.push(new_state)
-    new_state[:velocity] = 0
-    new_state[:acceleration] = 0 
 
-    state = car_state.state
-    # slowing down immediatelly
-    #
-    new_state = state.clone
-    new_states.push(new_state)
-    new_state[:position] -= new_state[:velocity]
-    new_state[:velocity] = 1
-    new_state[:acceleration] = 0 
+    velocity = state[:velocity] + state[:acceleration]
+    position = state[:position] - velocity
+    current_road_nr = state[:current_road_nr]
 
-    # movement with velocity on crossroads
-    #
-    new_state = state.clone
-    if new_state[:position] <= 0
-      cuts = car_road_cuts(new_state)
-      raise "WRONG CROSSROADS?" unless cuts.include?(new_state[:final_road_nr]) || is_on_final_road(new_state)
-      if new_state[:final_road_nr] != new_state[:current_road_nr]
-        new_state[:position] -= new_state[:velocity]
-      else
-        new_state[:position] += new_state[:velocity]
-      end
-      new_state[:velocity] += new_state[:acceleration]
-      new_state[:current_road_nr] = new_state[:final_road_nr]
-      new_state[:position] *= -1 if new_state[:position] < 0
-      new_states.push(new_state)
-      return new_states
+    if position < 0
+      cuts = car_road_cuts(state)
+      raise "WRONG CROSSROADS?" unless cuts.include?(state[:final_road_nr]) || is_on_final_road(state)
+      current_road_nr = state[:final_road_nr]
+      position *= -1
     end
 
     # movement with velocity
     #
     new_state = state.clone
-    if new_state[:final_road_nr] != new_state[:current_road_nr]
-      new_state[:position] -= new_state[:velocity]
-    else
-      new_state[:position] += new_state[:velocity]
-    end
-    new_state[:velocity] += new_state[:acceleration]
+    new_state[:position] = position
+    new_state[:velocity] = velocity
+    new_state[:current_road_nr] = current_road_nr
     new_states.push(new_state)
 
-    # acceleration + 1
+    # movement with velocity, acceleration+1
     #
     new_state = state.clone
+    new_state[:position] = position
+    new_state[:velocity] = velocity
+    new_state[:current_road_nr] = current_road_nr
     new_state[:acceleration] += 1
-    new_state[:position] -= new_state[:velocity]
+    new_states.push(new_state)
+
+    # movement with velocity, acceleration-1
+    #
+    new_state = state.clone
+    new_state[:position] = position
+    new_state[:velocity] = velocity
+    new_state[:current_road_nr] = current_road_nr
+    new_state[:acceleration] -= 1
     new_states.push(new_state)
 
     new_states
