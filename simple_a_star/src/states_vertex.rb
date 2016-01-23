@@ -76,7 +76,8 @@ class StatesVertex
     #
     result.delete_if { |state_vertex| state_vertex_collides(state_vertex) }
   end
-
+  
+  # acceleration 1,1,-2,+2
   def generate_car_states(car_state)
     new_states = []
     state = car_state.state
