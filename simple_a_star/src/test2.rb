@@ -29,8 +29,11 @@ end
 # Adding velocity and acceleration of each car
 #
 heuristic_function = Proc.new do |states_vertex|
-  result = states_vertex.states.map { |ele| ele.state[:velocity] + ele.state[:acceleration] }
-  (100 / result.reduce(:+).to_f).abs
+  result = states_vertex.states.map { |ele| ele.state[:velocity] }
+  final_roads_ok = states_vertex.states.map { |ele| ele.state[:current_road_nr] == ele.state[:final_road_nr] }
+  number_of_roads_switched = final_roads_ok.count { |ele| ele == true }
+  number_of_roads_switched = 1 if number_of_roads_switched == 0
+  (100 / result.reduce(:+).to_f).abs / number_of_roads_switched
 end
 
 reconstruct_path_function = Proc.new do |came_from, current_node, start|
