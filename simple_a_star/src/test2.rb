@@ -47,7 +47,12 @@ reconstruct_path_function = Proc.new do |came_from, current_node, start|
 end
 
 astar = AStar.new(StatesVertex)
+
+start = Time.now
 result = astar.a_star(start_vertex, heuristic_function, win_function, reconstruct_path_function)
+finish = Time.now
+time = finish - start
+
 result = result.map { |ele| ele.states }
 result = result.map { |states| states.map { |state| state.state } }
 result_json = JSON.pretty_generate(result)
@@ -58,4 +63,5 @@ File.open('../../human_core_out.json', 'w') do |file|
     file.puts(index+1)
     file.puts(ele)
   end
+  file.puts("It took: #{time} s")
 end
