@@ -1,4 +1,5 @@
-1. Poprawic kolizje # DONE
-2. Poprawic przyspieszenie # DONE
-3. Dla wiekszej ilosci aut
-4. Reprezentacja dla duzej ilosci skrzyzowan
+1. Wielopasmowy model, 4x4
+2. 3,4,5 stanow (0,1,-1) przyspieszenie albo (0,1,-1,-2) Przyspieszenie
+3. Wiele a*
+4. Heurystyka
+5. Wykres od aut i czasu 

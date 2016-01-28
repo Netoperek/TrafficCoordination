@@ -26,8 +26,10 @@ win_function = Proc.new do |states_vertex|
   result.reduce(:&)
 end
 
-# Adding velocity and acceleration of each car
+# Adding velocity
 #
+# kiedy bym przyspieszal maksymalnie to kiedy dojade celu
+# i zwracam najgorsze
 heuristic_function = Proc.new do |states_vertex|
   result = states_vertex.states.map { |ele| ele.state[:velocity] }
   final_roads_ok = states_vertex.states.map { |ele| ele.state[:current_road_nr] == ele.state[:final_road_nr] }
