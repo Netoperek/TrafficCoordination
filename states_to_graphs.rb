@@ -60,9 +60,24 @@ def base_json(cars_states, roads_states, colors_cars_hash)
       link = { :source => i, :target => i+1 }
       links.push(link)
     end
-    crossing_nodes[next_node[:road_nr]] = i+1 if next_node[:name] == 1
   end
-  
+
+  crossroads = roads_states.map { |ele| { :road_nr => ele.state[:road_nr] , :cuts => ele.state[:cuts] } }
+  crossroads.each do |ele|
+    road_nr = ele[:road_nr]
+    cuts = ele[:cuts]
+    cuts.each do |cut|
+      crossing_road_nr = cut[:road_nr]
+      node_a = nodes.select { |node| node[:name] == cut[:crossroad] && node[:road_nr] == road_nr }
+      node_a = node_a.first
+      crossroad = crossroads.select { |cross| cross[:road_nr] == crossing_road_nr }
+      cut = crossroad.first[:cuts].select { |ele| ele[:road_nr] == road_nr }
+      cut = cut.first[:crossroad]
+      node_b = nodes.select { |node| node[:name] == cut && node[:road_nr] == crossing_road_nr}
+      crossing_nodes[node_a] = node_b
+    end
+  end
+
   crossing_nodes.values.each do |i|
     road = roads_states.select { |ele| ele.state[:road_nr] == nodes[i][:road_nr] }
     cuts = road.first.state[:cuts]
