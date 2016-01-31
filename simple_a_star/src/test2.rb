@@ -5,9 +5,6 @@ require_relative 'road'
 require 'json'
 require 'pry'
 
-STEPS_TO_STOP = 5
-VALUE_FOR_STOPPING_CAR = 400
-
 states = states_from_file '../start_states_file'
 states_attributes = states[:attributes]
 data = states[:data]
@@ -22,7 +19,7 @@ start_vertex = StatesVertex.new(states_attributes, data)
 # Win if all cars are on desired roads
 #
 win_function = Proc.new do |states_vertex|
-  result = states_vertex.states.map { |state| state.state[:final_road_nr] == state.state[:current_road_nr] }
+  result = states_vertex.states.map { |state| state.state[:position] > state.state[:final_position] }
   result.reduce(:&)
 end
 
@@ -32,10 +29,7 @@ end
 # i zwracam najgorsze
 heuristic_function = Proc.new do |states_vertex|
   result = states_vertex.states.map { |ele| ele.state[:velocity] }
-  final_roads_ok = states_vertex.states.map { |ele| ele.state[:current_road_nr] == ele.state[:final_road_nr] }
-  number_of_roads_switched = final_roads_ok.count { |ele| ele == true }
-  number_of_roads_switched = 1 if number_of_roads_switched == 0
-  (100 / result.reduce(:+).to_f).abs / number_of_roads_switched
+  (100 / result.reduce(:+).to_f).abs
 end
 
 reconstruct_path_function = Proc.new do |came_from, current_node, start|

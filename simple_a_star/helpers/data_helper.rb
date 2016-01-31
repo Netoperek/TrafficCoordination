@@ -13,7 +13,7 @@ def roads_from_file(file)
   data.map! do |ele|
     [ ele[0].to_i,
       ele[1].to_i,
-      ele[2].split.map { |ele| ele.to_i },
+      ele[2].split(';').map { |ele| { :road_nr => ele.split()[0].to_i, :crossroad => ele.split()[1].to_i } },
       ele[3].to_i ]
   end
   { :attributes => attributes, :data => data }
