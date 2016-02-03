@@ -64,15 +64,25 @@ def base_json(cars_states, roads_states, colors_cars_hash)
   end
 
   crossroads_indices = []
+  nodes_to_delete = []
+  nodes_to_add = []
   crossing_nodes.each do |ele|
-    nodes.delete_at(ele[0])
-    nodes.delete_at(ele[1]-1)
-    node = { :name => "#{ele[0]-1}-#{ele[1]-2}", :road_nr => "#{ele[0]}-#{ele[1]}", :car_nr => -1 } 
-    nodes.push(node)
-    links.delete_if { |e| e[:source] == ele[0] || e[:target] == ele[0] }
-    links.delete_if { |e| e[:source] == ele[1] || e[:target] == ele[1] }
-    crossroads_indices.push(nodes.size-1)
+    nodes_to_delete.push(nodes[ele[0]])
+    nodes_to_delete.push(nodes[ele[1]])
+    node_a = nodes[ele[0]-1] if ele[0]-1 >= 0 && ele[0]-1 < nodes.size
+    node_b = nodes[ele[0]+1] if ele[0]+1 >= 0 && ele[0]+1 < nodes.size
+    node_c = nodes[ele[1]-1] if ele[1]-1 >= 0 && ele[1]-1 < nodes.size
+    node_d = nodes[ele[1]+1] if ele[1]+1 >= 0 && ele[1]+1 < nodes.size
+    crossroad_node_connect = []
+    crossroad_node_connect.push(node_a) unless node_a.nil?
+    crossroad_node_connect.push(node_b) unless node_b.nil?
+    crossroad_node_connect.push(node_c) unless node_c.nil?
+    crossroad_node_connect.push(node_d) unless node_d.nil?
+    nodes_to_add.push(crossroad_node_connect)
   end
+
+  nodes_to_delete.uniq!
+  nodes -= nodes_to_delete
 
   i = -1
   while i < nodes.size-2
@@ -88,18 +98,27 @@ def base_json(cars_states, roads_states, colors_cars_hash)
     end
   end
 
-  crossroads_indices.each do |ele|
-    crossroad_node = nodes[ele][:name]
-    node_a = crossroad_node.split('-')[0].to_i
-    node_b = crossroad_node.split('-')[1].to_i
-    link = { :source => node_a, :target => ele }
-    links.push(link)
-    link = { :source => ele, :target => node_a+1 }
-    links.push(link)
-    link = { :source => node_b, :target => ele }
-    links.push(link)
-    link = { :source => ele, :target => node_b+1 }
-    links.push(link)
+  nodes_to_add.each do |ele|
+    connect_indices = ele.map { |e| nodes.find_index e }
+    name = []
+    road_nr = []
+    name.push(ele[0][:name]+1)
+    name.push(ele[2][:name]+1)
+    road_nr.push(ele[0][:road_nr])
+    road_nr.push(ele[2][:road_nr])
+    name.uniq!
+    road_nr.uniq!
+    node = { :name => name, :road_nr => road_nr, :car_nr => nil } 
+    nodes.push(node)
+    node_index = nodes.size-1
+    i = 0
+    while i < connect_indices.size
+      link = { :source => connect_indices[i], :target => node_index }
+      links.push(link)
+      link = { :source => node_index, :target => connect_indices[i+1] }
+      links.push(link)
+      i += 2
+    end
   end
 
   result = { 'nodes' => nodes, 'links' => links }
@@ -146,7 +165,8 @@ def print_graph(outcome, index, colors_roads_hash, colors_cars_hash)
   g.output( :png => "output/#{index}.png" )
 end
 
-def apply_changing_states(core_outcome, graph, colors_cars_hash)
+def apply_changing_states(core_outcome, graph, colors_cars_hash, roads_states)
+  roads_states = roads_states.map { |ele| ele.state }
   colors_roads_hash = {}
   file = File.read(core_outcome) 
   cars_states = JSON.parse(file)
@@ -157,6 +177,13 @@ def apply_changing_states(core_outcome, graph, colors_cars_hash)
       node[:car_nr] = nil
       states.each do |car_state|
         node[:car_nr] = car_state['car_nr'] if car_state["current_road_nr"] == node[:road_nr] && car_state["position"] == node[:name]
+        if node[:name].is_a? Array
+          cut = roads_states.select { |ele| ele[:road_nr]== car_state["current_road_nr"] }
+          cut = cut.first
+          cut = cut[:cuts].select { |ele| ele[:crossroad] == car_state["position"] }
+          cut = cut.first
+          node[:car_nr] = car_state['car_nr'] if node[:road_nr].include?(car_state["current_road_nr"]) && node[:name].include?(car_state["position"]) && node[:road_nr].include?(cut[:road_nr])
+        end
       end
     end
     print_graph(graph, index, colors_roads_hash, colors_cars_hash)
@@ -169,4 +196,4 @@ colors_cars_hash = {}
 FileUtils.rm_rf('output/.', secure: true)
 data = data_from_files('simple_a_star/start_states_file', 'simple_a_star/roads_file')
 outcome = base_json(data[:cars_states], data[:roads_states], colors_cars_hash)
-apply_changing_states('core_out.json', outcome, colors_cars_hash)
+apply_changing_states('core_out.json', outcome, colors_cars_hash, data[:roads_states])
