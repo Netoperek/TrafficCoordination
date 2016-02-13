@@ -1,5 +1,3 @@
-1. Wielopasmowy model, 4x4
-2. 3,4,5 stanow (0,1,-1) przyspieszenie albo (0,1,-1,-2) Przyspieszenie
-3. Wiele a*
-4. Heurystyka
-5. Wykres od aut i czasu 
+1. Heurystyka
+2. Poprawienie kolizji
+3. Dokumentacja + udostpenienie

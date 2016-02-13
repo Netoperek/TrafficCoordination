@@ -3,7 +3,9 @@ require_relative 'road'
 require_relative '../helpers/data_helper'
 
 class StatesVertex
-  FIXNUM_MAX = 100
+  PLUS_ACCELEARTION_MAX = 1
+  MINUS_ACCELEARTION_MAX = -1
+
   attr_accessor :attributes, :states, :roads
 
   def id
@@ -22,9 +24,13 @@ class StatesVertex
   def crossroads_passed(car_state)
     cuts = roads_data.select { |ele| ele[:road_nr] == car_state[:current_road_nr] }
     cuts = cuts.first[:cuts]
-    new_position = car_state[:position] + car_state[:velocity] + 2
+    new_position = car_state[:position] + car_state[:velocity] + 1
     cuts = cuts.select { |ele| new_position >= ele[:crossroad] && car_state[:position] < ele[:crossroad] }
     cuts.map { |ele| ele[:road_nr] }
+  end
+
+  def cars_on_same_road(car_state_a, car_state_b)
+    car_state_a[:current_road_nr] == car_state_b[:current_road_nr]
   end
 
   def roads_crossing(road_a, road_b)
@@ -41,12 +47,6 @@ class StatesVertex
         state_i = states[i].state
         state_j = states[j].state
 
-        # Avoid same position and velocity states
-        #
-        same_positions = state_i[:position] == state_j[:position]
-        same_velocities = state_i[:velocity] == state_j[:velocity]
-        return true if same_positions && same_velocities
-
         # Avoid crossing crossroads at the same time by >= 2 cars
         #
         crossroads_passed_i = crossroads_passed(state_i)
@@ -55,6 +55,17 @@ class StatesVertex
           crossroads_passed_j.each do |j|
             return true if roads_crossing(i, j)
           end
+        end
+        if cars_on_same_road(state_i, state_j)
+          return true if state_i[:position] == state_j[:position]
+          i_in_front = state_i[:position] > state_j[:position]
+          i_still_in_front = false
+          for a in 0..PLUS_ACCELEARTION_MAX
+            new_state_i_position = state_i[:position] + state_i[:velocity] + a
+            new_state_j_position = state_j[:position] + state_j[:velocity] + a
+            i_still_in_front = new_state_i_position > new_state_j_position unless i_still_in_front
+          end
+          return true if i_in_front != i_still_in_front
         end
       end
     end
@@ -110,19 +121,23 @@ class StatesVertex
     new_state[:position] += new_state[:velocity]
     new_states.push(new_state) if new_state[:velocity] >= 0
 
-    # movement with velocity, acceleration + 2 
-    #
-    new_state = state.clone
-    new_state[:velocity] += 2
-    new_state[:position] += new_state[:velocity]
-    new_states.push(new_state)
+    if PLUS_ACCELEARTION_MAX == 2    
+      # movement with velocity, acceleration + 2 
+      #
+      new_state = state.clone
+      new_state[:velocity] += 2
+      new_state[:position] += new_state[:velocity]
+      new_states.push(new_state)
+    end
 
-    # movement with velocity, acceleration - 2 
-    #
-    new_state = state.clone
-    new_state[:velocity] -= 2
-    new_state[:position] += new_state[:velocity]
-    new_states.push(new_state) if new_state[:velocity] >= 0
+    if MINUS_ACCELEARTION_MAX == -2
+      # movement with velocity, acceleration - 2 
+      #
+      new_state = state.clone
+      new_state[:velocity] -= 2
+      new_state[:position] += new_state[:velocity]
+      new_states.push(new_state) if new_state[:velocity] >= 0
+    end
 
     new_states
   end
