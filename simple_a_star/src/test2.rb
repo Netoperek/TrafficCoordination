@@ -5,6 +5,8 @@ require_relative 'road'
 require 'json'
 require 'pry'
 
+PLUS_MAX_ACCELERATION = 1
+
 states = states_from_file '../start_states_file'
 states_attributes = states[:attributes]
 data = states[:data]
@@ -25,11 +27,29 @@ end
 
 # Adding velocity
 #
-# kiedy bym przyspieszal maksymalnie to kiedy dojade celu
-# i zwracam najgorsze
 heuristic_function = Proc.new do |states_vertex|
-  result = states_vertex.states.map { |ele| ele.state[:velocity] }
-  (100 / result.reduce(:+).to_f).abs
+
+  # Maximum acceleration - time stamp heurestic function
+  #
+  states = states_vertex.states.map { |ele| ele.state }
+  time_stamps = []
+  states.each do |ele|
+    time_stamps_number = 0
+    state = ele.clone
+    while state[:position] <= state[:final_position]
+      state[:velocity] += PLUS_MAX_ACCELERATION
+      state[:position] += state[:velocity]
+      time_stamps_number += 1
+    end
+  time_stamps.push(time_stamps_number)
+  end
+  time_stamps.reduce(:+)
+  #time_stamps.max
+
+  # Sum of velocities
+  #
+  #result = states_vertex.states.map { |ele| ele.state[:velocity] }
+  #(100 / result.reduce(:+).to_f).abs
 end
 
 reconstruct_path_function = Proc.new do |came_from, current_node, start|
