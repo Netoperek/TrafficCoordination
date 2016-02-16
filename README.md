@@ -17,6 +17,7 @@ The goal of this project is to use A Start algorithm in order to solve the follo
     - current road number that it is on
     - initial position
     - final position
+  + each car can accelerate within the following values {-2, -1, 0, 1, 2} (depends on the configuration)
 1. The algorithm looks for the situation where all of the cars have reach their final positions
 
 ## Documentation
