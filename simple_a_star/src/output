@@ -1,0 +1,14 @@
+{:car_nr=>1, :current_road_nr=>1, :position=>6, :velocity=>1, :acceleration=>0, :final_road_nr=>2}
+{:car_nr=>2, :current_road_nr=>4, :position=>8, :velocity=>1, :acceleration=>0, :final_road_nr=>3}
+{:car_nr=>1, :current_road_nr=>1, :position=>6, :velocity=>1, :acceleration=>1, :final_road_nr=>2}
+{:car_nr=>2, :current_road_nr=>4, :position=>8, :velocity=>1, :acceleration=>1, :final_road_nr=>3}
+{:car_nr=>1, :current_road_nr=>1, :position=>5, :velocity=>2, :acceleration=>1, :final_road_nr=>2}
+{:car_nr=>2, :current_road_nr=>4, :position=>7, :velocity=>2, :acceleration=>1, :final_road_nr=>3}
+{:car_nr=>1, :current_road_nr=>1, :position=>3, :velocity=>3, :acceleration=>1, :final_road_nr=>2}
+{:car_nr=>2, :current_road_nr=>4, :position=>5, :velocity=>3, :acceleration=>1, :final_road_nr=>3}
+{:car_nr=>1, :current_road_nr=>1, :position=>0, :velocity=>4, :acceleration=>1, :final_road_nr=>2}
+{:car_nr=>2, :current_road_nr=>4, :position=>2, :velocity=>4, :acceleration=>1, :final_road_nr=>3}
+{:car_nr=>1, :current_road_nr=>2, :position=>-4, :velocity=>5, :acceleration=>1, :final_road_nr=>2}
+{:car_nr=>2, :current_road_nr=>4, :position=>-2, :velocity=>5, :acceleration=>1, :final_road_nr=>3}
+{:car_nr=>1, :current_road_nr=>2, :position=>-9, :velocity=>6, :acceleration=>1, :final_road_nr=>2}
+{:car_nr=>2, :current_road_nr=>3, :position=>-7, :velocity=>6, :acceleration=>1, :final_road_nr=>3}

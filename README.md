@@ -1,48 +1,24 @@
 # TrafficCoordination
 
-## Environment description
+## The goal of the project
 
-1. Operating system - linux ubuntu
+The goal of this project is to use A Start algorithm in order to solve the following problem:
 
-1. Install the following:
-  - curl
+1. There are roads with multiple lanes
+  + each roads is represented in a discret way (is divided in to pieces)
+  + each roads has the following parameters:
+    - its unique id (number)
+    - its size (number of pieces)
+    - list of numbers of other roads which cuts it along with numbers of positions where other roads cuts it
+1. There are many cars on those roads
+  + each car has the following parameters:
+    - unique id (number)
+    - initial velocity
+    - current road number that it is on
+    - initial position
+    - final position
+1. The algorithm looks for the situation where all of the cars have reach their final positions
 
-    ```
-    sudo apt-get install curl -y
-    ```
+## Documentation
 
-  - rvm & ruby
-
-    ```
-    gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-    \curl -sSL https://get.rvm.io | bash -s stable --ruby
-    source /usr/local/rvm/scripts/rvm
-    ```
-
-  - git
-
-    ```
-    sudo apt-get install git -y
-    ```
-
-  - graphviz
-
-    ```
-    sudo apt-get install graphviz
-    ```
-
-1. Clone the repository:
-  - git clone https://github.com/Netoperek/TrafficCoordination.git
-  - cd TrafficCoordination
-  - git checkout multiCrossroads
-
-1. Install necessary gems
-  - bundle install
-
-1. Run A Start for TrafficCoordination
-  - cd simple_a_star/src
-  - ruby test2.rb
-
-1. Generate visual representation of the solution
-  - (in TrafficCoordination dir) ruby states_to_graphs.rb
-  - Output will be generated in TrafficCoordination/output dir
+The documentation can be found in the project_description folder
