@@ -1,5 +1,3 @@
-# TrafficCoordination
-
 ## Environment description
 
 1. Operating system - linux ubuntu
