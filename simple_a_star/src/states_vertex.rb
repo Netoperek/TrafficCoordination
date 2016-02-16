@@ -24,7 +24,7 @@ class StatesVertex
   def crossroads_passed(car_state)
     cuts = roads_data.select { |ele| ele[:road_nr] == car_state[:current_road_nr] }
     cuts = cuts.first[:cuts]
-    new_position = car_state[:position] + car_state[:velocity] + 1
+    new_position = car_state[:position] + car_state[:velocity] + MINUS_ACCELEARTION_MAX
     cuts = cuts.select { |ele| new_position >= ele[:crossroad] && car_state[:position] < ele[:crossroad] }
     cuts.map { |ele| ele[:road_nr] }
   end
@@ -72,17 +72,17 @@ class StatesVertex
     return false
   end
 
-  def mix_states(states, states_result, result, index)   
-    if states_result.size == states.size                  
-      result.push(states_result)                          
-    else                                                  
-      states[index].each do |state|                       
-        f_states_dup = states_result.dup                  
-        f_states_dup[index] = state                       
+  def mix_states(states, states_result, result, index)
+    if states_result.size == states.size
+      result.push(states_result)
+    else
+      states[index].each do |state|
+        f_states_dup = states_result.dup
+        f_states_dup[index] = state
         mix_states(states, f_states_dup, result, index+1)
-      end                                                 
-    end                                                   
-  end                                                     
+      end
+    end
+  end
 
   def generate_all_states
     cars_states = @states.map { |ele| generate_car_states(ele) }
@@ -96,7 +96,7 @@ class StatesVertex
     #
     result.delete_if { |state_vertex| state_vertex_collides(state_vertex) }
   end
- 
+
   def generate_car_states(car_state)
     new_states = []
     state = car_state.state
@@ -121,8 +121,8 @@ class StatesVertex
     new_state[:position] += new_state[:velocity]
     new_states.push(new_state) if new_state[:velocity] >= 0
 
-    if PLUS_ACCELEARTION_MAX == 2    
-      # movement with velocity, acceleration + 2 
+    if PLUS_ACCELEARTION_MAX == 2
+      # movement with velocity, acceleration + 2
       #
       new_state = state.clone
       new_state[:velocity] += 2
@@ -131,7 +131,7 @@ class StatesVertex
     end
 
     if MINUS_ACCELEARTION_MAX == -2
-      # movement with velocity, acceleration - 2 
+      # movement with velocity, acceleration - 2
       #
       new_state = state.clone
       new_state[:velocity] -= 2

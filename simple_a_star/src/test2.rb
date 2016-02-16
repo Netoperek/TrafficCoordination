@@ -44,6 +44,7 @@ heuristic_function = Proc.new do |states_vertex|
   time_stamps.push(time_stamps_number)
   end
   time_stamps.reduce(:+)
+
   #time_stamps.max
 
   # Sum of velocities
