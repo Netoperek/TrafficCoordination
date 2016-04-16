@@ -3,7 +3,7 @@ require_relative 'road'
 require_relative '../helpers/data_helper'
 
 class StatesVertex
-  PLUS_ACCELEARTION_MAX = 1
+  PLUS_ACCELEARTION_MAX = 2
   MINUS_ACCELEARTION_MAX = -1
 
   attr_accessor :attributes, :states, :roads
@@ -24,7 +24,7 @@ class StatesVertex
   def crossroads_passed(car_state)
     cuts = roads_data.select { |ele| ele[:road_nr] == car_state[:current_road_nr] }
     cuts = cuts.first[:cuts]
-    new_position = car_state[:position] + car_state[:velocity] + MINUS_ACCELEARTION_MAX
+    new_position = car_state[:position] + car_state[:velocity] + PLUS_ACCELEARTION_MAX
     cuts = cuts.select { |ele| new_position >= ele[:crossroad] && car_state[:position] < ele[:crossroad] }
     cuts.map { |ele| ele[:road_nr] }
   end
