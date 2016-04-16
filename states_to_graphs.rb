@@ -6,6 +6,8 @@ require 'json'
 require 'ruby-graphviz'
 require 'pry'
 
+PENDWIDTH = 30.0
+
 def data_from_files(start_states_file, roads_file)
   states = states_from_file 'simple_a_star/start_states_file'
   states_attributes = states[:attributes]
@@ -149,7 +151,7 @@ def print_graph(outcome, index, colors_roads_hash, colors_cars_hash)
 
     unless node[:car_nr].nil?
       car_color = colors_cars_hash[node[:car_nr]]
-      nodes.push(g.add_nodes('car#' + node[:car_nr].to_s, :color => car_color, :fillcolor => color, :style => :filled, :penwidth => 16.0, :label => node[:car_nr].to_s))
+      nodes.push(g.add_nodes('car#' + node[:car_nr].to_s, :color => car_color, :fillcolor => color, :style => :filled, :penwidth => PENDWIDTH, :label => node[:car_nr].to_s))
     else
       nodes.push(g.add_nodes(node[:name].to_s + '#' + node[:road_nr].to_s, :color => 'black', :fillcolor => color, :style => :filled, :penwidth => 1.0, :label => ''))
     end

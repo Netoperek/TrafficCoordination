@@ -3,8 +3,15 @@ require_relative 'road'
 require_relative '../helpers/data_helper'
 
 class StatesVertex
-  PLUS_ACCELEARTION_MAX = 2
+  if File.exists?('../plus_max_acceleration')
+    data = CSV.read('../plus_max_acceleration')
+    PLUS_MAX_ACCELERATION = data.last.last.to_i
+  else
+    PLUS_MAX_ACCELERATION = 1
+  end
+  
   MINUS_ACCELEARTION_MAX = -1
+  SAFETY = 3 
 
   attr_accessor :attributes, :states, :roads
 
@@ -21,10 +28,12 @@ class StatesVertex
     @@roads = @@roads.map! { |ele| ele.state }
   end
 
+  # returns roads nr that the car cut
+  #
   def crossroads_passed(car_state)
     cuts = roads_data.select { |ele| ele[:road_nr] == car_state[:current_road_nr] }
     cuts = cuts.first[:cuts]
-    new_position = car_state[:position] + car_state[:velocity] + PLUS_ACCELEARTION_MAX
+    new_position = car_state[:position] + car_state[:velocity] + PLUS_MAX_ACCELERATION + SAFETY
     cuts = cuts.select { |ele| new_position >= ele[:crossroad] && car_state[:position] < ele[:crossroad] }
     cuts.map { |ele| ele[:road_nr] }
   end
@@ -39,36 +48,61 @@ class StatesVertex
     return cuts.first[:cuts].include? road_b
   end
 
-  def state_vertex_collides(state_vertex)
-    states = state_vertex.states
+  def merge_road_occupation(road_areas, start_pos, end_pos)
+    new_road_area = { :start_pos => start_pos, :end_pos => end_pos }
+    areas_to_push = []
+    road_areas.each do |road_area|
+      return false if start_pos >= road_area[:start_pos] && start_pos <= road_area[:end_pos]
+      return false if end_pos >= road_area[:start_pos] && end_pos <= road_area[:end_pos]
+    end
+    road_areas.push(new_road_area)
+  end
 
-    for i in 0..states.size-1
-      for j in i+1..states.size-1
-        state_i = states[i].state
-        state_j = states[j].state
-
-        # Avoid crossing crossroads at the same time by >= 2 cars
-        #
-        crossroads_passed_i = crossroads_passed(state_i)
-        crossroads_passed_j = crossroads_passed(state_j)
-        crossroads_passed_i.each do |i|
-          crossroads_passed_j.each do |j|
-            return true if roads_crossing(i, j)
-          end
-        end
-        if cars_on_same_road(state_i, state_j)
-          return true if state_i[:position] == state_j[:position]
-          i_in_front = state_i[:position] > state_j[:position]
-          i_still_in_front = false
-          for a in 0..PLUS_ACCELEARTION_MAX
-            new_state_i_position = state_i[:position] + state_i[:velocity] + a
-            new_state_j_position = state_j[:position] + state_j[:velocity] + a
-            i_still_in_front = new_state_i_position > new_state_j_position unless i_still_in_front
-          end
-          return true if i_in_front != i_still_in_front
-        end
+  def crossroads_collided(road_area_x, road_area_y, pos_x, pos_y)
+    road_area_x.each do |road|
+      if pos_x >= road[:start_pos] && pos_x <= road[:end_pos]
+        pos_x = true  
+        break
       end
     end
+    road_area_y.each do |road|
+      if pos_y >= road[:start_pos] && pos_y <= road[:end_pos]
+        pos_y = true
+        break
+      end
+    end
+    return true if pos_y == true && pos_x == true
+    return false
+  end
+
+  def cuts
+    roads_data.map { |ele| { :road_nr => ele[:road_nr], :cuts => ele[:cuts] } }
+  end
+
+  def state_vertex_collides(state_vertex)
+    cars_states = state_vertex.states
+    roads_areas = []
+
+    cars_states.each do |ele|
+      ele = ele.state
+      start_pos = ele[:position]
+      end_pos = ele[:position] + ele[:velocity] + PLUS_MAX_ACCELERATION
+      roads_areas[ele[:current_road_nr]] ||= []
+      output = merge_road_occupation(roads_areas[ele[:current_road_nr]], start_pos, end_pos)
+      return true if output == false
+    end
+
+    crossroads_points = []
+    cars_states.each do |car_state|
+      crossed = crossroads_passed(car_state.state)
+      crossed.map! { |ele| [ car_state.state[:current_road_nr], ele] }
+      crossed.each do |cross|
+        crossroads_points.push(cross)
+        crossroads_points.push(cross.reverse)
+      end
+    end 
+    return true unless crossroads_points.uniq.size == crossroads_points.size
+
     return false
   end
 
@@ -121,7 +155,7 @@ class StatesVertex
     new_state[:position] += new_state[:velocity]
     new_states.push(new_state) if new_state[:velocity] >= 0
 
-    if PLUS_ACCELEARTION_MAX == 2
+    if PLUS_MAX_ACCELERATION == 2
       # movement with velocity, acceleration + 2
       #
       new_state = state.clone
