@@ -1,3 +1,52 @@
-1. Heurystyka # DONE
-2. Poprawienie kolizji # DONE
-3. Dokumentacja + udostpenienie
+-Idziemy najlepsza sciezka i musimy sie cofnac w pewnym momencie z powodu kolizji.
+-Wyciac relacje po jednym pasie
+-Heurystyka heurystyk - oszacowac do jakich stanow sie cofac
+-Najpierwsz szukac w lepszych a potem w gorszych
+-Wyciac ze zbioru rozwiazan usuwamy te rozwiazania ktore na pewdo spowoduja kolizje
+-Policzyc wartosc heurystyki dla goscia 
+
+
+jesli zero to odejmuje 1 od kazdego poprzedniego do ktorego bedziemy sie cofac
+
+###########
+
+Nie liczyc heurystyki dla wszystkich przypadkow
+
+Dopiero wtedy gdy dojdzie do sytuacji w ktorej musimy to robic.
+
+Gromadzimy sytuacje do policzenia (stany i jak policzyc heurystyke).
+W jakis sposob zakodowac dopuszczalne sterowania i jakie bylo dopuszczone.
+Czyli jakie odjelismy. Dla wszystkich stanow odejmujemy 1 i sprawdzamy potem 2 itd.
+Rozwiazanie ktore mniej odejmuje jest lepsze.
+
+Liczenie heurystyki dla najszybszego rozw.
+
+Jesli powoduje kolizje to cofamy sie metoda odejmowania kolejnych liczb od sterowania
+w poprzednich stanach.
+
+Czyli szukamy dla (22222) jesli koliduje, szukamy dla (2221222) itd
+Sume sterowan
+
+######################
+#       POMIARY      #
+######################
+Acceleration: +1, -1
+Cars: 10
+Crossroads: 4
+All: 84.72048186 s
+Heuristics: 3.0653064740000056 s
+Removing collisions: 43.478327400000005 s
+
+Acceleration: +2, -1
+Cars: 8
+Crossroads: 4
+All: 97.126938422
+Heuristics: 5.314582414000077 s
+Removing collisions: 63.98325062399999 s
+
+Acceleration: +2, -1, -2
+Cars: 7
+Crossroads: 4
+All: 49.471343802 s
+Heuristics: 3.981943885000019 s
+Removing collisions: 26.216097976 s
