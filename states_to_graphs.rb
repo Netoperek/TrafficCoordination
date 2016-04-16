@@ -27,7 +27,12 @@ end
 def base_json(cars_states, roads_states, colors_cars_hash)
   colors_set = Set.new
   cars_nr = cars_states.map { |ele| ele.state[:car_nr] }
-  cars_nr.each.map { |car_nr| colors_cars_hash[car_nr] = random_hex_color(colors_set) }
+  # cars_nr.each.map { |car_nr| colors_cars_hash[car_nr] = random_hex_color(colors_set) }
+  
+  # Cars on one road have same color
+  #
+  roads_nr = roads_states.map{ |ele| ele.state[:road_nr] }
+  roads_nr.each { |road_nr| colors_cars_hash[road_nr] = random_hex_color(colors_set) }
 
   crossroads_set = Set.new
   nodes = []
@@ -135,7 +140,7 @@ def random_hex_color(colors_set)
   color
 end
 
-def print_graph(outcome, index, colors_roads_hash, colors_cars_hash)
+def print_graph(outcome, index, colors_roads_hash, colors_cars_hash, cars_states)
   colors_set = Set.new
   g = GraphViz.new(:G, :type => :digraph, :use => 'neato')
   nodes = []
@@ -150,7 +155,9 @@ def print_graph(outcome, index, colors_roads_hash, colors_cars_hash)
     end
 
     unless node[:car_nr].nil?
-      car_color = colors_cars_hash[node[:car_nr]]
+      road_nr = cars_states[0][node[:car_nr]-1]["current_road_nr"]
+      car_color = colors_cars_hash[road_nr]
+      binding.pry if car_color.nil?
       nodes.push(g.add_nodes('car#' + node[:car_nr].to_s, :color => car_color, :fillcolor => color, :style => :filled, :penwidth => PENDWIDTH, :label => node[:car_nr].to_s))
     else
       nodes.push(g.add_nodes(node[:name].to_s + '#' + node[:road_nr].to_s, :color => 'black', :fillcolor => color, :style => :filled, :penwidth => 1.0, :label => ''))
@@ -188,7 +195,7 @@ def apply_changing_states(core_outcome, graph, colors_cars_hash, roads_states)
         end
       end
     end
-    print_graph(graph, index, colors_roads_hash, colors_cars_hash)
+    print_graph(graph, index, colors_roads_hash, colors_cars_hash, cars_states)
     # File.open("simulator/output/#{index}.json", 'w') { |file| file.write(JSON.pretty_generate(graph)) }
   end
 end
