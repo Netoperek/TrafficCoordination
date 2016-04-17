@@ -1,0 +1,41 @@
+\documentclass[../main.tex]{subfiles}
+ 
+\begin{document}
+ 
+\begin{figure}[bh]
+\centering
+ 
+\end{figure}
+
+\subsection{Opis algorytmu A*}
+
+Algorytm A* to algorytm heurystyczny, znajdujący najkrótszą ścieżkę w grafie ważonym z dowolnego wierzchołka do podanego wierzchołka, który spełnia okerślony warunek. Algorytm jest zupełny i optymalny, w tym sensie, że znajduje ścieżkę, jeśli tylko taka istnieje, i przy tym jest to ścieżka najkrótsza.
+
+
+Algorytm A* od wierzchołka początkowego tworzy ścieżkę, za każdym razem wybierając wierzchołek x z dostępnych w danym kroku niezbadanych wierzchołków tak, by minimalizować funkcję f(x) zdefiniowaną:
+
+\[ f(x) = g(x) + h(x) \]
+
+gdzie:
+\newline
+g(x) – droga pomiędzy wierzchołkiem początkowym a x. Dokładniej: suma wag krawędzi, które należą już do ścieżki plus waga krawędzi łączącej aktualny węzeł z x
+\newline
+h(x) – przewidywana przez heurystykę droga od x do wierzchołka docelowego
+\newline
+
+W każdym kroku algorytm dołącza do ścieżki wierzchołek o najniższym współczynniku f. Kończy w momencie natrafienia na wierzchołek będący wierzchołkiem docelowym.
+
+\subsection{Opis rozszerzenia algorytmu A*}
+
+Rozszerzenie algorytmu A* polega na tym, że wierzchołek przedstawia stan, natomiast krawędź przedstawia przejście z jednego stanu do drugiego. W tym konkretnym problemie wierzchołkiem będzie położenie wszystkich aut na skrzyżowaniach wraz z ich aktualnymi prędkościami. 
+\newline
+\newline
+Stan końcowy to stan, w którym wszystki auta przejadą wszystkie napotkane przez siebie skrzyżowania.
+
+
+\subsection{Funkcja heurystki}
+
+
+
+
+\end{document}
