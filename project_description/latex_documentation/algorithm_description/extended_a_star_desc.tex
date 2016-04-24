@@ -9,7 +9,7 @@
 
 \subsection{Opis algorytmu A*}
 
-Algorytm A* to algorytm heurystyczny, znajdujący najkrótszą ścieżkę w grafie ważonym z dowolnego wierzchołka do podanego wierzchołka, który spełnia okerślony warunek. Algorytm jest zupełny i optymalny, w tym sensie, że znajduje ścieżkę, jeśli tylko taka istnieje, i przy tym jest to ścieżka najkrótsza.
+Algorytm A* to algorytm heurystyczny, znajdujący najkrótszą ścieżkę w grafie ważonym z dowolnego wierzchołka do podanego wierzchołka, który spełnia określony warunek. Algorytm jest zupełny i optymalny, w tym sensie, że znajduje ścieżkę, jeśli tylko taka istnieje, i przy tym jest to ścieżka najkrótsza.
 
 
 Algorytm A* od wierzchołka początkowego tworzy ścieżkę, za każdym razem wybierając wierzchołek x z dostępnych w danym kroku niezbadanych wierzchołków tak, by minimalizować funkcję f(x) zdefiniowaną:
@@ -17,6 +17,7 @@ Algorytm A* od wierzchołka początkowego tworzy ścieżkę, za każdym razem wy
 \[ f(x) = g(x) + h(x) \]
 
 gdzie:
+\newline
 \newline
 g(x) – droga pomiędzy wierzchołkiem początkowym a x. Dokładniej: suma wag krawędzi, które należą już do ścieżki plus waga krawędzi łączącej aktualny węzeł z x
 \newline
@@ -27,15 +28,24 @@ W każdym kroku algorytm dołącza do ścieżki wierzchołek o najniższym wspó
 
 \subsection{Opis rozszerzenia algorytmu A*}
 
-Rozszerzenie algorytmu A* polega na tym, że wierzchołek przedstawia stan, natomiast krawędź przedstawia przejście z jednego stanu do drugiego. W tym konkretnym problemie wierzchołkiem będzie położenie wszystkich aut na skrzyżowaniach wraz z ich aktualnymi prędkościami. 
+Rozszerzenie algorytmu A* polega na tym, że wierzchołek przedstawia stan, natomiast krawędź przedstawia przejście z jednego stanu do drugiego. W tym konkretnym problemie wierzchołkiem czyli stanem będzie położenie wszystkich aut na skrzyżowaniach wraz z ich aktualnymi prędkościami. 
 \newline
 \newline
-Stan końcowy to stan, w którym wszystki auta przejadą wszystkie napotkane przez siebie skrzyżowania.
 
+Stan końcowy to taki, w którym wszystkie auta przejadą wszystkie napotkane przez siebie skrzyżowania.
 
-\subsection{Funkcja heurystki}
+\subsection{Funkcja heurystyki}
 
+Funkcja heurystki jest liczona następująco:
+\newline
+\newline
+Zakładamy, że wszystkie samochody jadą z największym możliwym przyspieszeniem. Wynikiem jest suma odcinków czasowych potrzebnych do przekroczenia ostatniego skrzyżowania dla wszystkich aut.
 
+\subsection{Generowanie stanów}
 
+Na początku otrzymujemy stan początkowy. Następnie dla każdego auta w tym stanie tworzę wszystkie możliwe wariacje przyspieszeń dla auta (przyspieszenie równe -2, -1, 0, 1, 2) co daje łącznie 5 stanów dla każdego z aut. Kolejno tworzone są kombinacje bez powtórzeń, aby otrzymać wszystkie możliwe stany sąsiednie dla stanu początkowego. Czyli taki stany, które są możliwe w następnym kroku czasowym.
+\newline
+\newline
+Ważnym elementem jest usuwanie kolizji samochodów. Kolizje mogą występować na skrzyżowaniach dróg oraz na drodze, na której auta poruszają się w jednym kierunku. Algorytm usuwania kolizji polega na sprawdzaniu czy po zmianie stanu jakiekolwiek dwa auta przekroczyły skrzyżowanie jednocześnie. Jeżeli takie auta znajdą się w takim stanie, to taki stan jest usuwany ze stanów sąsiednich. Usuwanie kolizji na jednym pasie polega na sprawdzaniu czy po zmianie stanu jaki kolwiek odcinek danej drogi jest zajmowany przez więcej niż jedno auto. Jeżeli tak, to taki stan jest usuwany ze stanów sąsiednich.
 
 \end{document}
