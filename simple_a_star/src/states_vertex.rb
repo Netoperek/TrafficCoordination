@@ -58,23 +58,6 @@ class StatesVertex
     road_areas.push(new_road_area)
   end
 
-  def crossroads_collided(road_area_x, road_area_y, pos_x, pos_y)
-    road_area_x.each do |road|
-      if pos_x >= road[:start_pos] && pos_x <= road[:end_pos]
-        pos_x = true  
-        break
-      end
-    end
-    road_area_y.each do |road|
-      if pos_y >= road[:start_pos] && pos_y <= road[:end_pos]
-        pos_y = true
-        break
-      end
-    end
-    return true if pos_y == true && pos_x == true
-    return false
-  end
-
   def cuts
     roads_data.map { |ele| { :road_nr => ele[:road_nr], :cuts => ele[:cuts] } }
   end
