@@ -7,6 +7,8 @@ require 'ruby-graphviz'
 require 'pry'
 
 PENDWIDTH = 30.0
+MISTAKE_DISTANCE = 2
+CARS_MISTAKES_AT_ONCE = 2
 
 def data_from_files(start_states_file, roads_file)
   states = states_from_file 'simple_a_star/start_states_file'
@@ -140,7 +142,7 @@ def random_hex_color(colors_set)
   color
 end
 
-def print_graph(outcome, index, colors_roads_hash, colors_cars_hash, cars_states)
+def print_graph(outcome, index, colors_roads_hash, colors_cars_hash, cars_states, mistakes)
   colors_set = Set.new
   g = GraphViz.new(:G, :type => :digraph, :use => 'neato')
   nodes = []
@@ -157,7 +159,6 @@ def print_graph(outcome, index, colors_roads_hash, colors_cars_hash, cars_states
     unless node[:car_nr].nil?
       road_nr = cars_states[0][node[:car_nr]-1]["current_road_nr"]
       car_color = colors_cars_hash[road_nr]
-      binding.pry if car_color.nil?
       nodes.push(g.add_nodes('car#' + node[:car_nr].to_s, :color => car_color, :fillcolor => color, :style => :filled, :penwidth => PENDWIDTH, :label => node[:car_nr].to_s))
     else
       nodes.push(g.add_nodes(node[:name].to_s + '#' + node[:road_nr].to_s, :color => 'black', :fillcolor => color, :style => :filled, :penwidth => 1.0, :label => ''))
@@ -171,10 +172,12 @@ def print_graph(outcome, index, colors_roads_hash, colors_cars_hash, cars_states
     target = nodes[target]
     g.add_edges(source, target, :arrowhead => :none)
   end
-  g.output( :png => "output/#{index}.png" )
+  dir = 'normal' unless mistakes
+  dir = 'mistakes' if mistakes
+  g.output( :png => "output/#{dir}/#{index}.png" )
 end
 
-def apply_changing_states(core_outcome, graph, colors_cars_hash, roads_states)
+def apply_changing_states(core_outcome, graph, colors_cars_hash, roads_states, mistakes)
   roads_states = roads_states.map { |ele| ele.state }
   colors_roads_hash = {}
   file = File.read(core_outcome) 
@@ -187,7 +190,7 @@ def apply_changing_states(core_outcome, graph, colors_cars_hash, roads_states)
       states.each do |car_state|
         node[:car_nr] = car_state['car_nr'] if car_state["current_road_nr"] == node[:road_nr] && car_state["position"] == node[:name]
         if node[:name].is_a? Array
-          cut = roads_states.select { |ele| ele[:road_nr]== car_state["current_road_nr"] }
+          cut = roads_states.select { |ele| ele[:road_nr] == car_state["current_road_nr"] }
           cut = cut.first
           cut = cut[:cuts].select { |ele| ele[:crossroad] == car_state["position"] }
           cut = cut.first
@@ -195,14 +198,34 @@ def apply_changing_states(core_outcome, graph, colors_cars_hash, roads_states)
         end
       end
     end
-    print_graph(graph, index, colors_roads_hash, colors_cars_hash, cars_states)
+    print_graph(graph, index, colors_roads_hash, colors_cars_hash, cars_states, mistakes)
     # File.open("simulator/output/#{index}.json", 'w') { |file| file.write(JSON.pretty_generate(graph)) }
   end
 end
 
 colors_cars_hash = {}
 
-FileUtils.rm_rf('output/.', secure: true)
+FileUtils.rm_rf('output/normal/.', secure: true)
+FileUtils.rm_rf('output/mistake/.', secure: true)
 data = data_from_files('simple_a_star/start_states_file', 'simple_a_star/roads_file')
+
+# Normal output
+#
 outcome = base_json(data[:cars_states], data[:roads_states], colors_cars_hash)
-apply_changing_states('core_out.json', outcome, colors_cars_hash, data[:roads_states])
+apply_changing_states('core_out.json', outcome, colors_cars_hash, data[:roads_states], false)
+
+# Mistakes output
+#
+file = File.read('core_out.json') 
+cars_states = JSON.parse(file)
+cars_states.each do |states|
+  i = (0..states.length-1).to_a.sample
+  car_state = states[i]
+  car_state["position"] += MISTAKE_DISTANCE
+end
+
+result_json = JSON.pretty_generate(cars_states)                               
+File.open('core_mistake_out.json', 'w') { |file| file.write(result_json) } 
+
+outcome = base_json(data[:cars_states], data[:roads_states], colors_cars_hash)
+apply_changing_states('core_mistake_out.json', outcome, colors_cars_hash, data[:roads_states], true)
