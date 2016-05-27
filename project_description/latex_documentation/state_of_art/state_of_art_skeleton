@@ -1,0 +1,61 @@
+Użycie algorytmu A* w celu usprawienia ruchu pojazdów na skrzyżowaniu dróg wielopasmowych jako cel pracy
+
+Alternatywa dla koordynacji ruchu drogowego za pomocą świateł
+
+Porównanie dwóch podejść i uzsadanienie, które jest szybsze
+
+Omówienie algorytmu A* na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
+
+Omówienie użycia A* do rozwiązywania problemu znajdowania drogi na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
+
+Omówienie optymalności A*
+
+Omówienie funkcji heurystki w A*
+
+Porównanie powyższego A* z moim dynamicznym wielostanowym algorytmem A* 
+
+Problem znajdowania ścieżki o minimalnym koszcie w grafie a mój problem na podstawie artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths)
+
+Porównanie użytego A* z artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths) do mojej modyfikacji A* w celu znalezienia najszybciej ścieżki w grafie.
+
+Planowanie z użyciem wielostanowego algorytmu A* z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+
+Porównanie algorytmu Multi-Entity A* z moim dynamicznym A*
+
+Omówienie przykładu przykładu użycia Multi-Entity na podstawie artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+
+Porównanie użycia oraz przykładu Multi-Entity z powyższego artykułu z użyciem mojego dynamicznego A* dla rozwiązania problemu koordynacji ruchu.
+
+Omówienie złożoności Multi-Entity A* poprzednim przykładzie
+
+Omówienie złożoności mojego A* na przykładowym  skrzyżowaniu i rozkładzie aut.
+
+Porównanie powyższych złożoności.
+
+Omówienie modelu wierzchołka w A* w przykładzie z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+
+Omówienie modelu wierzchołka w moim problemie.
+
+Porównanie obu modeli.
+
+Opis modyfikacji i użycia A* w artykule (Mobile Robot Navigation on Partially Known Maps using a Fast A∗ Algorithm Version)
+
+Porównanie modyfikacji algorytmu A*
+
+Porównanie użycia algorytmu A* w obu problemach.
+
+Mój algorytm A* posiada modyfikacje, których jescze nie było (dynamiczny, można określać warunek zwycięstwa, wierzchołek to obiekt, który musi spełniać pewne założenia) - porównanie podsumowujące.
+
+Omówienie możliwości wprowadzenia mojego rozwiązania w życie.
+
+Omówienie możliwości rozwiązania problemu dużej złożoności obilczeniowej w przyszłości.
+ 
+Omówienie bezpieczeństwa mojego rozwiązania.
+
+Porównanie bezpieczeństwa mojego rozwiązania z bezpieczeństwem przy użycie świateł.
+
+Omówienie wielowariantowości.
+
+Omówienie sytuacji, kiedy kierowca się pomyli.
+
+Omówienie prawdopodobieństwa kolizji w razie pomyłki kierowcy.
