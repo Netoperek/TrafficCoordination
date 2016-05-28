@@ -29,19 +29,8 @@ end
 
 $data = data_from_files('simple_a_star/start_states_file', 'simple_a_star/roads_file')
 
-def base_json(cars_states, roads_states, colors_cars_hash)
-  colors_set = Set.new
-  cars_nr = cars_states.map { |ele| ele.state[:car_nr] }
-  # cars_nr.each.map { |car_nr| colors_cars_hash[car_nr] = random_hex_color(colors_set) }
-  
-  # Cars on one road have same color
-  #
-  roads_nr = roads_states.map{ |ele| ele.state[:road_nr] }
-  roads_nr.each { |road_nr| colors_cars_hash[road_nr] = random_hex_color(colors_set) }
-
-  crossroads_set = Set.new
+def present_roads_as_nodes(roads_states, cars_states)
   nodes = []
-  links = []
 
   roads_states.each do |ele|
     road = ele.state
@@ -58,7 +47,12 @@ def base_json(cars_states, roads_states, colors_cars_hash)
       i += 1
     end
   end
+  nodes
+end
 
+# { [a, b] } - node a crosses with node b
+#
+def extract_crossing_nodes(nodes, roads_states)
   crossing_nodes = Set.new
   crossroads = roads_states.map { |ele| { :road_nr => ele.state[:road_nr] , :cuts => ele.state[:cuts] } }
   crossroads.each do |ele|
@@ -74,8 +68,65 @@ def base_json(cars_states, roads_states, colors_cars_hash)
       crossing_nodes.add([node_b, node_a].sort)
     end
   end
+  crossing_nodes
+end
 
-  crossroads_indices = []
+def create_links(nodes)
+  i = -1
+  links = []
+  while i < nodes.size-2
+    i += 1
+    node = nodes[i]
+    next_node = nodes[i+1]
+    node_road_nr = node[:road_nr]
+    next_node_road_nr = next_node[:road_nr]
+
+    if node_road_nr == next_node_road_nr && node[:name] == next_node[:name]-1
+      link = { :source => i, :target => i+1 }
+      links.push(link)
+    end
+  end
+  links
+end
+
+def find_replace_node(nodes, index)
+  new_nodes = nodes.find_all { |ele| ele[:name].is_a? Array }
+  new_nodes.uniq!
+  new_nodes.each do |ele|
+    return ele if ele[:name][0] == nodes[index][:name] && ele[:road_nr][0] == nodes[index][:road_nr]
+    return ele if ele[:name][1] == nodes[index][:name] && ele[:road_nr][1] == nodes[index][:road_nr]
+  end
+  raise 'Node to replace was not found'
+end
+
+def remove_mirror_links(links)
+  i = 0
+  j = 0
+  to_delete = []
+  for i in 0..links.size-1
+    for j in i+1..links.size-1
+      to_delete.push(links[i]) if links[i][:target] == links[j][:source] && links[i][:source] == links[j][:target]
+    end
+  end
+  links - to_delete
+end
+
+def base_json(cars_states, roads_states, colors_cars_hash)
+  colors_set = Set.new
+  cars_nr = cars_states.map { |ele| ele.state[:car_nr] }
+  
+  # Cars on one road have same color
+  #
+  roads_nr = roads_states.map{ |ele| ele.state[:road_nr] }
+  roads_nr.each { |road_nr| colors_cars_hash[road_nr] = random_hex_color(colors_set) }
+
+  nodes = present_roads_as_nodes(roads_states, cars_states)
+
+  crossing_nodes = extract_crossing_nodes(nodes, roads_states)
+
+  # Removing all crossing nodes
+  # Getting nodes to add
+  #
   nodes_to_delete = []
   nodes_to_add = []
   crossing_nodes.each do |ele|
@@ -93,45 +144,53 @@ def base_json(cars_states, roads_states, colors_cars_hash)
     nodes_to_add.push(crossroad_node_connect)
   end
 
+
   nodes_to_delete.uniq!
-  nodes -= nodes_to_delete
+  new_nodes_idx = -1
 
-  i = -1
-  while i < nodes.size-2
-    i += 1
-    node = nodes[i]
-    next_node = nodes[i+1]
-    node_road_nr = node[:road_nr]
-    next_node_road_nr = next_node[:road_nr]
-
-    if node_road_nr == next_node_road_nr && node[:name] == next_node[:name]-1
-      link = { :source => i, :target => i+1 }
-      links.push(link)
-    end
-  end
-
+  # Adding crossroads nodes
+  #
   nodes_to_add.each do |ele|
-    connect_indices = ele.map { |e| nodes.find_index e }
+    join_indices = ele.map { |e| nodes.find_index e }
     name = []
     road_nr = []
     name.push(ele[0][:name]+1)
     name.push(ele[2][:name]+1)
     road_nr.push(ele[0][:road_nr])
     road_nr.push(ele[2][:road_nr])
-    name.uniq!
-    road_nr.uniq!
     node = { :name => name, :road_nr => road_nr, :car_nr => nil } 
     nodes.push(node)
-    node_index = nodes.size-1
-    i = 0
-    while i < connect_indices.size
-      link = { :source => connect_indices[i], :target => node_index }
-      links.push(link)
-      link = { :source => node_index, :target => connect_indices[i+1] }
-      links.push(link)
-      i += 2
+    new_nodes_idx = nodes.size-1 if new_nodes_idx == -1
+  end
+
+  nodes_to_add.each_with_index do |ele, node_to_add_idx|
+    join_indices = ele.map { |e| nodes.find_index e }
+    join_indices.each do |index|
+      if nodes_to_delete.include? nodes[index]
+        node_to_replace = find_replace_node(nodes, index)
+        replace_idx = nodes_to_add[node_to_add_idx].find_index nodes[index]
+        nodes_to_add[node_to_add_idx][replace_idx] = node_to_replace
+      end
     end
   end
+
+  nodes -= nodes_to_delete
+  nodes.uniq!
+  links = create_links(nodes)
+  new_nodes_idx -= nodes_to_delete.size
+
+  nodes_to_add.each do |ele|
+    join_indices = ele.map { |e| nodes.find_index e }
+    node_index = new_nodes_idx
+    i = 0
+    join_indices.each do |idx|
+      link = { :source => idx, :target => node_index } 
+      links.push(link)
+    end
+    new_nodes_idx += 1
+  end
+
+  links = remove_mirror_links(links)
 
   result = { 'nodes' => nodes, 'links' => links }
 end
@@ -240,8 +299,8 @@ def apply_changing_states(core_outcome, graph, colors_cars_hash, roads_states, m
   index = 0
   collision = false
   cars_states.each do |states|
-    collision = states_collides(cars_states[index-1], cars_states[index]) unless index == 0
-    puts "COLLISION" if collision
+    #collision = states_collides(cars_states[index-1], cars_states[index]) unless index == 0
+    #puts "COLLISION" if collision
     index += 1
     graph['nodes'].each do |node|
       node[:car_nr] = nil
@@ -291,5 +350,5 @@ apply_changing_states('core_out.json', outcome, colors_cars_hash, data[:roads_st
 #result_json = JSON.pretty_generate(states)                               
 #File.open('core_mistake_out.json', 'w') { |file| file.write(result_json) } 
 
-outcome = base_json(data[:cars_states], data[:roads_states], colors_cars_hash)
-apply_changing_states('core_mistake_out.json', outcome, colors_cars_hash, data[:roads_states], true)
+#outcome = base_json(data[:cars_states], data[:roads_states], colors_cars_hash)
+#apply_changing_states('core_mistake_out.json', outcome, colors_cars_hash, data[:roads_states], true)
