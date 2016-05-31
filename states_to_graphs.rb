@@ -10,6 +10,7 @@ PENDWIDTH = 30.0
 MISTAKE_DISTANCE = 4
 CARS_MISTAKES_AT_ONCE = 2
 PLUS_MAX_ACCELERATION = 1
+GRAPH_TYPE = 'neato'
 
 def data_from_files(start_states_file, roads_file)
   states = states_from_file 'simple_a_star/start_states_file'
@@ -207,9 +208,9 @@ end
 def print_graph(outcome, index, colors_roads_hash, colors_cars_hash, cars_states, mistakes, collision)
   colors_set = Set.new
   if collision
-    g = GraphViz.new(:G, :type => :digraph, :use => 'neato', :labelloc => 'top', :label => 'Collision', :fontsize => '30')
+    g = GraphViz.new(:G, :type => :digraph, :use => GRAPH_TYPE, :labelloc => 'top', :label => 'Collision', :fontsize => '30')
   else
-    g = GraphViz.new(:G, :type => :digraph, :use => 'neato', :labelloc => 'top')
+    g = GraphViz.new(:G, :type => :digraph, :use => GRAPH_TYPE, :labelloc => 'top')
   end
   nodes = []
   color = 'black'
