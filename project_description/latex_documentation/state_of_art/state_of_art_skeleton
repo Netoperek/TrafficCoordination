@@ -56,7 +56,7 @@
 
 6. A* planujący ruch drogowy
 
-  Omówienie przykładu użycia Multi-Entity na podstawie artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+  Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
 
   Porównanie użycia oraz przykładu Multi-Entity z powyższego artykułu z użyciem mojego dynamicznego A* dla rozwiązania problemu koordynacji ruchu.
 
