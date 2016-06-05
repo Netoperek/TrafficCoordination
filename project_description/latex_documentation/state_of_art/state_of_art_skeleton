@@ -12,9 +12,11 @@
 
 2. Użycie algorytmu A* do planowania ruchu
 
+  Użycie algorytmu A* w celu usprawienia ruchu pojazdów na skrzyżowaniu dróg wielopasmowych jako cel pracy
+
   Omówienie użycia A* do rozwiązywania problemu znajdowania drogi na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
 
-  Użycie algorytmu A* w celu usprawienia ruchu pojazdów na skrzyżowaniu dróg wielopasmowych jako cel pracy
+  Problem znajdowania ścieżki o minimalnym koszcie w grafie a mój problem na podstawie artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths)
 
   Omówienie algorytmu A* na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
 
@@ -23,8 +25,6 @@
   Alternatywa dla koordynacji ruchu drogowego za pomocą świateł
 
   Porównanie dwóch podejść i uzsadanienie, które jest szybsze
-
-  Problem znajdowania ścieżki o minimalnym koszcie w grafie a mój problem na podstawie artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths)
 
   Bezpieczeństwo zapewnione przez światła drogowe
 
@@ -46,14 +46,13 @@
 
   Porównanie algorytmu Multi-Entity A* z moim dynamicznym A*
 
-  Mój algorytm A* posiada modyfikacje, których jescze nie było (dynamiczny, można określać warunek zwycięstwa, wierzchołek to obiekt, który musi spełniać pewne założenia) - porównanie podsumowujące.
-
   Opis modyfikacji i użycia A* w artykule (Mobile Robot Navigation on Partially Known Maps using a Fast A∗ Algorithm Version)
 
   Porównanie modyfikacji algorytmu A*
 
   Porównanie użycia algorytmu A* w obu problemach.
 
+  Mój algorytm A* posiada modyfikacje, których jescze nie było (dynamiczny, można określać warunek zwycięstwa, wierzchołek to obiekt, który musi spełniać pewne założenia) - porównanie podsumowujące.
 
 6. A* planujący ruch drogowy
 
