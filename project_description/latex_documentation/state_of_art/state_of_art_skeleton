@@ -1,61 +1,95 @@
-Użycie algorytmu A* w celu usprawienia ruchu pojazdów na skrzyżowaniu dróg wielopasmowych jako cel pracy
+1. Planowanie ruchu na skrzyżowaniach
 
-Alternatywa dla koordynacji ruchu drogowego za pomocą świateł
+  Zależność wydajności od rozmiaru problemu.
 
-Porównanie dwóch podejść i uzsadanienie, które jest szybsze
+  Szybkość zmian w środowisku uniemożliwia użycia algorytmu zajmującego dużo czasu
 
-Omówienie algorytmu A* na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
+  Rozważana klasa problemów
 
-Omówienie użycia A* do rozwiązywania problemu znajdowania drogi na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
+  Porównanie metody deterministycznej i heurystycznej
 
-Omówienie optymalności A*
+  Konieczność użycia metody heurystycznej z powodu dużej złożoności
 
-Omówienie funkcji heurystki w A*
+2. Użycie algorytmu A* do planowania ruchu
 
-Porównanie powyższego A* z moim dynamicznym wielostanowym algorytmem A* 
+  Omówienie użycia A* do rozwiązywania problemu znajdowania drogi na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
 
-Problem znajdowania ścieżki o minimalnym koszcie w grafie a mój problem na podstawie artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths)
+  Użycie algorytmu A* w celu usprawienia ruchu pojazdów na skrzyżowaniu dróg wielopasmowych jako cel pracy
 
-Porównanie użytego A* z artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths) do mojej modyfikacji A* w celu znalezienia najszybciej ścieżki w grafie.
+  Omówienie algorytmu A* na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
 
-Planowanie z użyciem wielostanowego algorytmu A* z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+3. Planowanie ruchu przy użyciu A*, a światła drogowe
 
-Porównanie algorytmu Multi-Entity A* z moim dynamicznym A*
+  Alternatywa dla koordynacji ruchu drogowego za pomocą świateł
 
-Omówienie przykładu przykładu użycia Multi-Entity na podstawie artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+  Porównanie dwóch podejść i uzsadanienie, które jest szybsze
 
-Porównanie użycia oraz przykładu Multi-Entity z powyższego artykułu z użyciem mojego dynamicznego A* dla rozwiązania problemu koordynacji ruchu.
+  Problem znajdowania ścieżki o minimalnym koszcie w grafie a mój problem na podstawie artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths)
 
-Omówienie złożoności Multi-Entity A* poprzednim przykładzie
+  Bezpieczeństwo zapewnione przez światła drogowe
 
-Omówienie złożoności mojego A* na przykładowym  skrzyżowaniu i rozkładzie aut.
+  Bezpieczeństwo zapewnione w moim rozwiązaniu
 
-Porównanie powyższych złożoności.
+4. Optymalność A*
 
-Omówienie modelu wierzchołka w A* w przykładzie z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+  Omówienie optymalności A*
 
-Omówienie modelu wierzchołka w moim problemie.
+  Omówienie funkcji heurystki w A*
 
-Porównanie obu modeli.
+5. Modyfikacja A*
 
-Opis modyfikacji i użycia A* w artykule (Mobile Robot Navigation on Partially Known Maps using a Fast A∗ Algorithm Version)
+  Opis modyfikacji A*
 
-Porównanie modyfikacji algorytmu A*
+  Porównanie powyższego A* z moim dynamicznym wielostanowym algorytmem A* 
 
-Porównanie użycia algorytmu A* w obu problemach.
+  Porównanie użytego A* z artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths) do mojej modyfikacji A* w celu znalezienia najszybciej ścieżki w grafie.
 
-Mój algorytm A* posiada modyfikacje, których jescze nie było (dynamiczny, można określać warunek zwycięstwa, wierzchołek to obiekt, który musi spełniać pewne założenia) - porównanie podsumowujące.
+  Planowanie z użyciem wielostanowego algorytmu A* z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
 
-Omówienie możliwości wprowadzenia mojego rozwiązania w życie.
+  Porównanie algorytmu Multi-Entity A* z moim dynamicznym A*
 
-Omówienie możliwości rozwiązania problemu dużej złożoności obilczeniowej w przyszłości.
+  Mój algorytm A* posiada modyfikacje, których jescze nie było (dynamiczny, można określać warunek zwycięstwa, wierzchołek to obiekt, który musi spełniać pewne założenia) - porównanie podsumowujące.
+
+6. A* planujący ruch drogowy
+
+  Omówienie przykładu użycia Multi-Entity na podstawie artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+
+  Porównanie użycia oraz przykładu Multi-Entity z powyższego artykułu z użyciem mojego dynamicznego A* dla rozwiązania problemu koordynacji ruchu.
+
+  Omówienie złożoności Multi-Entity A* poprzednim przykładzie
+
+  Omówienie złożoności mojego A* na przykładowym  skrzyżowaniu i rozkładzie aut.
+
+  Porównanie powyższych złożoności.
+
+7. Model opisujący problem
+
+  Omówienie modelu wierzchołka w A* w przykładzie z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+
+  Omówienie modelu wierzchołka w moim problemie.
+
+  Omówienie krawędzi w moim problemie.
+
+  Porównanie obu modeli.
+
+  Opis modyfikacji i użycia A* w artykule (Mobile Robot Navigation on Partially Known Maps using a Fast A∗ Algorithm Version)
+
+  Porównanie modyfikacji algorytmu A*
+
+  Porównanie użycia algorytmu A* w obu problemach.
+
+7. Dynamiczny wielostanowy A* planujący ruch drogowy
+
+  Omówienie możliwości wprowadzenia mojego rozwiązania w życie.
+
+  Omówienie możliwości rozwiązania problemu dużej złożoności obilczeniowej w przyszłości.
  
-Omówienie bezpieczeństwa mojego rozwiązania.
+  Omówienie bezpieczeństwa mojego rozwiązania.
 
-Porównanie bezpieczeństwa mojego rozwiązania z bezpieczeństwem przy użycie świateł.
+  Porównanie bezpieczeństwa mojego rozwiązania z bezpieczeństwem przy użycie świateł.
 
-Omówienie wielowariantowości.
+  Omówienie wielowariantowości.
 
-Omówienie sytuacji, kiedy kierowca się pomyli.
+  Omówienie sytuacji, kiedy kierowca się pomyli.
 
-Omówienie prawdopodobieństwa kolizji w razie pomyłki kierowcy.
+  Omówienie prawdopodobieństwa kolizji w razie pomyłki kierowcy.
