@@ -23,7 +23,10 @@ start_vertex = StatesVertex.new(states_attributes, data)
 # Win if all cars are on desired roads
 #
 win_function = Proc.new do |states_vertex|
-  result = states_vertex.states.map { |state| state.state[:position] > state.state[:final_position] }
+  result = states_vertex.states.map do |state|
+     (state.state[:position] > state.state[:final_position] && state.state[:direction] == 1) || \
+     (state.state[:position] < state.state[:final_position] && state.state[:direction] == -1)
+  end
   result.reduce(:&)
 end
 
@@ -38,9 +41,10 @@ heuristic_function = Proc.new do |states_vertex|
   states.each do |ele|
     time_stamps_number = 0
     state = ele.clone
-    while state[:position] <= state[:final_position]
+    while (state[:direction] == 1 && state[:position] <= state[:final_position]) \
+            || (state[:position] >= state[:final_position] && state[:direction] == -1)
       state[:velocity] += PLUS_MAX_ACCELERATION
-      state[:position] += state[:velocity]
+      state[:position] += state[:velocity] * state[:direction]
       time_stamps_number += 1
     end
   time_stamps.push(time_stamps_number)

@@ -12,6 +12,7 @@ class StatesVertex
   
   MINUS_ACCELEARTION_MAX = -1
   SAFETY = 1
+  MAX_VELOCITY = 4
 
   attr_accessor :attributes, :states, :roads
 
@@ -28,24 +29,22 @@ class StatesVertex
     @@roads = @@roads.map! { |ele| ele.state }
   end
 
+  def fixed_velocity(velocity)
+    return velocity if velocity <= MAX_VELOCITY
+    return MAX_VELOCITY
+  end
+
   # returns roads nr that the car cut
   #
   def crossroads_passed(car_state)
     cuts = roads_data.select { |ele| ele[:road_nr] == car_state[:current_road_nr] }
     cuts = cuts.first[:cuts]
-    new_position = car_state[:position] + car_state[:velocity] + PLUS_MAX_ACCELERATION + SAFETY
-    cuts = cuts.select { |ele| new_position >= ele[:crossroad] && car_state[:position] < ele[:crossroad] }
+    new_position = car_state[:position] + (fixed_velocity(car_state[:velocity] + PLUS_MAX_ACCELERATION) + SAFETY) * car_state[:direction]
+    cuts = cuts.select do |ele|
+      (new_position >= ele[:crossroad] && car_state[:position] < ele[:crossroad] && car_state[:direction] == 1) || \
+        (new_position <= ele[:crossroad] && car_state[:position] > ele[:crossroad] && car_state[:direction] == -1)
+    end
     cuts.map { |ele| ele[:road_nr] }
-  end
-
-  def cars_on_same_road(car_state_a, car_state_b)
-    car_state_a[:current_road_nr] == car_state_b[:current_road_nr]
-  end
-
-  def roads_crossing(road_a, road_b)
-    cuts = roads_data.map { |ele| { :road_nr => ele[:road_nr], :cuts => ele[:cuts].map { |e| e[:road_nr] } } }
-    cuts = cuts.select { |ele| ele[:road_nr] == road_a }
-    return cuts.first[:cuts].include? road_b
   end
 
   def merge_road_occupation(road_areas, start_pos, end_pos)
@@ -58,23 +57,6 @@ class StatesVertex
     road_areas.push(new_road_area)
   end
 
-  def crossroads_collided(road_area_x, road_area_y, pos_x, pos_y)
-    road_area_x.each do |road|
-      if pos_x >= road[:start_pos] && pos_x <= road[:end_pos]
-        pos_x = true  
-        break
-      end
-    end
-    road_area_y.each do |road|
-      if pos_y >= road[:start_pos] && pos_y <= road[:end_pos]
-        pos_y = true
-        break
-      end
-    end
-    return true if pos_y == true && pos_x == true
-    return false
-  end
-
   def cuts
     roads_data.map { |ele| { :road_nr => ele[:road_nr], :cuts => ele[:cuts] } }
   end
@@ -83,15 +65,19 @@ class StatesVertex
     cars_states = state_vertex.states
     roads_areas = []
 
+    # Collisions on one lane
+    #
     cars_states.each do |ele|
       ele = ele.state
       start_pos = ele[:position]
-      end_pos = ele[:position] + ele[:velocity] + PLUS_MAX_ACCELERATION
+      end_pos = ele[:position] + fixed_velocity(ele[:velocity] + PLUS_MAX_ACCELERATION) * ele[:direction]
       roads_areas[ele[:current_road_nr]] ||= []
       output = merge_road_occupation(roads_areas[ele[:current_road_nr]], start_pos, end_pos)
       return true if output == false
     end
 
+    # Collisions on crssroads
+    #
     crossroads_points = []
     cars_states.each do |car_state|
       crossed = crossroads_passed(car_state.state)
@@ -138,29 +124,29 @@ class StatesVertex
     # movement with velocity
     #
     new_state = state.clone
-    new_state[:position] += new_state[:velocity]
+    new_state[:position] += new_state[:velocity] * new_state[:direction]
     new_states.push(new_state)
 
     # movement with velocity, acceleration + 1
     #
     new_state = state.clone
-    new_state[:velocity] += 1
-    new_state[:position] += new_state[:velocity]
+    new_state[:velocity] = fixed_velocity(new_state[:velocity] + 1)
+    new_state[:position] += new_state[:velocity] * new_state[:direction]
     new_states.push(new_state)
 
     # movement with velocity, acceleration - 1
     #
     new_state = state.clone
     new_state[:velocity] -= 1
-    new_state[:position] += new_state[:velocity]
+    new_state[:position] += new_state[:velocity] * new_state[:direction]
     new_states.push(new_state) if new_state[:velocity] >= 0
 
     if PLUS_MAX_ACCELERATION == 2
       # movement with velocity, acceleration + 2
       #
       new_state = state.clone
-      new_state[:velocity] += 2
-      new_state[:position] += new_state[:velocity]
+      new_state[:velocity] = fixed_velocity(new_state[:velocity] + 2)
+      new_state[:position] += new_state[:velocity] * new_state[:direction]
       new_states.push(new_state)
     end
 
@@ -169,7 +155,7 @@ class StatesVertex
       #
       new_state = state.clone
       new_state[:velocity] -= 2
-      new_state[:position] += new_state[:velocity]
+      new_state[:position] += new_state[:velocity] * new_state[:direction]
       new_states.push(new_state) if new_state[:velocity] >= 0
     end
 
