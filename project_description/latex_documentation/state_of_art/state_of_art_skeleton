@@ -40,8 +40,6 @@
 
   Opis modyfikacji A*
 
-  Porównanie powyższego A* z moim dynamicznym wielostanowym algorytmem A* 
-
   Porównanie użytego A* z artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths) do mojej modyfikacji A* w celu znalezienia najszybciej ścieżki w grafie.
 
   Planowanie z użyciem wielostanowego algorytmu A* z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
@@ -50,13 +48,20 @@
 
   Mój algorytm A* posiada modyfikacje, których jescze nie było (dynamiczny, można określać warunek zwycięstwa, wierzchołek to obiekt, który musi spełniać pewne założenia) - porównanie podsumowujące.
 
+  Opis modyfikacji i użycia A* w artykule (Mobile Robot Navigation on Partially Known Maps using a Fast A∗ Algorithm Version)
+
+  Porównanie modyfikacji algorytmu A*
+
+  Porównanie użycia algorytmu A* w obu problemach.
+
+
 6. A* planujący ruch drogowy
 
   Omówienie przykładu użycia Multi-Entity na podstawie artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
 
   Porównanie użycia oraz przykładu Multi-Entity z powyższego artykułu z użyciem mojego dynamicznego A* dla rozwiązania problemu koordynacji ruchu.
 
-  Omówienie złożoności Multi-Entity A* poprzednim przykładzie
+  Omówienie złożoności Multi-Entity A* na poprzednim przykładzie
 
   Omówienie złożoności mojego A* na przykładowym  skrzyżowaniu i rozkładzie aut.
 
@@ -71,12 +76,6 @@
   Omówienie krawędzi w moim problemie.
 
   Porównanie obu modeli.
-
-  Opis modyfikacji i użycia A* w artykule (Mobile Robot Navigation on Partially Known Maps using a Fast A∗ Algorithm Version)
-
-  Porównanie modyfikacji algorytmu A*
-
-  Porównanie użycia algorytmu A* w obu problemach.
 
 7. Dynamiczny wielostanowy A* planujący ruch drogowy
 
