@@ -43,7 +43,7 @@ def present_roads_as_nodes(roads_states, cars_states)
     while i < size
       car_nr = nil
       car_nr = car_state.first.state[:car_nr] unless car_state.first.nil?
-      node = { :name => i+1, :road_nr => road[:road_nr], :car_nr => car_nr } 
+      node = { :name => i+1, :road_nr => road[:road_nr], :car_nr => car_nr }
       nodes.push(node)
       i += 1
     end
@@ -115,7 +115,7 @@ end
 def base_json(cars_states, roads_states, colors_cars_hash)
   colors_set = Set.new
   cars_nr = cars_states.map { |ele| ele.state[:car_nr] }
-  
+
   # Cars on one road have same color
   #
   roads_nr = roads_states.map{ |ele| ele.state[:road_nr] }
@@ -159,7 +159,7 @@ def base_json(cars_states, roads_states, colors_cars_hash)
     name.push(ele[2][:name]+1)
     road_nr.push(ele[0][:road_nr])
     road_nr.push(ele[2][:road_nr])
-    node = { :name => name, :road_nr => road_nr, :car_nr => nil } 
+    node = { :name => name, :road_nr => road_nr, :car_nr => nil }
     nodes.push(node)
     new_nodes_idx = nodes.size-1 if new_nodes_idx == -1
   end
@@ -185,7 +185,7 @@ def base_json(cars_states, roads_states, colors_cars_hash)
     node_index = new_nodes_idx
     i = 0
     join_indices.each do |idx|
-      link = { :source => idx, :target => node_index } 
+      link = { :source => idx, :target => node_index }
       links.push(link)
     end
     new_nodes_idx += 1
@@ -257,17 +257,17 @@ def states_collides(states_before, states_after)
 
   roads_data.each do |roads_states|
     road = roads_states.state
-    cars_on_roads_before = states_before.select { |ele| ele["current_road_nr"] == road[:road_nr] }
-    cars_on_roads_before.map! { |ele| ele["position"] }
+    cars_on_roads_before = states_before.select { |ele| ele['current_road_nr'] == road[:road_nr] }
+    cars_on_roads_before.map! { |ele| ele['position'] }
 
-    cars_on_roads_after = states_after.select { |ele| ele["current_road_nr"] == road[:road_nr] }
-    cars_on_roads_after.map! { |ele| ele["position"] }
+    cars_on_roads_after = states_after.select { |ele| ele['current_road_nr'] == road[:road_nr] }
+    cars_on_roads_after.map! { |ele| ele['position'] }
 
     for i in 0..cars_on_roads_before.length-2
       order_before = cars_on_roads_before[i] < cars_on_roads_before[i+1]
-      order_after = cars_on_roads_after[i] < cars_on_roads_after[i+1] 
+      order_after = cars_on_roads_after[i] < cars_on_roads_after[i+1]
       return true if cars_on_roads_before[i] == cars_on_roads_before[i+1]
-      return true if cars_on_roads_after[i] == cars_on_roads_after[i+1] 
+      return true if cars_on_roads_after[i] == cars_on_roads_after[i+1]
       return true if order_before != order_after
     end
   end
@@ -283,11 +283,18 @@ def states_collides(states_before, states_after)
 
     cuts = roads_data_states.select { |ele| ele[:road_nr] == new_car_state['current_road_nr'] }
     cuts = cuts.first[:cuts]
-    cuts = cuts.select { |ele| new_position >= ele[:crossroad] && old_position < ele[:crossroad] }
-    crossroads_passed.push(cuts)
+    cuts = cuts.select do |ele|                                                                                 
+      (new_position >= ele[:crossroad] && old_position < ele[:crossroad] && new_car_state['direction'] == 1) || \
+        (new_position <= ele[:crossroad] && old_position > ele[:crossroad] && new_car_state['direction'] == -1)  
+    end                                                                                                         
+
+    cuts = cuts.map { |ele| [new_car_state['current_road_nr'], ele[:road_nr]] } + \
+      cuts.map { |ele| [ele[:road_nr], new_car_state['current_road_nr']] }
+    crossroads_passed += cuts
   end
-  
-  crossroads_passed.delete_if { |ele| ele.empty? } 
+
+  crossroads_passed.delete_if { |ele| ele.empty? }
+
   return true if crossroads_passed.uniq.length != crossroads_passed.length
   return false
 end
@@ -295,13 +302,13 @@ end
 def apply_changing_states(core_outcome, graph, colors_cars_hash, roads_states, mistakes)
   roads_states = roads_states.map { |ele| ele.state }
   colors_roads_hash = {}
-  file = File.read(core_outcome) 
+  file = File.read(core_outcome)
   cars_states = JSON.parse(file)
   index = 0
   collision = false
   cars_states.each do |states|
-    #collision = states_collides(cars_states[index-1], cars_states[index]) unless index == 0
-    #puts "COLLISION" if collision
+    collision = states_collides(cars_states[index-1], cars_states[index]) unless index == 0
+    puts "COLLISION on step #{index+1}" if collision
     index += 1
     graph['nodes'].each do |node|
       node[:car_nr] = nil
@@ -324,32 +331,36 @@ end
 colors_cars_hash = {}
 
 FileUtils.rm_rf('output/normal/.', secure: true)
-FileUtils.rm_rf('output/mistake/.', secure: true)
+FileUtils.rm_rf('output/mistakes/.', secure: true)
 data = data_from_files('simple_a_star/start_states_file', 'simple_a_star/roads_file')
+
+puts 'NORMAL OUTPUT'
 
 # Normal output
 #
 outcome = base_json(data[:cars_states], data[:roads_states], colors_cars_hash)
 apply_changing_states('core_out.json', outcome, colors_cars_hash, data[:roads_states], false)
 
+puts 'OUTPUT WITH MISTAKES'
+
 # Mistakes output
 #
-#file = File.read('core_out.json') 
-#states = JSON.parse(file)
-#states.each_with_index do |cars_states, index|
-#  next if index == 0
-#  i = (0..cars_states.length-1).to_a.sample
-#  car_state = cars_states[i]
-#  car_state["position"] += MISTAKE_DISTANCE
-# 
-#  for idx in index+1..states.length-1
-#    car_state = states[idx][i]
-#    car_state["position"] += MISTAKE_DISTANCE
-#  end
-#end
-#
-#result_json = JSON.pretty_generate(states)                               
-#File.open('core_mistake_out.json', 'w') { |file| file.write(result_json) } 
+file = File.read('core_out.json')
+states = JSON.parse(file)
+states.each_with_index do |cars_states, index|
+  next if index == 0
+  i = (0..cars_states.length-1).to_a.sample
+  car_state = cars_states[i]
+  car_state["position"] += MISTAKE_DISTANCE
 
-#outcome = base_json(data[:cars_states], data[:roads_states], colors_cars_hash)
-#apply_changing_states('core_mistake_out.json', outcome, colors_cars_hash, data[:roads_states], true)
+  for idx in index+1..states.length-1
+    car_state = states[idx][i]
+    car_state["position"] += MISTAKE_DISTANCE
+  end
+end
+
+result_json = JSON.pretty_generate(states)
+File.open('core_mistake_out.json', 'w') { |file| file.write(result_json) }
+
+outcome = base_json(data[:cars_states], data[:roads_states], colors_cars_hash)
+apply_changing_states('core_mistake_out.json', outcome, colors_cars_hash, data[:roads_states], true)

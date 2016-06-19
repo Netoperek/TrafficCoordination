@@ -6,14 +6,22 @@ require 'csv'
 require 'json'
 require 'pry'
 
+unless ARGV[0] && ARGV[1]
+  puts 'USAGE: ruby main.rb ../start_states_file ../roads_file'
+  exit
+end
+
+cars_states_file = ARGV[0]
+roads_states_file = ARGV[1]
+
 data = CSV.read('../plus_max_acceleration')
 PLUS_MAX_ACCELERATION = data.last.last.to_i
 
-states = states_from_file '../start_states_file'
+states = states_from_file cars_states_file
 states_attributes = states[:attributes]
 data = states[:data]
 
-roads = roads_from_file '../roads_file'
+roads = roads_from_file roads_states_file
 roads_attributes = roads[:attributes]
 roads_data = roads[:data]
 roads_data.map! { |ele| Road.new(roads_attributes, ele) }

@@ -10,84 +10,70 @@
 
   Konieczność użycia metody heurystycznej z powodu dużej złożoności
 
-2. Użycie algorytmu A* do planowania ruchu
+2. Planowanie ruchu przy użyciu świateł drogowych
 
-  Użycie algorytmu A* w celu usprawienia ruchu pojazdów na skrzyżowaniu dróg wielopasmowych jako cel pracy
+  Opis dotychczasowych modeli ruchu przy użyciu świateł drogowych na podstawie artykułu [1]
 
-  Omówienie użycia A* do rozwiązywania problemu znajdowania drogi na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
+  Opis optymalizacji wprowadzonych do zarządzania sygnalizacją świetlną na podstawie artykułu [1]:
+    - Synchronized Traffic Lights
+    - Green Wave
+    - Random Offset
 
-  Problem znajdowania ścieżki o minimalnym koszcie w grafie a mój problem na podstawie artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths)
+  Porównanie powyższych optymalizacji na podstawie artykułu [1]
 
-  Omówienie algorytmu A* na podstawie artykułu (Generalized Best-First Search Strategies and the Optimality of A*)
+  Opis koordynacji ruchu przy użyciu algorytmu REAL TIME QUEUE LENGTH ESTIMATION: THE APTTC ALGORITHM na podstawie artykułu [7]:
+    - Sterowanie adaptacyjne
+    - Statystyczna optymalizacja
+    - Estymacja na podstawia długości dynamicznej kolejki
 
-3. Planowanie ruchu przy użyciu A*, a światła drogowe
+  Porównanie powyższego rozwiązania z synchroniczną zmianą świateł.
 
-  Alternatywa dla koordynacji ruchu drogowego za pomocą świateł
+3. Planowanie ruchu bez sygnalizacji świetlnej
 
-  Porównanie dwóch podejść i uzsadanienie, które jest szybsze
+  Znajdowanie ścieżki za pomocą algorytmu Dijkstr'y na podstawie artykułu [2]
 
-  Bezpieczeństwo zapewnione przez światła drogowe
+  Unikanie kolizji przy użyciu algorytmu Dijkstry' na podstawie artykułu [2]
 
-  Bezpieczeństwo zapewnione w moim rozwiązaniu
+  Planowanie ruchu za pomocą zmodyfikowanego algorytmu A* na podstawie artykułu [3]
+  
+  Planowanie ruchu za pomocą wielostanowego algorytmu A* oraz wielostanowego algorytmu Wavefront na podstawie artykułu [4]
 
-4. Optymalność A*
+  Autonomiczne podejśćie - użycie Automated Guided Vehicels.
 
-  Omówienie optymalności A*
+  Planowanie ruchu oraz unikanie kolizji przy użyciu AGV na podstawie artykułu [8]
 
-  Omówienie funkcji heurystki w A*
+  Omówienie przykładu z użyciem AGV na podstawie artykułu [8]
 
-5. Modyfikacja A*
+  Omówienie agorytmów stosowanych do planowania drogi na podstawie artykułu [5]:
+  - Dijkstra's Algorithm
+  - Priority Queues
+  - Bidirectional Search
+  - A*
 
-  Opis modyfikacji A*
+4. Użycie algorytmu A* do planowania ruchu
 
-  Porównanie użytego A* z artykułu (A Formal Basis for the Heuristic Determination of Minimum Cost Paths) do mojej modyfikacji A* w celu znalezienia najszybciej ścieżki w grafie.
+  Omówienie użycia A* do rozwiązywania problemu znajdowania drogi na podstawie artykułu [6]
 
-  Planowanie z użyciem wielostanowego algorytmu A* z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+  Omówienie algorytmu A* na podstawie artykułu [6]
 
-  Porównanie algorytmu Multi-Entity A* z moim dynamicznym A*
+  Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu [4]
 
-  Opis modyfikacji i użycia A* w artykule (Mobile Robot Navigation on Partially Known Maps using a Fast A∗ Algorithm Version)
+  Omówienie złożoności Multi-Entity A* na powyższym.
 
-  Porównanie modyfikacji algorytmu A*
+5. Modyfikacje A*
 
-  Porównanie użycia algorytmu A* w obu problemach.
+  Opis wielostanego A* na podstawie artykułu [4]
 
-  Mój algorytm A* posiada modyfikacje, których jescze nie było (dynamiczny, można określać warunek zwycięstwa, wierzchołek to obiekt, który musi spełniać pewne założenia) - porównanie podsumowujące.
+  Opis modyfikacji i użycia A* w artykule [3]
 
-6. A* planujący ruch drogowy
 
-  Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
+References
 
-  Porównanie użycia oraz przykładu Multi-Entity z powyższego artykułu z użyciem mojego dynamicznego A* dla rozwiązania problemu koordynacji ruchu.
-
-  Omówienie złożoności Multi-Entity A* na poprzednim przykładzie
-
-  Omówienie złożoności mojego A* na przykładowym  skrzyżowaniu i rozkładzie aut.
-
-  Porównanie powyższych złożoności.
-
-7. Model opisujący problem
-
-  Omówienie modelu wierzchołka w A* w przykładzie z artykułu (A Robust Planning Algorithm for Groups of Entities in Discrete Spaces)
-
-  Omówienie modelu wierzchołka w moim problemie.
-
-  Omówienie krawędzi w moim problemie.
-
-  Porównanie obu modeli.
-
-7. Dynamiczny wielostanowy A* planujący ruch drogowy
-
-  Omówienie możliwości wprowadzenia mojego rozwiązania w życie.
-
-  Omówienie możliwości rozwiązania problemu dużej złożoności obilczeniowej w przyszłości.
- 
-  Omówienie bezpieczeństwa mojego rozwiązania.
-
-  Porównanie bezpieczeństwa mojego rozwiązania z bezpieczeństwem przy użycie świateł.
-
-  Omówienie wielowariantowości.
-
-  Omówienie sytuacji, kiedy kierowca się pomyli.
-
-  Omówienie prawdopodobieństwa kolizji w razie pomyłki kierowcy.
+1. Optimizing Traffic Lights in a Cellular Automaton Model for City Traffic
+2. AGV Path Planning and Obstacle Avoidance Using Dijkstra’s Algorithm 
+3. Mobile Robot Navigation on Partially Known Maps using a Fast A∗ Algorithm Version
+4. A Robust Planning Algorithm for Groups of Entities in Discrete Spaces
+5. Engineering Route Planning Algorithms
+6. Generalized Best-First Search Strategies and the Optimality of A*
+7. Adaptive Predictive Traffic Timer Control Algorithm
+8. Robust algorithm for real-time route planning
