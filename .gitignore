@@ -1,2 +1,9 @@
 tags
 *.json
+*.aux
+*.log
+*.pdf
+converted_start_states_file
+*.swp
+*.gif
+output

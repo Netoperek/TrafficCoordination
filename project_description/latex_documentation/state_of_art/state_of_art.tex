@@ -9,15 +9,11 @@
 
 \subsection{Cel pracy}
 
-W pracy przedstawione zostanie wykorzystanie rozszerzonej wersji algorytmu "A*" do planowania ruchu pojazdów na skrzyżowaniach dróg wielopasmowych. Celem pracy jest pokazanie alternatywy dla koordynacji ruchu pojazdów przy użyciu świateł drogowych. Użycie algorytmu ma koordynować ruch drogowy uwzględniając przy tym bezpieczeństwo pojazdów. Rozwiązanie ma także uwzględniać potencjalne błędy kierowców polegające na nie dostosowaniu się do przesłanego im planu.
+  W pracy przedstawione zostanie wykorzystanie rozszerzonej wersji algorytmu "A*" do planowania ruchu pojazdów na skrzyżowaniach dróg wielopasmowych. Użycie algorytmu ma koordynować ruch drogowy uwzględniając przy tym bezpieczeństwo pojazdów. Rozwiązanie ma także uwzględniać potencjalne błędy kierowców polegające na nie dostosowaniu się do przesłanego im planu.
+  Ruch na skrzyżowaniach będzie koordynowany następująco. Każdy z kierowców dostaje na bieżąco plan, który mówi mu, jak ma on się poruszać na drodze. Plan zawiera informacje z jaką prędkością kierowca powinien się poruszać oraz kiedy powinien zwolnić lub przyspieszyć. Rozwiązanie uwzględnia błędy kierowców. W razie, gdy kierowca nie zastosuje się do planu - błąd jest wykrywany, następnie liczone są nowe plany oraz wysyłane do kierowców. Bezpieczeństwo przed kolizją zapewniane jest poprzez zachowanie odpowiedniej, określonej odległości między autami.
+  Pokazane w pracy podejście powinno usprawnić ruch drogowy na skrzyżowaniach w porównaniu do rozwiązania stosowanego najczęściej, czyli użycie świateł drogowych. Światła drogowe zapewniają bezpieczeństwo poprzez światło pomarańczowe. Światło pomarańczowe na skrzyżowaniu, to moment, w którym auta stoją, przez co tracą na czasie. Co za tym idzie ruch na skrzyżowaniu jest mniej sprawny.
 
-\subsection{Motywacja}
+\subsection{A* w planowaniu ruchu drogowego}
 
-Koordynacja ruchu za pomocą rozszerzonego algorytmu "A*" powinna działać szybciej niż koordynacja ruchu za pomocą świateł drogowych. Wynika to z faktu, że bezpieczeństwo na skrzyżowaniach, gdzie ruch koordynowany jest za pomocą świateł drogowych jest zapewnione poprzez czekanie na świetle żółtym. Porównując to z rozwiązaniem, gdzie każdy kierowca otrzymuje plan, zgodnie z którym powinien się poruszać - czas przeznaczony na bezpieczeństwo powinien być krótszy. Wynikiem tego, ruch na skrzyżowaniach powinien przebiegać sprawniej.
-
-
-\subsection{Finalne rozwiązanie}
-
-Rozwiązanie będzie uwzględniać błędy kierowców, polegające na nie dostosowaniu się do planu. W takim wypadku, pomyłka zostanie wykryta i kierowca dostanie nowy plan. Problemem jest złożoność obliczeniowa - wyliczenie takiego planu zajmuje dużo czasu. Czas ten rośnie wykładniczo do ilości aut na skrzyżowaniach. W razie pomyłki kierowcy plan powinien być dostarczony natychmiastowo. Z tego powodu rozważone będzie wykonwanie planów przewidujących pomyłki kierowców co wiąże się z potrzebą posiadania dużych zasobów obliczeniowych, co jest możliwe w przyszłości.
-
+  Algorytm A* to algorytm heurystyczny znajdowania najkrótszej ścieżki w grafie ważonym z dowolnego wierzchołka do wierzchołka spełniającego określony warunek zwany testem celu.  
 \end{document}
