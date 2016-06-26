@@ -2,39 +2,71 @@
 
 \section{Planowanie ruchu na skrzyżowaniach}
 
+CEL:
+\newline
+- wskazanie tematyki literatury jaka będzie omawiana
+\newline
+- jakie algorytmy w literaturze są stosowane do planowania ruchu drogowego
+\newline
+- algorytmy heurystyczne są preferowane ze względu na złożoność
+\newline
+\newline
 Zależność wydajności od rozmiaru problemu
+\newline
+- Metody planujące są zawsze zależne od rozmiaru problemu
+\newline
+- Duża złożoność powoduje stosowanie algorytmów heurystycznych
+\newline
+- Pokazanie złożoności na przykładowych algorytmach
 \newline
 \newline
 Szybkość zmian w środowisku uniemożliwia użycia algorytmu zajmującego dużo czasu
 \newline
+- Duża złożoność problemu powoduje, że jeżeli zajdzie zmiana w środowisku, algorytm musi natychmiast wyliczyć poprawny plan
+\newline
+- Algorytmy heurystyczne są wstanie działać w środowisku, gdzie zmiany zachodzą szybko
+\newline
 \newline
 Rozważana klasa problemów
 \newline
+- Omówienie klasy problemów planowania ruchu na skrzyżowań
 \newline
-Porównanie metody deterministycznej i heurystycznej
+- Omówienie modelów środowisk i wiążących się z nimi złożoności
 \newline
 \newline
-Konieczność użycia metody heurystycznej z powodu dużej złożoności
 
 \section{Planowanie ruchu przy użyciu świateł drogowych}
 
-Opis dotychczasowych modeli ruchu przy użyciu świateł drogowych na podstawie artykułu [1]
+CEL:
+\newline
+- omówienie literatury rozwiązującej ruch drogowy przy użyciu świateł drogowych
+\newline
+- światła drogowe wprowadzają opóźnienie spowodowane światłem pomarańczowym
+\newline
+- omówienie optymalizacji świateł drogowych, które mimo wszystko powodują opóźnienia
 \newline
 \newline
-Opis optymalizacji wprowadzonych do zarządzania sygnalizacją świetlną na podstawie artykułu [1]:
+Opis optymalizacji wprowadzonych do zarządzania sygnalizacją świetlną na podstawie artykułu ~\cite{brockfeld2001optimizing}:
   \newline
   - Synchronized Traffic Lights
   \newline
   - Green Wave
   \newline
   - Random Offset
-  \newline
 \newline
 \newline
-Porównanie powyższych optymalizacji na podstawie artykułu [1]
+Porównanie powyższych optymalizacji na podstawie artykułu ~\cite{brockfeld2001optimizing}
+\newline
+- która optymalizacja co wnosi
+\newline
+- jak niewelowane są opóźnienia
+\newline
+- która z nich daje najlepsze wyniki
+\newline
+- opóźnienia i tak są spowodowane przez użycie świateł (światło pomarańczowe)
 \newline
 \newline
-Opis koordynacji ruchu przy użyciu algorytmu REAL TIME QUEUE LENGTH ESTIMATION: THE APTTC ALGORITHM na podstawie artykułu [7]:
+Opis koordynacji ruchu przy użyciu algorytmu REAL TIME QUEUE LENGTH ESTIMATION: THE APTTC ALGORITHM na podstawie artykułu ~\cite{athmaraman2005adaptive}:
   \newline
   - Sterowanie adaptacyjne
   \newline
@@ -42,35 +74,54 @@ Opis koordynacji ruchu przy użyciu algorytmu REAL TIME QUEUE LENGTH ESTIMATION:
   \newline
   - Estymacja na podstawia długości dynamicznej kolejki
   \newline
-
+\newline
 Porównanie powyższego rozwiązania z synchroniczną zmianą świateł.
+\newline
+- jakie zalety i wady dają oba te rozwiązania
+\newline
+- którego rozwiązania używać a jakiej sytuacji
 \newline
 \newline
 
 \section{Planowanie ruchu bez sygnalizacji świetlnej}
 
-Znajdowanie ścieżki za pomocą algorytmu Dijkstr'y na podstawie artykułu [2]
+CEL:
+\newline
+- przedstawienie algorytmów bez sygnalizacji świetlnej, których można użyć do planowania ruchu
+\newline
+- porównanie tych rozwiązań między sobą
+\newline
+- zastosowania tych rozwiązań, przykłady
 \newline
 \newline
-Unikanie kolizji przy użyciu algorytmu Dijkstry' na podstawie artykułu [2]
+Znajdowanie ścieżki za pomocą algorytmu Dijkstr'y na podstawie artykułu ~\cite{shaikh2013agv} 
+\newline
+- opisanie sposobu zastosowanie dijkstry w planowaniu ruchu
+\newline
+- ograniczenia algorytmu
 \newline
 \newline
-Planowanie ruchu za pomocą zmodyfikowanego algorytmu A* na podstawie artykułu [3]
-\newline
-\newline
-Planowanie ruchu za pomocą wielostanowego algorytmu A* oraz wielostanowego algorytmu Wavefront na podstawie artykułu [4]
+Unikanie kolizji przy użyciu algorytmu Dijkstry' na podstawie artykułu ~\cite{shaikh2013agv} 
 \newline
 \newline
 Autonomiczne podejśćie - użycie Automated Guided Vehicels.
 \newline
+- zmiana podejścia - zarządzanie pojedyńczym samochodem zamiast algorytm dla wszystkich
 \newline
-Planowanie ruchu oraz unikanie kolizji przy użyciu AGV na podstawie artykułu [8]
-\newline
-\newline
-Omówienie przykładu z użyciem AGV na podstawie artykułu [8]
+- wady i zalety takiego rozwiązania
 \newline
 \newline
-Omówienie agorytmów stosowanych do planowania drogi na podstawie artykułu [5]:
+Planowanie ruchu oraz unikanie kolizji przy użyciu AGV na podstawie artykułu ~\cite{szczerba2000robust}
+\newline
+- opis zastosowanego rozwiązania
+\newline
+- opis sposobu unikania kolizji
+\newline
+\newline
+Omówienie przykładu z użyciem AGV na podstawie artykułu ~\cite{szczerba2000robust}
+\newline
+\newline
+Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie artykułu ~\cite{delling2009engineering}:
   \newline
   - Dijkstra's Algorithm
   \newline
@@ -85,24 +136,57 @@ Omówienie agorytmów stosowanych do planowania drogi na podstawie artykułu [5]
 
 \section{Użycie algorytmu A* do planowania ruchu}
 
-Omówienie użycia A* do rozwiązywania problemu znajdowania drogi na podstawie artykułu [6]
+CEL:
+\newline
+- przytoczenie użyć A* do planowania ruchu
+\newline
+- pokazanie ograniczeń użytych A*
 \newline
 \newline
-Omówienie algorytmu A* na podstawie artykułu [6]
+Omówienie algorytmu A* na podstawie artykułu ~\cite{dechter1985generalized} 
+\newline
+- omówienie optymalności
+\newline
+- omówienie funkcji heurystyki
 \newline
 \newline
-Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu [4]
+Planowanie ruchu za pomocą zmodyfikowanego algorytmu A* na podstawie artykułu ~\cite{munteanmobile} 
+\newline
+- opis sposobu wprowadzenia zmodyfikowanego algorytmu A* do koordynowania ruchu na skrzyżowaniach
+\newline
+- wady, zalety i ogarniczenia
 \newline
 \newline
-Omówienie złożoności Multi-Entity A* na powyższym.
+Planowanie ruchu za pomocą wielostanowego algorytmu A* oraz Wavefront na podstawie artykułu ~\cite{wojnicki2015robust} 
+\newline
+- omówienie zastosowania tych dwóch algorytmów do planowania ruchu
+\newline
+\newline
+Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu ~\cite{wojnicki2015robust} 
+\newline
+- przytoczenie przykładu
+\newline
+- omówienie wad, zalet i ogarniczeń
+\newline
+\newline
+Omówienie złożoności Multi-Entity A* na powyższym przykładzie.
+\newline
+- złożoność jest zależna od liczby stanów w A*
+\newline
+- obliczenie złożoności i pokazania jak ona rośnie
 \newline
 \newline
 
 \section{Modyfikacje A*}
 
-Opis wielostanego A* na podstawie artykułu [4]
+CEL:
+\newline
+- przytoczenie modyfikacji A* (nie ma takiej modyfikacji jak moja)
 \newline
 \newline
-Opis modyfikacji i użycia A* w artykule [3]
+Opis wielostanego A* na podstawie artykułu ~\cite{wojnicki2015robust} 
+\newline
+\newline
+Opis modyfikacji A* w artykule ~\cite{munteanmobile}
 \newline
 \newline
