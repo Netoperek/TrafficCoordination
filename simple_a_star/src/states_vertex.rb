@@ -76,7 +76,7 @@ class StatesVertex
       return true if output == false
     end
 
-    # Collisions on crssroads
+    # Collisions on crossroads
     #
     crossroads_points = []
     cars_states.each do |car_state|
