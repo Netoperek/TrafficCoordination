@@ -82,37 +82,37 @@ Porównanie powyższego rozwiązania z synchroniczną zmianą świateł.
 - którego rozwiązania używać a jakiej sytuacji
 \newline
 \newline
-Opis kierowania ruchem drogowym na jednym skrzyzowaniu. Autorzy artykulu \cite{de1998optimal} dla ulatwienia pomijaja swiatlo pomaranczowe:
+Opis kierowania ruchem drogowym na jednym skrzyżowaniu. AUtorzy artykułu \cite{de1998optimal} dla ułatwienia pomijają światło pomarańczowe:
+  \newline
+  - Optymalizacja świateł za pomocą dwóch podanych funkcji polegających na optymalicazji kolejek na czterech pasach
+  \newline
+  - Rozwiązanie pomija element bezpieczeństwa jakim jest światło pomarańczowe (w moim rozwiązaniu można je zapewnić)
+\newline
+\newline
+Kontrola ruchu drogowego za pomocą świateł. Autorzy atykułu \cite{lammer2008self} zaproponowali zdecentralizowany algorytm bazujący na krótkich prognozach ruchu:
   \newline
   - Optymalizacja swiatel za pomoca dwoch podanych funkcji polegajacych na optymalizacji kolejek na czterech pasach
   \newline
-  - Rozwiazanie pomija element bezpieczenstwa jakim jest swiatlo pomaranczowe (w moim rozwiazaniu mozna je zapewnic)
-
-\newline
-\newline
-Kontrola ruchu drogowego za pomoca swiatel drogowych. Autorzy artykulu \cite{lammer2008self} zaproponowali zdecentralizowany algorytm bazujacy na krotkich prognozach ruchu:
+	- Liczona długość światła zielonego w celu zwolnienia kolejki na pasie
   \newline
-  - Optymalizacja swiatel za pomoca dwoch podanych funkcji polegajacych na optymalizacji kolejek na czterech pasach
-  - Liczona dlugosc swiatla zielonego w celu zwolnienia kolejki na pasie
+  - Limitacja - Zielone światła są zapalone dłużej niż zwykle powinny
   \newline
-  - Limitacja - Zielone swiatla sa zapalone dluzej niz zwykle powinny
-  \newline
-  - Limitacja - Ruch jest optymizowany dla sytuacji "srednich", ktore tak na prawde nigdy nie wystepuja, przez co optymizacja nie jest optymalna dla aktualnej sytuacji
+	- Limitacja - Ruch jest optymalizowany dla sytuacji "średnich", które tak na prawdę nigdy nie występują, przez co optymalizacja nie jest stosowana dla aktualnej sytuacji
   \newline
   \newline
-Zarzadzanie swiatlami za pomoca komunikacji pojazdow miedzy soba \cite{ferreira2010self}
+Zarządzanie światłami za pomocą komunikacji pojazdów między sobą \cite{ferreira2010self}
 \newline
-Wszystie auta musza byc wyposazone w:
+Wszystkie auta muszą być wyposażone w:
 \newline
-  - Urzadzenia DSRC
+	- Urządzenia DSRC
 \newline
-  - Ta sama wersje mapy
+  - Tą sama wersję mapy
 \newline
-  - GPS z dokladnoscia do pasa na ktorym sa
+	- GPS z dokładnością do pasa na którym są
 \newline
-Siec bez przewodowa w kazdym z samochodow musi byc niezawodna.
+Sieć bezprzewodowa w każdym z samochdów musi być niezawodna
 \newline
-Rozwiazanie w porownaniu do mojego jest kosztowne, jezeli chodzi o wyposazenie. Jest ono mozliwe takze tylko wtedy kiedy wszystkie auta sa odpowiednio wyposazone i sprawe.
+Rozwiązanie w porównaniu do mojego jest kosztowne, jeżeli chodzi o wyposażenie. Jest ono możliwe także tylko wtedy kiedy wszystkie auta są odpowiednio wyposażone i sprawne.
     
 \section{Planowanie ruchu bez sygnalizacji świetlnej}
 
@@ -142,6 +142,15 @@ Autonomiczne podejśćie - użycie Automated Guided Vehicels.
 - wady i zalety takiego rozwiązania
 \newline
 \newline
+Autorzy artykułu ~\cite{huang2013improved} przedstawiają ulepszoną wersję algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki.
+\newline
+- Algorytm Dijkstry ma słabą wydajność, dlatego postanowiono go zmodyfikować. Według badań przeprowadzonych przez autorów algorytm jest ~42%-76% szybszy
+\newline
+- Autorzy wspominają o algorytmie A*, który jest szybszy od algorytmu Dijkstry ale może skończyć w nieskończonej pętli.
+\newline
+- W prowadzonych przeze mnie badaniach algorytm A* ani raz nie został wprowadzony w nieskończoną pętlę oraz jest szybszy od algorytmu Dijkstry w szukaniu ścieżki.
+\newline
+\newline
 Planowanie ruchu oraz unikanie kolizji przy użyciu AGV na podstawie artykułu ~\cite{szczerba2000robust}
 \newline
 - opis zastosowanego rozwiązania
@@ -163,6 +172,30 @@ Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie
   - A*
   \newline
 \newline
+\newline
+Autorzy artykułu ~\cite{gazis1997optimal} przedstawiają system planujący ruch pojazdów połączonych za pomocą bezprzewodowej komunikacji. System dostarcza pojazdą optymalną trasę biorąc pod uwagę aktualny ruch na drogach.
+\newline
+- Użycie algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki
+\newline
+- Celem patentu znalezienie drogi do celu w najkrótszym czasie poprzez omijanie zakorkowanych dróg
+\newline
+- Jest to jedynie znajdowanie najszbszej drogi do celu poprzez komunikacje bezprzewodową. Nie jest to dokładne zaplanowanie ruchu pojazdu wraz z unikaniem kolizji
+\newline
+\newline
+W Artykule ~\cite{broxmeyer1994vehicle} autorzy przedstawili system do controli ruchu i unikania kolizji na autostradach.
+\newline
+- Pod uwage wzięte zostały: zmiany pasów, unikanie kolizji, kontrolowanie trasy pojazdu
+\newline
+- Unikanie kolizji jest zapewniane poprzez komunikacje przez transmitery radiowe oraz radioodbiorniki zamontowane w każdym z pojazdów
+\newline
+- System planuje trasy oraz zmiany pasów na autostradach przy czym zapewnione jest bezpieczeństwo kolizji. Rozwiązania nie można jednak zaaplikować do skrzyżowań dróg
+\newline
+\newline
+Autorzy artykułu ~\cite{kanoh2007dynamic} przedstawiają system dynamiczny system planowania ruchu do nawigacji samochodów przy użyciu 'virus genetic algorithms'.
+\newline
+- Zaproponowany został 'Genetic Algorithm', który powinien dawać lepsze wyniki w porównaniu do algorytmu Dijkstry oraz algorytmu A*.
+\newline
+- Brak unikania kolizji
 \newline
 
 \section{Użycie algorytmu A* do planowania ruchu}
