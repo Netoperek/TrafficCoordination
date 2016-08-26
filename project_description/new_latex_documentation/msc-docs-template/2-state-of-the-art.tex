@@ -34,6 +34,14 @@ Rozważana klasa problemów
 - Omówienie modelów środowisk i wiążących się z nimi złożoności
 \newline
 \newline
+Zgodnie z artykułem ~\cite{leena2014survey} szukanie ścieżki można podzielić na planowanie globalne oraz lokalne.
+\newline
+- W globalnym dla algorytmu znane musi być całe środowisko
+\newline
+- W lokalnym dla jednego pojazdu całe środowisko jest nie znane - jest poznawane w czasie rzeczywistym
+\newline
+- W mojej pracy zastosowany będzie algorytm globalny
+
 
 \section{Planowanie ruchu przy użyciu świateł drogowych}
 
@@ -208,39 +216,47 @@ CEL:
 \newline
 \newline
 Omówienie algorytmu A* na podstawie artykułu ~\cite{dechter1985generalized} 
-\newline
-- omówienie optymalności
-\newline
-- omówienie funkcji heurystyki
-\newline
+  \newline
+  - omówienie optymalności
+  \newline
+  - omówienie funkcji heurystyki
+  \newline
 \newline
 Planowanie ruchu za pomocą zmodyfikowanego algorytmu A* na podstawie artykułu ~\cite{munteanmobile} 
-\newline
-- opis sposobu wprowadzenia zmodyfikowanego algorytmu A* do koordynowania ruchu na skrzyżowaniach
-\newline
-- wady, zalety i ogarniczenia
-\newline
-\newline
+  \newline
+  - opis sposobu wprowadzenia zmodyfikowanego algorytmu A* do koordynowania ruchu na skrzyżowaniach
+  \newline
+  - wady, zalety i ogarniczenia
+  \newline
+  \newline
 Planowanie ruchu za pomocą wielostanowego algorytmu A* oraz Wavefront na podstawie artykułu ~\cite{wojnicki2015robust} 
 \newline
 - omówienie zastosowania tych dwóch algorytmów do planowania ruchu
 \newline
 \newline
 Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu ~\cite{wojnicki2015robust} 
+  \newline
+  - przytoczenie przykładu
+  \newline
+  - omówienie wad, zalet i ogarniczeń
+  \newline
+  \newline
+  Omówienie złożoności Multi-Entity A* na powyższym przykładzie.
+  \newline
+  - złożoność jest zależna od liczby stanów w A*
+  \newline
+  - obliczenie złożoności i pokazania jak ona rośnie
 \newline
-- przytoczenie przykładu
 \newline
-- omówienie wad, zalet i ogarniczeń
-\newline
-\newline
-Omówienie złożoności Multi-Entity A* na powyższym przykładzie.
-\newline
-- złożoność jest zależna od liczby stanów w A*
-\newline
-- obliczenie złożoności i pokazania jak ona rośnie
-\newline
-\newline
-
+Autorzy artykułu ~\cite{elhalawany2013modified} zaproponowali użycie zmodyfikowanego algorytmu A* w celu bezpieczniejszej nawigacji dla robotów.
+  \newline
+  - Modyfikacja algorytmu polega na wzięciu pod uwagę rozmiaru robota w celu generowania prostrzej ścieżki i w celu uniknięcia ostrych skrętów.
+  \newline
+  - Do algorytmu A* przekazywany jest stan początkowy i cel jaki robot chce osiągnąć.
+  \newline
+  - Autorzy zmodyfikowali algorytm A* tak aby unikał niebezpiecznych sytuacji, które mogą powodować kolizje.
+  \newline
+  - Algorytm jest liczony dla jednego robota - u mnie brane są pod uwage wszystkie pojazdy na drogach
 \section{Modyfikacje A*}
 
 CEL:
@@ -254,3 +270,13 @@ Opis wielostanego A* na podstawie artykułu ~\cite{wojnicki2015robust}
 Opis modyfikacji A* w artykule ~\cite{munteanmobile}
 \newline
 \newline
+W artykule ~\cite{oleiwi2014modified} autorzy zaproponowali genetyczny algorytm oparty na zmodyfikowanym algorytmie A* w celu optymalizacji znajdowania ścieżek dla wielu obiektów.
+\newline
+- Znajdowanie śecieżek dla robotów z wymijaniem przeszkód
+\newline
+- Autorzy zaproponwali modyfikację A* w celu znalezienia suboptymalnej ścieżki w celu ustalenia początkowego rozwiązania dla algorytmu genetycznego.
+\newline
+- Modyfikacja została wykonana, aby A* nie wyszukiwał najkrótszej ścieżki na rzecz wydajności
+\newline
+- Nie jest to jednak Algorytm A* który opiera się na stanie wszystkich pojazdów w środowisku - polega on na znalezienie ścieżki dla jednego robota.
+
