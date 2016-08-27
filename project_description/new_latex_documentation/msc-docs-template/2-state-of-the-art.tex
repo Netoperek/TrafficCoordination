@@ -2,16 +2,12 @@
 
 \section{Planowanie ruchu na skrzyżowaniach}
 
-CEL:
+\textbf{Cel podrozdziału}
 \newline
-- wskazanie tematyki literatury jaka będzie omawiana
-\newline
-- jakie algorytmy w literaturze są stosowane do planowania ruchu drogowego
-\newline
-- algorytmy heurystyczne są preferowane ze względu na złożoność
+Wskazanie złożoności problemu znajdowania drogi oraz wskazania algorytmów używanych w literaturze do tego typu probemów
 \newline
 \newline
-Zależność wydajności od rozmiaru problemu
+\textbf{Zależność wydajności od rozmiaru problemu}
 \newline
 - Metody planujące są zawsze zależne od rozmiaru problemu
 \newline
@@ -20,95 +16,95 @@ Zależność wydajności od rozmiaru problemu
 - Pokazanie złożoności na przykładowych algorytmach
 \newline
 \newline
-Szybkość zmian w środowisku uniemożliwia użycia algorytmu zajmującego dużo czasu
+\textbf{Szybkość zmian w środowisku uniemożliwia użycia algorytmu zajmującego dużo czasu}
 \newline
 - Duża złożoność problemu powoduje, że jeżeli zajdzie zmiana w środowisku, algorytm musi natychmiast wyliczyć poprawny plan
 \newline
 - Algorytmy heurystyczne są wstanie działać w środowisku, gdzie zmiany zachodzą szybko
 \newline
 \newline
-Rozważana klasa problemów
+\textbf{Rozważana klasa problemów}
 \newline
 - Omówienie klasy problemów planowania ruchu na skrzyżowań
 \newline
 - Omówienie modelów środowisk i wiążących się z nimi złożoności
 \newline
 \newline
-Zgodnie z artykułem ~\cite{leena2014survey} szukanie ścieżki można podzielić na planowanie globalne oraz lokalne.
+\textbf{Zgodnie z artykułem ~\cite{leena2014survey} szukanie ścieżki można podzielić na planowanie globalne oraz lokalne}
 \newline
 - W globalnym dla algorytmu znane musi być całe środowisko
 \newline
 - W lokalnym dla jednego pojazdu całe środowisko jest nie znane - jest poznawane w czasie rzeczywistym
 \newline
 - W mojej pracy zastosowany będzie algorytm globalny
-
+\newline
+\newline
 
 \section{Planowanie ruchu przy użyciu świateł drogowych}
 
-CEL:
+\textbf{Cel podrozdziału}
 \newline
-- omówienie literatury rozwiązującej ruch drogowy przy użyciu świateł drogowych
-\newline
-- światła drogowe wprowadzają opóźnienie spowodowane światłem pomarańczowym
-\newline
-- omówienie optymalizacji świateł drogowych, które mimo wszystko powodują opóźnienia
+Przedstawienie rozwiązań koordynujących ruch drogowy przy użyciu świateł drogowych, omówienie ich optymalizacji oraz wskazanie co w nich powoduje opóźnienie, którego w moim rozwiązaniu nie ma.
 \newline
 \newline
-Opis optymalizacji wprowadzonych do zarządzania sygnalizacją świetlną na podstawie artykułu ~\cite{brockfeld2001optimizing}:
+\textbf{W artykule ~\cite{brockfeld2001optimizing} opisane zostały optymalizacje sygnalizacji świetlnej}
   \newline
   - Synchronized Traffic Lights
   \newline
   - Green Wave
   \newline
   - Random Offset
+  \newline
+  \newline
+  - Która optymalizacja co wnosi
+  \newline
+  - Jak niewelowane są opóźnienia
+  \newline
+  - Która z nich daje najlepsze wyniki
+  \newline
+  \newline
+\textbf{Krytyka}
 \newline
-\newline
-Porównanie powyższych optymalizacji na podstawie artykułu ~\cite{brockfeld2001optimizing}
-\newline
-- która optymalizacja co wnosi
-\newline
-- jak niewelowane są opóźnienia
-\newline
-- która z nich daje najlepsze wyniki
-\newline
-- opóźnienia i tak są spowodowane przez użycie świateł (światło pomarańczowe)
-\newline
-\newline
-Opis koordynacji ruchu przy użyciu algorytmu REAL TIME QUEUE LENGTH ESTIMATION: THE APTTC ALGORITHM na podstawie artykułu ~\cite{athmaraman2005adaptive}:
+Opóźnienia i tak są spowodowane przez użycie świateł (światło pomarańczowe) - te opóźnienia nie występują w moim rozwiązaniu
+\newpage
+\textbf{Autorzy artykułu ~\cite{athmaraman2005adaptive} opisują koordynację ruchu przy użyciu algorytmu - 'REAL TIME QUEUE LENGTH ESTIMATION: THE APTTC ALGORITHM'}
   \newline
   - Sterowanie adaptacyjne
   \newline
   - Statystyczna optymalizacja
   \newline
   - Estymacja na podstawia długości dynamicznej kolejki
-  \newline
-\newline
-Porównanie powyższego rozwiązania z synchroniczną zmianą świateł.
-\newline
-- jakie zalety i wady dają oba te rozwiązania
-\newline
-- którego rozwiązania używać a jakiej sytuacji
 \newline
 \newline
-Opis kierowania ruchem drogowym na jednym skrzyżowaniu. AUtorzy artykułu \cite{de1998optimal} dla ułatwienia pomijają światło pomarańczowe:
+\textbf{Krytyka}
+\newline
+Rozwiązanie nie bierze pod uwagę bezpieczeństwa, które w zwykłej sygnalizacji świetlnej jest zapewnione przez swiatło pomarańczowe.
+\newline
+\newline
+\textbf{Opis kierowania ruchem drogowym na jednym skrzyżowaniu. Autorzy artykułu \cite{de1998optimal} dla ułatwienia pomijają światło pomarańczowe}
   \newline
   - Optymalizacja świateł za pomocą dwóch podanych funkcji polegających na optymalicazji kolejek na czterech pasach
-  \newline
-  - Rozwiązanie pomija element bezpieczeństwa jakim jest światło pomarańczowe (w moim rozwiązaniu można je zapewnić)
 \newline
 \newline
-Kontrola ruchu drogowego za pomocą świateł. Autorzy atykułu \cite{lammer2008self} zaproponowali zdecentralizowany algorytm bazujący na krótkich prognozach ruchu:
+\textbf{Krytyka}
+\newline
+Rozwiązanie nie bierze pod uwagę bezpieczeństwa, które w zwykłej sygnalizacji świetlnej jest zapewnione przez swiatło pomarańczowe.
+\newline
+\newline
+\textbf{Kontrola ruchu drogowego za pomocą świateł. Autorzy atykułu \cite{lammer2008self} zaproponowali zdecentralizowany algorytm bazujący na krótkich prognozach ruchu}
   \newline
-  - Optymalizacja swiatel za pomoca dwoch podanych funkcji polegajacych na optymalizacji kolejek na czterech pasach
+  - Optymalizacja świateł za pomocą dwóch podanych funkcji polegających na optymalizacji kolejek na czterech pasach
   \newline
 	- Liczona długość światła zielonego w celu zwolnienia kolejki na pasie
   \newline
   - Limitacja - Zielone światła są zapalone dłużej niż zwykle powinny
-  \newline
-	- Limitacja - Ruch jest optymalizowany dla sytuacji "średnich", które tak na prawdę nigdy nie występują, przez co optymalizacja nie jest stosowana dla aktualnej sytuacji
-  \newline
-  \newline
-Zarządzanie światłami za pomocą komunikacji pojazdów między sobą \cite{ferreira2010self}
+\newline
+\newline
+\textbf{Krytyka}
+\newline
+Limitacja - Ruch jest optymalizowany dla sytuacji "średnich", które tak na prawdę nigdy nie występują, przez co optymalizacja nie jest stosowana dla aktualnej sytuacji
+\newpage
+\textbf{Zarządzanie światłami za pomocą komunikacji pojazdów między sobą \cite{ferreira2010self}}
 \newline
 Wszystkie auta muszą być wyposażone w:
 \newline
@@ -120,56 +116,54 @@ Wszystkie auta muszą być wyposażone w:
 \newline
 Sieć bezprzewodowa w każdym z samochdów musi być niezawodna
 \newline
+\newline
+\textbf{Krytyka}
+\newline
 Rozwiązanie w porównaniu do mojego jest kosztowne, jeżeli chodzi o wyposażenie. Jest ono możliwe także tylko wtedy kiedy wszystkie auta są odpowiednio wyposażone i sprawne.
     
 \section{Planowanie ruchu bez sygnalizacji świetlnej}
 
-CEL:
+\textbf{Cel podrozdziału}
 \newline
-- przedstawienie algorytmów bez sygnalizacji świetlnej, których można użyć do planowania ruchu
-\newline
-- porównanie tych rozwiązań między sobą
-\newline
-- zastosowania tych rozwiązań, przykłady
+Podanie metod w literaturze do planowania drogi, koordynowania ruchu. Wskazanie wad tych rozwiązań w porównaniu do mojego.
 \newline
 \newline
-Znajdowanie ścieżki za pomocą algorytmu Dijkstr'y na podstawie artykułu ~\cite{shaikh2013agv} 
+\textbf{Autorzy artykułu ~\cite{shaikh2013agv} opisali znajdowanie ścieżki za pomocą algorytmu Dijkstry}
 \newline
-- opisanie sposobu zastosowanie dijkstry w planowaniu ruchu
+- Opisanie sposobu zastosowanie dijkstry w planowaniu ruchu
 \newline
-- ograniczenia algorytmu
+- Opisanie sposobu unikania kolizji
 \newline
-\newline
-Unikanie kolizji przy użyciu algorytmu Dijkstry' na podstawie artykułu ~\cite{shaikh2013agv} 
-\newline
-\newline
-Autonomiczne podejśćie - użycie Automated Guided Vehicels.
-\newline
-- zmiana podejścia - zarządzanie pojedyńczym samochodem zamiast algorytm dla wszystkich
-\newline
-- wady i zalety takiego rozwiązania
+- Ograniczenia algorytmu
 \newline
 \newline
-Autorzy artykułu ~\cite{huang2013improved} przedstawiają ulepszoną wersję algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki.
+\textbf{Krytyka}
 \newline
-- Algorytm Dijkstry ma słabą wydajność, dlatego postanowiono go zmodyfikować. Według badań przeprowadzonych przez autorów algorytm jest ~42%-76% szybszy
+- Algorytm A* jest lepszy wydajnościowy względem Dijkstry
 \newline
-- Autorzy wspominają o algorytmie A*, który jest szybszy od algorytmu Dijkstry ale może skończyć w nieskończonej pętli.
+\newline
+\textbf{Autorzy artykułu ~\cite{huang2013improved} przedstawiają ulepszoną wersję algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki}
+\newline
+- Algorytm Dijkstry ma słabą wydajność, dlatego postanowiono go zmodyfikować. Według badań przeprowadzonych przez autorów algorytm jest ~42\%-76\% szybszy
+\newline
+- Autorzy wspominają o algorytmie A*, który jest szybszy od algorytmu Dijkstry ale może skończyć w nieskończonej pętli
+\newline
+\newline
+\textbf{Krytyka}
 \newline
 - W prowadzonych przeze mnie badaniach algorytm A* ani raz nie został wprowadzony w nieskończoną pętlę oraz jest szybszy od algorytmu Dijkstry w szukaniu ścieżki.
 \newline
 \newline
-Planowanie ruchu oraz unikanie kolizji przy użyciu AGV na podstawie artykułu ~\cite{szczerba2000robust}
+\textbf{Planowanie ruchu oraz unikanie kolizji przy użyciu AGV na podstawie artykułu ~\cite{ando2003autonomous}}
 \newline
-- opis zastosowanego rozwiązania
+- Opis zastosowanego rozwiązania
 \newline
-- opis sposobu unikania kolizji
+- Opis sposobu unikania kolizji
+\newline
+- Omówienie przykładu z użyciem AGV na podstawie artykułu
 \newline
 \newline
-Omówienie przykładu z użyciem AGV na podstawie artykułu ~\cite{szczerba2000robust}
-\newline
-\newline
-Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie artykułu ~\cite{delling2009engineering}:
+\textbf{Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie artykułu ~\cite{delling2009engineering}}
   \newline
   - Dijkstra's Algorithm
   \newline
@@ -181,96 +175,108 @@ Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie
   \newline
 \newline
 \newline
-Autorzy artykułu ~\cite{gazis1997optimal} przedstawiają system planujący ruch pojazdów połączonych za pomocą bezprzewodowej komunikacji. System dostarcza pojazdą optymalną trasę biorąc pod uwagę aktualny ruch na drogach.
+\textbf{Autorzy artykułu ~\cite{gazis1997optimal} przedstawiają system planujący ruch pojazdów połączonych za pomocą bezprzewodowej komunikacji. System dostarcza pojazdą optymalną trasę biorąc pod uwagę aktualny ruch na drogach}
 \newline
 - Użycie algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki
 \newline
 - Celem patentu znalezienie drogi do celu w najkrótszym czasie poprzez omijanie zakorkowanych dróg
 \newline
+\newline
+\textbf{Krytyka}
+\newline
 - Jest to jedynie znajdowanie najszbszej drogi do celu poprzez komunikacje bezprzewodową. Nie jest to dokładne zaplanowanie ruchu pojazdu wraz z unikaniem kolizji
 \newline
 \newline
-W Artykule ~\cite{broxmeyer1994vehicle} autorzy przedstawili system do controli ruchu i unikania kolizji na autostradach.
+\textbf{W Artykule ~\cite{broxmeyer1994vehicle} autorzy przedstawili system do controli ruchu i unikania kolizji na autostradach}
 \newline
 - Pod uwage wzięte zostały: zmiany pasów, unikanie kolizji, kontrolowanie trasy pojazdu
 \newline
 - Unikanie kolizji jest zapewniane poprzez komunikacje przez transmitery radiowe oraz radioodbiorniki zamontowane w każdym z pojazdów
 \newline
-- System planuje trasy oraz zmiany pasów na autostradach przy czym zapewnione jest bezpieczeństwo kolizji. Rozwiązania nie można jednak zaaplikować do skrzyżowań dróg
+\newline
+\textbf{Krytyka}
+\newline
+System planuje trasy oraz zmiany pasów na autostradach przy czym zapewnione jest bezpieczeństwo kolizji. Rozwiązania nie można jednak zaaplikować do skrzyżowań dróg
 \newline
 \newline
-Autorzy artykułu ~\cite{kanoh2007dynamic} przedstawiają system dynamiczny system planowania ruchu do nawigacji samochodów przy użyciu 'virus genetic algorithms'.
+\textbf{Autorzy artykułu ~\cite{kanoh2007dynamic} przedstawiają system dynamiczny system planowania ruchu do nawigacji samochodów przy użyciu 'virus genetic algorithms'}
 \newline
-- Zaproponowany został 'Genetic Algorithm', który powinien dawać lepsze wyniki w porównaniu do algorytmu Dijkstry oraz algorytmu A*.
+Zaproponowany został 'Genetic Algorithm', który powinien dawać lepsze wyniki w porównaniu do algorytmu Dijkstry oraz algorytmu A*
 \newline
-- Brak unikania kolizji
+\textbf{Krytyka}
 \newline
+\newline
+Brak unikania kolizji
 
 \section{Użycie algorytmu A* do planowania ruchu}
 
-CEL:
+\textbf{Cel podrozdziału}
 \newline
-- przytoczenie użyć A* do planowania ruchu
-\newline
-- pokazanie ograniczeń użytych A*
+Wskazania użyć A* w literaturze do planowania ruchu. Czy można użyć A* do planowania ruchu na skrzyżowaniach i wady użycia w porównania do mojego rozwiązania.
 \newline
 \newline
-Omówienie algorytmu A* na podstawie artykułu ~\cite{dechter1985generalized} 
+\textbf{Omówienie algorytmu A* na podstawie artykułu ~\cite{dechter1985generalized}}
   \newline
-  - omówienie optymalności
+  - Omówienie optymalności
   \newline
-  - omówienie funkcji heurystyki
-  \newline
-\newline
-Planowanie ruchu za pomocą zmodyfikowanego algorytmu A* na podstawie artykułu ~\cite{munteanmobile} 
-  \newline
-  - opis sposobu wprowadzenia zmodyfikowanego algorytmu A* do koordynowania ruchu na skrzyżowaniach
-  \newline
-  - wady, zalety i ogarniczenia
-  \newline
-  \newline
-Planowanie ruchu za pomocą wielostanowego algorytmu A* oraz Wavefront na podstawie artykułu ~\cite{wojnicki2015robust} 
-\newline
-- omówienie zastosowania tych dwóch algorytmów do planowania ruchu
+  - Omówienie funkcji heurystyki
 \newline
 \newline
-Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu ~\cite{wojnicki2015robust} 
+\textbf{Planowanie ruchu za pomocą zmodyfikowanego algorytmu A* na podstawie artykułu ~\cite{munteanmobile}}
   \newline
-  - przytoczenie przykładu
+  - Opis sposobu wprowadzenia zmodyfikowanego algorytmu A* do koordynowania ruchu na skrzyżowaniach
   \newline
-  - omówienie wad, zalet i ogarniczeń
-  \newline
-  \newline
-  Omówienie złożoności Multi-Entity A* na powyższym przykładzie.
-  \newline
-  - złożoność jest zależna od liczby stanów w A*
-  \newline
-  - obliczenie złożoności i pokazania jak ona rośnie
+  - Wady, zalety i ogarniczenia
 \newline
 \newline
-Autorzy artykułu ~\cite{elhalawany2013modified} zaproponowali użycie zmodyfikowanego algorytmu A* w celu bezpieczniejszej nawigacji dla robotów.
+\textbf{Planowanie ruchu za pomocą wielostanowego algorytmu A* oraz Wavefront na podstawie artykułu ~\cite{wojnicki2015robust}}
+\newline
+- Omówienie zastosowania tych dwóch algorytmów do planowania ruchu
+\newline
+\textbf{Krytyka}
+\newline
+Złożoność użycia wielostanowego A* jest już duża do planowania ruchu na skrzyżowaniach - dodając do tego wavefront złożoność jest jeszcze większa.
+\newline
+\newline
+\textbf{Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu ~\cite{wojnicki2015robust}}
   \newline
-  - Modyfikacja algorytmu polega na wzięciu pod uwagę rozmiaru robota w celu generowania prostrzej ścieżki i w celu uniknięcia ostrych skrętów.
+  - Przytoczenie przykładu
   \newline
-  - Do algorytmu A* przekazywany jest stan początkowy i cel jaki robot chce osiągnąć.
+  - Omówienie wad, zalet i ogarniczeń
   \newline
-  - Autorzy zmodyfikowali algorytm A* tak aby unikał niebezpiecznych sytuacji, które mogą powodować kolizje.
   \newline
-  - Algorytm jest liczony dla jednego robota - u mnie brane są pod uwage wszystkie pojazdy na drogach
+Omówienie złożoności Multi-Entity A* na powyższym przykładzie.
+  \newline
+  - Złożoność jest zależna od liczby stanów w A*
+  \newline
+  - Obliczenie złożoności i pokazania jak ona rośnie
+\newline
+\newline
+\textbf{Autorzy artykułu ~\cite{elhalawany2013modified} zaproponowali użycie zmodyfikowanego algorytmu A* w celu bezpieczniejszej nawigacji dla robotów}
+  \newline
+  - Modyfikacja algorytmu polega na wzięciu pod uwagę rozmiaru robota w celu generowania prostrzej ścieżki i w celu uniknięcia ostrych skrętów
+  \newline
+  - Do algorytmu A* przekazywany jest stan początkowy i cel jaki robot chce osiągnąć
+  \newline
+  - Autorzy zmodyfikowali algorytm A* tak aby unikał niebezpiecznych sytuacji, które mogą powodować kolizje
+\newline
+\newline
+\textbf{Krytyka}
+\newline
+ Algorytm jest liczony dla jednego robota - u mnie brane są pod uwage wszystkie pojazdy na drogach
 \section{Modyfikacje A*}
 
-CEL:
-\newline
-- przytoczenie modyfikacji A* (nie ma takiej modyfikacji jak moja)
-\newline
-\newline
-Opis wielostanego A* na podstawie artykułu ~\cite{wojnicki2015robust} 
+\textbf{Cel podrozdziału}
+Przytoczenie modyfikacji algorytmu A* w literaturze. Wsazanie wad takich modyfikacji w porównaniu do mojej
 \newline
 \newline
-Opis modyfikacji A* w artykule ~\cite{munteanmobile}
+\textbf{Opis wielostanego A* na podstawie artykułu ~\cite{wojnicki2015robust} }
 \newline
 \newline
-W artykule ~\cite{oleiwi2014modified} autorzy zaproponowali genetyczny algorytm oparty na zmodyfikowanym algorytmie A* w celu optymalizacji znajdowania ścieżek dla wielu obiektów.
+\textbf{Opis modyfikacji A* w artykule ~\cite{munteanmobile}}
+\newline
+\newline
+\textbf{W artykule ~\cite{oleiwi2014modified} autorzy zaproponowali genetyczny algorytm oparty na zmodyfikowanym algorytmie A* w celu optymalizacji znajdowania ścieżek dla wielu obiektów}
 \newline
 - Znajdowanie śecieżek dla robotów z wymijaniem przeszkód
 \newline
@@ -278,5 +284,7 @@ W artykule ~\cite{oleiwi2014modified} autorzy zaproponowali genetyczny algorytm 
 \newline
 - Modyfikacja została wykonana, aby A* nie wyszukiwał najkrótszej ścieżki na rzecz wydajności
 \newline
-- Nie jest to jednak Algorytm A* który opiera się na stanie wszystkich pojazdów w środowisku - polega on na znalezienie ścieżki dla jednego robota.
-
+\newline
+\textbf{Krytyka}
+\newline
+Nie jest to jednak Algorytm A* który opiera się na stanie wszystkich pojazdów w środowisku - polega on na znalezienie ścieżki dla jednego robota.
