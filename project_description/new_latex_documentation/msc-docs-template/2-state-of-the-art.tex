@@ -163,6 +163,11 @@ Podanie metod w literaturze do planowania drogi, koordynowania ruchu. Wskazanie 
 - Omówienie przykładu z użyciem AGV na podstawie artykułu
 \newline
 \newline
+\textbf{Krytyka}
+\newline
+Zastosowanie AGV jest przeznaczone dla robotów. Jest tu także komunikacja między pojazdami co wprowadza dodatkową warstwę trudności jeżeli chodzi o wprowadzenie rozwiązania dla koordynacji ruchu na skrzyżowaniach.
+\newline
+\newline
 \textbf{Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie artykułu ~\cite{delling2009engineering}}
   \newline
   - Dijkstra's Algorithm
@@ -203,8 +208,8 @@ System planuje trasy oraz zmiany pasów na autostradach przy czym zapewnione jes
 \newline
 Zaproponowany został 'Genetic Algorithm', który powinien dawać lepsze wyniki w porównaniu do algorytmu Dijkstry oraz algorytmu A*
 \newline
-\textbf{Krytyka}
 \newline
+\textbf{Krytyka}
 \newline
 Brak unikania kolizji
 
@@ -264,16 +269,33 @@ Omówienie złożoności Multi-Entity A* na powyższym przykładzie.
 \textbf{Krytyka}
 \newline
  Algorytm jest liczony dla jednego robota - u mnie brane są pod uwage wszystkie pojazdy na drogach
-\section{Modyfikacje A*}
 
+\section{Modyfikacje A*}
 \textbf{Cel podrozdziału}
-Przytoczenie modyfikacji algorytmu A* w literaturze. Wsazanie wad takich modyfikacji w porównaniu do mojej
+\newline
+Przytoczenie modyfikacji algorytmu A* w literaturze. Wskazanie wad takich modyfikacji w porównaniu do mojej
 \newline
 \newline
-\textbf{Opis wielostanego A* na podstawie artykułu ~\cite{wojnicki2015robust} }
+\textbf{Autorzy artykułu ~\cite{wojnicki2015robust} przedstawili wielostanowy A* }
+\newline
+- Ścieżka powinna być rozumiana jako sekwencja stanów
+\newline
+- Autorzy zastosowali modyfikację wraz z algorytmem Wavefront
+\newline
+\newline
+\textbf{Krytyka}
+\newline
+- Zastosowanie tych dwóch algorytmów do rozwiązania skrzyżowań wiąże się ze zbyt dużą złożonością
 \newline
 \newline
 \textbf{Opis modyfikacji A* w artykule ~\cite{munteanmobile}}
+\newline
+- Prezentacja szybkiego algorytmu A* w celu nawigacji robota
+\newline
+- Autorzy użyli innych struktur w implementacji algorytmu A* co daje lepsze wyniki
+\textbf{Krytyka}
+\newline
+- Rozwiązanie nie może być zastosowane do koordynacji ruchu na skrzyżowaniach - jest ono zaprojektowane do znalezienia najkrótszej ścieżki dla pojedyńczego pojazdu
 \newline
 \newline
 \textbf{W artykule ~\cite{oleiwi2014modified} autorzy zaproponowali genetyczny algorytm oparty na zmodyfikowanym algorytmie A* w celu optymalizacji znajdowania ścieżek dla wielu obiektów}
