@@ -63,8 +63,7 @@ def save_cars_pos(pos_taken, file_nr)
 
   csv_string = "car_nr,current_road_nr,position,velocity,final_position,direction\n" + csv_string
 
-  file_name = 'generated/generated_cars_states_file' + file_nr.to_s
-
+  file_name = "#{$directory_name}/generated_cars_states_file" + file_nr.to_s
   File.open(file_name, 'w') { |file| file.write(csv_string) }
 end
 
@@ -86,5 +85,8 @@ def randomate_x_states(cars_count, states_count)
     randomate_and_save_cars_pos(cars_count, file_nr)
   end
 end
-
+  
+$directory_name = 'generated' + cars_count.to_s
+FileUtils.rm_rf($directory_name, secure: true)
+Dir.mkdir($directory_name)
 randomate_x_states(cars_count, states_count)
