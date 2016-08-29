@@ -41,7 +41,7 @@ Samochody na drogach opisują następujące dane:
 \newline
 Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi w jednym kroku czasowym.
 \newline
-W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2}
+W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}
 
 \section{Generyczny, wielostanowy algorytm A*}
 
@@ -55,7 +55,7 @@ Modyfikacja Algorytm A* zawiera element generyczny. Do algorytmu przekazujemy kl
 \newline
 - implementuje metodę 'neighbours', która zwraca sąsiednie wierzchołki 
 \newline
-- 'edge_weight(neighbour_vertex)', która zwraca wagę krawędzi do wierzchołka przyjmowanego w parametrze metody
+- 'edge\_weight(neighbour\_vertex)', która zwraca wagę krawędzi do wierzchołka przyjmowanego w parametrze metody
 \newline
 \newline
 Do algorytmu przekazuje się także warunki wygranej. W przypadku mojego rozwiązania wygraną jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
