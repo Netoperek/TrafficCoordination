@@ -89,4 +89,5 @@ File.open('../../human_core_out.json', 'w') do |file|
   end
   file.puts("It took: #{time} s")
 end
-puts time
+puts "time: #{time}"
+puts "timesteps: #{result.count}"
