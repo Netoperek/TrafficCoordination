@@ -1,17 +1,71 @@
 \chapter{Implementacja} \label{chap:implementation}
 
-\section{Podrozdział}
+\section{Opis modelu danych do reprezentacji skrzyżowań}
 
-\bt
+Drogi są reprezentowane w sposób dyskretny. Każda droga zaczyna się w pozycji 1 i rośnie wraz z jej rozmiarem. 
+\newline
+Samochody mogą poruszać się w następujących kierunkach:
+\newline
+- z północy na południe
+\newline
+- z południa na północ
+\newline
+- ze wschodu na zachód
+\newline
+- z zachodu na wschód
+\newline
+\newline
+Droga jest reprezentowana poprzez następujące dane:
+\newline
+- unikalny numer drogi
+\newline
+- rozmiar drogi
+\newline
+- informacja o przecięciach z innymi drogami
+\newline
+- kierunek w którym samochód się porusza na drodze (z północy na południe, czy z południa na północ lub z zachodu na wschód czy ze wschodu na zachód)
+\newline
+\newline
+Samochody na drogach opisują następujące dane:
+\newline
+- unkialny numer samochodu
+\newline
+- unikalny numer drogi, na której się znajduje
+\newline
+- numer pozycji na drodze, na której samochód się znajduje
+\newline
+- prędkość początkowa
+\newline
+- numer pozycji docelowej na drodze - punkt za ostatnim skrzyżowaniem
+\newline
+\newline
+Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi w jednym kroku czasowym.
+\newline
+W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2}
 
-\section{Podrozdział}
+\section{Generyczny, wielostanowy algorytm A*}
 
-\bt
+Zaprezentowny w tej pracy zmodyfikowany algorytm A* jest algorytmem wielostanowym. Oznacza to, że wierzchołkiem w grafie jest stan wszystkich samochodów na skrzyżowaniu, a krawędzią jest przejście z jednego stanu do następnego.
+\newline
+Algorytm ma za zadanie doprowadzić do zadanego celu otrzymując określone dane początkowego. Stanem początkowym jest startowe rozstawienie aut na drogach.
+\newline
+Algorytm otrzymując dane startowe, ma osiągnąć zadany cel. Danymi startowymi jest początkowe rozstawienie samochodów na skrzyżowaniach wraz z ich początkowymi prędkościami.
+\newline
+Modyfikacja Algorytm A* zawiera element generyczny. Do algorytmu przekazujemy klasę reprezentującą wierzchołek, która spełnia następujące wymagania:
+\newline
+- implementuje metodę 'neighbours', która zwraca sąsiednie wierzchołki 
+\newline
+- 'edge_weight(neighbour_vertex)', która zwraca wagę krawędzi do wierzchołka przyjmowanego w parametrze metody
+\newline
+\newline
+Do algorytmu przekazuje się także warunki wygranej. W przypadku mojego rozwiązania wygraną jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
+\newline
+Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego wierzchołka.
 
-\section{Podrozdział}
+\section{Reprezentacja wierzchołka w zmodyfikowanym algorytmie A*}
 
-\bt
+\section{Unikanie kolizji}
 
-\section{Podrozdział}
+\section{Reprezentacja i wczytywanie danych}
 
-\bt
+\section{Reprezentacja graficzna wyników}

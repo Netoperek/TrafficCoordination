@@ -3,7 +3,7 @@ require 'pry'
 
 class AStar
   FIXNUM_MAX = (2**(0.size * 8 -2) -1)
-  NOT_IMPLEMENTED_ERROR_MSG = 'Class must define the following methods: neighbours, id'
+  NOT_IMPLEMENTED_ERROR_MSG = 'Class must define the following methods: neighbours, edge_weight'
 
   attr_accessor :vertex_class
 
