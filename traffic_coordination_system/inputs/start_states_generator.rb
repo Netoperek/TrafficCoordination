@@ -25,8 +25,20 @@ def random_car_pos(car_nr, pos_taken)
     break unless pos_taken[road_nr].size == road_size
   end
 
+  direction = $roads_data[road_nr-1].state[:direction]
+
+  if direction == 1 
+    final_position = $roads_data[road_nr-1].state[:cuts].map { |ele| ele[:crossroad] }.max
+  else
+    final_position = $roads_data[road_nr-1].state[:cuts].map { |ele| ele[:crossroad] }.min
+  end
+
   while true
-    pos = rand(1..road_size)
+    if direction == 1
+      pos = rand(1..final_position)
+    else
+      pos = rand(final_position..road_size)
+    end
     if pos_taken[road_nr][pos].nil?
       pos_taken[road_nr][pos] = car_nr
       break
@@ -38,6 +50,13 @@ def save_cars_pos(pos_taken, file_nr)
   pos_hash = []
   pos_taken.each_with_index do |road, road_nr|
     next if road.nil? 
+    direction = $roads_data[road_nr-1].state[:direction]
+ 
+    if direction == 1 
+      final_position = $roads_data[road_nr-1].state[:cuts].map { |ele| ele[:crossroad] }.max
+    else
+      final_position = $roads_data[road_nr-1].state[:cuts].map { |ele| ele[:crossroad] }.min
+    end
 
     road.each_with_index do |car_nr, pos|
       next if car_nr.nil?
@@ -46,8 +65,8 @@ def save_cars_pos(pos_taken, file_nr)
         :current_road_nr => road_nr,
         :postion => pos,
         :velocity => 0,
-        :final_position => $roads_data[road_nr-1].state[:cuts].map { |ele| ele[:crossroad] }.max,
-        :direction => 1
+        :final_position => final_position,
+        :direction => direction
       } 
       pos_hash.push(hash)
     end

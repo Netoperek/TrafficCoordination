@@ -1,6 +1,6 @@
-require_relative 'simple_a_star/helpers/data_helper'
-require_relative 'simple_a_star/src/road'
-require_relative 'simple_a_star/src/states_vertex'
+require_relative 'traffic_coordination_system/helpers/data_helper'
+require_relative 'traffic_coordination_system/src/road'
+require_relative 'traffic_coordination_system/src/states_vertex'
 require 'set'
 require 'json'
 require 'ruby-graphviz'
@@ -13,12 +13,12 @@ PLUS_MAX_ACCELERATION = 1
 GRAPH_TYPE = 'neato'
 
 def data_from_files(start_states_file, roads_file)
-  states = states_from_file 'simple_a_star/start_states_file'
+  states = states_from_file 'traffic_coordination_system/start_states_file'
   states_attributes = states[:attributes]
   data = states[:data]
   start_vertex = StatesVertex.new(states_attributes, data)
 
-  roads = roads_from_file 'simple_a_star/roads_file'
+  roads = roads_from_file 'traffic_coordination_system/roads_file'
   roads_attributes = roads[:attributes]
   roads_states = roads[:data]
   roads_states.map! { |ele| Road.new(roads_attributes, ele) }
@@ -28,7 +28,7 @@ def data_from_files(start_states_file, roads_file)
     :roads_states => roads_states }
 end
 
-$data = data_from_files('simple_a_star/start_states_file', 'simple_a_star/roads_file')
+$data = data_from_files('traffic_coordination_system/start_states_file', 'traffic_coordination_system/roads_file')
 
 def present_roads_as_nodes(roads_states, cars_states)
   nodes = []
@@ -332,7 +332,7 @@ colors_cars_hash = {}
 
 FileUtils.rm_rf('output/normal/.', secure: true)
 FileUtils.rm_rf('output/mistakes/.', secure: true)
-data = data_from_files('simple_a_star/start_states_file', 'simple_a_star/roads_file')
+data = data_from_files('traffic_coordination_system/start_states_file', 'traffic_coordination_system/roads_file')
 
 puts 'NORMAL OUTPUT'
 
