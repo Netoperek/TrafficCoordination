@@ -1,118 +1,120 @@
 case 1
-time: 0.529579061
-timesteps: 9
+time: 0.002557282
+timesteps: 6
 
 case 2
-time: 0.472967167
-timesteps: 8
+time: 0.002452169
+timesteps: 6
 
 case 3
+time: 0.002517061
+timesteps: 6
 
 case 4
-time: 0.578380545
-timesteps: 8
+time: 0.002175676
+timesteps: 6
 
 case 5
-time: 0.376167354
-timesteps: 8
+time: 0.002572364
+timesteps: 6
 
 case 6
-time: 0.324258095
-timesteps: 8
+time: 0.002547017
+timesteps: 6
 
 case 7
-time: 0.35471175
-timesteps: 9
+time: 0.001917854
+timesteps: 5
 
 case 8
-time: 0.412516926
-timesteps: 8
+time: 0.002488864
+timesteps: 6
 
 case 9
-time: 0.627490873
-timesteps: 9
+time: 0.002486098
+timesteps: 6
 
 case 10
-time: 0.740486863
-timesteps: 8
+time: 0.002657792
+timesteps: 6
 
 case 11
-time: 0.440341199
-timesteps: 9
+time: 0.00243823
+timesteps: 6
 
 case 12
-time: 0.662936153
-timesteps: 10
+time: 0.002664255
+timesteps: 6
 
 case 13
-time: 0.417042065
+time: 0.002309662
 timesteps: 6
 
 case 14
-time: 0.359567328
-timesteps: 8
-
-case 15
-time: 0.339286526
-timesteps: 7
-
-case 16
-time: 1.400120462
-timesteps: 8
-
-case 17
-time: 0.52403502
-timesteps: 11
-
-case 18
-time: 0.223813238
+time: 0.002044905
 timesteps: 5
 
+case 15
+time: 0.002462726
+timesteps: 6
+
+case 16
+time: 0.001959465
+timesteps: 5
+
+case 17
+time: 0.000885302
+timesteps: 3
+
+case 18
+time: 0.002791766
+timesteps: 6
+
 case 19
-time: 0.511816648
-timesteps: 8
+time: 0.001551652
+timesteps: 4
 
 case 20
-time: 0.393343156
-timesteps: 8
+time: 0.002591146
+timesteps: 6
 
 case 21
-time: 0.325561948
-timesteps: 7
+time: 0.002360196
+timesteps: 6
 
 case 22
-time: 0.349961403
-timesteps: 8
+time: 0.001617646
+timesteps: 5
 
 case 23
-time: 0.768043215
-timesteps: 10
+time: 0.002626792
+timesteps: 6
 
 case 24
-time: 0.583568604
-timesteps: 8
+time: 0.002082268
+timesteps: 5
 
 case 25
-time: 0.632238122
-timesteps: 9
+time: 0.002570532
+timesteps: 6
 
 case 26
-time: 0.696603777
-timesteps: 10
+time: 0.000848548
+timesteps: 3
 
 case 27
-time: 0.6050896
-timesteps: 7
+time: 0.00234722
+timesteps: 6
 
 case 28
-time: 0.86478693
-timesteps: 9
+time: 0.001988844
+timesteps: 5
 
 case 29
-time: 0.504813576
-timesteps: 7
+time: 0.002354106
+timesteps: 6
 
 case 30
-time: 0.775904608
-timesteps: 8
+time: 0.002450571
+timesteps: 6
 

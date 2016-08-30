@@ -1,118 +1,118 @@
 case 1
-time: 0.655665798
-timesteps: 9
+time: 0.283913269
+timesteps: 8
 
 case 2
-time: 0.52597178
-timesteps: 8
 
 case 3
+time: 0.804605381
+timesteps: 10
 
 case 4
-time: 0.830951629
-timesteps: 8
+time: 0.162312346
+timesteps: 6
 
 case 5
-time: 0.484937221
-timesteps: 8
+time: 0.163766637
+timesteps: 9
 
 case 6
-time: 0.426251811
+time: 0.276015766
 timesteps: 8
 
 case 7
-time: 0.401372669
-timesteps: 9
+time: 0.332078335
+timesteps: 10
 
 case 8
-time: 0.431222548
+time: 0.287147289
 timesteps: 8
 
 case 9
-time: 0.725826443
-timesteps: 9
-
-case 10
-time: 0.915974886
+time: 0.139999795
 timesteps: 8
 
+case 10
+time: 0.213823242
+timesteps: 6
+
 case 11
-time: 0.562426849
+time: 0.259629295
 timesteps: 9
 
 case 12
-time: 0.699464734
-timesteps: 10
+time: 0.348725215
+timesteps: 9
 
 case 13
-time: 0.381361386
-timesteps: 6
+time: 0.277023218
+timesteps: 9
 
 case 14
-time: 0.405848188
+time: 0.296675277
 timesteps: 8
 
 case 15
-time: 0.395071132
-timesteps: 7
+time: 0.213597856
+timesteps: 6
 
 case 16
-time: 1.53135883
-timesteps: 8
-
-case 17
-time: 0.59994824
+time: 0.495494563
 timesteps: 11
 
-case 18
-time: 0.26031105
-timesteps: 5
+case 17
+time: 0.252747285
+timesteps: 10
 
-case 19
-time: 0.555105974
+case 18
+time: 0.162325367
 timesteps: 8
 
+case 19
+time: 0.190391702
+timesteps: 7
+
 case 20
-time: 0.416626197
+time: 0.307448449
 timesteps: 8
 
 case 21
-time: 0.382480494
-timesteps: 7
+time: 0.340021885
+timesteps: 9
 
 case 22
-time: 0.235163399
-timesteps: 8
+time: 0.306131479
+timesteps: 9
 
 case 23
-time: 0.662821549
-timesteps: 10
+time: 0.185186175
+timesteps: 7
 
 case 24
-time: 0.520870273
+time: 0.292868094
 timesteps: 8
 
 case 25
-time: 0.660088625
-timesteps: 9
+time: 0.138132512
+timesteps: 6
 
 case 26
-time: 0.484383717
-timesteps: 10
+time: 0.222439051
+timesteps: 6
 
 case 27
-time: 0.385397958
+time: 0.263322396
 timesteps: 7
 
 case 28
-time: 0.739409814
-timesteps: 9
+time: 0.278683205
+timesteps: 8
 
 case 29
-time: 0.554304405
-timesteps: 7
+time: 0.67071889
+timesteps: 8
 
 case 30
-time: 0.476477527
+time: 0.29545032
 timesteps: 8
 

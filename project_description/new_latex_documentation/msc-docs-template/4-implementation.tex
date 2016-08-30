@@ -41,15 +41,19 @@ Samochody na drogach opisują następujące dane:
 \newline
 Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi w jednym kroku czasowym.
 \newline
+\newline
 W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}
 
 \section{Generyczny, wielostanowy algorytm A*}
 
 Zaprezentowny w tej pracy zmodyfikowany algorytm A* jest algorytmem wielostanowym. Oznacza to, że wierzchołkiem w grafie jest stan wszystkich samochodów na skrzyżowaniu, a krawędzią jest przejście z jednego stanu do następnego.
 \newline
+\newline
 Algorytm ma za zadanie doprowadzić do zadanego celu otrzymując określone dane początkowego. Stanem początkowym jest startowe rozstawienie aut na drogach.
 \newline
+\newline
 Algorytm otrzymując dane startowe, ma osiągnąć zadany cel. Danymi startowymi jest początkowe rozstawienie samochodów na skrzyżowaniach wraz z ich początkowymi prędkościami.
+\newline
 \newline
 Modyfikacja Algorytm A* zawiera element generyczny. Do algorytmu przekazujemy klasę reprezentującą wierzchołek, która spełnia następujące wymagania:
 \newline
@@ -59,6 +63,7 @@ Modyfikacja Algorytm A* zawiera element generyczny. Do algorytmu przekazujemy kl
 \newline
 \newline
 Do algorytmu przekazuje się także warunki wygranej. W przypadku mojego rozwiązania wygraną jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
+\newline
 \newline
 Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego wierzchołka.
 
