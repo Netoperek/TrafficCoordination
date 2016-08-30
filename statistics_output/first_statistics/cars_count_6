@@ -19,6 +19,8 @@ time: 0.039290432
 timesteps: 9
 
 case 6
+time: 0.032471499
+timesteps: 7
 
 case 7
 time: 0.031113167
