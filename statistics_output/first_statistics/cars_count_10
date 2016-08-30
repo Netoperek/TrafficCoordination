@@ -39,6 +39,8 @@ time: 3.930271067
 timesteps: 9
 
 case 11
+time: 7.148398893
+timesteps: 10
 
 case 12
 time: 5.486544748
@@ -49,8 +51,12 @@ time: 1.768188449
 timesteps: 9
 
 case 14
+time: 1.598738109
+timesteps: 8
 
 case 15
+time: 1.648407914
+timesteps: 9
 
 case 16
 time: 2.721639469
@@ -61,8 +67,12 @@ time: 1.756301998
 timesteps: 8
 
 case 18
+time: 2.543385861
+timesteps: 9
 
 case 19
+time: 3.242086394
+timesteps: 8
 
 case 20
 time: 6.032455235
@@ -85,6 +95,8 @@ time: 4.400153354
 timesteps: 11
 
 case 25
+time: 2.608676713
+timesteps: 8
 
 case 26
 time: 0.777878434
@@ -103,4 +115,5 @@ time: 3.131709397
 timesteps: 12
 
 case 30
-
+time: 1.288160665
+timesteps: 9
