@@ -121,16 +121,21 @@ class StatesVertex
     new_states = []
     state = car_state.state
 
-    # movement with velocity
-    #
-    new_state = state.clone
-    new_state[:position] += new_state[:velocity] * new_state[:direction]
-    new_states.push(new_state)
+    max_acc = (state[:position] > state[:final_position] && state[:direction] == 1) || \
+     (state[:position] < state[:final_position] && state[:direction] == -1)
 
     # movement with velocity, acceleration + 1
     #
     new_state = state.clone
     new_state[:velocity] = fixed_velocity(new_state[:velocity] + 1)
+    new_state[:position] += new_state[:velocity] * new_state[:direction]
+    new_states.push(new_state)
+
+    return new_states if max_acc
+
+    # movement with velocity
+    #
+    new_state = state.clone
     new_state[:position] += new_state[:velocity] * new_state[:direction]
     new_states.push(new_state)
 
