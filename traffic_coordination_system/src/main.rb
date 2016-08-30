@@ -28,7 +28,7 @@ roads_data.map! { |ele| Road.new(roads_attributes, ele) }
 
 start_vertex = StatesVertex.new(states_attributes, data)
 
-# Win if all cars are on desired roads
+# Win if all cars are on or after final positions
 #
 win_function = Proc.new do |states_vertex|
   result = states_vertex.states.map do |state|

@@ -43,6 +43,9 @@ Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu 
 \newline
 \newline
 W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}
+\newline
+\newline
+W Systemie jest także plik konfiguracyjny, który wyznacza maksymalną prędkość, oraz gdzie definiuje się wyżej opisane wartości przyspieszeń.
 
 \section{Generyczny, wielostanowy algorytm A*}
 
@@ -55,11 +58,9 @@ Algorytm ma za zadanie doprowadzić do zadanego celu otrzymując określone dane
 Algorytm otrzymując dane startowe, ma osiągnąć zadany cel. Danymi startowymi jest początkowe rozstawienie samochodów na skrzyżowaniach wraz z ich początkowymi prędkościami.
 \newline
 \newline
-Modyfikacja Algorytm A* zawiera element generyczny. Do algorytmu przekazujemy klasę reprezentującą wierzchołek, która spełnia następujące wymagania:
+Modyfikacja Algorytm A* jest generyczna. Do algorytmu przekazujemy klasę reprezentującą wierzchołek, która spełnia następujące wymagania:
 \newline
 - implementuje metodę 'neighbours', która zwraca sąsiednie wierzchołki 
-\newline
-- 'edge\_weight(neighbour\_vertex)', która zwraca wagę krawędzi do wierzchołka przyjmowanego w parametrze metody
 \newline
 \newline
 Do algorytmu przekazuje się także warunki wygranej. W przypadku mojego rozwiązania wygraną jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
@@ -69,8 +70,42 @@ Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych dan
 
 \section{Reprezentacja wierzchołka w zmodyfikowanym algorytmie A*}
 
+Wierzchołek w modyfikacji algorytmu A* przedstawionej w tej pracy opisuje stan wszystkich samochodów na skrzyżowaniach wraz z ich prędkościami.
+\newline
+\newline
+Zgodnie z wcześniej generycznością wierzchołek jest obiektem klasy, który implementuje metodę 'neighbours'. Metoda generuje wszystkie stany sąsiednie dla aktualnego stanu. Dla przykładu, dla ustawień przyspieszeń \{-2, -1, 0, 1, 2\}, dla każdego z aut na skrzyżowaniu generowane są stany z jego prędkością dodając wartości przyspieszeń. Pomijane są stany, w których prędkość samochodu byłaby ujemna.
+\newline
+\newline
+W metodzie usuwane są także stany powodujące kolizje, co będzie opisane w następnym rozdziale.
+
 \section{Unikanie kolizji}
 
-\section{Reprezentacja i wczytywanie danych}
+Koniecznym elementem w planowaniu ruchu jest unikanie kolizji.
+\newline
+\newline
+Unikanie kolizji zostało podzielone na dwa etapy
+\newline
+- Unikanie kolizji aut poruszających się po tym samym pasie
+\newline
+- Unikanie kolizji na skrzyżowaniach
+\newline
+\newline
+Impementacja unikania kolizji pojazdów na tym samym pasie polega na policzeniu obszarów dla samochodów znajdujących się na tym samym pasie, który będą one obejmowały w jednym kroku czasowym.
+\newline
+\newline
+Jeżeli obszary dwóch samochdów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego.
+\newline
+\newline
+Unikanie kolizji na skrzyżowaniach polega na eliminacji stanów, w których conajmniej dwa auta przekroczyły w jednym kroku czasowym to samo skrzyżowanie. Metoda 'neighbours' także nie zwróci takich stanów.
+
+\section{Funkcja heurystyki}
+
+Funkcja heurystyki dla algorytmu A* jest to suma kroków czasowych, po których wszystkie auta przekroczą ostatnie skrzyżowanie - czyli osiągną cel. Funkcja liczona jest, przy założeniu, że wszystkie samochody maksymalnie przyspieszają.
 
 \section{Reprezentacja graficzna wyników}
+
+W celu graficznej reprezentacji wyników zaimplementowany został moduł graficzny.
+\newline
+\newline
+Działanie modułu graficznego oparte jest na rysowaniu grafów z wykorzystaniem biblioteki Graphviz oraz jej implementacji w języku Ruby.
+\newline
