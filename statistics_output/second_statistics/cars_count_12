@@ -1,9 +1,112 @@
 case 1
-time: 7.400671729
+time: 29.777738269
 timesteps: 10
 
 case 2
+time: 17.704531094
+timesteps: 12
 
 case 3
+time: 13.025851473
+timesteps: 13
 
 case 4
+time: 73.687919188
+timesteps: 14
+
+case 5
+time: 12.522512095
+timesteps: 9
+
+case 6
+time: 4.745802853
+timesteps: 9
+
+case 7
+time: 30.602679669
+timesteps: 9
+
+case 8
+time: 21.171336402
+timesteps: 8
+
+case 9
+time: 1.914268089
+timesteps: 10
+
+case 10
+time: 19.225908315
+timesteps: 11
+
+case 11
+time: 1.107884888
+timesteps: 11
+
+case 12
+time: 5.016463684
+timesteps: 8
+
+case 13
+time: 33.471169258
+timesteps: 13
+
+case 14
+time: 6.226561213
+timesteps: 8
+
+case 15
+time: 3.163016813
+timesteps: 10
+
+case 16
+
+case 17
+time: 16.771588619
+timesteps: 12
+
+case 18
+
+case 19
+time: 5.17683728
+timesteps: 9
+
+case 20
+time: 30.876982579
+timesteps: 10
+
+case 21
+time: 32.679845068
+timesteps: 10
+
+case 22
+time: 5.33826156
+timesteps: 8
+
+case 23
+time: 9.290855945
+timesteps: 12
+
+case 24
+time: 22.667653099
+timesteps: 9
+
+case 25
+time: 5.572348837
+timesteps: 9
+
+case 26
+
+case 27
+time: 57.349631788
+timesteps: 7
+
+case 28
+
+case 29
+time: 25.983775939
+timesteps: 10
+
+case 30
+time: 2.71043722
+timesteps: 9
+
