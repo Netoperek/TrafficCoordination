@@ -12,13 +12,21 @@ CARS_MISTAKES_AT_ONCE = 2
 PLUS_MAX_ACCELERATION = 1
 GRAPH_TYPE = 'neato'
 
+unless ARGV[0] && ARGV[1]
+  puts 'USAGE: ruby states_to_graphs.rb traffic_coordination_system/inputs/start_states_file traffic_coordination_system/inputs/roads_file'
+  exit
+end
+
+start_states_file = ARGV[0]
+roads_file = ARGV[1]
+
 def data_from_files(start_states_file, roads_file)
-  states = states_from_file 'traffic_coordination_system/start_states_file'
+  states = states_from_file start_states_file
   states_attributes = states[:attributes]
   data = states[:data]
   start_vertex = StatesVertex.new(states_attributes, data)
 
-  roads = roads_from_file 'traffic_coordination_system/roads_file'
+  roads = roads_from_file roads_file
   roads_attributes = roads[:attributes]
   roads_states = roads[:data]
   roads_states.map! { |ele| Road.new(roads_attributes, ele) }
@@ -28,7 +36,7 @@ def data_from_files(start_states_file, roads_file)
     :roads_states => roads_states }
 end
 
-$data = data_from_files('traffic_coordination_system/start_states_file', 'traffic_coordination_system/roads_file')
+$data = data_from_files(start_states_file, roads_file)
 
 def present_roads_as_nodes(roads_states, cars_states)
   nodes = []
@@ -332,7 +340,7 @@ colors_cars_hash = {}
 
 FileUtils.rm_rf('output/normal/.', secure: true)
 FileUtils.rm_rf('output/mistakes/.', secure: true)
-data = data_from_files('traffic_coordination_system/start_states_file', 'traffic_coordination_system/roads_file')
+data = data_from_files(start_states_file, roads_file)
 
 puts 'NORMAL OUTPUT'
 
