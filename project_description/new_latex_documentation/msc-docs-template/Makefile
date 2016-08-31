@@ -24,6 +24,7 @@ archive:
 
 clean:
 	git clean -n -X | grep -v swp | sed 's/Would remove //' | xargs rm -f
+	rm main.pdf
 
 show:
 	$(Show)

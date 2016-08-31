@@ -4,6 +4,7 @@
 
 Drogi są reprezentowane w sposób dyskretny. Każda droga zaczyna się w pozycji 1 i rośnie wraz z jej rozmiarem. 
 \newline
+\newline
 Samochody mogą poruszać się w następujących kierunkach:
 \newline
 - z północy na południe
@@ -28,7 +29,7 @@ Droga jest reprezentowana poprzez następujące dane:
 \newline
 Samochody na drogach opisują następujące dane:
 \newline
-- unkialny numer samochodu
+- unikalny numer samochodu
 \newline
 - unikalny numer drogi, na której się znajduje
 \newline
@@ -42,7 +43,7 @@ Samochody na drogach opisują następujące dane:
 Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi w jednym kroku czasowym.
 \newline
 \newline
-W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}
+W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden kroku czasowym.
 \newline
 \newline
 W Systemie jest także plik konfiguracyjny, który wyznacza maksymalną prędkość, oraz gdzie definiuje się wyżej opisane wartości przyspieszeń.
@@ -58,9 +59,7 @@ Algorytm ma za zadanie doprowadzić do zadanego celu otrzymując określone dane
 Algorytm otrzymując dane startowe, ma osiągnąć zadany cel. Danymi startowymi jest początkowe rozstawienie samochodów na skrzyżowaniach wraz z ich początkowymi prędkościami.
 \newline
 \newline
-Modyfikacja Algorytm A* jest generyczna. Do algorytmu przekazujemy klasę reprezentującą wierzchołek, która spełnia następujące wymagania:
-\newline
-- implementuje metodę 'neighbours', która zwraca sąsiednie wierzchołki 
+Modyfikacja Algorytm A* jest generyczna. Do algorytmu przekazujemy klasę reprezentującą wierzchołek, która implementuje metodę 'neighbours', która zwraca sąsiednie wierzchołki.
 \newline
 \newline
 Do algorytmu przekazuje się także warunki wygranej. W przypadku mojego rozwiązania wygraną jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
@@ -113,7 +112,7 @@ Działanie modułu graficznego oparte jest na rysowaniu grafów z wykorzystaniem
 Skrzyżowanie jest reprezentowane za pomocą grafu. Wierzchołkami grafu są poszczególne odcinki dróg. Krawędziami grafu są połączenia pomiędzy odcinkami.
 \newline
 \newline
-Każda droga pomalowana jest na inny kolor.
+Każda droga jest oznaczona innym kolorem.
 \newline
 \newline
 Samochody poruszające się po tej samej drodze są zaznaczone grubszym obwodem oraz mają ten sam kolor. Samochody można rozróżnić poprzez unikalny numer na nich napisany.
@@ -125,7 +124,78 @@ Kolejne kroki czasowe reprezentowane są poprzez następne grafy z kolejnymi uł
 Ostatnim elementem modułu graficznego jest stworzenie GIFa z następujących po sobie grafów.
 \newline
 \newline
-Poniżej widać przykład dla dwunastu samochodów na skrzyżowaniu ośmiu dróg.
+Poniżej na rysunkach \ref{1-traffic} - \ref{12-traffic} jest przedstawione zostało rozwiązanie dla dwunastu pojazdów na skrzyżowaniu ośmiu dróg.
 \newline
-\newline
-
+Jak widać na rysunku \ref{12-traffic} po dwunastym kroku czasowym wszystkie samochody opóściły skrzyżowanie.
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{1.png}
+  \caption{1 krok czasowy}
+  \label{1-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{2.png}
+  \caption{2 krok czasowy}
+  \label{2-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{3.png}
+  \caption{3 krok czasowy}
+  \label{3-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{4.png}
+  \caption{4 krok czasowy}
+  \label{4-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{5.png}
+  \caption{5 krok czasowy}
+  \label{5-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{6.png}
+  \caption{6 krok czasowy}
+  \label{6-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{7.png}
+  \caption{7 krok czasowy}
+  \label{7-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{8.png}
+  \caption{8 krok czasowy}
+  \label{8-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{9.png}
+  \caption{9 krok czasowy}
+  \label{9-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{10.png}
+  \caption{10 krok czasowy}
+  \label{10-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{11.png}
+  \caption{11 krok czasowy}
+  \label{11-traffic}
+\end{figure}
+\newpage
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{12.png}
+  \caption{12 krok czasowy}
+  \label{12-traffic}
+\end{figure}
