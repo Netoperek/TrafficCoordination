@@ -3,6 +3,12 @@ require_relative 'road'
 require_relative '../helpers/data_helper'
 
 class StatesVertex
+	@@roads_file
+
+	def self.roads_file(roads_file)
+		@@roads_file=roads_file
+	end
+
   if File.exists?('../plus_max_acceleration')
     data = CSV.read('../plus_max_acceleration')
     PLUS_MAX_ACCELERATION = data.last.last.to_i
@@ -22,7 +28,7 @@ class StatesVertex
 
   def roads_data
     return @@roads unless @@roads.nil?
-    roads = roads_from_file '../roads_file'
+    roads = roads_from_file @@roads_file
     roads_attributes = roads[:attributes]
     roads_data = roads[:data]
     @@roads = roads_data.map! { |ele| Road.new(roads_attributes, ele) }

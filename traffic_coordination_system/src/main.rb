@@ -14,6 +14,8 @@ end
 cars_states_file = ARGV[0]
 roads_states_file = ARGV[1]
 
+StatesVertex.roads_file roads_states_file
+
 data = CSV.read('../plus_max_acceleration')
 PLUS_MAX_ACCELERATION = data.last.last.to_i
 
