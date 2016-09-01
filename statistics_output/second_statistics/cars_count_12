@@ -59,12 +59,16 @@ time: 3.163016813
 timesteps: 10
 
 case 16
+time: 7.068591675
+timesteps: 11
 
 case 17
 time: 16.771588619
 timesteps: 12
 
 case 18
+time: 0.507315226
+timesteps: 10
 
 case 19
 time: 5.17683728
@@ -95,12 +99,16 @@ time: 5.572348837
 timesteps: 9
 
 case 26
+time: 1.330663298
+timesteps: 9
 
 case 27
 time: 57.349631788
 timesteps: 7
 
 case 28
+time: 1.637701966
+timesteps: 11
 
 case 29
 time: 25.983775939
@@ -109,4 +117,3 @@ timesteps: 10
 case 30
 time: 2.71043722
 timesteps: 9
-

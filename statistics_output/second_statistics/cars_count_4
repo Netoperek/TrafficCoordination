@@ -55,6 +55,8 @@ time: 0.010362599
 timesteps: 6
 
 case 15
+time: 0.010203589
+timesteps: 7
 
 case 16
 time: 0.010181438
@@ -115,4 +117,3 @@ timesteps: 6
 case 30
 time: 0.00358316
 timesteps: 6
-

@@ -3,34 +3,52 @@ time: 0.990262267
 timesteps: 7
 
 case 2
+time: 2.852706047
+timesteps: 8
 
 case 3
 time: 3.12327474
 timesteps: 13
 
 case 4
+time: 1.217531495
+timesteps: 13
 
 case 5
 time: 1.706374715
 timesteps: 10
 
 case 6
+time: 0.163551463
+timesteps: 8
 
 case 7
+time: 0.801020629
+timesteps: 10
 
 case 8
+time: 1.633527448
+timesteps: 9
 
 case 9
+time: 5.670333239
+timesteps: 10
 
 case 10
+time: 1.297089903
+timesteps: 9
 
 case 11
+time: 1.058340983
+timesteps: 11
 
 case 12
 time: 2.274513272
 timesteps: 10
 
 case 13
+time: 2.065997954
+timesteps: 10
 
 case 14
 time: 1.564250121
@@ -53,6 +71,8 @@ time: 2.182630185
 timesteps: 11
 
 case 19
+time: 0.291334953
+timesteps: 9
 
 case 20
 time: 2.588105558
@@ -63,8 +83,12 @@ time: 1.381693113
 timesteps: 11
 
 case 22
+time: 2.170415163
+timesteps: 7
 
 case 23
+time: 8.305444298
+timesteps: 9
 
 case 24
 time: 1.313290887
@@ -79,6 +103,8 @@ time: 8.866238199
 timesteps: 7
 
 case 27
+time: 3.226824095
+timesteps: 10
 
 case 28
 time: 5.111508995
@@ -91,4 +117,3 @@ timesteps: 8
 case 30
 time: 0.76190536
 timesteps: 8
-

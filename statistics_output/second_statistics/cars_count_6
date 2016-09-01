@@ -95,6 +95,8 @@ time: 0.031575308
 timesteps: 6
 
 case 25
+time: 0.196773736
+timesteps: 7
 
 case 26
 time: 0.064484166
@@ -115,4 +117,3 @@ timesteps: 6
 case 30
 time: 0.16606716
 timesteps: 8
-
