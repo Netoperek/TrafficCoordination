@@ -41,8 +41,8 @@ def random_car_pos(car_nr, pos_taken)
     end
     if pos_taken[road_nr][pos].nil?
       pos_taken[road_nr][pos] = car_nr
-     # pos_taken[road_nr][pos+1] = -1 if pos+1 < pos_taken[road_nr].size
-     # pos_taken[road_nr][pos-1] = -1 if pos-1 > -1
+      pos_taken[road_nr][pos+1] = -1 if pos+1 < pos_taken[road_nr].size
+      pos_taken[road_nr][pos-1] = -1 if pos-1 > -1
       break
     end
   end
