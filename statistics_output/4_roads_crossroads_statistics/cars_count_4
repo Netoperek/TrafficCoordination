@@ -1,119 +1,31 @@
-case 1
-time: 0.006707874
-timesteps: 5
-
-case 2
-time: 0.021435437
-timesteps: 10
-
-case 3
-time: 0.003508193
-timesteps: 6
-
-case 4
-time: 0.002814222
-timesteps: 4
-
-case 5
-time: 0.015559508
-timesteps: 6
-
-case 6
-time: 0.008165722
-timesteps: 6
-
-case 7
-time: 0.014164183
-timesteps: 7
-
-case 8
-time: 0.004724745
-timesteps: 6
-
-case 9
-time: 0.007202958
-timesteps: 5
-
-case 10
-time: 0.004833951
-timesteps: 5
-
-case 11
-time: 0.019046605
-timesteps: 8
-
-case 12
-time: 0.006096061
-timesteps: 6
-
-case 13
-time: 0.012535432
-timesteps: 7
-
-case 14
-time: 0.010362599
-timesteps: 6
-
-case 15
-time: 0.010203589
-timesteps: 7
-
-case 16
-time: 0.010181438
-timesteps: 6
-
-case 17
-time: 0.004290738
-timesteps: 6
-
-case 18
-time: 0.007189479
-timesteps: 5
-
-case 19
-time: 0.011101981
-timesteps: 7
-
-case 20
-time: 0.003731913
-timesteps: 4
-
-case 21
-time: 0.009197809
-timesteps: 6
-
-case 22
-time: 0.005510315
-timesteps: 6
-
-case 23
-time: 0.00381327
-timesteps: 4
-
-case 24
-time: 0.014623406
-timesteps: 6
-
-case 25
-time: 0.00627435
-timesteps: 6
-
-case 26
-time: 0.007575425
-timesteps: 7
-
-case 27
-time: 0.007934642
-timesteps: 7
-
-case 28
-time: 0.005000109
-timesteps: 6
-
-case 29
-time: 0.012281941
-timesteps: 6
-
-case 30
-time: 0.00358316
-timesteps: 6
+time, timestamps
+0.006707874, 5
+0.021435437, 10
+0.003508193, 6
+0.002814222, 4
+0.015559508, 6
+0.008165722, 6
+0.014164183, 7
+0.004724745, 6
+0.007202958, 5
+0.004833951, 5
+0.019046605, 8
+0.006096061, 6
+0.012535432, 7
+0.010362599, 6
+0.010203589, 7
+0.010181438, 6
+0.004290738, 6
+0.007189479, 5
+0.011101981, 7
+0.003731913, 4
+0.009197809, 6
+0.005510315, 6
+0.00381327,  4
+0.014623406, 6
+0.00627435,  6
+0.007575425, 7
+0.007934642, 7
+0.005000109, 6
+0.012281941, 6
+0.00358316,  6

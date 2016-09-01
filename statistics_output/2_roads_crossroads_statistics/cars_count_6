@@ -1,120 +1,30 @@
-case 1
-time: 0.049390361
-timesteps: 6
-
-case 2
-time: 0.041530572
-timesteps: 7
-
-case 3
-time: 0.023910369
-timesteps: 7
-
-case 4
-time: 0.010973154
-timesteps: 7
-
-case 5
-time: 0.029417506
-timesteps: 7
-
-case 6
-time: 0.036232883
-timesteps: 6
-
-case 7
-time: 0.12958552
-timesteps: 7
-
-case 8
-time: 0.124586442
-timesteps: 7
-
-case 9
-time: 0.099674579
-timesteps: 6
-
-case 10
-time: 0.06837963
-timesteps: 7
-
-case 11
-time: 0.033483158
-timesteps: 6
-
-case 12
-time: 0.11405507
-timesteps: 7
-
-case 13
-time: 0.009845309
-timesteps: 6
-
-case 14
-time: 0.077807648
-timesteps: 8
-
-case 15
-time: 0.048016745
-timesteps: 9
-
-case 16
-time: 0.055893795
-timesteps: 7
-
-case 17
-time: 0.080401328
-timesteps: 7
-
-case 18
-time: 0.069135991
-timesteps: 7
-
-case 19
-time: 0.033908553
-timesteps: 7
-
-case 20
-time: 0.149052295
-timesteps: 8
-
-case 21
-time: 0.032990807
-timesteps: 7
-
-case 22
-time: 0.025510589
-timesteps: 6
-
-case 23
-time: 0.075009677
-timesteps: 8
-
-case 24
-time: 0.083740665
-timesteps: 7
-
-case 25
-time: 0.058156698
-timesteps: 7
-
-case 26
-time: 0.022842932
-timesteps: 6
-
-case 27
-time: 0.079170202
-timesteps: 6
-
-case 28
-time: 0.048341447
-timesteps: 6
-
-case 29
-time: 0.036069942
-timesteps: 6
-
-case 30
-time: 0.015396676
-timesteps: 7
-
+0.049390361, 6
+0.041530572, 7
+0.023910369, 7
+0.010973154, 7
+0.029417506, 7
+0.036232883, 6
+0.12958552,  7
+0.124586442, 7
+0.099674579, 6
+0.06837963,  7
+0.033483158, 6
+0.11405507,  7
+0.009845309, 6
+0.077807648, 8
+0.048016745, 9
+0.055893795, 7
+0.080401328, 7
+0.069135991, 7
+0.033908553, 7
+0.149052295, 8
+0.032990807, 7
+0.025510589, 6
+0.075009677, 8
+0.083740665, 7
+0.058156698, 7
+0.022842932, 6
+0.079170202, 6
+0.048341447, 6
+0.036069942, 6
+0.015396676, 7
