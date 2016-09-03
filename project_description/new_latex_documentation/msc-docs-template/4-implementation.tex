@@ -49,7 +49,7 @@ Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu 
 W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden kroku czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu, z tego względu, że wraz ze wzrostem ilośći możliwych przyspieszeń rośnie ilość możliwość stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
 \newline
 \newline
-Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć.
+Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr prędkości, czyli liczba pozyji będąca dystansem trzymanym między pojazdami.
 
 \section{Zmodyfikowany algorytm A*}
 
@@ -105,23 +105,32 @@ Unikanie kolizji zostało podzielone na dwa etapy
 - Unikanie kolizji na skrzyżowaniach
 \newline
 \newline
-Impementacja unikania kolizji pojazdów na tym samym pasie polega na policzeniu obszarów dla samochodów znajdujących się na tym samym pasie, który będą one obejmowały w jednym kroku czasowym.
+Impementacja unikania kolizji pojazdów na tym samym pasie polega na policzeniu obszarów dla samochodów znajdujących się na tym samym pasie, który będą one obejmowały w jednym kroku czasowym wraz z uwzględnieniem parametru bezpieczeństwa.
 \newline
 \newline
 Jeżeli obszary dwóch samochdów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego.
 \newline
 \newline
+Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykładu unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden.
+\newline
+Jak widać samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce.
+\begin{figure}
+    \includegraphics[width=1.0\textwidth]{collision-avoidance-lane.png}
+  \caption{Unikani kolizji na pasie}
+  \label{collision-avoidance-lane}
+\end{figure}
+\newpage
 Unikanie kolizji na skrzyżowaniach polega na eliminacji stanów, w których conajmniej dwa auta przekroczyły w jednym kroku czasowym to samo skrzyżowanie. Metoda 'neighbours' także nie zwróci takich stanów.
 \newline
 \newline
-Na rysunku \ref{1-collision-avoidance} przedstawiony jest przykładu unikania kolizji dla dwóch samochodów na prostym skrzyżowaniu. Samochód z numerem jeden przyspieszył o dwie jedostki i zmienił pozycję o dwie jednostki do przodu. Samochód z numerem dwa przyspieszył natomiast o jedną jednostkę i zmienił pozycję o jedną jednostkę do przodu w celu uniknięcia kolizji.
+Na rysunku \ref{collision-avoidance-crossroads} przedstawiony jest przykładu unikania kolizji dla dwóch samochodów na prostym skrzyżowaniu. Samochód z numerem jeden przyspieszył o dwie jedostki i zmienił pozycję o dwie jednostki do przodu. Samochód z numerem dwa przyspieszył natomiast o jedną jednostkę i zmienił pozycję o jedną jednostkę do przodu w celu uniknięcia kolizji.
 \newline
 \newline
 W algorytmie usunięty został stan, w którym oba pojazdy przyspieszyły o dwie jednostki. Został natomiast wybrany stan gdzie jeden z samochodów przyspieszył o dwie jednostki, a drugi o jedną jednostką, ponieważ prowadzi to, do najszybszego opuszczenia przez pojazdy skrzyżowania.
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{collision-avoidance-crossroads.png}
   \caption{Unikanie kolizji na skrzyżowaniu}
-  \label{1-collision-avoidance}
+  \label{collision-avoidance-crossroads}
 \end{figure}
 \newpage
 
