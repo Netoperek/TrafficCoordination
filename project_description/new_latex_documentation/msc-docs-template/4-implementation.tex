@@ -16,9 +16,12 @@ Samochody mogą poruszać się w następujących kierunkach:
 - z zachodu na wschód
 \newline
 \newline
+Powyższe ogarniczenie nie wpływa na algorytm lub wyniki. Dodanie funkcjonalności wymagałoby dodania możliwości zmiany numeru drogi przez samochód, co nie wpływa na liczbę stanów, a co za tym idzie długości wykonywania algorytmu.
+\newline
+\newline
 Droga jest reprezentowana poprzez następujące dane:
 \newline
-- unikalny numer drogi
+- unikatowy numer drogi
 \newline
 - rozmiar drogi
 \newline
@@ -29,9 +32,9 @@ Droga jest reprezentowana poprzez następujące dane:
 \newline
 Samochody na drogach opisują następujące dane:
 \newline
-- unikalny numer samochodu
+- unikatowy numer samochodu
 \newline
-- unikalny numer drogi, na której się znajduje
+- unikatowy numer drogi, na której pojazd się znajduje
 \newline
 - numer pozycji na drodze, na której samochód się znajduje
 \newline
@@ -43,33 +46,29 @@ Samochody na drogach opisują następujące dane:
 Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi w jednym kroku czasowym.
 \newline
 \newline
-W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden kroku czasowym.
-\newline
-\newline
-W Systemie jest także plik konfiguracyjny, który wyznacza maksymalną prędkość, oraz gdzie definiuje się wyżej opisane wartości przyspieszeń.
+W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden kroku czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu, z tego względu, że wraz ze wzrostem ilośći możliwych przyspieszeń rośnie ilość możliwość stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
 
-\section{Generyczny, wielostanowy algorytm A*}
+\section{Zmodyfikowany algorytm A*}
 
-Zaprezentowny w tej pracy zmodyfikowany algorytm A* jest algorytmem wielostanowym. Oznacza to, że wierzchołkiem w grafie jest stan wszystkich samochodów na skrzyżowaniu, a krawędzią jest przejście z jednego stanu do następnego.
+Zaprezentowany w tej pracy zmodyfikowanym algorytmu A* jest oparty na stanach, gdzie pojedyńczym stanem jest rozłożenie samochodów na drogach wraz z ich prędkościami.
 \newline
 \newline
-Algorytm ma za zadanie doprowadzić do zadanego celu otrzymując określone dane początkowego. Stanem początkowym jest startowe rozstawienie aut na drogach.
+Algorytm zaczynając od zadanego stanu początkowego analizuje możliwe stany sąsiednie i wybiera optymalną ścieżkę kierując się funkcją heurystyki. Ścieżka prowadzi do określonego celu.
 \newline
 \newline
-Algorytm otrzymując dane startowe, ma osiągnąć zadany cel. Danymi startowymi jest początkowe rozstawienie samochodów na skrzyżowaniach wraz z ich początkowymi prędkościami.
+W przypadku opracowanego rozwiązania, celem jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
 \newline
 \newline
-Modyfikacja Algorytm A* jest generyczna. Do algorytmu przekazujemy klasę reprezentującą wierzchołek, która implementuje metodę 'neighbours', która zwraca sąsiednie wierzchołki.
+Zrealizowany Algorytm A* jest generyczny. Do algorytmu przekazujemy klasę reprezentującą dowolny stan. Klasa musi implementować metodę 'neighbours', która zwraca stany sąsiednie dla danej instancji stanu.
 \newline
 \newline
-Do algorytmu przekazuje się także warunki wygranej. W przypadku mojego rozwiązania wygraną jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
 \newline
 \newline
-Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego wierzchołka.
+Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego stanu.
 
-\section{Reprezentacja wierzchołka w zmodyfikowanym algorytmie A*}
+\section{Stan w opracowanym rozwiązaniu dla algorytmu A*}
 
-Wierzchołek w modyfikacji algorytmu A* przedstawionej w tej pracy opisuje stan wszystkich samochodów na skrzyżowaniach wraz z ich prędkościami.
+Stan w modyfikacji algorytmu A* przedstawionej w tej pracy opisuje stan wszystkich samochodów na skrzyżowaniach wraz z ich prędkościami.
 \newline
 \newline
 Zgodnie z wcześniej generycznością wierzchołek jest obiektem klasy, który implementuje metodę 'neighbours'. Metoda generuje wszystkie stany sąsiednie dla aktualnego stanu. Dla przykładu, dla ustawień przyspieszeń \{-2, -1, 0, 1, 2\}, dla każdego z aut na skrzyżowaniu generowane są stany z jego prędkością dodając wartości przyspieszeń. Pomijane są stany, w których prędkość samochodu byłaby ujemna.
@@ -115,7 +114,7 @@ Skrzyżowanie jest reprezentowane za pomocą grafu. Wierzchołkami grafu są pos
 Każda droga jest oznaczona innym kolorem.
 \newline
 \newline
-Samochody poruszające się po tej samej drodze są zaznaczone grubszym obwodem oraz mają ten sam kolor. Samochody można rozróżnić poprzez unikalny numer na nich napisany.
+Samochody poruszające się po tej samej drodze są zaznaczone grubszym obwodem oraz mają ten sam kolor. Samochody można rozróżnić poprzez unikatowy numer na nich napisany.
 \newline
 \newline
 Kolejne kroki czasowe reprezentowane są poprzez następne grafy z kolejnymi ułożeniami samochodów.
@@ -124,78 +123,6 @@ Kolejne kroki czasowe reprezentowane są poprzez następne grafy z kolejnymi uł
 Ostatnim elementem modułu graficznego jest stworzenie GIFa z następujących po sobie grafów.
 \newline
 \newline
-Poniżej na rysunkach \ref{1-traffic} - \ref{12-traffic} jest przedstawione zostało rozwiązanie dla dwunastu pojazdów na skrzyżowaniu ośmiu dróg.
+%Poniżej na rysunkach \ref{1-traffic} - \ref{12-traffic} jest przedstawione zostało rozwiązanie dla dwunastu pojazdów na skrzyżowaniu ośmiu dróg.
 \newline
-Jak widać na rysunku \ref{12-traffic} po dwunastym kroku czasowym wszystkie samochody opóściły skrzyżowanie.
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{1.png}
-  \caption{1 krok czasowy}
-  \label{1-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{2.png}
-  \caption{2 krok czasowy}
-  \label{2-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{3.png}
-  \caption{3 krok czasowy}
-  \label{3-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{4.png}
-  \caption{4 krok czasowy}
-  \label{4-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{5.png}
-  \caption{5 krok czasowy}
-  \label{5-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{6.png}
-  \caption{6 krok czasowy}
-  \label{6-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{7.png}
-  \caption{7 krok czasowy}
-  \label{7-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{8.png}
-  \caption{8 krok czasowy}
-  \label{8-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{9.png}
-  \caption{9 krok czasowy}
-  \label{9-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{10.png}
-  \caption{10 krok czasowy}
-  \label{10-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{11.png}
-  \caption{11 krok czasowy}
-  \label{11-traffic}
-\end{figure}
-\newpage
-\begin{figure}
-    \includegraphics[width=1.0\textwidth]{12.png}
-  \caption{12 krok czasowy}
-  \label{12-traffic}
-\end{figure}
+%Jak widać na rysunku \ref{12-traffic} po dwunastym kroku czasowym wszystkie samochody opóściły skrzyżowanie.
