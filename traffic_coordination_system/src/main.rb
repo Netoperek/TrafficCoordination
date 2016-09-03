@@ -57,6 +57,7 @@ heuristic_function = Proc.new do |states_vertex|
       state[:position] += state[:velocity] * state[:direction]
       time_stamps_number += 1
     end
+  binding.pry
   time_stamps.push(time_stamps_number)
   end
   time_stamps.reduce(:+)
