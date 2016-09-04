@@ -75,7 +75,7 @@ Stan w modyfikacji algorytmu A* przedstawionej w tej pracy opisuje stan wszystki
 Zgodnie z wcześniej generycznością wierzchołek jest obiektem klasy, który implementuje metodę 'neighbours'. Metoda generuje wszystkie stany sąsiednie dla aktualnego stanu. Dla przykładu, dla ustawień przyspieszeń \{-2, -1, 0, 1, 2\}, dla każdego z aut na skrzyżowaniu generowane są stany z jego prędkością dodając wartości przyspieszeń. Pomijane są stany, w których prędkość samochodu byłaby ujemna.
 \newline
 \newline
-Przykładowo jest pojazd z prędkością 1 pozycja na krok czasowy znajdujący się na 1 pozycji na drodze numer jeden. Dla pojazdu rozpatrywane są następujące stany:
+Przykładowo jest pojazd z prędkością 1 pozycji na krok czasowy znajdujący się na 1 pozycji na drodze numer 1. Dla pojazdu rozpatrywane są następujące stany:
 \newline
 1) Dodając przyspieszenie o wartości 0: 2 pozycja na drodze numer jeden z prędkością 1
 \newline
@@ -132,10 +132,6 @@ W algorytmie usunięty został stan, w którym oba pojazdy przyspieszyły o dwie
 \end{figure}
 \newpage
 
-\section{Funkcja heurystyki}
-
-Funkcja heurystyki dla algorytmu A* jest to suma kroków czasowych, po których wszystkie auta przekroczą ostatnie skrzyżowanie - czyli osiągną cel. Funkcja liczona jest, przy założeniu, że wszystkie samochody maksymalnie przyspieszają.
-
 \section{Format danych wejściowych}
 
 System koordynacji ruchu potrzebuje dane na temat skrzyżowan, samochodów oraz ograniczeń parametrów samochodów.
@@ -148,6 +144,158 @@ Stany samochodów zapisane są w pliku CSV posiadającym atrybuty: numer samocho
 \newline
 \newline
 Ograniczenia przechowywane są w osobnym pliku CSV posiadającym atrybuty: maksymalna prędkość, parametr bezpieczeńśtwa, wartości przyspieszeń.
+
+\section{Funkcja heurystyki}
+
+Funkcja heurystyki dla algorytmu A* jest to suma kroków czasowych, po których wszystkie auta przekroczą ostatnie skrzyżowanie - czyli osiągną cel. Funkcja liczona jest, przy założeniu, że wszystkie samochody maksymalnie przyspieszają.
+\newline
+\newline
+W opracowanym rozwiązaniu każdy samochód ma wyznaczoną pozycję, na której musi się znaleźć lub ją przekroczyć. Poniżej przedstawiony jest przykład liczonej funkcji heurystyki dla dwóch stanów opisujących położenia samochodów na skrzyżowaniu.
+\newline
+\newline
+\begin{table}[t]
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline 
+      Numer pojazdu & Numer drogi & Pozycja na drodze & Prędkość & Pozycja końcowa\\
+      \hline
+      1 & 1 & 1 & 1 & 6 \\
+      \hline
+      2 & 2 & 1 & 1 & 6 \\
+      \hline
+      3 & 3 & 1 & 1 & 6 \\
+      \hline
+      4 & 4 & 1 & 1 & 6 \\
+      \hline
+    \end{tabular} 
+    \caption{Stan 1}
+    \label{FirstState}
+\end{table}
+\newline
+\begin{table}[t]
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline 
+      Numer pojazdu & Numer drogi & Pozycja na drodze & Prędkość & Pozycja końcowa\\
+      \hline
+      1 & 1 & 1 & 0 & 6 \\
+      \hline
+      2 & 2 & 1 & 1 & 6 \\
+      \hline
+      3 & 3 & 1 & 0 & 6 \\
+      \hline
+      4 & 4 & 1 & 1 & 6 \\
+      \hline
+    \end{tabular} 
+    \caption{Stan 2}
+    \label{SecondState}
+\end{table}
+\newpage
+Dla stanu opisanego w tabeli \ref{FirstState} funkcja heurystyki jest liczona następująco:
+\newline
+\newline
+\textbf{Dla pojazdów 1-4:}
+\newline
+\newline
+\underline{1 krok czasowy}:
+\newline
+\newline
+prędkość = (prędkość) 1 + (maksymalne przyspieszenie) 1 = 2
+\newline
+pozycja = (pozycja) 1 + (prędkość) 2 = 3
+\newline
+\newline
+Pojazd znajduje się na pozycji 3, która jest przed pozycją końcową 6 - liczony jest kolejny krok czasowy.
+\newline
+\newline
+\underline{2 krok czasowy}:
+\newline
+\newline
+prędkość = (prędkość) 2 + (maksymalne przyspieszenie) 1 = 3
+\newline
+pozycja = (pozycja) 3 + (prędkość) 3 = 6
+\newline
+\newline
+Pojazd znajduje się na pozycji 6, która jest równa pozycji końcowej.
+\newline
+\newline
+Razem 2 kroki czasowe dla jednego pojazdu. Dla wszystkich czterech pojazdów - 8 kroków czasowych.
+\newline
+\newline
+\newline
+Dla stanu opisanego w tabeli \ref{SecondState} funkcja heurystyki jest liczona następująco:
+\newline
+\newline
+\textbf{Dla pojazdów 1 i 3}
+\newline
+\newline
+\underline{1 krok czasowy}:
+\newline
+\newline
+prędkość = (prędkość) 0 + (maksymalne przyspieszenie) 1 = 1
+\newline
+pozycja = (pozycja) 1 + (prędkość) 1 = 2
+\newline
+\newline
+Pojazd znajduje się na pozycji 2, która jest przed pozycją końcową 6 - liczony jest kolejny krok czasowy.
+\newline
+\newline
+\underline{2 krok czasowy}:
+\newline
+\newline
+prędkość = (prędkość) 1 + (maksymalne przyspieszenie) 1 = 2
+\newline
+pozycja = (pozycja) 2 + (prędkość) 2 = 4
+\newline
+\newline
+Pojazd znajduje się na pozycji 4, która jest przed pozycją końcową 6 - liczony jest kolejny krok czasowy.
+\newline
+\newline
+\underline{3 krok czasowy}:
+\newline
+\newline
+prędkość = (prędkość) 2 + (maksymalne przyspieszenie) 1 = 3
+\newline
+pozycja = (pozycja) 4 + (prędkość) 3 = 7
+\newline
+\newline
+Pojazd znajduje się na pozycji 7, która jest za pozycją końcową 6.
+\newline
+\newline
+Razem 3 kroki czasowe dla jednego pojazdu. Dla pojazdów 1 i 3 - 6 kroków czasowych.
+\newline
+\newline
+\textbf{Dla pojazdów 2 i 4:}
+\newline
+\newline
+\underline{1 krok czasowy}:
+\newline
+\newline
+prędkość = (prędkość) 1 + (maksymalne przyspieszenie) 1 = 2
+\newline
+pozycja = (pozycja) 1 + (prędkość) 2 = 3
+\newline
+\newline
+Pojazd znajduje się na pozycji 3, która jest przed pozycją końcową 6 - liczony jest kolejny krok czasowy.
+\newline
+\newline
+\underline{2 krok czasowy}:
+\newline
+\newline
+prędkość = (prędkość) 2 + (maksymalne przyspieszenie) 1 = 3
+\newline
+pozycja = (pozycja) 3 + (prędkość) 3 = 6
+\newline
+\newline
+Pojazd znajduje się na pozycji 6, która jest równa pozycji końcowej.
+\newline
+\newline
+Razem 2 kroki czasowe dla jednego pojazdu. Dla pojazdów 2 i 4 - 4 kroki czasowe.
+\newline
+\newline
+Razem dla wszystkich pojazdów - 10 kroków czasowych.
+\newline
+\newline
+\newline
+Podsumowując, dla stanu opisanego w tabeli \ref{FirstState} funkcja heurystyki zwróci wartość 8 (osiem kroków czasowych), a dla stanu opisanego w tabeli \ref{SecondState} funkcja heurystyki zwróci wartość 10 (dziesięć kroków czasowych). Algorytm wybierze wartość minimalną - czyli wybierze stan opisany w tabeli \ref{FirstState}.
 
 \section{Reprezentacja graficzna wyników}
 
