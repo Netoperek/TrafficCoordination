@@ -1,109 +1,76 @@
-\chapter{State of the art} \label{chap:state-of-the-art}
+\chapter{Istniejące rozwiązania w zakresie planowania ruchu i koordynacji ruchu na skrzyżowaniach} \label{chap:state-of-the-art}
 
 \section{Planowanie ruchu na skrzyżowaniach}
 
-\textbf{Cel podrozdziału}
+\textbf{Cel - lista wymagań i cech mojego rozwiązania - tego nie będzie w treści}
 \newline
-Wskazanie złożoności problemu znajdowania drogi oraz wskazania algorytmów używanych w literaturze do tego typu probemów
+- Zastosowanie algorytmu A* do zaplanowania ruchu na skrzyżowaniach
 \newline
+- Brak świateł powinno przyspieszyć ruch na szkyżowaniach - auta nie czekają na świetle pomarańczowym
 \newline
-\textbf{Zależność wydajności od rozmiaru problemu}
+- Rozwiązanie uwzględnia unikanie kolizji
 \newline
-- Metody planujące są zawsze zależne od rozmiaru problemu
+- A* powinien szybciej zaplanować drogę niż np. Dijkstra
 \newline
-- Duża złożoność powoduje stosowanie algorytmów heurystycznych
+- W rozwiązaniu zapewnione jest bezpieczeństwo - nie dochodzi do kolizji
 \newline
-- Pokazanie złożoności na przykładowych algorytmach
-\newline
-\newline
-\textbf{Szybkość zmian w środowisku uniemożliwia użycia algorytmu zajmującego dużo czasu}
-\newline
-- Duża złożoność problemu powoduje, że jeżeli zajdzie zmiana w środowisku, algorytm musi natychmiast wyliczyć poprawny plan
-\newline
-- Algorytmy heurystyczne są wstanie działać w środowisku, gdzie zmiany zachodzą szybko
+- Rozwiązanie koordynuje ruch globalnie
 \newline
 \newline
-\textbf{Rozważana klasa problemów}
-\newline
-- Omówienie klasy problemów planowania ruchu na skrzyżowań
-\newline
-- Omówienie modelów środowisk i wiążących się z nimi złożoności
 \newline
 \newline
-\textbf{Zgodnie z artykułem ~\cite{leena2014survey} szukanie ścieżki można podzielić na planowanie globalne oraz lokalne}
+\indent
+  Planowanie ruchu zawsze wiąże się z rozmiarem problemu. Dla koordynacji ruchu na skrzyżowaniach rozmiarem problemu jest rozmiar dróg, ich liczba oraz liczba przecięć między nimi, a także parametry pojazdów. Z planowaniem ruchu wiąże się trudność jaką jest szybkość zmian w środowisku. W przypadku nie zastosowania się pojazdu do planu, algorytm musi natychmiast wyliczyć poprawiony plan. Z tego względu algorytm nie powinien zajmować dużo czasu. Algorytmy heurystyczne są najczejściej stosowane w często zmieniających się środowiskach.
 \newline
-- W globalnym dla algorytmu znane musi być całe środowisko
-\newline
-- W lokalnym dla jednego pojazdu całe środowisko jest nie znane - jest poznawane w czasie rzeczywistym
-\newline
-- W mojej pracy zastosowany będzie algorytm globalny
+\indent
+  Często stosowany algorytmem do znajdowania najkrótszej ścieżki w grafie jest algorytm Dijkstry. O rzędzie złożoności algorytmu decyduje implementacja kolejki. W przypadku implementacji kolejki poprzez kopiec złożoność algortmu to:
 \newline
 \newline
+\begin{math}
+O(E + V\log V)
+\end{math}
+\newline
+\newline
+gdzie \begin{math}E\end{math} to liczba krawędzi grafu, a \begin{math}V\end{math} liczba wierzchołków grafu.
+\indent
+\newline
+\newline
+\indent
+  Algorytmem heurystycznym stosowanym do szukania najkrótszej ścieżki jest Algorytm A*. Złożoność czasowa algorytmu jest zależna od zastosowanej funkcji heurystyki. Jeśli funkcja heurystyki spełnia następujący warunek:
+\newline
+\newline
+\begin{math}
+|h(x)-h^{*}(x)|=O(\log h^{*}(x))
+\end{math}
+\newline
+\newline
+gdzie \begin{math}h*\end{math} jest optymalną heurystyką - liczba przeszukanych węzłów rośnie wielomianowo w stosunku do długości rozwiązania.
+\newline
+\newline
+\indent
+W artykule \cite{wojnicki2015robust} autorzy przedstawili algorytm A* w celu planowania wielowymiarowego. W celu przybliżenia złożoności jako przykładowe środowisko podana została dwuwymiarowa przestrzeń kwadratowa o boku 7. Pojazdy mogą zajmować wówczas 49 pozycji oznaczonych współrzednymi \begin{math}(x, y)\end{math}. Dla jednego pojazdu, możliwość zajmowanych pozycji wynosi \begin{math}(7 x 7) = 49 \end{math}. Dla dwóch pojazdów jest to już \begin{math}(7 x 7) x (7 x 7 - 1) = 2352 \end{math}. Aktualny stan jest wówczas opisywany jako \begin{math}(x1, y1, x2, y2)\end{math}. Złożoność rośnie wraz z przetrzymywaniem kolejnych informacji na temat pojazdów, czyli  na przykład prędkośći czy przyspieszenia.
+\indent
+\newline
+Autorzy artykułu \cite{leena2014survey} zwrócili uwagę na podział planowania na globalne i lokalne. W podejśćiu globalnym dla algorytmu musi być znane całe środowisko co wiąże się z dużym obciążeniem pamięciowym - algorytm przechowuje informacje na temat stanów wszystkich pojazdów na skrzyżowaniach. W podejśćiu lokalnym środowisko dla pojedyńczego pojazdu nie jest znane, algorytm poznaje je w czasie rzeczywistym. W przedstawionym rozwiązaniu zastosowane jest podejście globalne.
 
 \section{Planowanie ruchu przy użyciu świateł drogowych}
 
-\textbf{Cel podrozdziału}
+\indent
+Najczęściej stosowanym systemem do koordynacji ruchu na skrzyżowaniach są światła drogowe. Powodują one opóźniena wiążące się z oczekiwaniem przy świetle pomarańczowym, które jednocześnie zapewnia bezpieczeństwo. Powstało wiele optymalizacji świateł drogowych w celu pryspieszenia ruchu na skrzyżowaniach.
 \newline
-Przedstawienie rozwiązań koordynujących ruch drogowy przy użyciu świateł drogowych, omówienie ich optymalizacji oraz wskazanie co w nich powoduje opóźnienie, którego w moim rozwiązaniu nie ma.
+\indent
+W artykule \cite{brockfeld2001optimizing} autorzy opisują następujące optymalizacje sygnalizacji świetlnej: \textit{Synchronized Traffic Lights, Green Wave, Random Offset}. Synchroniczne światła drogowe oparte są o obliczane cykle oraz o klastry samochodow poruszających się po skrzyżowaniach. Klaster samochodów rusza, gdy pojawi się światło zielone. Pierwszy samochód rusza z największym przyspieszeniem, aż dojedzie do następnego skrzyżowania. Wówczas natychmiast włącza się światło czerwone i reszta samochodów w klastrze dojeżdża do skrzyżowania. Cykle są obliczane w sposób, aby opóźnienia na skrzyżowaniach były najmniejsze. Zgodnie ze zdaniem autorów, jedną z wad jest fakt, że rozwiązanie działa najlepiej dla nierealistycznych cykli. W celu usprawnienia autorzy zaproponowali strategię zielonej fali. Głównym celem tego podejście jest to, aby duże klastry samochodów były w ruchu. W artykule, strategia zielonej fali daje lepsze efekty niż startegia synchronicznych świateł. Ostatnią przedstawioną strategią jest losowa zmiana świateł przed skrzyżowaniami. W przeciwieństwie do poprzednich strategii - światła na skrzyżowanach nie przełączją się jednocześnie. Użycie tej strategii powoduje powstawanie dużych klastrów samochodów na niektórych drogach i szybki przepływ na innych. Globalnie strategia zielonej falii przynosiła najlepsze efekty. Przedstawione rozwiązania muszą jednak stosować światło w celu utrzymania bezpieczeństwa co powoduje opóźnienia na każdym skrzyżowaniu.
 \newline
+\indent
+Autorzy artykułu \cite{athmaraman2005adaptive} opisują koordynację ruchu przy użyciu algorytmu 'REAL TIME QUEUE LENGTH ESTIMATION: THE APTTC ALGORITHM'. Koordynacja ta działa przy użyciu tablicy sensorów fotoelektrycznych rozmieszczonych w topologii. Algorytm w zależności od danych i estymacji kolejek odpowowiednio steruje sygnalizacją świetlną w celu uniknięcia opóźnień. Algorytm został uruchomiony w mieście Chennai w Indiach, gdzie wyestymowane zostały długości kolejek aut na drogach poprzez zamontowane sensory na każdy dzień tygodnia. Rozwiązanie jest jednak zaprojektowane do działania na jednym skrzyżowaniu oraz nie eliminuje opóźnień spowodowachnych światłem pomarańczowym. Co więcej, w rozwiązaniu konieczne jest montowanie sensorów na drogach.
 \newline
-\textbf{W artykule ~\cite{brockfeld2001optimizing} opisane zostały optymalizacje sygnalizacji świetlnej}
-  \newline
-  - Synchronized Traffic Lights
-  \newline
-  - Green Wave
-  \newline
-  - Random Offset
-  \newline
-  \newline
-  - Która optymalizacja co wnosi
-  \newline
-  - Jak niewelowane są opóźnienia
-  \newline
-  - Która z nich daje najlepsze wyniki
-  \newline
-  \newline
-\textbf{Krytyka}
+\indent
+W artykule \cite{de1998optimal} opisane zostało kierowanie ruchem drogowym na jednym skrzyżowaniu poprzez optymalizację kolejek. W rozwiązaniu brane pod uwage są takie dane jak: średni czas oczekiwania, średnia długość kolejki, najgorszy czas oczekiwania. Istnieje także możliwość przekazania parametrów odpowiadających za maksymalny czas trwania światła czerwonego oraz zielonego. Wynikiem rozwiązania jest schemat zmiany świateł, który liczony jest za pomocą funkcji obiektowych na podstawie długości kolejek. W rozwiązaniu pominięty został element bezpieczeństwa jakim jest światło pomarańczowe. Rozwiązanie zostało pokazane także na jednym skrzyżowaniu, a nie na całej sieci skrzyżowań.
 \newline
-Opóźnienia i tak są spowodowane przez użycie świateł (światło pomarańczowe) - te opóźnienia nie występują w moim rozwiązaniu
-\newpage
-\textbf{Autorzy artykułu ~\cite{athmaraman2005adaptive} opisują koordynację ruchu przy użyciu algorytmu - 'REAL TIME QUEUE LENGTH ESTIMATION: THE APTTC ALGORITHM'}
-  \newline
-  - Sterowanie adaptacyjne
-  \newline
-  - Statystyczna optymalizacja
-  \newline
-  - Estymacja na podstawia długości dynamicznej kolejki
+\indent
+  Autorzy artykulu \cite{lammer2008self} przedstawili system kontroli świateł i przepływu pojazdów na sieciach drogowych. Rozwiązanie stosowane jest dla całych sieci skrzyżowań. Autorzy opierają się o krótkie prognozu ruchu i na ich podstawie liczą długość trwania światła zielonego. Klasyczne rozwiązania działają na wcześniej obliczonych danych oraz działają we wcześniej określonych miejscach największego ruchu. Takie rozwiązania powodują, że zielona fala trwa dużej niż powinna. W rozwiązaniu zastosowana jest także strategia stabilizacji, która zapewnia fakt, iż długość kolejek nie będzie zbyt długa. Zapewnione jest to przez odpowiednią długość trwania światła zielonego. W rozwiązaniu, na każdym ze skrzyżowań, samochody będą tracic czas na świetle pomarańczowym, które w rozwiązaniu jest konieczne, aby było ono bezpieczne. Ruch jest także optymalizowany dla sytuacji "średnich", które tak na prawdę nigdy nie występują. Wynikiem tego zjawiska jest fakt, że optymalizacja nie jest nigdy stosowana dla prawdziwej, aktualnej sytuacji.
 \newline
-\newline
-\textbf{Krytyka}
-\newline
-Rozwiązanie nie bierze pod uwagę bezpieczeństwa, które w zwykłej sygnalizacji świetlnej jest zapewnione przez swiatło pomarańczowe.
-\newline
-\newline
-\textbf{Opis kierowania ruchem drogowym na jednym skrzyżowaniu. Autorzy artykułu \cite{de1998optimal} dla ułatwienia pomijają światło pomarańczowe}
-  \newline
-  - Optymalizacja świateł za pomocą dwóch podanych funkcji polegających na optymalicazji kolejek na czterech pasach
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-Rozwiązanie nie bierze pod uwagę bezpieczeństwa, które w zwykłej sygnalizacji świetlnej jest zapewnione przez swiatło pomarańczowe.
-\newline
-\newline
-\textbf{Kontrola ruchu drogowego za pomocą świateł. Autorzy atykułu \cite{lammer2008self} zaproponowali zdecentralizowany algorytm bazujący na krótkich prognozach ruchu}
-  \newline
-  - Optymalizacja świateł za pomocą dwóch podanych funkcji polegających na optymalizacji kolejek na czterech pasach
-  \newline
-	- Liczona długość światła zielonego w celu zwolnienia kolejki na pasie
-  \newline
-  - Limitacja - Zielone światła są zapalone dłużej niż zwykle powinny
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-Limitacja - Ruch jest optymalizowany dla sytuacji "średnich", które tak na prawdę nigdy nie występują, przez co optymalizacja nie jest stosowana dla aktualnej sytuacji
-\newpage
+\indent
 \textbf{Zarządzanie światłami za pomocą komunikacji pojazdów między sobą \cite{ferreira2010self}}
 \newline
 Wszystkie auta muszą być wyposażone w:
@@ -123,49 +90,14 @@ Rozwiązanie w porównaniu do mojego jest kosztowne, jeżeli chodzi o wyposażen
     
 \section{Planowanie ruchu bez sygnalizacji świetlnej}
 
-\textbf{Cel podrozdziału}
+\indent
+W celu uniknięcia świateł drogowych istnieją także rozwiązania z wykorzystaniem algorytmów znajdujących najkrótszą ścieżkę. W artykule \cite{shaikh2013agv} autorzy wykorzystali algorytm Dijkstry do zarządzania ruchem przy użyciu automatycznie prowadzonych pojazdów. Autorzy przedstawili zarządzanie ruchem pojazdów w magazynie chcąc ogarniczyć czas transportu. Algorytm Dijkstry wskazuje najkrótszą ścieżkę od jednego pojazdu do następnego. W przypadku, gdy na ścieżce znajdzie się przeszkoda - algorytm wylicza ścieżkę od nowa. Zastosowanie algorytmu Dijkstry do koordynacji ruchu na skrzyżowaniach jest zbyt złożone. Ponadto unikanie kolizji jest wykonane poprzez ponowne wyliczanie najkrótszej ścieżki, zamiast unikania ich na bieżąco.
 \newline
-Podanie metod w literaturze do planowania drogi, koordynowania ruchu. Wskazanie wad tych rozwiązań w porównaniu do mojego.
+\indent
+Autorzy artykułu \cite{huang2013improved} przedstawiają ulepszoną wersję algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki. Do algorytmu Dijkstry wprowadzona została funkcja dzięki której ignorowane są nieistotne wierzchołki w grafie. Dzięki tej modyfikacji algorytm jest jest ~43\%-76\% szybszy. Rozwiązanie jest nadal zbyt złożone by zastosować go do koordynacji ruchu na skrzyżowaniach. W rozwiązanie nie ma także uwzględnionego unikania kolizji.
 \newline
-\newline
-\textbf{Autorzy artykułu ~\cite{shaikh2013agv} opisali znajdowanie ścieżki za pomocą algorytmu Dijkstry}
-\newline
-- Opisanie sposobu zastosowanie dijkstry w planowaniu ruchu
-\newline
-- Opisanie sposobu unikania kolizji
-\newline
-- Ograniczenia algorytmu
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-- Algorytm A* jest lepszy wydajnościowy względem Dijkstry
-\newline
-\newline
-\textbf{Autorzy artykułu ~\cite{huang2013improved} przedstawiają ulepszoną wersję algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki}
-\newline
-- Algorytm Dijkstry ma słabą wydajność, dlatego postanowiono go zmodyfikować. Według badań przeprowadzonych przez autorów algorytm jest ~42\%-76\% szybszy
-\newline
-- Autorzy wspominają o algorytmie A*, który jest szybszy od algorytmu Dijkstry ale może skończyć w nieskończonej pętli
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-- W prowadzonych przeze mnie badaniach algorytm A* ani raz nie został wprowadzony w nieskończoną pętlę oraz jest szybszy od algorytmu Dijkstry w szukaniu ścieżki.
-\newline
-\newline
-\textbf{Planowanie ruchu oraz unikanie kolizji przy użyciu AGV na podstawie artykułu ~\cite{ando2003autonomous}}
-\newline
-- Opis zastosowanego rozwiązania
-\newline
-- Opis sposobu unikania kolizji
-\newline
-- Omówienie przykładu z użyciem AGV na podstawie artykułu
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-Zastosowanie AGV jest przeznaczone dla robotów. Jest tu także komunikacja między pojazdami co wprowadza dodatkową warstwę trudności jeżeli chodzi o wprowadzenie rozwiązania dla koordynacji ruchu na skrzyżowaniach.
+\indent
+W artykule \cite{ando2003autonomous} przedstawione zostało planowanie ruchu przy użyciu automatycznie prowadzonych pojazdów wraz z unikaniem kolizji. W rozwiązaniu każdy robot indywidualnie liczy najkrótszą dla siebie ścieżkę. Następnie dane tras są wymieniane pomiędzy robotami w celu ustalenia finalnego rozwiązania. Szukanie ścieżki jest wykonywane przy użyciu algorytmu Dijkstry. W celu unikania kolizji dla każdego pojazdu liczona jest funkcja kary. Waga kary jest zwiększa tak długo, aż zostanie znaleziona bezkolizyjna ścieżka. Złożoność rozwiązania jest zbyt duża by zastosować je dla skrzyżowań. Wymienianie danych pomiędzy pojazdami oraz podany w rozwiązaniu sposób rozwiązywania kolizji nie znajduje zastosowania w koordynowaniu ruch na skrzyżowaniach.
 \newline
 \newline
 \textbf{Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie artykułu ~\cite{delling2009engineering}}
