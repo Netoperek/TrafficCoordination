@@ -111,7 +111,7 @@ Impementacja unikania kolizji pojazdów na tym samym pasie polega na policzeniu 
 Jeżeli obszary dwóch samochdów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego.
 \newline
 \newline
-Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykładu unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce.
+Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykład unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce.
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{collision-avoidance-lane.png}
   \caption{Unikani kolizji na pasie}
@@ -121,10 +121,10 @@ Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykładu unikania
 Unikanie kolizji na skrzyżowaniach polega na eliminacji stanów, w których conajmniej dwa auta przekroczyły w jednym kroku czasowym to samo skrzyżowanie. Metoda 'neighbours' także nie zwróci takich stanów.
 \newline
 \newline
-Na rysunku \ref{collision-avoidance-crossroads} przedstawiony jest przykładu unikania kolizji dla dwóch samochodów na prostym skrzyżowaniu. Samochód z numerem jeden przyspieszył o dwie jedostki i zmienił pozycję o dwie jednostki do przodu. Samochód z numerem dwa przyspieszył natomiast o jedną jednostkę i zmienił pozycję o jedną jednostkę do przodu w celu uniknięcia kolizji.
+Na rysunku \ref{collision-avoidance-crossroads} przedstawiony jest przykład unikania kolizji dla dwóch samochodów na prostym skrzyżowaniu. Samochód z numerem jeden przyspieszył o dwie jedostki i zmienił pozycję o dwie jednostki do przodu. Samochód z numerem dwa przyspieszył natomiast o jedną jednostkę i zmienił pozycję o jedną jednostkę do przodu w celu uniknięcia kolizji.
 \newline
 \newline
-W algorytmie usunięty został stan, w którym oba pojazdy przyspieszyły o dwie jednostki. Został natomiast wybrany stan gdzie jeden z samochodów przyspieszył o dwie jednostki, a drugi o jedną jednostką, ponieważ prowadzi to, do najszybszego opuszczenia przez pojazdy skrzyżowania.
+W algorytmie usunięty został stan, w którym oba pojazdy przyspieszyły o dwie jednostki. Został natomiast wybrany stan gdzie jeden z samochodów przyspieszył o dwie jednostki, a drugi o jedną jednostką, ponieważ prowadzi to, do najszybszego opuszczenia skrzyżowania przez pojazdy.
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{collision-avoidance-crossroads.png}
   \caption{Unikanie kolizji na skrzyżowaniu}
@@ -134,7 +134,7 @@ W algorytmie usunięty został stan, w którym oba pojazdy przyspieszyły o dwie
 
 \section{Format danych wejściowych}
 
-System koordynacji ruchu potrzebuje dane na temat skrzyżowan, samochodów oraz ograniczeń parametrów samochodów.
+Zaprezentowane rozwiązanie potrzebuje dane na temat skrzyżowań, samochodów oraz ograniczeń parametrów samochodów.
 \newline
 \newline
 Skrzyżowania reprezentowane są w pliku CSV posiadającym atrybuty: numer drogi, rozmiar, przecięcia, kierunek. Przecięcie reprezentowane są przez dwie liczby. Na przykład 5 7 - oznacza, że droga przecina drogę o numerze 5 w pozycji 7. Kolejne przecięcia oddzielane są średnikami.
@@ -150,7 +150,7 @@ Ograniczenia przechowywane są w osobnym pliku CSV posiadającym atrybuty: maksy
 Funkcja heurystyki dla algorytmu A* jest to suma kroków czasowych, po których wszystkie auta przekroczą ostatnie skrzyżowanie - czyli osiągną cel. Funkcja liczona jest, przy założeniu, że wszystkie samochody maksymalnie przyspieszają.
 \newline
 \newline
-W opracowanym rozwiązaniu każdy samochód ma wyznaczoną pozycję, na której musi się znaleźć lub ją przekroczyć. Poniżej przedstawiony jest przykład liczonej funkcji heurystyki dla dwóch stanów opisujących położenia samochodów na skrzyżowaniu.
+W opracowanym rozwiązaniu każdy samochód ma wyznaczoną pozycję, na której musi się znaleźć lub ją przekroczyć (jest to pozycja za ostatnim skrzyżowaniem). Poniżej przedstawiony jest przykład liczonej funkcji heurystyki dla dwóch stanów opisujących położenia samochodów na skrzyżowaniu.
 \newline
 \newline
 \begin{table}[t]
@@ -308,9 +308,6 @@ Działanie modułu graficznego oparte jest na rysowaniu grafów z wykorzystaniem
 Skrzyżowanie jest reprezentowane za pomocą grafu. Wierzchołkami grafu są poszczególne odcinki dróg. Krawędziami grafu są połączenia pomiędzy odcinkami.
 \newline
 \newline
-Każda droga jest oznaczona innym kolorem.
-\newline
-\newline
 Samochody poruszające się po tej samej drodze są zaznaczone grubszym obwodem oraz mają ten sam kolor. Samochody można rozróżnić poprzez unikatowy numer na nich napisany.
 \newline
 \newline
@@ -323,10 +320,10 @@ Efektem końcowym jest stworzony GIF z następujących po sobie grafów przy uż
 Moduł graficzny wczytuje wszystkie dane wejściowe: pozycję samochodów, dane skrzyżowania oraz ograniczenia. Kolejno na wejście otrzymuje plik zawierający JSON, który reprezentuje wszystkie stany samochodów na skrzyżowaniach od momentu startu, aż do opuszczenia skrzyżowań przez wszystkie samochody. Plik powstaje w wyniki wykonania zaprezentowanego algorytmu A*.
 \newline
 \newline
-Moduł wczytując dane początkowy tworzy graf bazowy. Graf bazowy przedstawia skrzyżowanie wraz z pojazdami. Kolory dla dróg oraz samochodów są losowane oraz przetrzymywane w zbiorze tak, aby żaden z kolorów się nie powtórzył.
+Moduł wczytując dane początkowe tworzy graf bazowy. Graf bazowy przedstawia skrzyżowanie wraz z pojazdami. Kolory dla dróg oraz samochodów są losowane oraz przetrzymywane w zbiorze tak, aby żaden z kolorów się nie powtórzył.
 \newline
 \newline
-Następnie moduł, posiadający kolejne stany w kolejnyc krokach czasowych, korzysta z grafu bazowego i zmienia pozycję samochodów. Po każdym kroku czasowym zapisywane jest zdjęcie grafu z numerem kroku czasowego.
+Następnie moduł, posiadający kolejne stany w kolejnych krokach czasowych, korzysta z grafu bazowego i zmienia pozycję samochodów. Po każdym kroku czasowym zapisywane jest zdjęcie grafu z numerem kroku czasowego.
 \newline
 \newline
 W module znajduje się także dodatkowe sprawdzanie kolizji. Jeżeli kolizja wystąpi, w danym kroku czasowym na zdjęciu dodany zostanie napis "Collision". Dzięki temu można zobaczyć prawdopodobieństwo kolizji w przypadku, gdy jeden z pojazdów nie zastosuje się do planu.
