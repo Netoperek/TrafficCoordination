@@ -52,7 +52,8 @@ class StatesVertex
     old_position = old_state[:position]
     cuts = cuts.select do |ele|
       (new_position >= ele[:crossroad] && old_position < ele[:crossroad] && car_state[:direction] == 1) || \
-        (new_position <= ele[:crossroad] && old_position > ele[:crossroad] && car_state[:direction] == -1)
+        (new_position <= ele[:crossroad] && old_position > ele[:crossroad] && car_state[:direction] == -1) || \
+          (new_position == ele[:crossroad] && old_position == ele[:crossroad])
     end
     cuts.map { |ele| ele[:road_nr] }
   end
