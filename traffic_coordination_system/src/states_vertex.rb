@@ -43,12 +43,16 @@ class StatesVertex
   # returns roads nr that the car cut
   #
   def crossroads_passed(car_state)
+    old_state = @states.select { |ele| ele.state[:car_nr] == car_state[:car_nr]}
+    old_state = old_state.first.state
+
     cuts = roads_data.select { |ele| ele[:road_nr] == car_state[:current_road_nr] }
     cuts = cuts.first[:cuts]
-    new_position = car_state[:position] + (fixed_velocity(car_state[:velocity] + PLUS_MAX_ACCELERATION) + SAFETY) * car_state[:direction]
+    new_position = car_state[:position]
+    old_position = old_state[:position]
     cuts = cuts.select do |ele|
-      (new_position >= ele[:crossroad] && car_state[:position] < ele[:crossroad] && car_state[:direction] == 1) || \
-        (new_position <= ele[:crossroad] && car_state[:position] > ele[:crossroad] && car_state[:direction] == -1)
+      (new_position >= ele[:crossroad] && old_position < ele[:crossroad] && car_state[:direction] == 1) || \
+        (new_position <= ele[:crossroad] && old_position > ele[:crossroad] && car_state[:direction] == -1)
     end
     cuts.map { |ele| ele[:road_nr] }
   end
@@ -73,12 +77,14 @@ class StatesVertex
 
     # Collisions on one lane
     #
-    cars_states.each do |ele|
-      ele = ele.state
-      start_pos = ele[:position]
-      end_pos = ele[:position] + fixed_velocity(ele[:velocity] + PLUS_MAX_ACCELERATION) * ele[:direction]
-      roads_areas[ele[:current_road_nr]] ||= []
-      output = merge_road_occupation(roads_areas[ele[:current_road_nr]], start_pos, end_pos)
+    cars_states.each do |car_state|
+      car_state = car_state.state
+      old_state = @states.select { |ele| ele.state[:car_nr] == car_state[:car_nr]}
+      old_state = old_state.first.state
+      start_pos = old_state[:position]
+      end_pos = car_state[:position]
+      roads_areas[car_state[:current_road_nr]] ||= []
+      output = merge_road_occupation(roads_areas[car_state[:current_road_nr]], start_pos, end_pos)
       return true if output == false
     end
 

@@ -7,7 +7,3 @@ car_nr,current_road_nr,position,velocity,final_position,direction
 6,6,1,0,21,1
 7,7,1,0,21,1
 8,8,1,0,21,1
-9,1,4,0,21,1
-10,2,4,0,21,1
-11,3,4,0,21,1
-12,4,4,0,21,1
