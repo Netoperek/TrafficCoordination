@@ -90,14 +90,37 @@ Rozwiązanie w porównaniu do mojego jest kosztowne, jeżeli chodzi o wyposażen
     
 \section{Planowanie ruchu bez sygnalizacji świetlnej}
 
-\indent
-W celu uniknięcia świateł drogowych istnieją także rozwiązania z wykorzystaniem algorytmów znajdujących najkrótszą ścieżkę. W artykule \cite{shaikh2013agv} autorzy wykorzystali algorytm Dijkstry do zarządzania ruchem przy użyciu automatycznie prowadzonych pojazdów. Autorzy przedstawili zarządzanie ruchem pojazdów w magazynie chcąc ogarniczyć czas transportu. Algorytm Dijkstry wskazuje najkrótszą ścieżkę od jednego pojazdu do następnego. W przypadku, gdy na ścieżce znajdzie się przeszkoda - algorytm wylicza ścieżkę od nowa. Zastosowanie algorytmu Dijkstry do koordynacji ruchu na skrzyżowaniach jest zbyt złożone. Ponadto unikanie kolizji jest wykonane poprzez ponowne wyliczanie najkrótszej ścieżki, zamiast unikania ich na bieżąco.
+W celu uniknięcia użycia świateł drogowych istnieją także rozwiązania z wykorzystaniem algorytmów znajdujących najkrótszą ścieżkę. W artykule \cite{shaikh2013agv} autorzy wykorzystali algorytm Dijkstry do zarządzania ruchem przy użyciu automatycznie prowadzonych pojazdów. Autorzy przedstawili zarządzanie ruchem pojazdów w magazynie chcąc ogarniczyć czas transportu. Algorytm Dijkstry wskazuje najkrótszą ścieżkę od jednego pojazdu do następnego. W przypadku, gdy na ścieżce znajdzie się przeszkoda - algorytm wylicza ścieżkę od nowa. Zastosowanie algorytmu Dijkstry do koordynacji ruchu na skrzyżowaniach jest zbyt złożone. Ponadto unikanie kolizji jest wykonane poprzez ponowne wyliczanie najkrótszej ścieżki, zamiast unikania ich na bieżąco.
 \newline
 \indent
 Autorzy artykułu \cite{huang2013improved} przedstawiają ulepszoną wersję algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki. Do algorytmu Dijkstry wprowadzona została funkcja dzięki której ignorowane są nieistotne wierzchołki w grafie. Dzięki tej modyfikacji algorytm jest jest ~43\%-76\% szybszy. Rozwiązanie jest nadal zbyt złożone by zastosować go do koordynacji ruchu na skrzyżowaniach. W rozwiązanie nie ma także uwzględnionego unikania kolizji.
 \newline
 \indent
 W artykule \cite{ando2003autonomous} przedstawione zostało planowanie ruchu przy użyciu automatycznie prowadzonych pojazdów wraz z unikaniem kolizji. W rozwiązaniu każdy robot indywidualnie liczy najkrótszą dla siebie ścieżkę. Następnie dane tras są wymieniane pomiędzy robotami w celu ustalenia finalnego rozwiązania. Szukanie ścieżki jest wykonywane przy użyciu algorytmu Dijkstry. W celu unikania kolizji dla każdego pojazdu liczona jest funkcja kary. Waga kary jest zwiększa tak długo, aż zostanie znaleziona bezkolizyjna ścieżka. Złożoność rozwiązania jest zbyt duża by zastosować je dla skrzyżowań. Wymienianie danych pomiędzy pojazdami oraz podany w rozwiązaniu sposób rozwiązywania kolizji nie znajduje zastosowania w koordynowaniu ruch na skrzyżowaniach.
+\newline
+\indent
+W patencie \cite{gazis1997optimal} autorzy przedstawili centralnie zaplanowany, generalny system przydzielający trasy w celu utrzymania optymalnego ruchu. System zawiera dużą ilość komputerów zamontowanych w pojazdach w celu komunikacji między nimi poprzez sieć bezprzewodową. Do znajdownia najkrótszej ścieżki autorzy wykorzystali algorytm Dijkstry. Ścieżki liczone są przy użyciu daynch dostarczanych przez komputery zamontowane w pojazdach. Celem patentu jest znalezienie drogi do celu w najkrótszym czasie poprzez omijanie zakorkowanych dróg. Nie jest to dokładne zaplanowanie poruszania się pojazdu wraz z unikaniem kolizji.
+\newline
+\indent
+Autorzy patentu \cite{broxmeyer1994vehicle} opisali system do controli ruchu i unikania kolizji na autostradach. Pod uwage wzięte zostały zmiany pasów, unikanie kolizji oraz kontrolowanie trasy pojazdu. Unikanie kolizji zostało zapewnione poprzez komunikacje przez transmitery radiowe oraz radioodbiorniki zamontowane w każdym z pojazdów. Rozwiązanie znajduje zastosowanie na autostradach, unikanie kolizji ma miejsce na równoległych pasach. Tego podejścia nie da się zastosować jeżeli chodzi o koordynacje ruchu na skrzyżowaniach.
+\newline
+\indent
+W artykule \cite{kanoh2007dynamic} przedstawiony został system dynamicznego planowania ruchu do nawigacji samochodów przy użyciu 'virus genetic algorithms'. Autorzy zaproponowali algorytm genetyczny, który jest bardziej wydajny od algorytmu A* czy algorytmu Dijkstry. W rozwiązaniu zastosowana jest strategia infekcji wirusowej, dzięki czemu omijane są korki na drogach. Rozwiązanie jest zaprojektowane do wskazania najlepszej trasy, nie jest to dokładne zaplanowanie ruchu samochodów wraz z wymijaniem kolizji.
+
+\section{Użycie algorytmu A* do planowania ruchu}
+
+\indent
+Algorytm A* jest często stosowany do szukania najkrótszej ścieżki oraz planowania ruchu. W artykule \cite{dechter1985generalized} omówiona została optymalność tego algorytmu oraz funkcja heurystyki. A* jest algorytmem heurystycznym, który znajduje najkrótszą ścieżkę w grafie ważonym z dowolnego podanego wierzchołka do wierzchołka celu. Wierzchołkiem celu jest wierzchołek spełniający zadane warunki wygranej. W artykule przedstawione zostały poprzednie próby udowodnienia optymalności algorytmu. Autorzy przeprowadzili także własny dowód na optymalność algorytmu A*. Dowód polega na fakcie, iż kiedy funkcja heurystyki nigdy nie przeszacowuje wtedy algorytm A* jest optymalny. Dla grafu, algorytm A* od zadanego wierzchołka startowego tworzy ścieżkę, wybierając niezbadany sąsiedni wierzchołek. Wybiera go w sposób aby minimalizować funkcję:
+\newline
+\newline
+\begin{math} f(x) = g(x) + h(x)\end{math}
+\newline
+\newline
+gdzie:
+\newline
+\newline
+\begin{math} g(x) \end{math} - suma wag krawędzi od wierzchołka startowego do wierzchołka x
+\begin{math} h(x) \end{math} - przewidywana przez funkcję heurystyki suma wag z wierzchołka x do wierzchołka docelowego
 \newline
 \newline
 \textbf{Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie artykułu ~\cite{delling2009engineering}}
@@ -109,54 +132,6 @@ W artykule \cite{ando2003autonomous} przedstawione zostało planowanie ruchu prz
   - Bidirectional Search
   \newline
   - A*
-  \newline
-\newline
-\newline
-\textbf{Autorzy artykułu ~\cite{gazis1997optimal} przedstawiają system planujący ruch pojazdów połączonych za pomocą bezprzewodowej komunikacji. System dostarcza pojazdą optymalną trasę biorąc pod uwagę aktualny ruch na drogach}
-\newline
-- Użycie algorytmu Dijkstry w celu znalezienia najkrótszej ścieżki
-\newline
-- Celem patentu znalezienie drogi do celu w najkrótszym czasie poprzez omijanie zakorkowanych dróg
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-- Jest to jedynie znajdowanie najszbszej drogi do celu poprzez komunikacje bezprzewodową. Nie jest to dokładne zaplanowanie ruchu pojazdu wraz z unikaniem kolizji
-\newline
-\newline
-\textbf{W Artykule ~\cite{broxmeyer1994vehicle} autorzy przedstawili system do controli ruchu i unikania kolizji na autostradach}
-\newline
-- Pod uwage wzięte zostały: zmiany pasów, unikanie kolizji, kontrolowanie trasy pojazdu
-\newline
-- Unikanie kolizji jest zapewniane poprzez komunikacje przez transmitery radiowe oraz radioodbiorniki zamontowane w każdym z pojazdów
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-System planuje trasy oraz zmiany pasów na autostradach przy czym zapewnione jest bezpieczeństwo kolizji. Rozwiązania nie można jednak zaaplikować do skrzyżowań dróg
-\newline
-\newline
-\textbf{Autorzy artykułu ~\cite{kanoh2007dynamic} przedstawiają system dynamiczny system planowania ruchu do nawigacji samochodów przy użyciu 'virus genetic algorithms'}
-\newline
-Zaproponowany został 'Genetic Algorithm', który powinien dawać lepsze wyniki w porównaniu do algorytmu Dijkstry oraz algorytmu A*
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-Brak unikania kolizji
-
-\section{Użycie algorytmu A* do planowania ruchu}
-
-\textbf{Cel podrozdziału}
-\newline
-Wskazania użyć A* w literaturze do planowania ruchu. Czy można użyć A* do planowania ruchu na skrzyżowaniach i wady użycia w porównania do mojego rozwiązania.
-\newline
-\newline
-\textbf{Omówienie algorytmu A* na podstawie artykułu ~\cite{dechter1985generalized}}
-  \newline
-  - Omówienie optymalności
-  \newline
-  - Omówienie funkcji heurystyki
 \newline
 \newline
 \textbf{Planowanie ruchu za pomocą zmodyfikowanego algorytmu A* na podstawie artykułu ~\cite{munteanmobile}}
