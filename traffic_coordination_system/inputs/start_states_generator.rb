@@ -16,13 +16,14 @@ roads_attributes = roads[:attributes]
 $roads_data = roads[:data]
 $roads_data.map! { |ele| Road.new(roads_attributes, ele) }
 $roads_size = $roads_data.size
-$cuts = $roads_data.map { |ele| { :road_nr => ele.state[:road_nr], :cuts => ele.state[:cuts] } }
+
+def cuts
+  $roads_data.map { |ele| { :road_nr => ele.state[:road_nr], :cuts => ele.state[:cuts] } }
+end
 
 def cuts_taken(pos_taken, road_nr, pos)
-  binding.pry
-  road_cuts = $cuts.select { |ele| ele[:road_nr] == road_nr}.first[:cuts]
-  road_cuts.map! { |ele| ele[:crossroad] }
-  road_cuts.include? pos
+  road_cuts = cuts.select { |ele| ele[:road_nr] == road_nr}.first[:cuts]
+  road_cuts.map { |ele| ele[:crossroad] }.include? pos
 end
 
 def random_car_pos(car_nr, pos_taken)
@@ -47,7 +48,7 @@ def random_car_pos(car_nr, pos_taken)
     else
       pos = rand(final_position..road_size)
     end
-    if pos_taken[road_nr][pos].nil? && cuts_taken(pos_taken, road_nr, pos)
+    if pos_taken[road_nr][pos].nil? && !cuts_taken(pos_taken, road_nr, pos)
       pos_taken[road_nr][pos] = car_nr
       break
     end
