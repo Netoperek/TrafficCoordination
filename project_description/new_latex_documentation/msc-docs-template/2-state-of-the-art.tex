@@ -20,10 +20,10 @@
 \newline
 \newline
 \indent
-  Planowanie ruchu zawsze wiąże się z rozmiarem problemu. Dla koordynacji ruchu na skrzyżowaniach rozmiarem problemu jest rozmiar dróg, ich liczba oraz liczba przecięć między nimi, a także parametry pojazdów. Z planowaniem ruchu wiąże się trudność jaką jest szybkość zmian w środowisku. W przypadku nie zastosowania się pojazdu do planu, algorytm musi natychmiast wyliczyć poprawiony plan. Z tego względu algorytm nie powinien zajmować dużo czasu. Algorytmy heurystyczne są najczejściej stosowane w często zmieniających się środowiskach.
+  Planowanie ruchu zawsze wiąże się z rozmiarem problemu. Dla koordynacji ruchu na skrzyżowaniach rozmiarem problemu jest rozmiar dróg, ich liczba oraz liczba przecięć między nimi, a także parametry i liczba pojazdów. Z planowaniem ruchu wiąże się trudność jaką jest szybkość zmian w środowisku. W przypadku nie zastosowania się pojazdu do planu, algorytm musi natychmiast wyliczyć poprawiony plan. Z tego względu algorytm nie powinien zajmować dużo czasu. Algorytmy heurystyczne są najczejściej stosowane w często zmieniających się środowiskach.
 \newline
 \indent
-  Często stosowany algorytmem do znajdowania najkrótszej ścieżki w grafie jest algorytm Dijkstry. O rzędzie złożoności algorytmu decyduje implementacja kolejki. W przypadku implementacji kolejki poprzez kopiec złożoność algortmu to:
+  Często stosowanym algorytmem do znajdowania najkrótszej ścieżki w grafie jest algorytm Dijkstry. O rzędzie złożoności algorytmu decyduje implementacja kolejki. W przypadku implementacji kolejki poprzez kopiec złożoność algortmu to:
 \newline
 \newline
 \begin{math}
@@ -48,18 +48,18 @@ gdzie \begin{math}h*\end{math} jest optymalną heurystyką - liczba przeszukanyc
 \newline
 \newline
 \indent
-W artykule \cite{wojnicki2015robust} autorzy przedstawili algorytm A* w celu planowania wielowymiarowego. W celu przybliżenia złożoności jako przykładowe środowisko podana została dwuwymiarowa przestrzeń kwadratowa o boku 7. Pojazdy mogą zajmować wówczas 49 pozycji oznaczonych współrzednymi \begin{math}(x, y)\end{math}. Dla jednego pojazdu, możliwość zajmowanych pozycji wynosi \begin{math}(7 x 7) = 49 \end{math}. Dla dwóch pojazdów jest to już \begin{math}(7 x 7) x (7 x 7 - 1) = 2352 \end{math}. Aktualny stan jest wówczas opisywany jako \begin{math}(x1, y1, x2, y2)\end{math}. Złożoność rośnie wraz z przetrzymywaniem kolejnych informacji na temat pojazdów, czyli  na przykład prędkośći czy przyspieszenia.
-\indent
+W artykule \cite{wojnicki2015robust} autorzy przedstawili algorytm A* w celu planowania wielowymiarowego. W celu przybliżenia złożoności jako przykładowe środowisko podana została dwuwymiarowa, dyskretna przestrzeń kwadratowa o boku 7. Pojazdy mogą zajmować wówczas 49 pozycji oznaczonych współrzednymi \begin{math}(x, y)\end{math}. Dla jednego pojazdu, możliwość zajmowanych pozycji wynosi \begin{math}(7 x 7) = 49 \end{math}. Dla dwóch pojazdów jest to już \begin{math}(7 x 7) x (7 x 7 - 1) = 2352 \end{math}. Aktualny stan jest wówczas opisywany jako \begin{math}(x1, y1, x2, y2)\end{math}. Złożoność rośnie wraz z przetrzymywaniem kolejnych informacji na temat pojazdów, czyli  na przykład prędkośći czy przyspieszenia.
 \newline
+\indent
 Autorzy artykułu \cite{leena2014survey} zwrócili uwagę na podział planowania na globalne i lokalne. W podejśćiu globalnym dla algorytmu musi być znane całe środowisko co wiąże się z dużym obciążeniem pamięciowym - algorytm przechowuje informacje na temat stanów wszystkich pojazdów na skrzyżowaniach. W podejśćiu lokalnym środowisko dla pojedyńczego pojazdu nie jest znane, algorytm poznaje je w czasie rzeczywistym. W przedstawionym rozwiązaniu zastosowane jest podejście globalne.
 
 \section{Planowanie ruchu przy użyciu świateł drogowych}
 
 \indent
-Najczęściej stosowanym systemem do koordynacji ruchu na skrzyżowaniach są światła drogowe. Powodują one opóźniena wiążące się z oczekiwaniem przy świetle pomarańczowym, które jednocześnie zapewnia bezpieczeństwo. Powstało wiele optymalizacji świateł drogowych w celu pryspieszenia ruchu na skrzyżowaniach.
+Najczęściej stosowanym systemem do koordynacji ruchu na skrzyżowaniach są światła drogowe. Powodują one opóźnienia wiążące się z oczekiwaniem przy świetle pomarańczowym, które jednocześnie zapewnia bezpieczeństwo. Powstało wiele optymalizacji świateł drogowych w celu przyspieszenia ruchu na skrzyżowaniach.
 \newline
 \indent
-W artykule \cite{brockfeld2001optimizing} autorzy opisują następujące optymalizacje sygnalizacji świetlnej: \textit{Synchronized Traffic Lights, Green Wave, Random Offset}. Synchroniczne światła drogowe oparte są o obliczane cykle oraz o klastry samochodow poruszających się po skrzyżowaniach. Klaster samochodów rusza, gdy pojawi się światło zielone. Pierwszy samochód rusza z największym przyspieszeniem, aż dojedzie do następnego skrzyżowania. Wówczas natychmiast włącza się światło czerwone i reszta samochodów w klastrze dojeżdża do skrzyżowania. Cykle są obliczane w sposób, aby opóźnienia na skrzyżowaniach były najmniejsze. Zgodnie ze zdaniem autorów, jedną z wad jest fakt, że rozwiązanie działa najlepiej dla nierealistycznych cykli. W celu usprawnienia autorzy zaproponowali strategię zielonej fali. Głównym celem tego podejście jest to, aby duże klastry samochodów były w ruchu. W artykule, strategia zielonej fali daje lepsze efekty niż startegia synchronicznych świateł. Ostatnią przedstawioną strategią jest losowa zmiana świateł przed skrzyżowaniami. W przeciwieństwie do poprzednich strategii - światła na skrzyżowanach nie przełączją się jednocześnie. Użycie tej strategii powoduje powstawanie dużych klastrów samochodów na niektórych drogach i szybki przepływ na innych. Globalnie strategia zielonej falii przynosiła najlepsze efekty. Przedstawione rozwiązania muszą jednak stosować światło w celu utrzymania bezpieczeństwa co powoduje opóźnienia na każdym skrzyżowaniu.
+W artykule \cite{brockfeld2001optimizing} autorzy opisują następujące optymalizacje sygnalizacji świetlnej: \textit{Synchronized Traffic Lights, Green Wave, Random Offset}. Synchroniczne światła drogowe oparte są o obliczane cykle oraz o klastry samochodow poruszających się po skrzyżowaniach. Klaster samochodów rusza, gdy pojawi się światło zielone. Pierwszy samochód rusza z największym przyspieszeniem, aż dojedzie do następnego skrzyżowania. Wówczas natychmiast włącza się światło czerwone i reszta samochodów w klastrze dojeżdża do skrzyżowania. Cykle są obliczane w sposób, aby opóźnienia były najmniejsze. Zgodnie ze zdaniem autorów, jedną z wad jest fakt, że rozwiązanie działa najlepiej dla nierealistycznych cykli. W celu usprawnienia autorzy zaproponowali strategię zielonej fali. Głównym celem tego podejście jest to, aby duże klastry samochodów były w ruchu. W artykule, strategia zielonej fali daje lepsze efekty niż startegia synchronicznych świateł. Ostatnią przedstawioną strategią jest losowa zmiana świateł przed skrzyżowaniami. W przeciwieństwie do poprzednich strategii - światła na skrzyżowanach nie przełączją się jednocześnie. Użycie tej strategii powoduje powstawanie dużych klastrów samochodów na niektórych drogach i szybki przepływ na innych. Globalnie strategia zielonej falii przynosiła najlepsze efekty. Przedstawione rozwiązania muszą jednak stosować światło w celu utrzymania bezpieczeństwa co powoduje opóźnienia na każdym skrzyżowaniu.
 \newline
 \indent
 Autorzy artykułu \cite{athmaraman2005adaptive} opisują koordynację ruchu przy użyciu algorytmu 'REAL TIME QUEUE LENGTH ESTIMATION: THE APTTC ALGORITHM'. Koordynacja ta działa przy użyciu tablicy sensorów fotoelektrycznych rozmieszczonych w topologii. Algorytm w zależności od danych i estymacji kolejek odpowowiednio steruje sygnalizacją świetlną w celu uniknięcia opóźnień. Algorytm został uruchomiony w mieście Chennai w Indiach, gdzie wyestymowane zostały długości kolejek aut na drogach poprzez zamontowane sensory na każdy dzień tygodnia. Rozwiązanie jest jednak zaprojektowane do działania na jednym skrzyżowaniu oraz nie eliminuje opóźnień spowodowachnych światłem pomarańczowym. Co więcej, w rozwiązaniu konieczne jest montowanie sensorów na drogach.
@@ -102,7 +102,7 @@ W artykule \cite{ando2003autonomous} przedstawione zostało planowanie ruchu prz
 W patencie \cite{gazis1997optimal} autorzy przedstawili centralnie zaplanowany, generalny system przydzielający trasy w celu utrzymania optymalnego ruchu. System zawiera dużą ilość komputerów zamontowanych w pojazdach w celu komunikacji między nimi poprzez sieć bezprzewodową. Do znajdownia najkrótszej ścieżki autorzy wykorzystali algorytm Dijkstry. Ścieżki liczone są przy użyciu daynch dostarczanych przez komputery zamontowane w pojazdach. Celem patentu jest znalezienie drogi do celu w najkrótszym czasie poprzez omijanie zakorkowanych dróg. Nie jest to dokładne zaplanowanie poruszania się pojazdu wraz z unikaniem kolizji.
 \newline
 \indent
-Autorzy patentu \cite{broxmeyer1994vehicle} opisali system do controli ruchu i unikania kolizji na autostradach. Pod uwage wzięte zostały zmiany pasów, unikanie kolizji oraz kontrolowanie trasy pojazdu. Unikanie kolizji zostało zapewnione poprzez komunikacje przez transmitery radiowe oraz radioodbiorniki zamontowane w każdym z pojazdów. Rozwiązanie znajduje zastosowanie na autostradach, unikanie kolizji ma miejsce na równoległych pasach. Tego podejścia nie da się zastosować jeżeli chodzi o koordynacje ruchu na skrzyżowaniach.
+Autorzy patentu \cite{broxmeyer1994vehicle} opisali system do kontroli ruchu i unikania kolizji na autostradach. Pod uwage wzięte zostały zmiany pasów, unikanie kolizji oraz kontrolowanie trasy pojazdu. Unikanie kolizji zostało zapewnione poprzez komunikacje przez transmitery radiowe oraz radioodbiorniki zamontowane w każdym z pojazdów. Rozwiązanie znajduje zastosowanie na autostradach, unikanie kolizji ma miejsce na równoległych pasach. Tego podejścia nie da się zastosować jeżeli chodzi o koordynacje ruchu na skrzyżowaniach.
 \newline
 \indent
 W artykule \cite{kanoh2007dynamic} przedstawiony został system dynamicznego planowania ruchu do nawigacji samochodów przy użyciu 'virus genetic algorithms'. Autorzy zaproponowali algorytm genetyczny, który jest bardziej wydajny od algorytmu A* czy algorytmu Dijkstry. W rozwiązaniu zastosowana jest strategia infekcji wirusowej, dzięki czemu omijane są korki na drogach. Rozwiązanie jest zaprojektowane do wskazania najlepszej trasy, nie jest to dokładne zaplanowanie ruchu samochodów wraz z wymijaniem kolizji.
@@ -120,100 +120,21 @@ gdzie:
 \newline
 \newline
 \begin{math} g(x) \end{math} - suma wag krawędzi od wierzchołka startowego do wierzchołka x
-\begin{math} h(x) \end{math} - przewidywana przez funkcję heurystyki suma wag z wierzchołka x do wierzchołka docelowego
+\begin{math} h(x) \end{math} - przewidywana przez funkcję heurystyki suma wag z wierzchołka x do wierzchołka docelowego.
 \newline
+\indent
+W artykule \cite{delling2009engineering} autorzy przeprowadzili porównanie algorytmów do planowania drogi. Na początku omówiony został algorytm Dijkstry, aby później pokazać algorytmy od niego szybsze. Następnie, autorzy przedstawiają kolejki priorytetowe jako implementację algorytmu Dijkstry, które są w stanie poprawic jego złozoność z \begin{math} O(n^2) \end{math} do \begin{math} O(nlogn) \end{math}. Używanie kolejek priorytetowych nie sprawdza sie jednach na bardzo dużych zbiorach danych. Następną zaproponowaną modyfikacją algorytmu Dijkstry jest wyszukiwanie dwukierunkowe. Algorytm równolegle uruchamia algorytm Dijkstry, w stronę celu oraz w stronę startu. Kiedy wierzchołek jest odwiedzony z dwóch strony, ścieżka może być znaleziona. Kolejno opisany został Algorytm A* korzystający z funkcji heurystyki opartej o odległość Euklidesową. Według autorów znajdywanie najkrótszej ścieżko jest niewiele przyspieszone. Mimo to czas wykonania algorytmu A* jest krótszy od czasu wykonania algorytmu Dijkstry.
 \newline
-\textbf{Omówienie i porównanie agorytmów stosowanych do planowania drogi na podstawie artykułu ~\cite{delling2009engineering}}
-  \newline
-  - Dijkstra's Algorithm
-  \newline
-  - Priority Queues
-  \newline
-  - Bidirectional Search
-  \newline
-  - A*
+\indent
+Wykorzystanie modyfikacji algorytmu A* wraz z algorytmem Wavefront zostało przedstawione w artykule \cite{wojnicki2015robust}. Autorzy przedstawili wersję algorytmu A*, która operuje na stanach. Autorzy pokazali przykład na dwuwymiarowej, dyskretnej przestrzeni kwadratowej o boku 7. Stanem początkowym jest rozłożenie czterech obiektów na rogach zadanej przestrzeni. Stanem końcowym natomiast, jest znalezienie się tych czterech obiektów po przeciwnych stronach przekątnych. Algortym Wavefront został zastosowany w celu otrzymania planów wielowariantowych dla obiektów. Zastosowanie algorytmu A* operującego na stanach wraz z prędkościami pojazdów wnosi duże narzuty obliczeniowe. Przeprowadzenie koordynacji ruchu dla dużych sieci skrzyżowań używając algorytmu A* wraz z Wavefront jest zbyt złożone.
 \newline
-\newline
-\textbf{Planowanie ruchu za pomocą zmodyfikowanego algorytmu A* na podstawie artykułu ~\cite{munteanmobile}}
-  \newline
-  - Opis sposobu wprowadzenia zmodyfikowanego algorytmu A* do koordynowania ruchu na skrzyżowaniach
-  \newline
-  - Wady, zalety i ogarniczenia
-\newline
-\newline
-\textbf{Planowanie ruchu za pomocą wielostanowego algorytmu A* oraz Wavefront na podstawie artykułu ~\cite{wojnicki2015robust}}
-\newline
-- Omówienie zastosowania tych dwóch algorytmów do planowania ruchu
-\newline
-\textbf{Krytyka}
-\newline
-Złożoność użycia wielostanowego A* jest już duża do planowania ruchu na skrzyżowaniach - dodając do tego wavefront złożoność jest jeszcze większa.
-\newline
-\newline
-\textbf{Omówienie przykładu użycia Multi-Entity A* na podstawie artykułu ~\cite{wojnicki2015robust}}
-  \newline
-  - Przytoczenie przykładu
-  \newline
-  - Omówienie wad, zalet i ogarniczeń
-  \newline
-  \newline
-Omówienie złożoności Multi-Entity A* na powyższym przykładzie.
-  \newline
-  - Złożoność jest zależna od liczby stanów w A*
-  \newline
-  - Obliczenie złożoności i pokazania jak ona rośnie
-\newline
-\newline
-\textbf{Autorzy artykułu ~\cite{elhalawany2013modified} zaproponowali użycie zmodyfikowanego algorytmu A* w celu bezpieczniejszej nawigacji dla robotów}
-  \newline
-  - Modyfikacja algorytmu polega na wzięciu pod uwagę rozmiaru robota w celu generowania prostrzej ścieżki i w celu uniknięcia ostrych skrętów
-  \newline
-  - Do algorytmu A* przekazywany jest stan początkowy i cel jaki robot chce osiągnąć
-  \newline
-  - Autorzy zmodyfikowali algorytm A* tak aby unikał niebezpiecznych sytuacji, które mogą powodować kolizje
-\newline
-\newline
-\textbf{Krytyka}
-\newline
- Algorytm jest liczony dla jednego robota - u mnie brane są pod uwage wszystkie pojazdy na drogach
+\indent
+W artykul \cite{elhalawany2013modified} autorzy zaproponowali modyfikację algorytmu A*, która skupia sie na bezpieczeństwie w problemie nawigacji robotów. Modyfikacja polega na wzięciu pod uwagę rozmiaru robota oraz unikanie ostrych skrętów jeżeli chodzi o bezpieczeństwo. Do algorytmu A* przekazywany jest stan początkowy oraz cel jaki robot ma osiągnąc. Rozwiązanie przedstawione jest dla pojedyńczego pojazdu, który ma za zadanie znaleźć najprosztą i bezpieczną ścieżkę wraz z unikaniem statycznych kolizji. Tego podejścia nie da się zastosować dla wielu pojazdów poruszających się po sieci skrzyżowań.
 
 \section{Modyfikacje A*}
-\textbf{Cel podrozdziału}
+
+\indent
+Autorzy artykułu \cite{munteanmobile} opisali modyfikację algorytmu A* do planowania ruchu. Rozwiązanie zostało zaprezentowanie dla robotów mobilnych. Autorzy stwierdzają fakt, że algorytm A* dla dużych danych potrzebuje dużo pamięci żeby śledzić dane, które są związane z aktualnym wierzchołkiem. Wspomniana została także modyfikacja algorytmu A*, która polega na równoczesnym przeszukiwaniu grafu w dwóch kierunkach. Kolejną modyfikacją jest IDA*, która nie używa pamięci do przechowywania wcześniej odwiedzonych wierzchołków. Minusem tej modyfikacji jest fakt, iż IDA* odwiedza niektóre wierzchołki wiele razy. Na końcu, autorzy zaproponowali swoją modyfikację - Fast A*. W modyfikacje zamiast list, użyte zostały drzewa binarne w celu przechowywania danych. W wyniku pracy zmodyfikowany algorytm Fast A* dawał lepsze wyniki od wersji klasycznej. Przedstawione modyfikacje są oparte o działanie na grafie, polegające na znalezieniu najkrótszej ściezki z punktu startowego do punktu końcowego. Modyfikacje nie są wstanie wskazać najkrótszej ścieżki dla stanu początkowego i końcowego, którym może być na przykład położenie wszystkich samochodów na skrzyżowaniach.
 \newline
-Przytoczenie modyfikacji algorytmu A* w literaturze. Wskazanie wad takich modyfikacji w porównaniu do mojej
-\newline
-\newline
-\textbf{Autorzy artykułu ~\cite{wojnicki2015robust} przedstawili wielostanowy A* }
-\newline
-- Ścieżka powinna być rozumiana jako sekwencja stanów
-\newline
-- Autorzy zastosowali modyfikację wraz z algorytmem Wavefront
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-- Zastosowanie tych dwóch algorytmów do rozwiązania skrzyżowań wiąże się ze zbyt dużą złożonością
-\newline
-\newline
-\textbf{Opis modyfikacji A* w artykule ~\cite{munteanmobile}}
-\newline
-- Prezentacja szybkiego algorytmu A* w celu nawigacji robota
-\newline
-- Autorzy użyli innych struktur w implementacji algorytmu A* co daje lepsze wyniki
-\textbf{Krytyka}
-\newline
-- Rozwiązanie nie może być zastosowane do koordynacji ruchu na skrzyżowaniach - jest ono zaprojektowane do znalezienia najkrótszej ścieżki dla pojedyńczego pojazdu
-\newline
-\newline
-\textbf{W artykule ~\cite{oleiwi2014modified} autorzy zaproponowali genetyczny algorytm oparty na zmodyfikowanym algorytmie A* w celu optymalizacji znajdowania ścieżek dla wielu obiektów}
-\newline
-- Znajdowanie śecieżek dla robotów z wymijaniem przeszkód
-\newline
-- Autorzy zaproponwali modyfikację A* w celu znalezienia suboptymalnej ścieżki w celu ustalenia początkowego rozwiązania dla algorytmu genetycznego.
-\newline
-- Modyfikacja została wykonana, aby A* nie wyszukiwał najkrótszej ścieżki na rzecz wydajności
-\newline
-\newline
-\textbf{Krytyka}
-\newline
-Nie jest to jednak Algorytm A* który opiera się na stanie wszystkich pojazdów w środowisku - polega on na znalezienie ścieżki dla jednego robota.
+\indent
+W artykule \cite{oleiwi2014modified} autorzy zaproponowali genetyczny algorytm oparty na zmodyfikowanym algorytmie A* w celu optymalizacji znajdowania ścieżek dla wielu obiektów. Modyfikacja algorytmu A* polega na znalezieniu ścieżki suboptymalnej poprzez dodanie do algorytmu funkcji prawdopodobieństwa. Uniknięto więc szukania najkrótszej ścieżki, aby zwiększyc optymalność algorytmu. To rozwiązanie następnie jest przekazywane to algorytmu genetycznego. W rozwiązaniu uwzględnione zostało także unikanie kolizji. Autorzy opisali podejście optymalizacji szukania najkrótszej ścieżki dla pojedyńczego pojazdu z unikaniem kolizji ze statycznymi elemntami. Tego rozwiązania nie da się zastosować w sieci skrzyżowań, na której znajduje się wiele aut.
