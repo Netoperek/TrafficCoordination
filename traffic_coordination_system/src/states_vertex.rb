@@ -71,6 +71,9 @@ class StatesVertex
     road_areas.each do |road_area|
       return false if start_pos >= road_area[:start_pos] && start_pos <= road_area[:end_pos]
       return false if end_pos >= road_area[:start_pos] && end_pos <= road_area[:end_pos]
+
+      return false if road_area[:start_pos] >= start_pos && road_area[:start_pos] <= end_pos
+      return false if road_area[:end_pos] >= start_pos && road_area[:end_pos] <= end_pos
     end
     road_areas.push(new_road_area)
   end
@@ -85,6 +88,10 @@ class StatesVertex
 
     # Collisions on one lane
     #
+    car10 = cars_states.select { |ele| ele.state[:car_nr] == 10 }.first.state
+    car4 = cars_states.select { |ele| ele.state[:car_nr] == 4 }.first.state
+    flaga = false
+    flaga = true if car4[:position] == 14 && car10[:position] == 16
     cars_states.each do |car_state|
       car_state = car_state.state
       old_state = @states.select { |ele| ele.state[:car_nr] == car_state[:car_nr]}
