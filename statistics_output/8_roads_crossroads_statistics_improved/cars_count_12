@@ -1,120 +1,30 @@
-case 1
-time: 171.131727569
-timesteps: 7
-
-case 2
-time: 490.079706383
-timesteps: 8
-
-case 3
-time: 140.930252688
-timesteps: 10
-
-case 4
-time: 339.789490459
-timesteps: 9
-
-case 5
-time: 177.953504753
-timesteps: 9
-
-case 6
-time: 211.780475841
-timesteps: 10
-
-case 7
-time: 45.496698132
-timesteps: 11
-
-case 8
-time: 218.648183401
-timesteps: 8
-
-case 9
-time: 129.95980226
-timesteps: 11
-
-case 10
-time: 113.5592733
-timesteps: 10
-
-case 11
-time: 735.635724524
-timesteps: 10
-
-case 12
-time: 154.386485445
-timesteps: 8
-
-case 13
-time: 129.229017942
-timesteps: 10
-
-case 14
-time: 73.200503381
-timesteps: 10
-
-case 15
-time: 53.575777379
-timesteps: 8
-
-case 16
-time: 113.843555716
-timesteps: 8
-
-case 17
-time: 163.603925781
-timesteps: 11
-
-case 18
-time: 123.107459734
-timesteps: 8
-
-case 19
-time: 41.236802238
-timesteps: 14
-
-case 20
-time: 1206.634819596
-timesteps: 9
-
-case 21
-time: 80.55830913
-timesteps: 11
-
-case 22
-time: 488.838426696
-timesteps: 11
-
-case 23
-time: 177.027143694
-timesteps: 10
-
-case 24
-time: 395.191700886
-timesteps: 10
-
-case 25
-time: 168.413869399
-timesteps: 9
-
-case 26
-time: 67.918695593
-timesteps: 9
-
-case 27
-time: 210.216338312
-timesteps: 9
-
-case 28
-time: 374.884089516
-timesteps: 9
-
-case 29
-time: 1758.564588257
-timesteps: 10
-
-case 30
-time: 69.604665034
-timesteps: 10
-
+time: 171.131727569 timesteps: 7
+time: 490.079706383 timesteps: 8
+time: 140.930252688 timesteps: 10
+time: 339.789490459 timesteps: 9
+time: 177.953504753 timesteps: 9
+time: 211.780475841 timesteps: 10
+time: 45.496698132 timesteps: 11
+time: 218.648183401 timesteps: 8
+time: 129.95980226 timesteps: 11
+time: 113.5592733 timesteps: 10
+time: 735.635724524 timesteps: 10
+time: 154.386485445 timesteps: 8
+time: 129.229017942 timesteps: 10
+time: 73.200503381 timesteps: 10
+time: 53.575777379 timesteps: 8
+time: 113.843555716 timesteps: 8
+time: 163.603925781 timesteps: 11
+time: 123.107459734 timesteps: 8
+time: 41.236802238 timesteps: 14
+time: 1206.634819596 timesteps: 9
+time: 80.55830913 timesteps: 11
+time: 488.838426696 timesteps: 11
+time: 177.027143694 timesteps: 10
+time: 395.191700886 timesteps: 10
+time: 168.413869399 timesteps: 9
+time: 67.918695593 timesteps: 9
+time: 210.216338312 timesteps: 9
+time: 374.884089516 timesteps: 9
+time: 1758.564588257 timesteps: 10
+time: 102.941853139 timesteps: 10

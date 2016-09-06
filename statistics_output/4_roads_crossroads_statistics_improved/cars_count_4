@@ -1,120 +1,30 @@
-case 1
-time: 0.012378694
-timesteps: 7
-
-case 2
-time: 0.012254601
-timesteps: 7
-
-case 3
-time: 0.013569568
-timesteps: 7
-
-case 4
-time: 0.005984897
-timesteps: 6
-
-case 5
-time: 0.011453531
-timesteps: 7
-
-case 6
-time: 0.016908078
-timesteps: 9
-
-case 7
-time: 0.00998943
-timesteps: 7
-
-case 8
-time: 0.008535977
-timesteps: 8
-
-case 9
-time: 0.011360072
-timesteps: 7
-
-case 10
-time: 0.008305574
-timesteps: 7
-
-case 11
-time: 0.006779001
-timesteps: 7
-
-case 12
-time: 0.006759049
-timesteps: 7
-
-case 13
-time: 0.009502405
-timesteps: 6
-
-case 14
-time: 0.010193117
-timesteps: 6
-
-case 15
-time: 0.007311718
-timesteps: 6
-
-case 16
-time: 0.009573025
-timesteps: 7
-
-case 17
-time: 0.01189661
-timesteps: 7
-
-case 18
-time: 0.005641529
-timesteps: 5
-
-case 19
-time: 0.006515863
-timesteps: 6
-
-case 20
-time: 0.010819087
-timesteps: 7
-
-case 21
-time: 0.008850963
-timesteps: 6
-
-case 22
-time: 0.008908268
-timesteps: 6
-
-case 23
-time: 0.005887765
-timesteps: 5
-
-case 24
-time: 0.007467014
-timesteps: 6
-
-case 25
-time: 0.00958822
-timesteps: 7
-
-case 26
-time: 0.011707226
-timesteps: 7
-
-case 27
-time: 0.007943505
-timesteps: 7
-
-case 28
-time: 0.012268125
-timesteps: 6
-
-case 29
-time: 0.005744399
-timesteps: 6
-
-case 30
-time: 0.019153067
-timesteps: 7
-
+time: 0.012378694 timesteps: 7
+time: 0.012254601 timesteps: 7
+time: 0.013569568 timesteps: 7
+time: 0.005984897 timesteps: 6
+time: 0.011453531 timesteps: 7
+time: 0.016908078 timesteps: 9
+time: 0.00998943 timesteps: 7
+time: 0.008535977 timesteps: 8
+time: 0.011360072 timesteps: 7
+time: 0.008305574 timesteps: 7
+time: 0.006779001 timesteps: 7
+time: 0.006759049 timesteps: 7
+time: 0.009502405 timesteps: 6
+time: 0.010193117 timesteps: 6
+time: 0.007311718 timesteps: 6
+time: 0.009573025 timesteps: 7
+time: 0.01189661 timesteps: 7
+time: 0.005641529 timesteps: 5
+time: 0.006515863 timesteps: 6
+time: 0.010819087 timesteps: 7
+time: 0.008850963 timesteps: 6
+time: 0.008908268 timesteps: 6
+time: 0.005887765 timesteps: 5
+time: 0.007467014 timesteps: 6
+time: 0.00958822 timesteps: 7
+time: 0.011707226 timesteps: 7
+time: 0.007943505 timesteps: 7
+time: 0.012268125 timesteps: 6
+time: 0.005744399 timesteps: 6
+time: 0.004512359 timesteps: 6
