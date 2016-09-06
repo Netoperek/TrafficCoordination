@@ -58,8 +58,15 @@ class StatesVertex
     cuts.map { |ele| ele[:road_nr] }
   end
 
-  def merge_road_occupation(road_areas, start_pos, end_pos)
-    new_road_area = { :start_pos => start_pos, :end_pos => end_pos }
+  def merge_road_occupation(road_areas, start_pos, end_pos, car_state)
+    direction = car_state[:direction]
+
+    if direction == 1
+      new_road_area = { :start_pos => start_pos, :end_pos => end_pos }
+    else
+      new_road_area = { :start_pos => end_pos, :end_pos => start_pos }
+    end
+
     areas_to_push = []
     road_areas.each do |road_area|
       return false if start_pos >= road_area[:start_pos] && start_pos <= road_area[:end_pos]
@@ -85,7 +92,7 @@ class StatesVertex
       start_pos = old_state[:position]
       end_pos = car_state[:position]
       roads_areas[car_state[:current_road_nr]] ||= []
-      output = merge_road_occupation(roads_areas[car_state[:current_road_nr]], start_pos, end_pos)
+      output = merge_road_occupation(roads_areas[car_state[:current_road_nr]], start_pos, end_pos, car_state)
       return true if output == false
     end
 
