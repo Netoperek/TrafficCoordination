@@ -2,27 +2,50 @@
 
 \section{Cel}
 
-W opracowanym rozwiązaniu wykonany został system plaujący ruch drogowy na skrzyżowaniach dróg wielopasmowych przy użyciu zmodyfikowanego algorytmu A*.
-\newline
-\newline
-Wynikiem rozwiązania jest szczegółowy opis, który dokładnie planuje ruch każdego z samochodów w celu najszybszego i bezpiecznego opuszczenia skrzyżowania.
-\newline
-\newline
-System zapewnia unikanie kolizji oraz optymalny dojazd do celu pojazdów na zadanej sieci skrzyżowań.
+W opracowanym rozwiązaniu wykonany został system plaujący ruch drogowy na skrzyżowaniach dróg wielopasmowych przy użyciu zmodyfikowanego algorytmu A*. Wynikiem rozwiązania jest szczegółowy opis, który dokładnie planuje ruch każdego z samochodów w celu najszybszego i bezpiecznego opuszczenia skrzyżowania. System zapewnia unikanie kolizji oraz optymalny dojazd do celu pojazdów na zadanej sieci skrzyżowań.
 
 \section{Planowanie ruchu przy użyciu modyfikacji A*}
 
-\newline
-\newline
-Rozwiązanie mając podane położenie samochodów na sieci skrzyżowań liczy plan dla każdego z pojazdów. W planie znajdują się informacje jak szybko pojazd powinien jechać, kiedy powinien zwolnić lub przyspieszyć aby ominąć kolizję.
-
+Rozwiązanie, mając podane położenie samochodów na sieci skrzyżowań liczy plan dla każdego z pojazdów. W planie znajdują się informacje jak szybko pojazd powinien jechać, kiedy powinien zwolnić lub przyspieszyć aby ominąć kolizję.
 \newline
 \newline
 Algorytm A* jest oparty o działanie na stanach. Pojedyńczym stanem jest rozmieszczenie pojazdów na sieci skrzyżowań wraz z ich prędkościami.
-
 \newline
 \newline
-Algorytm A* jest oparty o działanie na stanach. Pojedyńczym stanem jest rozmieszczenie pojazdów na sieci skrzyżowań wraz z ich prędkościami.
-\section{Podrozdział}
-
-\bt 
+Do systemu wprowadza się także następujące dane:
+\begin{itemize}
+\item maksymalną prędkość jaką pojazd może osiągnąć
+\item wartośći przyspieszeń pojazdu
+\item parametr bezpieczeństwa, czyli odległość utrzymywana pomiędzy pojazdami
+\end{itemize}
+System posiadając stan początkowy i powyższe dane, tworzy wszystkie możliwe stany pochodne. Następnie korzystając z funkcji heurystyki wybiera najkrótszą ścieżkę stanów.
+\newline
+\newline
+Opracowana została modyfikacja algorytmu A*. Algorytm został zaimplementowany w języku Ruby i jest on generyczny. Algorytm jako stan przyjmuje dowolny obiekt klasy implementujący metodę 'neighbours', która zwraca stany sąsiednie dla aktualnego stanu.
+\newline
+\newline
+Algorytm działa w sposób dynamiczny. W przypadku działania algorytmu A* na grafie - z góry znane są krawędzie oraz wierzchołki. W tej modyfikacji algorytm A* działą na dynamicznie liczonych stanach.
+\newline
+\newline
+Do algorytmu należy także przekazać funkcję heurystyki, która jest zależna od danych danego stanu.
+\newline
+\newline
+Algorytm prowadzi obliczenia aż nie osiągnięte zostaną, wcześniej przekazane warunki wygranej.
+\newline
+\newline
+W opracowanym rozwiązaniu warunkiem wygranej jest opuszczenie przez wszystkie pojazdy skrzyżowań.
+\newline
+\newline
+W rozwiązaniu przedstawione zostało także unikanie kolizji pojazdów na skrzyżowaniu oraz pojazdów poruszających się tym samym pasem.
+\newline
+\newline
+Do systemu można przekazać każdy rodzaj skrzyżowania jako listę dróg wraz z ich danymi oraz informacjami o przecięciach z innnymi drogami.
+\newline
+\newline
+Rozwiązanie oparte jest o przestrzeń dyskretną. Drogi mają konkretny rozmiar. System opiera się o działanie na krokach czasowych. Prędkość samochodów wyrażana jest w liczbie odcinków drogi na jeden krok czasowy.
+\newline
+\newline
+W celu wizualizcji stworzny został także moduł graficzny, który jest wstanie zwizualizować każde podane skrzyżowanie. Przedstawia on także w formie zdjęć zaplanowany ruch samochodów. Każde zdjęcie odpowiada następnemu krokowi czasowemu. Na zdjęciu ostatnim wszystkie samochody opuszczają skrzyżowanie.
+\newline
+\newline
+W rozwiązaniu jest także liczone prawdopodobieństwo kolizji w przypadku, gdy jeden z pojazdów nie zastosuje się do rozwiązania. Kolizja jest wówczas wykrywana. W przypadku niezastosowania się pojazdu do planu, kolejny plan powinien być wyliczony.
