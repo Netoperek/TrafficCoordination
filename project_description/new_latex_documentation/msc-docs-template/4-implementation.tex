@@ -238,6 +238,26 @@ Razem dla wszystkich pojazdów - 10 kroków czasowych.
 \newline
 Podsumowując, dla stanu opisanego w tabeli \ref{FirstState} funkcja heurystyki zwróci wartość 8 (osiem kroków czasowych), a dla stanu opisanego w tabeli \ref{SecondState} funkcja heurystyki zwróci wartość 10 (dziesięć kroków czasowych). Algorytm wybierze wartość minimalną - czyli wybierze stan opisany w tabeli \ref{FirstState}.
 
+\section{Złożoność rozwiązania}
+
+W przedstawionym modelu stan jednego samochodu to (p, v), gdzie p to pozycyja na drodzę oraz v to prędkość pojazdu w odcinkach drogi na krok czasowy. Pozostałe parametry, czyli numer drogi na której znajduje się samochód i pozycja końcowa czy przyspieszenie nie zmieniają się. Dla wartości przyspieszeń ze zbioru \{-1, 0, 1\} dla samochodu powstają następujące stany:
+\begin{enumerate}
+\item (p + v, v) - dla przyspieszenia 0
+\item (p + v + 1, v + 1) - dla przyspieszenia 1
+\item (p + v - 1, v - 1) - dla przyspieszenia 1
+\end{enumerate}
+Dla jednego pojazdu z każdym krokiem czasowym powstają 3 stany. Mając na skrzyżowaniu 12 pojazdów otrzymujemy daje 531441 możliwości w jednym kroku czasowym. Algorytm nie musi przechodzić przez wszystie możliwości, jeżeli wcześniej znajdzie rozwiązanie.
+\newline
+\indent
+Największym obciążeniem algorytmu jest unikanie kolizji. Zajmuje ono około 60 \% czasu znajdowania rozwiązania. Jest to spowodowane tym, że dla każdego stanu, którym jest położenie wszystkich pojazdów na skrzyżowaniu, algorytm przeprowadza dwie weryfikacje w każdym kroku czasowym:
+\begin{enumerate}
+\item Czy istnieją dwa pojazdy, które w tym samym czasie przekroczyły skrzyżowanie
+\item Czy odcinki zajęte przez dwa pojazdy na jednym pasie się przecinają
+\end{enumerate}
+Powyższe stany eliminowane są z rozwiązania co zapewnia unikanie kolizji.
+\newline
+\indent
+Dla zbioru przyspieszeń \{-2, -1, 0, 1, 2\} dla każdego pojazdu powstaje 5 stanów. Mając na skrzyżowaniu 12 pojazdów mamy 244140625 możliwości w jednym kroku czasowym. Możliwości przypadające na krok czasowy są silnie związane z czasem wykonania algorytmu. Wraz ze wzrostem pojazdów na skrzyżowaniach, a co za tym idzie dodatkowych możliwośći, czas wykonania rośnie ekspotencjalnie.
 \section{Reprezentacja graficzna wyników}
 
 W celu graficznej reprezentacji wyników zaimplementowany został moduł graficzny. Działanie modułu graficznego oparte jest na rysowaniu grafów z wykorzystaniem biblioteki Graphviz oraz jej implementacji w języku Ruby. Skrzyżowanie jest reprezentowane za pomocą grafu. Wierzchołkami grafu są poszczególne odcinki dróg. Krawędziami grafu są połączenia pomiędzy odcinkami. Samochody poruszające się po tej samej drodze są zaznaczone grubszym obwodem oraz mają ten sam kolor. Samochody można rozróżnić poprzez unikatowy numer na nich napisany. Kolejne kroki czasowe reprezentowane są poprzez następne grafy z kolejnymi ułożeniami samochodów. Efektem końcowym jest stworzony GIF z następujących po sobie grafów przy użyciu biblioteki 'rmagick' dla języka Ruby.

@@ -1,13 +1,30 @@
 \chapter{Wstęp}
 
-\section{Podrozdział}
+\section{Dziedzina Problemu}
 
-\bt
+W pracy rozwiązywany jest problem planowania ruchu na skrzyżowaniach.
+\newline
+\newline
+W rozwiązaniu wykorzystany jest algorytm A*, który najczęściej służy do wyszukiwania najkrótszej ścieżki w grafie.
+\newline
+\newline
+Poruszony jest także problem unikania kolizji wraz z użyciem algorytmu A*.
+\newline
+\newline
+Omówiona jest trudność w planowaniu ruchu globalnego jakim jest złożoność, która róśnie wraz z rozmiarem środowiska.
+\newline
+\newline
+Planowanie ruchu na skrzyżowaniach wiaże się z czestymi zmianami środowiska. W związku z tym system planujący dokładnie ruch powinien być wstanie szybko reagować na pomyłki.
 
-\section{Podrozdział}
+\section{Specyfikacja problemu}
 
-\bt
+Problemem przedstawionym w pracy jest szybkie i bezpieczne zaplanowanie ruchu na skrzyżowaniach. Mając określony stan początkowy będącym położeniem wszystkich pojazdów na skrzyżowaniu, system zwraca dokładny plan, który prowadzi do szybkiego i bezpiecznego opuszczenia przez samochody skrzyżowań.
+\newline
+\newline
+Problem polega na znalezieniu kolejnych stanów prowadzących do optymalnego rozwiązania. Pojedyńczy stan oraz jego zmiany wprowadzają duża liczbę możliwości. Dla przykładu na drodze reprezentowanej w sposób dyskretny o rozmiarze 24 oraz pojeździe znajdującej się w pozycji 12 - pojazd może zwolnić, przyspieszyć, lub przyspieszenia nie zmieniać.
+\newline
+\newline
+Kolejną trudnością w problemie, jest unikanie kolizji. Dla wszystkich możliwość algorytm planowania, powinien usunąć wszystkie możliwości kolizji na jednym pasie oraz przy przekraczaniu przez skrzyżowanie.
 
-\section{Podrozdział}
-
-\bt
+\section{Struktura pracy}
+TODO
