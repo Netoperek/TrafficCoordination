@@ -88,10 +88,6 @@ class StatesVertex
 
     # Collisions on one lane
     #
-    car10 = cars_states.select { |ele| ele.state[:car_nr] == 10 }.first.state
-    car4 = cars_states.select { |ele| ele.state[:car_nr] == 4 }.first.state
-    flaga = false
-    flaga = true if car4[:position] == 14 && car10[:position] == 16
     cars_states.each do |car_state|
       car_state = car_state.state
       old_state = @states.select { |ele| ele.state[:car_nr] == car_state[:car_nr]}
