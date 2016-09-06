@@ -61,11 +61,13 @@ class StatesVertex
   def merge_road_occupation(road_areas, start_pos, end_pos, car_state)
     direction = car_state[:direction]
 
-    if direction == 1
-      new_road_area = { :start_pos => start_pos, :end_pos => end_pos }
-    else
-      new_road_area = { :start_pos => end_pos, :end_pos => start_pos }
+    if direction == -1
+      tmp = start_pos
+      start_pos = end_pos
+      end_pos = tmp
     end
+
+    new_road_area = { :start_pos => start_pos, :end_pos => end_pos }
 
     areas_to_push = []
     road_areas.each do |road_area|
