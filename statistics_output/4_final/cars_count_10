@@ -1,120 +1,30 @@
-case 1
-time: 11.37835539
-timesteps: 8
-
-case 2
-time: 2.31720962
-timesteps: 11
-
-case 3
-time: 18.837583441
-timesteps: 10
-
-case 4
-time: 6.29637347
-timesteps: 13
-
-case 5
-time: 9.772847348
-timesteps: 14
-
-case 6
-time: 14.398557398
-timesteps: 10
-
-case 7
-time: 57.950386248
-timesteps: 10
-
-case 8
-time: 12.68238485
-timesteps: 11
-
-case 9
-time: 15.143725228
-timesteps: 9
-
-case 10
-time: 14.249035449
-timesteps: 11
-
-case 11
-time: 19.130288286
-timesteps: 8
-
-case 12
-time: 21.259325216
-timesteps: 9
-
-case 13
-time: 8.523174075
-timesteps: 9
-
-case 14
-time: 2.066310814
-timesteps: 12
-
-case 15
-time: 3.650370399
-timesteps: 14
-
-case 16
-time: 13.268192517
-timesteps: 11
-
-case 17
-time: 3.165980303
-timesteps: 9
-
-case 18
-time: 7.135443784
-timesteps: 11
-
-case 19
-time: 23.967922103
-timesteps: 11
-
-case 20
-time: 4.168459633
-timesteps: 8
-
-case 21
-time: 17.094846031
-timesteps: 9
-
-case 22
-time: 13.658993417
-timesteps: 9
-
-case 23
-time: 6.015929041
-timesteps: 11
-
-case 24
-time: 1.060466816
-timesteps: 12
-
-case 25
-time: 9.763727572
-timesteps: 12
-
-case 26
-time: 7.381363156
-timesteps: 11
-
-case 27
-time: 4.458885286
-timesteps: 9
-
-case 28
-time: 14.898625046
-timesteps: 10
-
-case 29
-time: 9.408392061
-timesteps: 8
-
-case 30
-time: 15.948686362
-timesteps: 9
-
+time: 11.37835539 timesteps: 8
+time: 2.31720962 timesteps: 11
+time: 18.837583441 timesteps: 10
+time: 6.29637347 timesteps: 13
+time: 9.772847348 timesteps: 14
+time: 14.398557398 timesteps: 10
+time: 57.950386248 timesteps: 10
+time: 12.68238485 timesteps: 11
+time: 15.143725228 timesteps: 9
+time: 14.249035449 timesteps: 11
+time: 19.130288286 timesteps: 8
+time: 21.259325216 timesteps: 9
+time: 8.523174075 timesteps: 9
+time: 2.066310814 timesteps: 12
+time: 3.650370399 timesteps: 14
+time: 13.268192517 timesteps: 11
+time: 3.165980303 timesteps: 9
+time: 7.135443784 timesteps: 11
+time: 23.967922103 timesteps: 11
+time: 4.168459633 timesteps: 8
+time: 17.094846031 timesteps: 9
+time: 13.658993417 timesteps: 9
+time: 6.015929041 timesteps: 11
+time: 1.060466816 timesteps: 12
+time: 9.763727572 timesteps: 12
+time: 7.381363156 timesteps: 11
+time: 4.458885286 timesteps: 9
+time: 14.898625046 timesteps: 10
+time: 9.408392061 timesteps: 8
+time: 15.948686362 timesteps: 9

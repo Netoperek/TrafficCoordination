@@ -1,120 +1,30 @@
-case 1
-time: 0.119387705
-timesteps: 10
-
-case 2
-time: 0.173069467
-timesteps: 10
-
-case 3
-time: 0.181879046
-timesteps: 8
-
-case 4
-time: 0.065285002
-timesteps: 8
-
-case 5
-time: 0.11140655
-timesteps: 9
-
-case 6
-time: 0.160648805
-timesteps: 8
-
-case 7
-time: 0.064577239
-timesteps: 7
-
-case 8
-time: 1.081558392
-timesteps: 9
-
-case 9
-time: 0.082612276
-timesteps: 7
-
-case 10
-time: 0.055978393
-timesteps: 6
-
-case 11
-time: 0.050818995
-timesteps: 9
-
-case 12
-time: 0.130673017
-timesteps: 7
-
-case 13
-time: 0.067802
-timesteps: 8
-
-case 14
-time: 0.057329671
-timesteps: 7
-
-case 15
-time: 0.097327763
-timesteps: 10
-
-case 16
-time: 0.128729286
-timesteps: 9
-
-case 17
-time: 0.116654283
-timesteps: 7
-
-case 18
-time: 0.089911036
-timesteps: 8
-
-case 19
-time: 0.123254904
-timesteps: 8
-
-case 20
-time: 0.0728529
-timesteps: 8
-
-case 21
-time: 0.12168201
-timesteps: 7
-
-case 22
-time: 0.35678176
-timesteps: 9
-
-case 23
-time: 0.131855749
-timesteps: 7
-
-case 24
-time: 0.104476027
-timesteps: 7
-
-case 25
-time: 0.051795354
-timesteps: 8
-
-case 26
-time: 0.100259807
-timesteps: 8
-
-case 27
-time: 0.069206395
-timesteps: 7
-
-case 28
-time: 0.078528037
-timesteps: 7
-
-case 29
-time: 0.159142248
-timesteps: 7
-
-case 30
-time: 0.186113837
-timesteps: 9
-
+time: 0.119387705 timesteps: 10
+time: 0.173069467 timesteps: 10
+time: 0.181879046 timesteps: 8
+time: 0.065285002 timesteps: 8
+time: 0.11140655 timesteps: 9
+time: 0.160648805 timesteps: 8
+time: 0.064577239 timesteps: 7
+time: 1.081558392 timesteps: 9
+time: 0.082612276 timesteps: 7
+time: 0.055978393 timesteps: 6
+time: 0.050818995 timesteps: 9
+time: 0.130673017 timesteps: 7
+time: 0.067802 timesteps: 8
+time: 0.057329671 timesteps: 7
+time: 0.097327763 timesteps: 10
+time: 0.128729286 timesteps: 9
+time: 0.116654283 timesteps: 7
+time: 0.089911036 timesteps: 8
+time: 0.123254904 timesteps: 8
+time: 0.0728529 timesteps: 8
+time: 0.12168201 timesteps: 7
+time: 0.35678176 timesteps: 9
+time: 0.131855749 timesteps: 7
+time: 0.104476027 timesteps: 7
+time: 0.051795354 timesteps: 8
+time: 0.100259807 timesteps: 8
+time: 0.069206395 timesteps: 7
+time: 0.078528037 timesteps: 7
+time: 0.159142248 timesteps: 7
+time: 0.161245123 timesteps: 8
