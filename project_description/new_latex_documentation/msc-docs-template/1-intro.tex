@@ -21,10 +21,17 @@ Planowanie ruchu na skrzyżowaniach wiaże się z czestymi zmianami środowiska.
 Problemem przedstawionym w pracy jest szybkie i bezpieczne zaplanowanie ruchu na skrzyżowaniach. Mając określony stan początkowy będącym położeniem wszystkich pojazdów na skrzyżowaniu, system zwraca dokładny plan, który prowadzi do szybkiego i bezpiecznego opuszczenia przez samochody skrzyżowań.
 \newline
 \newline
-Problem polega na znalezieniu kolejnych stanów prowadzących do optymalnego rozwiązania. Pojedyńczy stan oraz jego zmiany wprowadzają duża liczbę możliwości. Dla przykładu na drodze reprezentowanej w sposób dyskretny o rozmiarze 24 oraz pojeździe znajdującej się w pozycji 12 - pojazd może zwolnić, przyspieszyć, lub przyspieszenia nie zmieniać.
+Problem polega na znalezieniu kolejnych stanów prowadzących do optymalnego rozwiązania. Pojedyńczy stan oraz jego zmiany wprowadzają duża liczbę możliwości.
+\newline
+\newline
+Dla przykładu pojazd musi mieć określoną pozycję na drodze na której się znajduje oraz prędkość. W kolejnych stanach pojazd może zmienić położenie, przyspieszyć, zwolnić lub prędkości nie zmieniać.
 \newline
 \newline
 Kolejną trudnością w problemie, jest unikanie kolizji. Dla wszystkich możliwość algorytm planowania, powinien usunąć wszystkie możliwości kolizji na jednym pasie oraz przy przekraczaniu przez skrzyżowanie.
+
+\section{Cel}
+
+Celem pracy jest opracowanie metody planującej ruch drogowy na skrzyżowaniach dróg wielopasmowych przy użyciu zmodyfikowanego algorytmu A*. Wynikiem rozwiązania jest szczegółowy opis, który dokladnie planuje ruch każdego z samochodów w celu najszybszego i bezpiecznego opuszczenia skrzyżowania. System zapewnia unikanie kolizji oraz optymalny dojazd do celu pojazdów na zadanej sieci skrzyżowań.
 
 \section{Struktura pracy}
 TODO

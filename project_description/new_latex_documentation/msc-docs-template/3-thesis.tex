@@ -1,11 +1,14 @@
 \chapter{Teza} \label{chap:thesis}
 
-\section{Cel}
 
-W opracowanym rozwiązaniu wykonany został system plaujący ruch drogowy na skrzyżowaniach dróg wielopasmowych przy użyciu zmodyfikowanego algorytmu A*. Wynikiem rozwiązania jest szczegółowy opis, który dokładnie planuje ruch każdego z samochodów w celu najszybszego i bezpiecznego opuszczenia skrzyżowania. System zapewnia unikanie kolizji oraz optymalny dojazd do celu pojazdów na zadanej sieci skrzyżowań.
+\section{Wprowadzenie}
 
+W pracy rozwiązywany jest problem planowania ruchu na skrzyżowaniach dróg wielopasmowych. Podejście przestawione w pracy bierze pod uwagę bezpieczeństwo, unikanie kolizji oraz zapewnia szybkie opuszczenie skrzyżowania przez pojazdy. Realizowane jest to, poprzez przedstawienie każdemu z pojazdów dokładnego planu opisującego jak ma się poruszać po drodze. Rozwiązanie jest jest szybsze od podejścia ze światłami drogowymi, ponieważ usunięte jest opóźnienie spowodowane światełm pomarańczowym na każdym ze szkrzyżowań. Użyty w pracy algorytm A* opiera się o stan opisuący położenie wszystkich samochodów na sieci skrzyżowań. Algorytm zapewnia unikanie kolizji w czasie rzeczywistym - w niektórych rozwiązaniach kolizje usuwane są przez kilkakrotne uruchamianie algorytmu.
 \section{Planowanie ruchu przy użyciu modyfikacji A*}
 
+Zastosowanie metody planującej ruch drogowy przy użyciu zmodyfikowanej wersji algorytmu A* pozwala na bezpieczne i szybkie zaplanowanie ruchu drogowego dla pojazdów na sieci skrzyżowań.
+\newline
+\newline
 Rozwiązanie, mając podane położenie samochodów na sieci skrzyżowań liczy plan dla każdego z pojazdów. W planie znajdują się informacje jak szybko pojazd powinien jechać, kiedy powinien zwolnić lub przyspieszyć aby ominąć kolizję.
 \newline
 \newline
