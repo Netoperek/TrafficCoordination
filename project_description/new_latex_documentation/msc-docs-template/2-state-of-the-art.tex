@@ -23,7 +23,7 @@
   Planowanie ruchu zawsze wiąże się z rozmiarem problemu. Dla koordynacji ruchu na skrzyżowaniach rozmiarem problemu jest rozmiar dróg, ich liczba oraz liczba przecięć między nimi, a także parametry i liczba pojazdów. Z planowaniem ruchu wiąże się trudność jaką jest szybkość zmian w środowisku. W przypadku nie zastosowania się pojazdu do planu, algorytm musi natychmiast wyliczyć poprawiony plan. System planujący ruch drogowy powinien być więc systemem czasu rzeczywistego. Cechą takich systemów jest rownloegłość w czasie zmian w środowisku oraz prowadzonych przez system obliczeń opierjących się o stan środowiska. Algorytmy heurystyczne są najczejściej stosowane w często zmieniających się środowiskach.
 \newline
 \indent
-Popolarnym modelem reprezentującym sieci dróg jest graf. Wierzchołki grafu to skrzyżowania dróg. Krawędzie natomiast reprezentują odległości między skrzyżowaniami, za pomocą wag. Często stosowanym algorytmem do znajdowania najkrótszej ścieżki w grafie jest algorytm Dijkstry. O rzędzie złożoności algorytmu decyduje implementacja kolejki. W przypadku implementacji kolejki poprzez kopiec złożoność algortmu to:
+Popularnym modelem reprezentującym sieci dróg jest graf. Wierzchołki grafu to skrzyżowania dróg. Krawędzie natomiast reprezentują odległości między skrzyżowaniami, za pomocą wag. Często stosowanym algorytmem do znajdowania najkrótszej ścieżki w grafie jest algorytm Dijkstry \cite{shaikh2013agv}, \cite{ando2003autonomous}, \cite{huang2013improved}, \cite{gazis1997optimal}, \cite{broxmeyer1994vehicle}, \cite{kanoh2007dynamic}. O rzędzie złożoności algorytmu decyduje implementacja kolejki. W przypadku implementacji kolejki poprzez kopiec złożoność algortmu to:
 \newline
 \newline
 \begin{math}
@@ -36,7 +36,7 @@ gdzie \begin{math}E\end{math} to liczba krawędzi grafu, a \begin{math}V\end{mat
 \newline
 \newline
 \indent
-  Algorytmem heurystycznym stosowanym do szukania najkrótszej ścieżki jest Algorytm A*. Złożoność czasowa algorytmu jest zależna od zastosowanej funkcji heurystyki. Jeśli funkcja heurystyki spełnia następujący warunek:
+  Algorytmem heurystycznym stosowanym do szukania najkrótszej ścieżki jest Algorytm A* \cite{munteanmobile}, \cite{oleiwi2014modified}, \cite{wojnicki2015robust}, \cite{elhalawany2013modified}, \cite{dechter1985generalized}. Złożoność czasowa algorytmu jest zależna od zastosowanej funkcji heurystyki. Jeśli funkcja heurystyki spełnia następujący warunek:
 \newline
 \newline
 \begin{math}
@@ -46,9 +46,8 @@ gdzie \begin{math}E\end{math} to liczba krawędzi grafu, a \begin{math}V\end{mat
 \newline
 gdzie \begin{math}h*\end{math} jest optymalną heurystyką - liczba przeszukanych węzłów rośnie wielomianowo w stosunku do długości rozwiązania.
 \newline
-\newline
 \indent
-W artykule \cite{wojnicki2015robust} autorzy przedstawili algorytm A* w celu planowania wielowymiarowego. W celu przybliżenia złożoności jako przykładowe środowisko podana została dwuwymiarowa, dyskretna przestrzeń kwadratowa o boku 7. Pojazdy mogą zajmować wówczas 49 pozycji oznaczonych współrzednymi \begin{math}(x, y)\end{math}. Dla jednego pojazdu, możliwość zajmowanych pozycji wynosi \begin{math}(7 * 7) = 49 \end{math}. Dla dwóch pojazdów jest to już \begin{math}(7 * 7) * (7 * 7 - 1) = 2352 \end{math}. Aktualny stan jest wówczas opisywany jako \begin{math}(x1, y1, x2, y2)\end{math}. Złożoność rośnie wraz z przetrzymywaniem kolejnych informacji na temat pojazdów, czyli  na przykład prędkośći czy przyspieszenia.
+W artykule \cite{wojnicki2015robust} autorzy przedstawili algorytm A* w celu planowania wielowymiarowego. W celu przybliżenia złożoności jako przykładowe środowisko podana została dwuwymiarowa, dyskretna przestrzeń kwadratowa o boku 7. Pojazdy mogą zajmować wówczas 49 pozycji oznaczonych współrzednymi \begin{math}(x, y)\end{math}. Dla jednego pojazdu, możliwość zajmowanych pozycji wynosi \begin{math}(7 * 7) = 49 \end{math}. Dla dwóch pojazdów jest to już \begin{math}(7 * 7) * (7 * 7 - 1) = 2352 \end{math}. Aktualny stan jest wówczas opisywany jako \begin{math}(x1, y1, x2, y2)\end{math}. Złożoność rośnie wraz z przetrzymywaniem kolejnych informacji na temat pojazdów, czyli  na przykład prędkości czy przyspieszenia.
 \newline
 \indent
 Autorzy artykułu \cite{leena2014survey} zwrócili uwagę na podział planowania na globalne i lokalne. W podejśćiu globalnym dla algorytmu musi być znane całe środowisko co wiąże się z dużym obciążeniem pamięciowym - algorytm przechowuje informacje na temat stanów wszystkich pojazdów na skrzyżowaniach. W podejśćiu lokalnym środowisko dla pojedyńczego pojazdu nie jest znane, algorytm poznaje je w czasie rzeczywistym. W przedstawionym rozwiązaniu zastosowane jest podejście globalne.

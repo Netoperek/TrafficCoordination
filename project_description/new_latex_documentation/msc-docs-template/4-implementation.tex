@@ -58,14 +58,14 @@ Koniecznym elementem w koordynacji ruchu na skrzyżowaniach wielu pojazdów jest
 \item Unikanie kolizji na skrzyżowaniach
 \end{enumerate}
 Implementacja unikania kolizji pojazdów na tym samym pasie polega na policzeniu obszarów dla samochodów znajdujących się na tym samym pasie, który będą one obejmowały w jednym kroku czasowym wraz z uwzględnieniem parametru bezpieczeństwa. Jeżeli obszary dwóch samochdów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego. Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykład unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce. Stan pierwszy jest stanem startowy. Kolejno w stanie drugim, pojazd ostatni znajdujący się najdalej od skrzyżowania rusza i zmienia swoją pozycję o jeden do przodu. Reszta pojazdów stoi i czeka na miejsce. Następnie w stanie trzecim kolejny pojazd widząc, że ma miejsce porusza się o jedną pozycję do przodu. W stanie następnym na miejsce czeka jedynie samochód pierwszy - reszta zmienia pozycję. W kroku piątym i szóstym pojazdy mając miejsce, swobodnie opuszczają skrzyżowanie.
-\begin{figure}
+\begin{figure}[H]
     \includegraphics[width=1.0\textwidth]{collision-avoidance-lane.png}
   \caption{Unikani kolizji na pasie}
   \label{collision-avoidance-lane}
 \end{figure}
 \newpage
 Unikanie kolizji na skrzyżowaniach polega na eliminacji stanów, w których conajmniej dwa auta przekroczyły w jednym kroku czasowym to samo skrzyżowanie. Metoda 'neighbours' także nie zwróci takich stanów. Na rysunku \ref{collision-avoidance-crossroads} przedstawiony jest przykład unikania kolizji dla dwóch samochodów na prostym skrzyżowaniu. Samochód z kolorem ciemnozielonym przyspieszył o dwie jedostki i zmienił pozycję o dwie jednostki do przodu. Samochód z kolorem jasnozielonym przyspieszył natomiast o jedną jednostkę i zmienił pozycję o jedną jednostkę do przodu w celu uniknięcia kolizji. W algorytmie usunięty został stan, w którym oba pojazdy przyspieszyły o dwie jednostki. Został natomiast wybrany stan gdzie jeden z samochodów przyspieszył o dwie jednostki, a drugi o jedną jednostką, ponieważ prowadzi to, do najszybszego opuszczenia skrzyżowania przez pojazdy.
-\begin{figure}
+\begin{figure}[H]
     \includegraphics[width=1.0\textwidth]{collision-avoidance-crossroads.png}
   \caption{Unikanie kolizji na skrzyżowaniu}
   \label{collision-avoidance-crossroads}
@@ -258,7 +258,7 @@ W module znajduje się także dodatkowe sprawdzanie kolizji. Jeżeli kolizja wys
 \newline
 \indent
 Na rysunku \ref{graphical-framework} zaprezentowane jest działanie modułu graficznego dla skrzyżowania czterech dróg i ośmiu pojazdów. Na 11 elemencie rysunku widać, że wszystkie samochody opuściły wszystkie skrzyżowania po 11 krokach czasowych.
-\begin{figure}
+\begin{figure}[H]
     \includegraphics[width=1.0\textwidth]{graphical_module_1.png}
   \caption{Wynik działania modułu graficznego}
   \label{graphical-framework}
