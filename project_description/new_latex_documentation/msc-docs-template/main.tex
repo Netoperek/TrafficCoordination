@@ -33,6 +33,12 @@
 %\newcommand{\rev}[1]{\textcolor{red}{#1}}
 \newcommand{\rev}[1]{#1}
 \newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\mychapter}[2]{
+    \setcounter{chapter}{#1}
+    \setcounter{section}{0}
+    \chapter*{#2}
+    \addcontentsline{toc}{chapter}{#2}
+}
 
 \algnewcommand\And{\,\textbf{and}\,}
 \algnewcommand\Or{\,\textbf{or}\,}
