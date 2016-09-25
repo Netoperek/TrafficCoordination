@@ -14,7 +14,7 @@ Samochody na drogach są opisane przez:
 \item unikatowy numer samochodu
 \item unikatowy numer drogi, na której pojazd się znajduje
 \item numer pozycji na drodze, na której samochód się znajduje
-\item prędkość początkowa
+\item prędkość początkową
 \item numer pozycji docelowej na drodze - punkt za ostatnim skrzyżowaniem
 \end{itemize}
 Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi na jeden krok czasowy.
@@ -23,7 +23,7 @@ Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu 
 W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden kroku czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu, z tego względu, że wraz ze wzrostem ilośći możliwych przyspieszeń rośnie ilość możliwość stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
 \newline
 \indent
-Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr prędkości, czyli liczba pozyji będąca dystansem trzymanym między pojazdami.
+Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr bezpieczeństwa, czyli liczba pozyji będąca dystansem trzymanym między pojazdami. W rozwiązaniu brane są pod uwage pomyłki pojazdów, które polegają na niezastosowaniu się do planu. Dzięki parametrowi bezpieczeństwa maleje prawdopodobieństwo kolizji, kiedy taka pomyłka będzie miała miejsce.
 
 \section{Zmodyfikowany algorytm A*}
 
@@ -33,7 +33,7 @@ Zaprezentowany w tej pracy zmodyfikowanym algorytmu A* jest oparty na stanach, g
 Zrealizowany Algorytm A* jest generyczny. Do algorytmu przekazujemy klasę reprezentującą dowolny stan. Klasa musi implementować metodę 'neighbours', która zwraca stany sąsiednie dla danej instancji stanu. Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego stanu.
 \newline
 \indent
-Modyfikacja róźni się od innych tym, że stany sąsiednie są liczone dynamicznie. Algorytm nie ma z góry podnaego celu. Dla przykładu w przeszukiwaniu ścieżki w grafie celem jest podany wierzchołek końcowy. Algorytm przyjmuje funkcje wygranej, która określa warunki końca algorytmu. W przedstawionej pracy warunkiem końca jest przekroczenie przez wszystkie pojazdy skrzyżowań.
+Modyfikacja róźni się od innych tym, że stany sąsiednie są liczone dynamicznie. Algorytm nie ma z góry podanego celu. Dla przykładu w przeszukiwaniu ścieżki w grafie celem jest podany wierzchołek końcowy. Algorytm przyjmuje funkcje wygranej, która określa warunki końca algorytmu. W przedstawionej pracy warunkiem końca jest przekroczenie przez wszystkie pojazdy skrzyżowań, a takich stanów jest wiele i nie są znane na początku działania.
 
 \section{Stan w opracowanym rozwiązaniu dla algorytmu A*}
 
@@ -245,7 +245,7 @@ Największym obciążeniem algorytmu jest unikanie kolizji. Zajmuje ono około 6
 Powyższe stany eliminowane są z rozwiązania co zapewnia unikanie kolizji.
 \newline
 \indent
-Dla zbioru przyspieszeń \{-2, -1, 0, 1, 2\} dla każdego pojazdu powstaje 5 stanów. Mając na skrzyżowaniu 12 pojazdów mamy 244140625 możliwości w jednym kroku czasowym. Możliwości przypadające na krok czasowy są silnie związane z czasem wykonania algorytmu. Wraz ze wzrostem pojazdów na skrzyżowaniach, a co za tym idzie dodatkowych możliwośći, czas wykonania rośnie ekspotencjalnie.
+Dla zbioru przyspieszeń \{-2, -1, 0, 1, 2\} dla każdego pojazdu powstaje 5 stanów. Mając na skrzyżowaniu 12 pojazdów mamy 244140625 możliwości w jednym kroku czasowym. Możliwości przypadające na krok czasowy są silnie związane z czasem wykonania algorytmu. Wraz ze wzrostem liczby pojazdów na skrzyżowaniach, a co za tym idzie dodatkowych możliwości, czas wykonania rośnie ekspotencjalnie.
 \section{Reprezentacja graficzna wyników}
 
 W celu graficznej reprezentacji wyników zaimplementowany został moduł graficzny. Działanie modułu graficznego oparte jest na rysowaniu grafów z wykorzystaniem biblioteki Graphviz oraz jej implementacji w języku Ruby. Skrzyżowanie jest reprezentowane za pomocą grafu. Wierzchołkami grafu są poszczególne odcinki dróg. Krawędziami grafu są połączenia pomiędzy odcinkami. Samochody poruszające się po tej samej drodze są zaznaczone grubszym obwodem oraz mają ten sam kolor. Samochody można rozróżnić poprzez unikatowy numer na nich napisany. Kolejne kroki czasowe reprezentowane są poprzez następne grafy z kolejnymi ułożeniami samochodów. Efektem końcowym jest stworzony GIF z następujących po sobie grafów przy użyciu biblioteki 'rmagick' dla języka Ruby.

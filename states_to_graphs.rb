@@ -11,7 +11,6 @@ MISTAKE_DISTANCE = 1
 CARS_MISTAKES_AT_ONCE = 2
 PLUS_MAX_ACCELERATION = 1
 GRAPH_TYPE = 'neato'
-PROBABILITY = 0.01
 
 unless ARGV[0] && ARGV[1]
   puts 'USAGE: ruby states_to_graphs.rb traffic_coordination_system/inputs/start_states_file traffic_coordination_system/inputs/roads_file'
@@ -359,16 +358,16 @@ states = JSON.parse(file)
 states.each_with_index do |cars_states, index|
   next if index == 0
 
-  make_mistake = (0..100).to_a.sample
-  break unless make_mistake == 25
+  cars_states.each_with_index do |car_state, car_nr|
+    make_mistake = (0..100).to_a.sample
 
-  i = (0..cars_states.length-1).to_a.sample
-  car_state = cars_states[i]
-  car_state["position"] += MISTAKE_DISTANCE
-
-  for idx in index+1..states.length-1
-    car_state = states[idx][i]
-    car_state["position"] += MISTAKE_DISTANCE
+    if make_mistake == 8
+      car_state["position"] += MISTAKE_DISTANCE
+      for idx in index+1..states.length-1
+        car_state = states[idx][car_nr]
+        car_state["position"] += MISTAKE_DISTANCE
+      end
+    end
   end
 end
 
