@@ -7,10 +7,11 @@ require 'ruby-graphviz'
 require 'pry'
 
 PENDWIDTH = 30.0
-MISTAKE_DISTANCE = 4
+MISTAKE_DISTANCE = 1
 CARS_MISTAKES_AT_ONCE = 2
 PLUS_MAX_ACCELERATION = 1
 GRAPH_TYPE = 'neato'
+PROBABILITY = 0.01
 
 unless ARGV[0] && ARGV[1]
   puts 'USAGE: ruby states_to_graphs.rb traffic_coordination_system/inputs/start_states_file traffic_coordination_system/inputs/roads_file'
@@ -357,6 +358,10 @@ file = File.read('core_out.json')
 states = JSON.parse(file)
 states.each_with_index do |cars_states, index|
   next if index == 0
+
+  make_mistake = (0..100).to_a.sample
+  break unless make_mistake == 25
+
   i = (0..cars_states.length-1).to_a.sample
   car_state = cars_states[i]
   car_state["position"] += MISTAKE_DISTANCE
