@@ -60,6 +60,7 @@ class StatesVertex
 
   def merge_road_occupation(road_areas, start_pos, end_pos, car_state)
     direction = car_state[:direction]
+    end_pos += SAFETY
 
     if direction == -1
       tmp = start_pos

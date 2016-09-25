@@ -8,6 +8,7 @@ unless ARGV[0] && ARGV[1] && ARGV[2]
   exit
 end
 
+
 cars_count = ARGV[1].to_i
 states_count = ARGV[2].to_i
 
@@ -50,6 +51,8 @@ def random_car_pos(car_nr, pos_taken)
     end
     if pos_taken[road_nr][pos].nil? && !cuts_taken(pos_taken, road_nr, pos)
       pos_taken[road_nr][pos] = car_nr
+      pos_taken[road_nr][pos+1] = -1 
+      pos_taken[road_nr][pos-1] = -1 if pos > 0 && pos_taken[road_nr][pos-1].nil?
       break
     end
   end
@@ -68,7 +71,7 @@ def save_cars_pos(pos_taken, file_nr)
     end
 
     road.each_with_index do |car_nr, pos|
-      next if car_nr.nil?
+      next if car_nr.nil? || car_nr == -1
       hash = {
         :car_nr => car_nr,
         :current_road_nr => road_nr,
