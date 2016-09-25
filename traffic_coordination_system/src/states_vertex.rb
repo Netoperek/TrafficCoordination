@@ -47,6 +47,7 @@ class StatesVertex
     old_state = old_state.first.state
 
     cuts = roads_data.select { |ele| ele[:road_nr] == car_state[:current_road_nr] }
+    return [] unless cuts.first
     cuts = cuts.first[:cuts]
     new_position = car_state[:position]
     old_position = old_state[:position]

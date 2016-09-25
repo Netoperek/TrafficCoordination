@@ -6,7 +6,7 @@ require 'json'
 require 'ruby-graphviz'
 require 'pry'
 
-PENDWIDTH = 30.0
+PENDWIDTH = 20.0
 MISTAKE_DISTANCE = 1
 CARS_MISTAKES_AT_ONCE = 2
 PLUS_MAX_ACCELERATION = 1
@@ -290,6 +290,7 @@ def states_collides(states_before, states_after)
     old_position = old_car_state['position']
 
     cuts = roads_data_states.select { |ele| ele[:road_nr] == new_car_state['current_road_nr'] }
+    return false unless cuts.first
     cuts = cuts.first[:cuts]
     cuts = cuts.select do |ele|                                                                                 
       (new_position >= ele[:crossroad] && old_position < ele[:crossroad] && new_car_state['direction'] == 1) || \
