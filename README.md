@@ -19,6 +19,7 @@ The goal of this project is to use A Start algorithm in order to solve the follo
     - final position
   + each car can accelerate within the following values {-2, -1, 0, 1, 2} (depends on the configuration)
 1. The algorithm looks for the situation where all of the cars have reach their final positions
+1. Cars move on WITHOUT collisions
 
 ## Documentation
 
