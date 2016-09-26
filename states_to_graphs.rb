@@ -360,7 +360,7 @@ states.each_with_index do |cars_states, index|
   next if index == 0
 
   cars_states.each_with_index do |car_state, car_nr|
-    make_mistake = (0..100).to_a.sample
+    make_mistake = (0..500).to_a.sample
 
     if make_mistake == 8
       car_state["position"] += MISTAKE_DISTANCE

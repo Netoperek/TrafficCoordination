@@ -45,17 +45,20 @@ Zgodnie z wcześniej opisanymi założeniami dla skrzyżowania czterech dróg pr
 \newline
 Wykresy przedstawiające wyniki na skrzyżowaniu czterech dróg zaprezentowane są na rysunkach \ref{execution_time_10_cars_4_roads}, \ref{execution_time_12_cars_4_roads} oraz \ref{four-roads-crossroads-timesteps}
 \begin{figure}[H]
-  \includegraphics[width=1.0\textwidth]{execution_time_10_cars_4_roads.png}
+  \centering
+  \includegraphics[width=0.8\textwidth]{execution_time_10_cars_4_roads.png}
   \caption{Wykres zależności czasu wykonania programu od liczby pojazdów (dla 2-10 pojazdów)}
   \label{execution_time_10_cars_4_roads}
 \end{figure}
 \begin{figure}[H]
-  \includegraphics[width=1.0\textwidth]{execution_time_12_cars_4_roads.png}
+  \centering
+  \includegraphics[width=0.8\textwidth]{execution_time_12_cars_4_roads.png}
   \caption{Wykres zależności czasu wykonania programu od liczby pojazdów (dla 12 pojazdów)}
   \label{execution_time_12_cars_4_roads}
 \end{figure}
 \begin{figure}[H]
-  \includegraphics[width=1.0\textwidth]{4_roads_timesteps_2.png}
+  \centering
+  \includegraphics[width=0.8\textwidth]{4_roads_timesteps_2.png}
   \caption{Wykres zależności kroków czasowych od liczby pojazdów}
   \label{four-roads-crossroads-timesteps}
 \end{figure}
@@ -65,34 +68,82 @@ Wykresy przedstawiające wyniki na skrzyżowaniu czterech dróg zaprezentowane s
 Dla skrzyżowania ośmiu dróg też zostało przeprowadzone 180 uruchomień.
 \newline
 \newline
-Wykresy przedstawiające wyniki na skrzyżowaniu czterech dróg zaprezentowane są na rysunkach \ref{execution_time_10_cars_8_roads}, \ref{execution_time_12_cars_8_roads} oraz \ref{eight-roads-crossroads-timesteps}
+Wykresy przedstawiające wyniki na skrzyżowaniu ośmiu dróg zaprezentowane są na rysunkach \ref{execution_time_10_cars_8_roads}, \ref{execution_time_12_cars_8_roads} oraz \ref{eight-roads-crossroads-timesteps}
 \begin{figure}[H]
-    \includegraphics[width=1.0\textwidth]{execution_time_10_cars_8_roads.png}
+  \centering
+  \includegraphics[width=0.8\textwidth]{execution_time_10_cars_8_roads.png}
   \caption{wykres zależności czasu wykonania programu od liczby pojazdów (dla 2-10 pojazdów)}
   \label{execution_time_10_cars_8_roads}
 \end{figure}
 \begin{figure}[H]
-    \includegraphics[width=1.0\textwidth]{execution_time_12_cars_8_roads.png}
+  \centering
+  \includegraphics[width=0.8\textwidth]{execution_time_12_cars_8_roads.png}
   \caption{wykres zależności czasu wykonania programu od liczby pojazdów (dla 12 pojazdów)}
   \label{execution_time_12_cars_8_roads}
 \end{figure}
 \begin{figure}[H]
-    \includegraphics[width=1.0\textwidth]{8_roads_timesteps_2.png}
+  \centering
+  \includegraphics[width=0.8\textwidth]{8_roads_timesteps_2.png}
   \caption{Wykres zależności kroków czasowych od liczby pojazdów}
   \label{eight-roads-crossroads-timesteps}
 \end{figure}
 
+\section{Wnioski z pomiarów na skrzyżowaniach czterech i ośmiu dróg}
+
+Liczba samochodów ogranicza metodę
+\newline
+\newline
+Czas wykonania rośnie ekspotencjalnie do liczby samochodów na skrzyżowaniach
+\newline
+\newline
+Im więcej skrzyżowań tym czas wykonania jest większy
+\newline
+\newline
+Dla 12 pojazdów czas wykonania przekracza nawet 25 min
+\newline
+\newline
+Liczba kroków czasowych, po których wszystkie samochody opuszczą skrzyżowanie rośnie liniowo do liczby samochodów znajdujących się na skrzyżowaniu.
+\newline
+\newline
+Liczba kroków czasowych na skrzyżowaniu ośmiu dróg jest mniejsza niż na skrzyżowaniu ośmiu dróg. Spowodowane jest to tym, że na skrzyżowaniu czterech dróg auta stoją jedno za drugim na pasach, bez wolnej przestrzeni przed sobą. W porównaniu do skrzyżowaniu ośmiu dróg, auta mogą swobodniej poruszać się na pasie i częściej wymijają kolizję na skrzyżowaniu.
+
 \section{Porównanie wyników z rozwiązaniem ze światłami drogowymi}
 
-W celu zweryfikowania szybkości podejścia z wykorzystaniem zmodyfikowanej wersji A* pomiary zostały porównane z rozwiązaniem polegającym na optymalizacji świateł drogowych przedstawionym w pracy [TUTAJ CYTAT PRACY SEBASTIANA].
+W celu zweryfikowania szybkości podejścia z wykorzystaniem zmodyfikowanej wersji A* pomiary zostały porównane z rozwiązaniem polegającym na optymalizacji świateł drogowych przedstawionym w pracy [TUTAJ CYTAT PRACY SEBASTIANA]. 
 \newline
 \newline
-Wykonując pomiary uzgodnione zostały wspólne warunki w obu rozwiązanich tak, aby można było w krokach czasowych porównać oba rozwiązania.
+Praca oparta jest o kroki czasowe. Drogi są dyskretne i są mierzone w odcinkach. Prędkość mierzona jest w ilości odcinków drogi na krok czasowy.
+\newline
+\newline
+Rozwiązania różnią się modelami danych, które reprezentują skrzyżowania oraz znajdujące się na nich pojazdy. W jednym rozwiązaniu położenie i droga aut jest określona za pomocą grafu oraz wierzchołków grafu, przez które auta będą przechodzić. W opisywanym w tej pracy rozwiązaniu drogi są opisywane poprzez ich rozmiar oraz przecięcia z innymi drogami. Położenia samochodów natomiast poprzez numer drogi oraz numer odcinka drogi na której się znajdują.
+\newline
+\newline
+Wykonując pomiary uzgodnione zostały wspólne warunki w obu rozwiązanich tak, aby można było porównać rozwiązania. Porównywane są korki czasowe, po których wszystkie auta opuszczą skrzyżowanie. Wspólne warunki są następujące:
+\begin{itemize}
+\item Maksymalna prędkość samochodów wynosi 4 odcinki drogi na krok czasowy
+\item Wartości przyspieszeń pojazdów są następujące: \{-1, 0, 1\}
+\item Losowane położenia pojazdów w celu wykonania 30 pomiarów są wykonywane w taki sposób, aby żaden pojazd nie znajdował się za skrzyżowaniem
+\item Rozwiązanie kończy obliczenia, kiedy wszystkie pojazdy znajdą się za skrzyżowaniem
+\end{itemize}
+Pomiary zostały wykonane na skrzyżowaniu ośmiu dróg dla następujących liczb pojazdów \{2, 4, 6, 8, 10 ,12\}
 \newline
 \newline
 Wykres z wynikami pokazany jest na rysunku \ref{comparison}
-\begin{figure}[ht]
+\begin{figure}[H]
   \includegraphics[width=1.0\textwidth]{8_roads_comparison_2.png}
   \caption{Porównanie rozwiązania z użyciem A* ze światłami drogowymi na skrzyżowaniu ośmiu dróg}
   \label{comparison}
 \end{figure}
+
+\section{Wnioski z porównania pomiarów rozwiązania A* oraz świateł drogowych}
+
+Rozwiązanie wypada lepiej na tle rozwiązania ze światłami sekwencyjnymi oraz z ich optymalizacjami.
+\newline
+\newline
+Zgodnie z przedstawioną tezą, przepustowość na skrzyżowaniach jest lepsza w rozwiązaniu A* w porównaniu do świateł.
+\newline
+\newline
+Rozwiązanie korzystające z algorytmu A* dla 12 pojazdów nie przekracza 15 kroków czasowych. Dla świateł zoptymalizowanych przekracza 20 kroków czasowych, a dla świateł sekwencyjnych przekracza 25 kroków czasowych.
+\newline
+\newline
+Przedstawione w pracy rozwiązanie zoaszczędza 5-10 kroków na jednym skrzyżowaniu dla 12 pojazdów. Dla wielu skrzyżowań można zaoszczędzić dużo czasu.

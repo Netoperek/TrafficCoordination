@@ -27,7 +27,7 @@ Do modelu przekazać należy także maksymalną prędkość, którą wszystkie s
 
 \section{Zmodyfikowany algorytm A*}
 
-Zaprezentowany w tej pracy zmodyfikowanym algorytmu A* jest oparty na stanach, gdzie pojedyńczym stanem jest rozłożenie samochodów na drogach wraz z ich prędkościami. Algorytm zaczynając od zadanego stanu początkowego analizuje możliwe stany sąsiednie i wybiera najszybszą ścieżkę kierując się funkcją heurystyki. Ścieżka prowadzi do określonego celu. W przypadku opracowanego rozwiązania, celem jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
+Zaprezentowany w tej pracy zmodyfikowanym algorytmu A* jest oparty na stanach, gdzie pojedyńczym stanem jest rozłożenie samochodów na drogach wraz z ich prędkościami. Algorytm zaczynając od zadanego stanu początkowego analizuje możliwe stany sąsiednie i wybiera najszybszą ścieżkę kierując się funkcją heurystyki. Ścieżka prowadzi do określonego celu. W przypadku opracowanego rozwiązania, celem jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują. Przez ostatnie skrzyżowanie, rozumiane jest skrzyżowanie aktualnej drogi z ostatnią drogą spośród zbioru dróg, które się z aktualną droga krzyżują.
 \newline
 \indent
 Zrealizowany Algorytm A* jest generyczny. Do algorytmu przekazujemy klasę reprezentującą dowolny stan. Klasa musi implementować metodę 'neighbours', która zwraca stany sąsiednie dla danej instancji stanu. Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego stanu.
