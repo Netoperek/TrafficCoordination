@@ -107,6 +107,56 @@ Liczba kroków czasowych, po których wszystkie samochody opuszczą skrzyżowani
 \newline
 Liczba kroków czasowych na skrzyżowaniu ośmiu dróg jest mniejsza niż na skrzyżowaniu ośmiu dróg. Spowodowane jest to tym, że na skrzyżowaniu czterech dróg auta stoją jedno za drugim na pasach, bez wolnej przestrzeni przed sobą. W porównaniu do skrzyżowaniu ośmiu dróg, auta mogą swobodniej poruszać się na pasie i częściej wymijają kolizję na skrzyżowaniu.
 
+\section{Prawdopodobieństwo kolizji}
+Zostały przeprowadzone pomiary prawdopodobieństwa kolizji w przypadku pomyłek pojazdów.
+\newline
+\newline
+Pomyłka polega na niezastosowaniu się pojazdu do planu
+\newline
+\newline
+Przeprowadzone zostały symulacje pomyłek pojazdów - w jednym kroku czasowym, każdy samochód myli się z określonym prawdopodobieństem.
+\newline
+\newline
+Zmierzone zostało prawdopodobieństwo kolizji w razie pomyłek pojazdów z następującymi prawdopodobieństwami \{0.001, 0.005, 0.05\}
+\newline
+\newline
+Pod uwage wzięty został parametr bezpieczeństwa
+\newline
+\newline
+Pomiary zostały wykonane dla skrzyżowania 8 dróg, na których znajdowało się 10 pojazdów. Program uruchomiony został 30 razy dla parametru bezpieczeństwa równego 0 oraz 30 razy dla parametru bezpieczeństwa równego 1.
+\newline
+\newline
+Wyniki z parametrem bezpieczeństwa równym 0 zareprezentowane są w tabeli \ref{firstCollision}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+      \hline 
+      Prawdopodobieństwo pomyłki & 0.001 & 0.005 & 0.01 \\
+      \hline
+      Prawdopodobieństwo kolizji & 0.2 & 0.27 & 0.54 \\
+      \hline
+    \end{tabular} 
+    \caption{Prawdopodobieństwo kolizji z parametrem bezpieczeństwa równym 0}
+    \label{firstCollision}
+\end{table}
+Wyniki z parametrem bezpieczeństwa równym 1 zareprezentowane są w tabeli \ref{secondCollision}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+      \hline 
+      Prawdopodobieństwo pomyłki & 0.001 & 0.005 & 0.01 \\
+      \hline
+      Prawdopodobieństwo kolizji & 0 & 0 & 0.24 \\
+      \hline
+    \end{tabular} 
+    \caption{Prawdopodobieństwo kolizji z parametrem bezpieczeństwa równym 0}
+    \label{secondCollision}
+\end{table}
+Parametr bezpieczeństwa niweluje prawdopodobieństwo kolizji dla małych prawdopodobieństw pomyłki do zera.
+\newline
+\newline
+Dla prawdopodobieństwa pomyłki równego 0.1, parametr bezpieczeństwa nie zapobiega całkowicie kolizjom.
+
 \section{Porównanie wyników z rozwiązaniem ze światłami drogowymi}
 
 W celu zweryfikowania szybkości podejścia z wykorzystaniem zmodyfikowanej wersji A* pomiary zostały porównane z rozwiązaniem polegającym na optymalizacji świateł drogowych przedstawionym w pracy [TUTAJ CYTAT PRACY SEBASTIANA]. 
@@ -134,9 +184,6 @@ Wykres z wynikami pokazany jest na rysunku \ref{comparison}
   \caption{Porównanie rozwiązania z użyciem A* ze światłami drogowymi na skrzyżowaniu ośmiu dróg}
   \label{comparison}
 \end{figure}
-
-\section{Wnioski z porównania pomiarów rozwiązania A* oraz świateł drogowych}
-
 Rozwiązanie wypada lepiej na tle rozwiązania ze światłami sekwencyjnymi oraz z ich optymalizacjami.
 \newline
 \newline
