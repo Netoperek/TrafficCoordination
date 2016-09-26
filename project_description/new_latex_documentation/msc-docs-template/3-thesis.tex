@@ -3,7 +3,7 @@
 
 \section{Wprowadzenie}
 
-W pracy rozwiązywany jest problem planowania ruchu na skrzyżowaniach dróg wielopasmowych. Rozwiązanie w porównaniu do wcześniej opisanych podejść, wyróżnia się użyciem algorytmu A* do dokładnego zaplanowania ruchu dla każdego z pojazdów wraz z unikaniem kolizji. Większość przedstawionych rozwiązań opiera się o światła drogowe, co wiąże się z opóźnieniami spowodowanymi oczekiwaniem na świetle pomarańczowym, a także opóźnieniami spowodowanymi na oczekiwaniu na świetle czerwonym, kiedy na drodze poprzecznej nie ma żadnych pojazdów. Implementacja algorytmu A* jest generyczna i opiera się na stanach. Algorytm przyjmuje obiekt klasy implementującej metodę zwracającą stany sąsiednie dla stanu aktualnego. Do algorytmu przekazywane są także warunki końcowe. Algorytm przeszukuje stany korzystając z funkcji heurystyki, aż osiągnięte zostaną warunki końcowe - nie przeszukiwane są wszystkie możliwe stany. Algorytm kończy obliczenia, kiedy znajdzie stany spełniające określone warunki. Algorytm A*, moduł graficzne oraz pozostałe elementy systemu zostałby napisane w języku Ruby.
+W pracy rozwiązywany jest problem planowania ruchu na skrzyżowaniach dróg wielopasmowych. Rozwiązanie w porównaniu do wcześniej opisanych podejść, wyróżnia się użyciem algorytmu A* do dokładnego zaplanowania ruchu dla każdego z pojazdów wraz z unikaniem kolizji. Większość przedstawionych rozwiązań opiera się o światła drogowe, co wiąże się z opóźnieniami spowodowanymi oczekiwaniem na świetle pomarańczowym, a także opóźnieniami spowodowanymi na oczekiwaniu na świetle czerwonym, kiedy na drodze poprzecznej nie ma żadnych pojazdów. Implementacja algorytmu A* jest generyczna i opiera się na stanach. Algorytm przyjmuje obiekt klasy implementującej metodę zwracającą stany sąsiednie dla stanu aktualnego. Do algorytmu przekazywane są także warunki końcowe. Algorytm przeszukuje stany korzystając z funkcji heurystyki, aż osiągnięte zostaną warunki końcowe - nie przeszukiwane są wszystkie możliwe stany. Algorytm kończy obliczenia, kiedy znajdzie stany spełniające określone warunki. Algorytm A*, moduł graficzne oraz pozostałe elementy systemu zostały napisane w języku Ruby.
 
 \section{Planowanie ruchu przy użyciu modyfikacji A*}
 
@@ -13,7 +13,7 @@ Można postawić tezę: zastosowanie metody planującej ruch drogowy przy użyci
 Rozwiązanie przyjmuje położenie samochodów na sieci skrzyżowań oraz informacje na temat dróg jako dane wejściowe. Wynikiem jest dokładny plan poruszania się dla każdego z pojazdów. W planie znajdują się informacje o tym z jaką prędkością pojazd powinien się poruszyć, kiedy zwolnić lub przyspieszyć, aby omijać kolizje.
 \newline
 \indent
-W metodzie, do planowania wykorzystany został algorytm A*. Jest on oparty o działanie na stanach, gdzie pojedynczym stanem jest rozmieszczenie pojazdów na sieci skrzyżowań wraz z ich prędkościami. Stanem sąsiednim dla aktualnego stanu, jest zmiana pozycji pojazdów na sieci skrzyżowań wraz z ich prędkościami. Implementacja algorytmu A* jest generyczna - algorytm przyjmuje dowolny obiekt klasy impementujący metodę 'neighbours', która zwraca stany sąsiednie dla aktualnego stanu. Algorytm działa w sposób dynamiczny. W przypadku działania algorytmu A* na grafie, z góry znane są krawędzie oraz wierzchołki. W opracowanym rozwiązaniu algorytm dynamicznie tworzy sąsiednie stany.
+W metodzie, do planowania wykorzystany został algorytm A*. Jest on oparty o działanie na stanach, gdzie pojedynczym stanem jest rozmieszczenie pojazdów na sieci skrzyżowań wraz z ich prędkościami. Stanem sąsiednim dla aktualnego stanu, jest zmiana pozycji pojazdów na sieci skrzyżowań wraz z ich prędkościami. Implementacja algorytmu A* jest generyczna - algorytm przyjmuje dowolny obiekt klasy implementujący metodę 'neighbours', która zwraca stany sąsiednie dla aktualnego stanu. Algorytm działa w sposób dynamiczny. W przypadku działania algorytmu A* na grafie, z góry znane są krawędzie oraz wierzchołki. W opracowanym rozwiązaniu algorytm dynamicznie tworzy sąsiednie stany.
 \newline
 \indent
 Do algorytmu przekazywana jest funkcja heurystyki, a także warunek końcowy. Dla koordynacji ruchu, warunkiem końcowym jest opuszczenie przez wszystkie pojazdy skrzyżowania. Funkcja heurystyki operuje na danych stanu - każdemu stanowi przypisuje wartość. W przedstawionym rozwiązaniu funkcja heurystyki zwraca najmniejsze wartości dla stanów, w których samochody maksymalnie przyspieszają.
@@ -23,7 +23,7 @@ Do algorytmu przekazywana jest funkcja heurystyki, a także warunek końcowy. Dl
 Do systemu wprowadza się także następujące dane:
 \begin{itemize}
 \item maksymalną prędkość jaką pojazd może osiągnąć
-\item wartośći przyspieszeń pojazdu
+\item wartości przyspieszeń pojazdu
 \item parametr bezpieczeństwa, czyli odległość utrzymywana pomiędzy pojazdami
 \end{itemize}
 System posiadając stan początkowy i powyższe dane, tworzy wszystkie możliwe stany pochodne. Następnie korzystając z funkcji heurystyki algorytm wybiera stany, które prowadzą do najszybszego opuszczenia przez samochody skrzyżowania.
@@ -35,7 +35,7 @@ Rozwiązanie bierze pod uwagę unikanie kolizji pojazdów na skrzyżowaniu oraz 
 Do systemu można przekazać każdy rodzaj skrzyżowania jako listę dróg wraz z ich rozmiarami oraz informację o przecięciach z innymi drogami. Rozwiązanie oparte jest o przestrzeń dyskretną. Drogi mają konkretny rozmiar. Do systemu przekazuje się także listę samochodów, która zawiera informacje o położeniu samochodów na drogach oraz informację o ich prędkościach. System opiera się o działanie na krokach czasowych. Prędkość samochodów wyrażana jest w liczbie odcinków drogi na jeden krok czasowy.
 \newline
 \indent
-W celu wizualizcji stworzny został także moduł graficzny, który jest w stanie zwizualizować każde podane skrzyżowanie. Przedstawia on także w formie zdjęć, zaplanowany ruch samochodów. Każde zdjęcie odpowiada następnemu krokowi czasowemu. Na ostatnim zdjęciu skrzyżowanie jest opuszczone przez wszystkie samochody.
+W celu wizualizacji stworzony został także moduł graficzny, który jest w stanie zaprezentować każde podane skrzyżowanie. Przedstawia on także w formie zdjęć, zaplanowany ruch samochodów. Każde zdjęcie odpowiada następnemu krokowi czasowemu. Na ostatnim zdjęciu skrzyżowanie jest opuszczone przez wszystkie samochody.
 \newline
 \indent
-Wadą metody jest złożoność obliczeniowa, która jest zależna od ilosci samochodów na skrzyżowaniach. Czas trwania programu zależy wykładniczo od ilości pojazdów na skrzyżowaniu. Dla 14 pojazdów znajdującyc się na skrzyżowaniu 8 dróg obliczenia trwają do kilku godzin, co jest znaczącym limitem dla rozwiązania.
+Wadą metody jest złożoność obliczeniowa, która jest zależna od ilości samochodów na skrzyżowaniach. Czas trwania programu zależy wykładniczo od ilości pojazdów na skrzyżowaniu. Dla 14 pojazdów znajdujących się na skrzyżowaniu 8 dróg obliczenia trwają do kilku godzin, co jest znaczącym limitem dla rozwiązania.
