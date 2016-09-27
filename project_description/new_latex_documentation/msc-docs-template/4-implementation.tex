@@ -1,4 +1,4 @@
-\mychapter{4}{Implementacja} \label{chap:implementation}
+\mychapter{4}{4. Implementacja} \label{chap:implementation}
 
 \section{Opis modelu danych do reprezentacji skrzyżowań}
 
@@ -49,6 +49,13 @@ Dodatkowo w przypadku ustawienia maksymalnej prędkości równej 2 pozycje na je
 \newline
 \newline
 W metodzie usuwane są także stany powodujące kolizje, co będzie opisane w następnym rozdziale.
+
+\section{Bezpieczeństwo ruchu i plany wielowariantowe}
+
+W rozwiązaniu zaimplementowane zostało symulowanie pomyłek pojazdów. Pomyłka polega na niezastosowaniu się pojazdu do przekazanego mu planu. Bezpieczeństwo zapewnione jest przez parametr bezpieczeństwa. Parametrem bezpieczeństwa jest liczba odcinków drogi utrzymywana między pojazdami. Wartość parametru można przekazać do systemu.
+\newline
+\indent
+Rozwiązanie zostało uruchamiane na jednym wątku procesora. W przypadku wykorzystania wielu wątków, metoda może wyliczyć plany dla pojazdów przewidując ich pomyłki. Dla przykładu, mając 4 pojazdy na skrzyżowaniu dwóch dróg, załóżmy że w każdym kroku czasowym jeden z nich, myli się z pewnym prawdopodobieństem o jeden odcinek drogi. Wyliczone wcześniej plany, z góry przewidując takie pomyłki - dostarczają nowy, poprawny plan. Takie rozwiązanie korzystając z nowych, poprawionych błędów zmniejsza prawdopodobieństwo kolizji, w razie pomyłek pojazdów.
 
 \section{Unikanie kolizji}
 
