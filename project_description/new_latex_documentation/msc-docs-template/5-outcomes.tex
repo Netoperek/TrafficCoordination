@@ -5,7 +5,7 @@
 W celu zbadania działania systemu przeprowadzone zostały następujące pomiary:
 \begin{itemize}
 \item pomiar czasu wykonania programu w zależności od liczby samochodów na skrzyżowaniu 
-\item pomiar ilości kroków czasowych po których wszystkie samochody opuszczą skrzyżowania w zależnośći od liczby samochodów na skrzżowaniu
+\item pomiar ilości kroków czasowych po których wszystkie samochody opuszczą skrzyżowania w zależności od liczby samochodów na skrzyżowaniu
 \end{itemize}
 
 Pomiary zostały wykonane na dwóch sieciach dróg:
@@ -86,14 +86,14 @@ Wykresy przedstawiające wyniki na skrzyżowaniu ośmiu dróg zaprezentowane są
 Wykresy zależności czasu wykonywania względem liczby samochodów na skrzyżowaniu pokazują ograniczenie metody względem liczby samochodów. Jak widać, czas wykonania rośnie ekspotencjalnie względem liczby samochodów. Dla 12 pojazdów czas wykonania przekracza nawet 25 min. Dla sieci skrzyżowań, na której jest 12 lub więcej samochodów użycie metody jest zbyt czasochłonne.
 \newline
 \indent
-Wykresy zależności liczby kroków czasowych po których wszystkie samochody opuszczą skrzyżowania pokajują, że liczba kroków czasowych rośnie liniowo względem liczby pojazdów. 
+Wykresy zależności liczby kroków czasowych po których wszystkie samochody opuszczą skrzyżowania pokazują, że liczba kroków czasowych rośnie liniowo względem liczby pojazdów. 
 \newline
 \indent
 Liczba kroków czasowych na skrzyżowaniu ośmiu dróg jest mniejsza niż na skrzyżowaniu czterech dróg. Spowodowane jest to tym, że na skrzyżowaniu czterech dróg auta stoją jedno za drugim na pasach, bez wolnej przestrzeni przed sobą. W porównaniu do skrzyżowaniu ośmiu dróg, auta mogą swobodnie poruszać się na pasie i częściej wymijają kolizję na skrzyżowaniu.
 
 \section{Prawdopodobieństwo kolizji}
 
-W celu przetestowania bezpieczeństwa rozwiązania zostały przeprowadzone pomiary prawdopodobieństwa kolizji w przypadku pomyłek pojazdów. Pomyłka polega na niezastosowaniu się pojazdu do planu. W rozwiązaniu zaimplementowane zostało symulowanie kolizji pojazdów z określonym prawdopodobieńtwem. W każdym kroku czasowym każdy z pojazdów myli się z podanym wcześniej prawdopodobieństwem. Wynikiem pomiarów jest zależność prawdopodobieństwa kolizji od prawdopodobieństwa pomyłki. Zmierzone zostało prawdopodobieństwo kolizji w razie pomyłek pojazdów z następującymi prawdopodobieństwami \{0.001, 0.005, 0.01\}
+W celu przetestowania bezpieczeństwa rozwiązania zostały przeprowadzone pomiary prawdopodobieństwa kolizji w przypadku pomyłek pojazdów. Pomyłka polega na niezastosowaniu się pojazdu do planu. W rozwiązaniu zaimplementowane zostało symulowanie kolizji pojazdów z określonym prawdopodobieństwem. W każdym kroku czasowym każdy z pojazdów myli się z podanym wcześniej prawdopodobieństwem. Wynikiem pomiarów jest zależność prawdopodobieństwa kolizji od prawdopodobieństwa pomyłki. Zmierzone zostało prawdopodobieństwo kolizji w razie pomyłek pojazdów z następującymi prawdopodobieństwami \{0.001, 0.005, 0.01\}
 \newline
 \indent
 W obliczeniach pod uwagę wzięty został także parametr bezpieczeństwa. Pomiary zostały wykonane dla skrzyżowania 8 dróg, na których znajdowało się 10 pojazdów. Program uruchomiony został 30 razy dla parametru bezpieczeństwa równego 0 oraz 30 razy dla parametru bezpieczeństwa równego 1, aby pokazać jakie bezpieczeństwo gwarantuje użycie parametru bezpieczeństwa.
@@ -136,7 +136,7 @@ W celu zweryfikowania szybkości podejścia z wykorzystaniem algorytmu A*, pomia
 Rozwiązania różnią się modelami danych, które reprezentują skrzyżowania oraz znajdujące się na nich pojazdy. W jednym rozwiązaniu położenie i droga aut jest określona za pomocą grafu oraz wierzchołków grafu, przez które auta będą przechodzić. W opisywanym w tej pracy rozwiązaniu drogi są opisywane poprzez ich rozmiar oraz przecięcia z innymi drogami. Położenia samochodów natomiast poprzez numer drogi oraz numer odcinka drogi na której się znajdują.
 \newline
 \indent
-Wykonując pomiary uzgodnione zostały wspólne warunki w obu rozwiązanich tak, aby można było porównać rozwiązania. Porównywane są kroki czasowe, po których wszystkie auta opuszczą skrzyżowanie. Wspólne warunki są następujące:
+Wykonując pomiary uzgodnione zostały wspólne warunki w obu rozwiązaniach tak, aby można było porównać rozwiązania. Porównywane są kroki czasowe, po których wszystkie auta opuszczą skrzyżowanie. Wspólne warunki są następujące:
 \begin{itemize}
 \item Maksymalna prędkość samochodów wynosi 4 odcinki drogi na krok czasowy
 \item Wartości przyspieszeń pojazdów są następujące: \{-1, 0, 1\}
@@ -151,4 +151,4 @@ Wykres z wynikami pokazany jest na rysunku \ref{comparison}
   \caption{Porównanie rozwiązania z użyciem A* ze światłami drogowymi na skrzyżowaniu ośmiu dróg}
   \label{comparison}
 \end{figure}
-Rozwiązanie z wykorzystaniem algorytmu A* daje lepsze wyniki na tle rozwiązania ze światłami sekwencyjnymi oraz z ich optymalizacjami. Zgodnie z przedstawioną tezą, przepustowość na skrzyżowaniach jest lepsza w rozwiązaniu A* w porównaniu do świateł. Rozwiązanie korzystające z algorytmu A* dla 12 pojazdów nie przekracza 15 kroków czasowych. Dla świateł zoptymalizowanych przekracza 20 kroków czasowych, a dla świateł sekwencyjnych przekracza 25 kroków czasowych. Przedstawione w pracy rozwiązanie zoaszczędza 5-10 kroków na jednym skrzyżowaniu dla 12 pojazdów. Wykorzystując metodę dla dużej sieci skrzyżowań, można zaoszczędzić dużo czasu.
+Rozwiązanie z wykorzystaniem algorytmu A* daje lepsze wyniki na tle rozwiązania ze światłami sekwencyjnymi oraz z ich optymalizacjami. Zgodnie z przedstawioną tezą, przepustowość na skrzyżowaniach jest lepsza w rozwiązaniu A* w porównaniu do świateł. Rozwiązanie korzystające z algorytmu A* dla 12 pojazdów nie przekracza 15 kroków czasowych. Dla świateł zoptymalizowanych przekracza 20 kroków czasowych, a dla świateł sekwencyjnych przekracza 25 kroków czasowych. Przedstawione w pracy rozwiązanie zaoszczędza 5-10 kroków na jednym skrzyżowaniu dla 12 pojazdów. Wykorzystując metodę dla dużej sieci skrzyżowań, można zaoszczędzić dużo czasu.
