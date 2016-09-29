@@ -2,48 +2,24 @@
 
 \section{Dziedzina Problemu}
 
-W pracy rozwiązywany jest problem planowania ruchu na skrzyżowaniach.
+W przedstawionej pracy rozwiązywany jest problem planowania ruchu drogowego na skrzyżowaniach. Koordynacja ruchu na skrzyżowaniach najczęściej zapewniana jest poprzez użycie świateł drogowych. W opisywanej metodzie wykorzystany jest algorytm A*, który najczęściej służy do wyszukiwania najkrótszej ścieżki w grafie. Poruszony jest także problem unikania kolizji. Kolizje w opisywanej metodzie są usuwane na bieżąco podczas działania algorytmu A*.
 \newline
-\newline
-W rozwiązaniu wykorzystany jest algorytm A*, który najczęściej służy do wyszukiwania najkrótszej ścieżki w grafie.
-\newline
-\newline
-Poruszony jest także problem unikania kolizji wraz z użyciem algorytmu A*.
-\newline
-\newline
-Omówiona jest trudność w planowaniu ruchu globalnego jakim jest złożoność, która róśnie wraz z rozmiarem środowiska.
-\newline
-\newline
-Planowanie ruchu na skrzyżowaniach wiaże się z czestymi zmianami środowiska. W związku z tym system planujący dokładnie ruch powinien być wstanie szybko reagować na pomyłki.
+\indent
+W pracy omówiona jest także trudność planowaniu ruchu w sposób globalny, jaką jest złożoność, która rośnie wraz z rozmiarem środowiska. Przez środowisko, rozumiane są dane opisujące drogi oraz znajdujące się na nich pojazdy wraz z parametrami. Planowanie ruchu na skrzyżowaniach wiąże się z częstymi zmianami środowiska, czyli zmianami położeń pojazdów wraz z innymi parametrami (np. prędkość, przyspieszenie). W związku z tym, system planujący ruch drogowy powinien być w stanie szybko reagować na pomyłki. Pomyłki powinny być natychmiastowo wykrywane, a plan ruchu korygowany.
 
 \section{Specyfikacja problemu}
 
-Problemem przedstawionym w pracy jest szybkie i bezpieczne zaplanowanie ruchu na skrzyżowaniach. 
+Problemem rozwiązywanym w pracy jest szybkie i bezpieczne zaplanowanie ruchu na skrzyżowaniach. Metoda rozwiązująca ten problem ma określony stan początkowy, którym jest położenie wszystkich pojazdów wraz z parametrami (prędkość, przyspieszenie) na skrzyżowaniach oraz opis dróg. System zwraca dokładny plan, który prowadzi do bezkolizyjnego opuszczenia przez samochody skrzyżowań. Rozwiązanie problemu polega na znalezieniu kolejnych stanów prowadzących do optymalnego wyniki. Pojedynczy stan można zmienić na wiele sposobów. Dla przykładu, pojazd musi mieć określoną prędkość oraz pozycję na drodze, na której się znajduje. W kolejnych stanach może on zmienić położenie, przyspieszyć, zwolnić lub prędkości nie zmieniać. Duża liczba możliwości zmian pojedynczego stanu oznacza, że w celu znalezienia stanów prowadzących do optymalnego rozwiązania, trzeba przeszukać ich bardzo wiele.
 \newline
-\newline
-Mając określony stan początkowy będącym położeniem wszystkich pojazdów na skrzyżowaniu, system zwraca dokładny plan, który prowadzi do szybkiego i bezpiecznego opuszczenia przez samochody skrzyżowań.
-\newline
-\newline
-Problem polega na znalezieniu kolejnych stanów prowadzących do optymalnego rozwiązania. Pojedyńczy stan oraz jego zmiany wprowadzają dużą liczbę możliwości.
-\newline
-\newline
-Dla przykładu pojazd musi mieć określoną pozycję na drodze na której się znajduje oraz prędkość. W kolejnych stanach pojazd może zmienić położenie, przyspieszyć, zwolnić lub prędkości nie zmieniać.
-\newline
-\newline
-Kolejną trudnością w problemie, jest unikanie kolizji. Dla wszystkich możliwość algorytm planowania powinien usunąć wszystkie możliwości kolizji na jednym pasie oraz przy przekraczaniu przez skrzyżowanie.
+\indent
+Kolejną trudnością w problemie, jest unikanie kolizji. Dla wszystkich możliwości, algorytm planowania powinien usunąć wszystkie kolizje na jednym pasie oraz te przy przekraczaniu przez skrzyżowanie. Unikanie kolizji prowadzi do przeszukiwania wygenerowanych stanów, analizy każdego z pojazdów oraz każdego skrzyżowania dwóch dróg, a następnie usuwania stanów powodujących kolizję.
 
 \section{Cel}
 
-Celem pracy jest opracowanie metody planującej ruch drogowy na skrzyżowaniach dróg wielopasmowych przy użyciu zmodyfikowanego algorytmu A*. 
+Celem pracy jest opracowanie metody planującej ruch drogowy na skrzyżowaniach dróg wielopasmowych przy użyciu zmodyfikowanego algorytmu A*. Wynikiem działania metody jest szczegółowy opis, który dokładnie planuje ruch każdego z samochodów w celu bezkolizyjnego opuszczenia skrzyżowania. Celem rozwiązania, jest także zapewnienie dużej przepustowości na skrzyżowaniu. Przepustowość rozumiana jest jako ilość samochodów opuszczających skrzyżowanie w jednostce czasu. System zapewnia wyliczenie planu ruchu dla każdej zadanej sieci skrzyżowań oraz każdego stanu początkowego samochodów.
 \newline
-\newline
-Wynikiem rozwiązania jest szczegółowy opis, który dokładnie planuje ruch każdego z samochodów w celu najszybszego i bezpiecznego opuszczenia skrzyżowania.
-\newline
-\newline
-System zapewnia unikanie kolizji oraz optymalny dojazd do celu pojazdów na zadanej sieci skrzyżowań.
-\newline
-\newline
-W pracy używane będą dwa pojęcia odnoszące się do skrzyżowań: sieć skrzyżowań oraz skrzyżowanie. Skrzyżwanie oznacza przecięcie się dwóch pasów. Sieć skrzyżowań oznacza przecięcia się wielu pasów.
+\indent
+W pracy używane będą dwa pojęcia odnoszące się do skrzyżowań: sieć skrzyżowań oraz skrzyżowanie. Skrzyżowanie oznacza przecięcie się dwóch pasów. Sieć skrzyżowań oznacza przecięcia się wielu pasów.
 
 \section{Struktura pracy}
 TODO
