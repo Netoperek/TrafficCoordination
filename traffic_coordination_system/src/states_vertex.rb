@@ -17,7 +17,7 @@ class StatesVertex
   end
   
   MINUS_ACCELEARTION_MAX = -1
-  SAFETY = 1
+  SAFETY = 0
   MAX_VELOCITY = 4
 
   attr_accessor :attributes, :states, :roads
