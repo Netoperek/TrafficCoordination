@@ -7,7 +7,7 @@ W opracowanym rozwiązaniu drogi reprezentowane są w sposób dyskretny. Każda 
 \item Unikatowy numer drogi
 \item Rozmiar drogi
 \item Informacja o przecięciach z innymi drogami
-\item Kierunek w którym samochód się porusza na drodze (z północy na południe, czy z południa na północ lub z zachodu na wschód czy ze wschodu na zachód)
+\item Kierunek, w którym samochód się porusza na drodze (z północy na południe, czy z południa na północ lub z zachodu na wschód czy ze wschodu na zachód)
 \end{itemize}
 Samochody na drogach są opisane przez:
 \begin{itemize}
@@ -20,24 +20,24 @@ Samochody na drogach są opisane przez:
 Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi na jeden krok czasowy.
 \newline
 \indent
-W systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden kroku czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu, z tego względu, że wraz ze wzrostem ilośći możliwych przyspieszeń rośnie ilość możliwość stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
+W systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden krok czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu. Wynika to z faktu, iż wraz ze wzrostem ilośći możliwych przyspieszeń, rośnie ilość możliwych stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
 \newline
 \indent
-Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr bezpieczeństwa, czyli liczba pozyji będąca dystansem trzymanym między pojazdami. W rozwiązaniu brane są pod uwage pomyłki pojazdów, które polegają na niezastosowaniu się do planu. Dzięki parametrowi bezpieczeństwa maleje prawdopodobieństwo kolizji, kiedy taka pomyłka będzie miała miejsce.
+Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr bezpieczeństwa, czyli liczbę pozyji będącą dystansem trzymanym między pojazdami. W rozwiązaniu brane są pod uwage pomyłki pojazdów, które polegają na niezastosowaniu się do planu. Dzięki parametrowi bezpieczeństwa maleje prawdopodobieństwo kolizji, kiedy taka pomyłka będzie miała miejsce.
 
 \section{Zmodyfikowany algorytm A*}
 
 Zaprezentowany w tej pracy zmodyfikowany algorytm A* jest oparty na stanach, gdzie pojedyńczym stanem jest rozłożenie samochodów na drogach wraz z ich prędkościami. Algorytm zaczynając od zadanego stanu początkowego analizuje możliwe stany sąsiednie i wybiera najszybszą ścieżkę kierując się funkcją heurystyki. Ścieżka prowadzi do określonego celu. W przypadku opracowanego rozwiązania, celem jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
 \newline
 \indent
-Zrealizowany Algorytm A* jest generyczny. Do algorytmu przekazujemy klasę reprezentującą dowolny stan. Klasa musi implementować metodę 'neighbours', która zwraca stany sąsiednie dla danej instancji stanu. Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego stanu.
+Zrealizowany algorytm A* jest generyczny. Do algorytmu przekazujemy klasę reprezentującą dowolny stan. Klasa musi implementować metodę 'neighbours', która zwraca stany sąsiednie dla danej instancji stanu. Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego stanu.
 \newline
 \indent
-Modyfikacja róźni się od innych tym, że stany sąsiednie są liczone dynamicznie. Algorytm nie ma z góry podanego celu. Dla przykładu w przeszukiwaniu ścieżki w grafie celem jest podany wierzchołek końcowy. Algorytm przyjmuje funkcje wygranej, która określa warunki końca algorytmu. W przedstawionej pracy warunkiem końca jest przekroczenie przez wszystkie pojazdy skrzyżowań, a takich stanów jest wiele i nie są znane na początku działania.
+Modyfikacja róźni się od innych tym, że stany sąsiednie są liczone dynamicznie. Algorytm nie ma z góry podanego celu. Dla przykładu, w przeszukiwaniu ścieżki w grafie celem jest podany wierzchołek końcowy. Algorytm przyjmuje funkcje wygranej, która określa warunki końca algorytmu. W przedstawionej pracy warunkiem końca jest przekroczenie przez wszystkie pojazdy skrzyżowań, a takich stanów jest wiele i nie są znane na początku działania.
 
 \section{Stan w opracowanym rozwiązaniu dla algorytmu A*}
 
-Stan w modyfikacji algorytmu A* przedstawionej w tej pracy opisuje stan wszystkich samochodów na skrzyżowaniach wraz z ich prędkościami. Zgodnie z wcześniej opisaną generycznością wierzchołek jest obiektem klasy, który implementuje metodę 'neighbours'. Metoda generuje wszystkie stany sąsiednie dla aktualnego stanu. Dla przykładu, dla ustawień przyspieszeń \{-2, -1, 0, 1, 2\}, dla każdego z aut na skrzyżowaniu generowane są stany z jego prędkością dodając wartości przyspieszeń. Pomijane są stany, w których prędkość samochodu byłaby ujemna. Przykładowo jest pojazd z prędkością 1 pozycji na krok czasowy znajdujący się na 1 pozycji na drodze numer 1. Dla pojazdu rozpatrywane są następujące stany:
+Stan w modyfikacji algorytmu A* przedstawionej w tej pracy, opisuje stan wszystkich samochodów na skrzyżowaniach wraz z ich prędkościami. Zgodnie z wcześniej opisaną generycznością, wierzchołek jest obiektem klasy, który implementuje metodę 'neighbours'. Metoda generuje wszystkie stany sąsiednie dla aktualnego stanu. Dla przykładu, dla ustawień przyspieszeń \{-2, -1, 0, 1, 2\}, dla każdego z aut na skrzyżowaniu generowane są stany z jego prędkością dodając wartości przyspieszeń. Pomijane są stany, w których prędkość samochodu byłaby ujemna. Przykładowo - jest pojazd z prędkością 1 pozycja na krok czasowy, znajdujący się na 1 pozycji na drodze numer 1. Dla pojazdu rozpatrywane są następujące stany:
 \begin{enumerate}
 \item Dodając przyspieszenie o wartości 0: 2 pozycja na drodze numer jeden z prędkością 1
 \item Dodając przyspieszenie o wartości 1: 3 pozycja na drodze numer jeden z prędkością 2
@@ -45,7 +45,7 @@ Stan w modyfikacji algorytmu A* przedstawionej w tej pracy opisuje stan wszystki
 \item Dodając przyspieszenie o wartości -1: 1 pozycja na drodze numer jeden z prędkością 0
 \item Dodając przyspieszenie o wartości -2: Stan jest eliminowany, ponieważ prędkość byłaby ujemna
 \end{enumerate}
-Dodatkowo w przypadku ustawienia maksymalnej prędkości równej 2 pozycje na jeden krok czasowy - możliwość nr 3 także zostałaby wyeliminowana.
+Dodatkowo w przypadku ustawienia maksymalnej prędkości równej 2 pozycje na jeden krok czasowy - możliwość nr 3 zostałaby wyeliminowana.
 \newline
 \newline
 W metodzie usuwane są także stany powodujące kolizje, co będzie opisane w następnym rozdziale.
@@ -64,7 +64,7 @@ Koniecznym elementem w koordynacji ruchu na skrzyżowaniach wielu pojazdów jest
 \item Unikanie kolizji aut poruszających się po tym samym pasie
 \item Unikanie kolizji na skrzyżowaniach
 \end{enumerate}
-Implementacja unikania kolizji pojazdów na tym samym pasie polega na policzeniu obszarów dla samochodów znajdujących się na tym samym pasie, który będą one obejmowały w jednym kroku czasowym wraz z uwzględnieniem parametru bezpieczeństwa. Jeżeli obszary dwóch samochdów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego. Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykład unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce. Stan pierwszy jest stanem startowym. Kolejno w stanie drugim, pojazd \textbf{D} rusza i zmienia swoją pozycję o jeden do przodu, ponieważ nie ma żadnego pojazdu przed nim. Reszta pojazdów stoi i czeka na miejsce. Następnie w stanie trzecim, pojazd \textbf{C} widząc, że ma miejsce porusza się o jedną pozycję do przodu. W stanie następnym na miejsce czeka jedynie samochód \textbf{A} - reszta zmienia pozycję. W kroku piątym i szóstym pojazdy mając miejsce, swobodnie opuszczają skrzyżowanie.
+Implementacja unikania kolizji pojazdów na tym samym pasie, polega na policzeniu obszarów dla samochodów na pasie, który będą one obejmowały w jednym kroku czasowym wraz z uwzględnieniem parametru bezpieczeństwa. Jeżeli obszary dwóch samochdów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego. Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykład unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce. Stan pierwszy jest stanem startowym. Kolejno w stanie drugim, pojazd \textbf{D} rusza i zmienia swoją pozycję o jeden do przodu, ponieważ nie ma żadnego pojazdu przed nim. Reszta pojazdów stoi i czeka na miejsce. Następnie w stanie trzecim, pojazd \textbf{C} widząc, że ma miejsce porusza się o jedną pozycję do przodu. W stanie następnym na miejsce czeka jedynie samochód \textbf{A} - reszta zmienia pozycję. W kroku piątym i szóstym pojazdy mając miejsce, swobodnie opuszczają skrzyżowanie.
 \begin{figure}[H]
     \includegraphics[width=1.0\textwidth]{collision-avoidance-lane.png}
   \caption{Unikanie kolizji na pasie}
@@ -235,13 +235,13 @@ Podsumowując, dla stanu opisanego w tabeli \ref{FirstState} funkcja heurystyki 
 
 \section{Złożoność rozwiązania}
 
-W przedstawionym modelu stan jednego samochodu to (p, v), gdzie p to pozycyja na drodzę oraz v to prędkość pojazdu w odcinkach drogi na krok czasowy. Pozostałe parametry, czyli numer drogi na której znajduje się samochód i pozycja końcowa czy przyspieszenie nie zmieniają się. Dla wartości przyspieszeń ze zbioru \{-1, 0, 1\} dla samochodu powstają następujące stany:
+W przedstawionym modelu stan jednego samochodu to (p, v), gdzie p to pozycyja na drodzę oraz v to prędkość pojazdu w odcinkach drogi na krok czasowy. Pozostałe parametry, czyli numer drogi na której znajduje się samochód i pozycja końcowa, czy przyspieszenie nie zmieniają się. Dla wartości przyspieszeń ze zbioru \{-1, 0, 1\} dla samochodu powstają następujące stany:
 \begin{enumerate}
 \item (p + v, v) - dla przyspieszenia 0
 \item (p + v + 1, v + 1) - dla przyspieszenia 1
 \item (p + v - 1, v - 1) - dla przyspieszenia 1
 \end{enumerate}
-Dla jednego pojazdu z każdym krokiem czasowym powstają 3 stany. Mając na skrzyżowaniu 12 pojazdów otrzymujemy daje 531441 możliwości w jednym kroku czasowym. Algorytm nie musi przechodzić przez wszystie możliwości, jeżeli wcześniej znajdzie rozwiązanie.
+Dla jednego pojazdu z każdym krokiem czasowym powstają 3 stany. Mając na skrzyżowaniu 12 pojazdów, otrzymujemy 531441 możliwości w jednym kroku czasowym. Algorytm nie musi przechodzić przez wszystie możliwości, jeżeli wcześniej znajdzie rozwiązanie.
 \newline
 \indent
 Największym obciążeniem algorytmu jest unikanie kolizji. Zajmuje ono około 60 \% czasu znajdowania rozwiązania. Jest to spowodowane tym, że dla każdego stanu, którym jest położenie wszystkich pojazdów na skrzyżowaniu, algorytm przeprowadza dwie weryfikacje w każdym kroku czasowym:
