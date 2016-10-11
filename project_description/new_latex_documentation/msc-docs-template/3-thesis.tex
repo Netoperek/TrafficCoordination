@@ -6,7 +6,7 @@ W pracy rozwiązywany jest problem planowania ruchu na skrzyżowaniach dróg wie
 Rozwiązanie w porównaniu do wcześniej opisanych podejść, wyróżnia się użyciem algorytmu A* do dokładnego zaplanowania ruchu dla każdego z pojazdów wraz z unikaniem kolizji. Większość istniejących rozwiązań opiera się o światła drogowe, co wiąże się z opóźnieniami spowodowanymi oczekiwaniem na świetle pomarańczowym, a także opóźnieniami spowodowanymi na oczekiwaniu na świetle czerwonym, kiedy na drodze poprzecznej nie ma żadnych pojazdów.
 \newline
 \indent
-Można postawić tezę: \textbf{zastosowanie metody planującej ruch drogowy przy użyciu algorytmu A* pozwala na zaplanowanie bezkolizyjnego ruchu drogowego dla pojazdów na skrzyżowaniu, co pozwala na osiągnięcie lepszej przepustowości niż w przypadku świateł sekwencyjnych wraz z optymalizacjami. Przepustowość rozumiemy jako ilość samochodów opuszczających skrzyżowanie w jednostce czasu. Rozwiązanie jest uruchamiane na jednym rdzeniu procesora. Korzystając z większej ilości rdzeni, metoda może policzyć plany dla wielu wariantów. Plany wielowariantowe znajdują zastosowanie w przypadku pomyłki pojazdów, polegającej na niezastosowanie się do wyliczonego planu.}
+Można postawić tezę: \textbf{zastosowanie metody planującej ruch drogowy przy użyciu algorytmu A* umożliwia zaplanowanie bezkolizyjnego ruchu drogowego dla pojazdów na skrzyżowaniu, co pozwala na osiągnięcie lepszej przepustowości niż w przypadku świateł sekwencyjnych wraz z optymalizacjami.} Przepustowość rozumiemy jako ilość samochodów opuszczających skrzyżowanie w jednostce czasu. Rozwiązanie jest uruchamiane na jednym rdzeniu procesora. Korzystając z większej ilości rdzeni, metoda może policzyć plany dla wielu wariantów. Plany wielowariantowe znajdują zastosowanie w przypadku pomyłki pojazdów, polegającej na niezastosowanie się do wyliczonego planu.
 \newline
 \indent
 Rozwiązanie przyjmuje położenie samochodów na sieci skrzyżowań oraz informacje na temat dróg jako dane wejściowe. Wynikiem jest dokładny plan poruszania się dla każdego z pojazdów. W planie znajdują się informacje o tym z jaką prędkością pojazd powinien się poruszyć, kiedy zwolnić lub przyspieszyć, aby omijać kolizje.
@@ -21,9 +21,9 @@ Do algorytmu przekazywana jest funkcja heurystyki, a także warunek końcowy. Dl
 \noindent
 Do systemu wprowadza się także następujące dane:
 \begin{itemize}
-\item maksymalną prędkość jaką pojazd może osiągnąć
-\item wartości przyspieszeń pojazdu
-\item parametr bezpieczeństwa, czyli odległość utrzymywana pomiędzy pojazdami
+\item Maksymalną prędkość jaką pojazd może osiągnąć
+\item Wartości przyspieszeń pojazdu
+\item Parametr bezpieczeństwa, czyli odległość utrzymywana pomiędzy pojazdami
 \end{itemize}
 System posiadając stan początkowy i powyższe dane, tworzy wszystkie możliwe stany pochodne. Następnie korzystając z funkcji heurystyki algorytm wybiera stany, które prowadzą do najszybszego opuszczenia przez samochody skrzyżowania.
 \newline

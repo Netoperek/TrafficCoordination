@@ -4,30 +4,30 @@
 
 W opracowanym rozwiązaniu drogi reprezentowane są w sposób dyskretny. Każda droga zaczyna się w pozycji 1 i rośnie wraz z jej rozmiarem. Droga jest opisywana przez:
 \begin{itemize}
-\item unikatowy numer drogi
-\item rozmiar drogi
-\item informacja o przecięciach z innymi drogami
-\item kierunek w którym samochód się porusza na drodze (z północy na południe, czy z południa na północ lub z zachodu na wschód czy ze wschodu na zachód)
+\item Unikatowy numer drogi
+\item Rozmiar drogi
+\item Informacja o przecięciach z innymi drogami
+\item Kierunek w którym samochód się porusza na drodze (z północy na południe, czy z południa na północ lub z zachodu na wschód czy ze wschodu na zachód)
 \end{itemize}
 Samochody na drogach są opisane przez:
 \begin{itemize}
-\item unikatowy numer samochodu
-\item unikatowy numer drogi, na której pojazd się znajduje
-\item numer pozycji na drodze, na której samochód się znajduje
-\item prędkość początkową
-\item numer pozycji docelowej na drodze - punkt za ostatnim skrzyżowaniem
+\item Unikatowy numer samochodu
+\item Unikatowy numer drogi, na której pojazd się znajduje
+\item Numer pozycji na drodze, na której samochód się znajduje
+\item Prędkość początkową
+\item Numer pozycji docelowej na drodze - punkt za ostatnim skrzyżowaniem
 \end{itemize}
 Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi na jeden krok czasowy.
 \newline
 \indent
-W Systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden kroku czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu, z tego względu, że wraz ze wzrostem ilośći możliwych przyspieszeń rośnie ilość możliwość stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
+W systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden kroku czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu, z tego względu, że wraz ze wzrostem ilośći możliwych przyspieszeń rośnie ilość możliwość stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
 \newline
 \indent
 Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr bezpieczeństwa, czyli liczba pozyji będąca dystansem trzymanym między pojazdami. W rozwiązaniu brane są pod uwage pomyłki pojazdów, które polegają na niezastosowaniu się do planu. Dzięki parametrowi bezpieczeństwa maleje prawdopodobieństwo kolizji, kiedy taka pomyłka będzie miała miejsce.
 
 \section{Zmodyfikowany algorytm A*}
 
-Zaprezentowany w tej pracy zmodyfikowanym algorytmu A* jest oparty na stanach, gdzie pojedyńczym stanem jest rozłożenie samochodów na drogach wraz z ich prędkościami. Algorytm zaczynając od zadanego stanu początkowego analizuje możliwe stany sąsiednie i wybiera najszybszą ścieżkę kierując się funkcją heurystyki. Ścieżka prowadzi do określonego celu. W przypadku opracowanego rozwiązania, celem jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
+Zaprezentowany w tej pracy zmodyfikowany algorytm A* jest oparty na stanach, gdzie pojedyńczym stanem jest rozłożenie samochodów na drogach wraz z ich prędkościami. Algorytm zaczynając od zadanego stanu początkowego analizuje możliwe stany sąsiednie i wybiera najszybszą ścieżkę kierując się funkcją heurystyki. Ścieżka prowadzi do określonego celu. W przypadku opracowanego rozwiązania, celem jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
 \newline
 \indent
 Zrealizowany Algorytm A* jest generyczny. Do algorytmu przekazujemy klasę reprezentującą dowolny stan. Klasa musi implementować metodę 'neighbours', która zwraca stany sąsiednie dla danej instancji stanu. Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego stanu.
@@ -59,15 +59,15 @@ Rozwiązanie zostało uruchamiane na jednym wątku procesora. W przypadku wykorz
 
 \section{Unikanie kolizji}
 
-Koniecznym elementem w koordynacji ruchu na skrzyżowaniach wielu pojazdów jest unikanie kolizji. W opracowanym rozwiązaniu nikanie kolizji zostało podzielone na dwa etapy:
+Koniecznym elementem w koordynacji ruchu na skrzyżowaniach wielu pojazdów jest unikanie kolizji. W opracowanym rozwiązaniu unikanie kolizji zostało podzielone na dwa etapy:
 \begin{enumerate}
 \item Unikanie kolizji aut poruszających się po tym samym pasie
 \item Unikanie kolizji na skrzyżowaniach
 \end{enumerate}
-Implementacja unikania kolizji pojazdów na tym samym pasie polega na policzeniu obszarów dla samochodów znajdujących się na tym samym pasie, który będą one obejmowały w jednym kroku czasowym wraz z uwzględnieniem parametru bezpieczeństwa. Jeżeli obszary dwóch samochdów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego. Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykład unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce. Stan pierwszy jest stanem startowy. Kolejno w stanie drugim, pojazd \textbf{D} rusza i zmienia swoją pozycję o jeden do przodu, ponieważ nie ma żadnego pojazdu przed nim. Reszta pojazdów stoi i czeka na miejsce. Następnie w stanie trzecim, pojazd \textbf{C} widząc, że ma miejsce porusza się o jedną pozycję do przodu. W stanie następnym na miejsce czeka jedynie samochód \textbf{A} - reszta zmienia pozycję. W kroku piątym i szóstym pojazdy mając miejsce, swobodnie opuszczają skrzyżowanie.
+Implementacja unikania kolizji pojazdów na tym samym pasie polega na policzeniu obszarów dla samochodów znajdujących się na tym samym pasie, który będą one obejmowały w jednym kroku czasowym wraz z uwzględnieniem parametru bezpieczeństwa. Jeżeli obszary dwóch samochdów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego. Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykład unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce. Stan pierwszy jest stanem startowym. Kolejno w stanie drugim, pojazd \textbf{D} rusza i zmienia swoją pozycję o jeden do przodu, ponieważ nie ma żadnego pojazdu przed nim. Reszta pojazdów stoi i czeka na miejsce. Następnie w stanie trzecim, pojazd \textbf{C} widząc, że ma miejsce porusza się o jedną pozycję do przodu. W stanie następnym na miejsce czeka jedynie samochód \textbf{A} - reszta zmienia pozycję. W kroku piątym i szóstym pojazdy mając miejsce, swobodnie opuszczają skrzyżowanie.
 \begin{figure}[H]
     \includegraphics[width=1.0\textwidth]{collision-avoidance-lane.png}
-  \caption{Unikani kolizji na pasie}
+  \caption{Unikanie kolizji na pasie}
   \label{collision-avoidance-lane}
 \end{figure}
 \newpage
