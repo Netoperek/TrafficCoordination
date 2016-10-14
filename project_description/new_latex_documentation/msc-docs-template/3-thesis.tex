@@ -12,16 +12,16 @@ Można postawić tezę: \textbf{zastosowanie metody planującej ruch drogowy prz
 Rozwiązanie przyjmuje położenie samochodów na sieci skrzyżowań oraz informacje na temat dróg jako dane wejściowe. Wynikiem jest dokładny plan poruszania się dla każdego z pojazdów. W planie znajdują się informacje o tym, z jaką prędkością pojazd powinien się poruszyć, kiedy zwolnić lub przyspieszyć, aby omijać kolizje.
 \newline
 \indent 
-Implementacja algorytmu A* jest generyczna i jest oparta na stanach. Algorytm przyjmuje obiekt klasy implementującej metodę zwracającą stany sąsiednie dla stanu aktualnego. Pojedynczym stanem jest rozmieszczenie pojazdów na sieci skrzyżowań wraz z ich prędkościami. Stanem sąsiednim dla aktualnego stanu, jest zmiana pozycji pojazdów na sieci skrzyżowań wraz z ich prędkościami. Do algorytmu przekazywane są także warunki końcowe. Algorytm przeszukuje stany korzystając z funkcji heurystyki, aż osiągnięte zostaną warunki końcowe - nie przeszukiwane są wszystkie możliwe stany. Algorytm A*, moduł graficzny oraz pozostałe elementy systemu zostały napisane w języku Ruby. Algorytm działa w sposób dynamiczny. W przypadku działania algorytmu A* na grafie, z góry znane są krawędzie oraz wierzchołki. W opracowanym rozwiązaniu algorytm dynamicznie tworzy sąsiednie stany.
+Implementacja algorytmu A* jest generyczna i jest oparta na stanach. Algorytm przyjmuje obiekt klasy implementującej metodę zwracającą stany sąsiednie dla stanu aktualnego. Pojedynczym stanem jest rozmieszczenie pojazdów na sieci skrzyżowań wraz z ich prędkościami. Stanem sąsiednim dla aktualnego stanu, jest zmiana pozycji pojazdów na sieci skrzyżowań wraz z ich prędkościami. Do algorytmu przekazywane są także warunki końcowe. Algorytm przeszukuje stany korzystając z funkcji heurystyki, aż osiągnięte zostaną warunki końcowe - nieprzeszukiwane są wszystkie możliwe stany. Algorytm A*, moduł graficzny oraz pozostałe elementy systemu zostały napisane w języku Ruby. Algorytm działa w sposób dynamiczny. W przypadku działania algorytmu A* na grafie, z góry znane są krawędzie oraz wierzchołki. W opracowanym rozwiązaniu algorytm dynamicznie tworzy sąsiednie stany.
 \newline
 \indent
-Do algorytmu przekazywana jest funkcja heurystyki, a także warunek końcowy. Dla koordynacji ruchu, warunkiem końcowym jest opuszczenie przez wszystkie pojazdy skrzyżowania. Funkcja heurystyki operuje na danych stanu - każdemu stanowi przypisuje wartość. W przedstawionym rozwiązaniu funkcja heurystyki zwraca najmniejsze wartości dla stanów, w których samochody maksymalnie przyspieszają.
+Do algorytmu przekazywana jest funkcja heurystyki, a także warunek końcowy. Dla koordynacji ruchu warunkiem końcowym jest opuszczenie przez wszystkie pojazdy skrzyżowania. Funkcja heurystyki operuje na danych stanu - każdemu stanowi przypisuje wartość. W przedstawionym rozwiązaniu funkcja heurystyki zwraca najmniejsze wartości dla stanów, w których samochody maksymalnie przyspieszają.
 \newline
 \newline
 \noindent
 Do systemu wprowadza się także następujące dane:
 \begin{itemize}
-\item Maksymalną prędkość jaką pojazd może osiągnąć
+\item Maksymalną prędkość, jaką pojazd może osiągnąć
 \item Wartości przyspieszeń pojazdu
 \item Parametr bezpieczeństwa, czyli odległość utrzymywana pomiędzy pojazdami
 \end{itemize}
