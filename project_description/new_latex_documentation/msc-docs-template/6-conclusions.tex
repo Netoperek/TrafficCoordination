@@ -2,17 +2,17 @@
 
 \section {Podsumowanie}
 
-W pracy przedstawiona została metoda planowania ruchu drogowego z wykorzystaniem algorytmu A*. Algorytm A* został zmodyfikowany - jest on generyczny, operuje na stanach oraz dynamicznie je przeszukuje. Implementacja algorytmu nie przeszukuje także całej przestrzeni stanów - algorytm kończy działanie w przypadku znalezienia pierwszego rozwiązania.
+W~pracy przedstawiona została metoda planowania ruchu drogowego z~wykorzystaniem algorytmu A*. Algorytm A* został zmodyfikowany - jest on generyczny, operuje na stanach oraz dynamicznie je przeszukuje. Implementacja algorytmu nie przeszukuje także całej przestrzeni stanów - algorytm kończy działanie w~przypadku znalezienia pierwszego rozwiązania.
 \newline
 \indent
-Analizując wyniki przedstawione w rozdziale 5 można wnioskować, że teza przedstawiona w rozdziale 3 jest prawdziwa. Porównanie opisywanej w tej pracy metody, wraz z koordynacją ruchu przy użyciu świateł drogowych pokazuje, że metoda daje lepsze wyniki, jeżeli chodzi o przepustowość. W przedstawionej metodzie, zapewnione jest także rozwiązywanie kolizji oraz bezpieczeństwo w przypadku niezastosowania się pojazdów do planu. Rozwiązanie zostało zaprojektowane i uruchamiane na jednym wątku procesora. Używając więcej wątków, można liczyć plany wielowariantowe w celu szybkiej reakcji na pomyłki pojazdów.
+Analizując wyniki przedstawione w~rozdziale 5 można wnioskować, że teza przedstawiona w~rozdziale 3 jest prawdziwa. Porównanie opisywanej w~tej pracy metody, wraz z~koordynacją ruchu przy użyciu świateł drogowych pokazuje, że metoda daje lepsze wyniki, jeżeli chodzi o~przepustowość. W~przedstawionej metodzie, zapewnione jest także rozwiązywanie kolizji oraz bezpieczeństwo w~przypadku niezastosowania się pojazdów do planu. Rozwiązanie zostało zaprojektowane i~uruchamiane na jednym wątku procesora. Używając więcej wątków, można liczyć plany wielowariantowe w~celu szybkiej reakcji na pomyłki pojazdów.
 \newline
 \indent
-Jak pokazują wyniki, zastosowanie metody do koordynacji ruchu na skrzyżowaniu ze sobą ośmiu dróg zaoszczędza 20-40\% kroków czasowych. Korzystając z metody dla większej ilości sieci skrzyżowań, można zaoszczędzić dużo czasu.
+Jak pokazują wyniki, zastosowanie metody do koordynacji ruchu na skrzyżowaniu ze sobą ośmiu dróg zaoszczędza 20-40\% kroków czasowych. Korzystając z~metody dla większej ilości sieci skrzyżowań, można zaoszczędzić dużo czasu.
 \newline
 \indent
-Z pewnością wadą metody jest złożoność obliczeniowa, która rośnie ekspotencjalnie względem liczby pojazdów znajdujących się na sieci skrzyżowań. Obliczenia na opisanym w rozdziale 5 sprzęcie dla 14 pojazdów trwały nawet do kilku godzin.
+Z~pewnością wadą metody jest złożoność obliczeniowa, która rośnie ekspotencjalnie względem liczby pojazdów znajdujących się na sieci skrzyżowań. Obliczenia na opisanym w~rozdziale 5 sprzęcie dla 14 pojazdów trwały nawet do kilku godzin.
 
 \section{Kierunki rozwoju}
 
-Metoda została zaprojektowana i uruchamiana na jednym wątku procesora. Głównym kierunkiem rozwoju jest liczenie planów wielowariantowych na wielu wątkach procesora. Mając równolegle wyliczane plany wielowariantowe, można następnie symulować pomyłki pojazdów, które polegają na niezastosowaniu się do planu głównego. Następnie, w przypadku takiej pomyłki pojazdu wykrywać ją i wysyłać pojazdom poprawiony plan ruchu. Mając wprowadzone takie zmiany, można kolejno policzyć prawdopodobieństwa kolizji w zależności od prawdopodobieństwa pomyłki pojedynczego pojazdu oraz minimalizować prawdopodobieństwo kolizji, poprzez modyfikację parametru bezpieczeństwa.
+Metoda została zaprojektowana i~uruchamiana na jednym wątku procesora. Głównym kierunkiem rozwoju jest liczenie planów wielowariantowych na wielu wątkach procesora. Mając równolegle wyliczane plany wielowariantowe, można następnie symulować pomyłki pojazdów, które polegają na niezastosowaniu się do planu głównego. Następnie, w~przypadku takiej pomyłki pojazdu wykrywać ją i~wysyłać pojazdom poprawiony plan ruchu. Mając wprowadzone takie zmiany, można kolejno policzyć prawdopodobieństwa kolizji w~zależności od prawdopodobieństwa pomyłki pojedynczego pojazdu oraz minimalizować prawdopodobieństwo kolizji, poprzez modyfikację parametru bezpieczeństwa.

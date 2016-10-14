@@ -2,12 +2,12 @@
 
 \section{Opis modelu danych do reprezentacji skrzyżowań}
 
-W opracowanym rozwiązaniu drogi reprezentowane są w sposób dyskretny. Każda droga zaczyna się w pozycji 1 i rośnie wraz z jej rozmiarem. Droga jest opisywana przez:
+W~opracowanym rozwiązaniu drogi reprezentowane są w~sposób dyskretny. Każda droga zaczyna się w~pozycji 1 i~rośnie wraz z~jej rozmiarem. Droga jest opisywana przez:
 \begin{itemize}
 \item Unikatowy numer drogi
 \item Rozmiar drogi
-\item Informacja o przecięciach z innymi drogami
-\item Kierunek, w którym samochód się porusza na drodze (z północy na południe, czy z południa na północ lub z zachodu na wschód, czy ze wschodu na zachód)
+\item Informacja o~przecięciach z~innymi drogami
+\item Kierunek, w~którym samochód się porusza na drodze (z północy na południe, czy z~południa na północ lub z~zachodu na wschód, czy ze wschodu na zachód)
 \end{itemize}
 Samochody na drogach są opisane przez:
 \begin{itemize}
@@ -17,61 +17,61 @@ Samochody na drogach są opisane przez:
 \item Prędkość początkową
 \item Numer pozycji docelowej na drodze - punkt za ostatnim skrzyżowaniem
 \end{itemize}
-Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi na jeden krok czasowy.
+Samochody poruszają się po drogach w~krokach czasowych. Prędkość samochodu wyrażana jest w~liczbie odcinków drogi na jeden krok czasowy.
 \newline
 \indent
-W systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden krok czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu. Wynika to z faktu, iż wraz ze wzrostem ilości możliwych przyspieszeń, rośnie ilość możliwych stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
+W~systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z~następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w~następnym stanie pojazd może przyspieszyć o~1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o~1 lub 2 odcinki drogi na jeden krok czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu. Wynika to z~faktu, iż wraz ze wzrostem ilości możliwych przyspieszeń, rośnie ilość możliwych stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
 \newline
 \indent
-Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr bezpieczeństwa, czyli liczbę pozycji będącą dystansem trzymanym między pojazdami. W rozwiązaniu brane są pod uwagę pomyłki pojazdów, które polegają na niezastosowaniu się do planu. Dzięki parametrowi bezpieczeństwa maleje prawdopodobieństwo kolizji, kiedy taka pomyłka będzie miała miejsce.
+Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr bezpieczeństwa, czyli liczbę pozycji będącą dystansem trzymanym między pojazdami. W~rozwiązaniu brane są pod uwagę pomyłki pojazdów, które polegają na niezastosowaniu się do planu. Dzięki parametrowi bezpieczeństwa maleje prawdopodobieństwo kolizji, kiedy taka pomyłka będzie miała miejsce.
 
 \section{Zmodyfikowany algorytm A*}
 
-Zaprezentowany w tej pracy zmodyfikowany algorytm A* jest oparty na stanach, gdzie pojedynczym stanem jest rozłożenie samochodów na drogach wraz z ich prędkościami. Algorytm zaczynając od zadanego stanu początkowego analizuje możliwe stany sąsiednie i wybiera najszybszą ścieżkę kierując się funkcją heurystyki. Ścieżka prowadzi do określonego celu. W przypadku opracowanego rozwiązania celem jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
+Zaprezentowany w~tej pracy zmodyfikowany algorytm A* jest oparty na stanach, gdzie pojedynczym stanem jest rozłożenie samochodów na drogach wraz z~ich prędkościami. Algorytm zaczynając od zadanego stanu początkowego analizuje możliwe stany sąsiednie i~wybiera najszybszą ścieżkę kierując się funkcją heurystyki. Ścieżka prowadzi do określonego celu. W~przypadku opracowanego rozwiązania celem jest przekroczenie przez wszystkie samochody ostatniego skrzyżowania na drogach, na których się znajdują.
 \newline
 \indent
 Zrealizowany algorytm A* jest generyczny. Do algorytmu przekazujemy klasę reprezentującą dowolny stan. Klasa musi implementować metodę 'neighbours', która zwraca stany sąsiednie dla danej instancji stanu. Do algorytmu przekazywana jest także funkcja heurystyki, zależna od danych danego stanu.
 \newline
 \indent
-Modyfikacja różni się od innych tym, że stany sąsiednie są liczone dynamicznie. Algorytm nie ma z góry podanego celu. Dla przykładu, w przeszukiwaniu ścieżki w grafie celem jest podany wierzchołek końcowy. Algorytm przyjmuje funkcje wygranej, która określa warunki końca algorytmu. W przedstawionej pracy warunkiem końca jest przekroczenie przez wszystkie pojazdy skrzyżowań, a takich stanów jest wiele i nie są znane na początku działania.
+Modyfikacja różni się od innych tym, że stany sąsiednie są liczone dynamicznie. Algorytm nie ma z~góry podanego celu. Dla przykładu, w~przeszukiwaniu ścieżki w~grafie celem jest podany wierzchołek końcowy. Algorytm przyjmuje funkcje wygranej, która określa warunki końca algorytmu. W~przedstawionej pracy warunkiem końca jest przekroczenie przez wszystkie pojazdy skrzyżowań, a~takich stanów jest wiele i~nie są znane na początku działania.
 
-\section{Stan w opracowanym rozwiązaniu dla algorytmu A*}
+\section{Stan w~opracowanym rozwiązaniu dla algorytmu A*}
 
-Stan w modyfikacji algorytmu A* przedstawionej w tej pracy, opisuje stan wszystkich samochodów na skrzyżowaniach wraz z ich prędkościami. Zgodnie z wcześniej opisaną generycznością, wierzchołek jest obiektem klasy, który implementuje metodę 'neighbours'. Metoda generuje wszystkie stany sąsiednie dla aktualnego stanu. Dla przykładu, dla ustawień przyspieszeń \{-2, -1, 0, 1, 2\}, dla każdego z aut na skrzyżowaniu generowane są stany z jego prędkością dodając wartości przyspieszeń. Pomijane są stany, w których prędkość samochodu byłaby ujemna. Przykładowo - jest pojazd z prędkością 1 pozycja na krok czasowy, znajdujący się na 1 pozycji na drodze numer 1. Dla pojazdu rozpatrywane są następujące stany:
+Stan w~modyfikacji algorytmu A* przedstawionej w~tej pracy, opisuje stan wszystkich samochodów na skrzyżowaniach wraz z~ich prędkościami. Zgodnie z~wcześniej opisaną generycznością, wierzchołek jest obiektem klasy, który implementuje metodę 'neighbours'. Metoda generuje wszystkie stany sąsiednie dla aktualnego stanu. Dla przykładu, dla ustawień przyspieszeń \{-2, -1, 0, 1, 2\}, dla każdego z~aut na skrzyżowaniu generowane są stany z~jego prędkością dodając wartości przyspieszeń. Pomijane są stany, w~których prędkość samochodu byłaby ujemna. Przykładowo - jest pojazd z~prędkością 1 pozycja na krok czasowy, znajdujący się na 1 pozycji na drodze numer 1. Dla pojazdu rozpatrywane są następujące stany:
 \begin{enumerate}
-\item Dodając przyspieszenie o wartości 0: 2 pozycja na drodze numer jeden z prędkością 1
-\item Dodając przyspieszenie o wartości 1: 3 pozycja na drodze numer jeden z prędkością 2
-\item Dodając przyspieszenie o wartości 2: 4 pozycja na drodze numer jeden z prędkością 3
-\item Dodając przyspieszenie o wartości -1: 1 pozycja na drodze numer jeden z prędkością 0
-\item Dodając przyspieszenie o wartości -2: Stan jest eliminowany, ponieważ prędkość byłaby ujemna
+\item Dodając przyspieszenie o~wartości 0: 2 pozycja na drodze numer jeden z~prędkością 1
+\item Dodając przyspieszenie o~wartości 1: 3 pozycja na drodze numer jeden z~prędkością 2
+\item Dodając przyspieszenie o~wartości 2: 4 pozycja na drodze numer jeden z~prędkością 3
+\item Dodając przyspieszenie o~wartości -1: 1 pozycja na drodze numer jeden z~prędkością 0
+\item Dodając przyspieszenie o~wartości -2: Stan jest eliminowany, ponieważ prędkość byłaby ujemna
 \end{enumerate}
-Dodatkowo w przypadku ustawienia maksymalnej prędkości równej 2 pozycje na jeden krok czasowy - możliwość nr 3 zostałaby wyeliminowana.
+Dodatkowo w~przypadku ustawienia maksymalnej prędkości równej 2 pozycje na jeden krok czasowy - możliwość nr 3 zostałaby wyeliminowana.
 \newline
 \newline
-W metodzie usuwane są także stany powodujące kolizje, co będzie opisane w następnym rozdziale.
+W~metodzie usuwane są także stany powodujące kolizje, co będzie opisane w~następnym rozdziale.
 
-\section{Bezpieczeństwo ruchu i plany wielowariantowe}
+\section{Bezpieczeństwo ruchu i~plany wielowariantowe}
 
-W rozwiązaniu zaimplementowane zostało symulowanie pomyłek pojazdów. Pomyłka polega na niezastosowaniu się pojazdu do przekazanego mu planu. Bezpieczeństwo zapewnione jest przez parametr bezpieczeństwa. Parametrem bezpieczeństwa jest liczba odcinków drogi utrzymywana między pojazdami. Wartość parametru można przekazać do systemu.
+W~rozwiązaniu zaimplementowane zostało symulowanie pomyłek pojazdów. Pomyłka polega na niezastosowaniu się pojazdu do przekazanego mu planu. Bezpieczeństwo zapewnione jest przez parametr bezpieczeństwa. Parametrem bezpieczeństwa jest liczba odcinków drogi utrzymywana między pojazdami. Wartość parametru można przekazać do systemu.
 \newline
 \indent
-Rozwiązanie zostało uruchamiane na jednym wątku procesora. W przypadku wykorzystania wielu wątków metoda może wyliczyć plany dla pojazdów przewidując ich pomyłki. Dla przykładu, mając 4 pojazdy na skrzyżowaniu dwóch dróg załóżmy, że w każdym kroku czasowym jeden z nich, myli się z pewnym prawdopodobieństwem  o jeden odcinek drogi. Wyliczone wcześniej plany, z góry przewidując takie pomyłki - dostarczają nowy, poprawny plan. Takie rozwiązanie korzystając z nowych, poprawionych planów zmniejsza prawdopodobieństwo kolizji, w razie pomyłek pojazdów.
+Rozwiązanie zostało uruchamiane na jednym wątku procesora. W~przypadku wykorzystania wielu wątków metoda może wyliczyć plany dla pojazdów przewidując ich pomyłki. Dla przykładu, mając 4 pojazdy na skrzyżowaniu dwóch dróg załóżmy, że w~każdym kroku czasowym jeden z~nich, myli się z~pewnym prawdopodobieństwem  o~jeden odcinek drogi. Wyliczone wcześniej plany, z~góry przewidując takie pomyłki - dostarczają nowy, poprawny plan. Takie rozwiązanie korzystając z~nowych, poprawionych planów zmniejsza prawdopodobieństwo kolizji, w~razie pomyłek pojazdów.
 
 \section{Unikanie kolizji}
 
-Koniecznym elementem w koordynacji ruchu na skrzyżowaniach wielu pojazdów jest unikanie kolizji. W opracowanym rozwiązaniu unikanie kolizji zostało podzielone na dwa etapy:
+Koniecznym elementem w~koordynacji ruchu na skrzyżowaniach wielu pojazdów jest unikanie kolizji. W~opracowanym rozwiązaniu unikanie kolizji zostało podzielone na dwa etapy:
 \begin{enumerate}
 \item Unikanie kolizji aut poruszających się po tym samym pasie
 \item Unikanie kolizji na skrzyżowaniach
 \end{enumerate}
-Implementacja unikania kolizji pojazdów na tym samym pasie, polega na policzeniu obszarów dla samochodów na pasie, który będą one obejmowały w jednym kroku czasowym wraz z uwzględnieniem parametru bezpieczeństwa. Jeżeli obszary dwóch samochodów na jednym pasie pokrywają się - taki stan jest usuwany i wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego. Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykład unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce. Stan pierwszy jest stanem startowym. Kolejno w stanie drugim, pojazd \textbf{D} rusza i zmienia swoją pozycję o jeden do przodu, ponieważ nie ma żadnego pojazdu przed nim. Reszta pojazdów stoi i czeka na miejsce. Następnie w stanie trzecim, pojazd \textbf{C} widząc, że ma miejsce porusza się o jedną pozycję do przodu. W stanie następnym na miejsce czeka jedynie samochód \textbf{A} - reszta zmienia pozycję. W kroku piątym i szóstym pojazdy mając miejsce, swobodnie opuszczają skrzyżowanie.
+Implementacja unikania kolizji pojazdów na tym samym pasie, polega na policzeniu obszarów dla samochodów na pasie, który będą one obejmowały w~jednym kroku czasowym wraz z~uwzględnieniem parametru bezpieczeństwa. Jeżeli obszary dwóch samochodów na jednym pasie pokrywają się - taki stan jest usuwany i~wówczas metoda 'neighbours' nie zwróci go jako stanu sąsiedniego. Na rysunku \ref{collision-avoidance-lane} przedstawiony jest przykład unikania kolizji dla samochodów poruszających się jednym pasem. Przykład przedstawiony jest z~parametrem bezpieczeństwa równym jeden. Samochody, mając przed sobą inny pojazd, czekają aż będzie dla nich miejsce. Stan pierwszy jest stanem startowym. Kolejno w~stanie drugim, pojazd \textbf{D} rusza i~zmienia swoją pozycję o~jeden do przodu, ponieważ nie ma żadnego pojazdu przed nim. Reszta pojazdów stoi i~czeka na miejsce. Następnie w~stanie trzecim, pojazd \textbf{C} widząc, że ma miejsce porusza się o~jedną pozycję do przodu. W~stanie następnym na miejsce czeka jedynie samochód \textbf{A} - reszta zmienia pozycję. W~kroku piątym i~szóstym pojazdy mając miejsce, swobodnie opuszczają skrzyżowanie.
 \begin{figure}[H]
     \includegraphics[width=1.0\textwidth]{collision-avoidance-lane.png}
   \caption{Unikanie kolizji na pasie}
   \label{collision-avoidance-lane}
 \end{figure}
 \newpage
-Unikanie kolizji na skrzyżowaniach polega na eliminacji stanów, w których co najmniej dwa auta przekroczyły w jednym kroku czasowym to samo skrzyżowanie. Metoda 'neighbours' także nie zwróci takich stanów. Na rysunku \ref{collision-avoidance-crossroads} przedstawiony jest przykład unikania kolizji dla dwóch samochodów na prostym skrzyżowaniu. Samochód z kolorem ciemnozielonym porusza się po drodze brązowej, samochód z kolorem jasnozielonym porusza się po drodze czerwonej. Samochód z kolorem ciemnozielonym przyspieszył o dwie jedostki i zmienił pozycję o dwie jednostki do przodu. Samochód z kolorem jasnozielonym przyspieszył natomiast o jedną jednostkę i zmienił pozycję o jedną jednostkę do przodu w celu uniknięcia kolizji. W algorytmie usunięty został stan, w którym oba pojazdy przyspieszyły o dwie jednostki. Został natomiast wybrany stan gdzie jeden z samochodów przyspieszył o dwie jednostki, a drugi o jedną jednostką, ponieważ prowadzi to, do najszybszego opuszczenia skrzyżowania przez pojazdy.
+Unikanie kolizji na skrzyżowaniach polega na eliminacji stanów, w~których co najmniej dwa auta przekroczyły w~jednym kroku czasowym to samo skrzyżowanie. Metoda 'neighbours' także nie zwróci takich stanów. Na rysunku \ref{collision-avoidance-crossroads} przedstawiony jest przykład unikania kolizji dla dwóch samochodów na prostym skrzyżowaniu. Samochód z~kolorem ciemnozielonym porusza się po drodze brązowej, samochód z~kolorem jasnozielonym porusza się po drodze czerwonej. Samochód z~kolorem ciemnozielonym przyspieszył o~dwie jedostki i~zmienił pozycję o~dwie jednostki do przodu. Samochód z~kolorem jasnozielonym przyspieszył natomiast o~jedną jednostkę i~zmienił pozycję o~jedną jednostkę do przodu w~celu uniknięcia kolizji. W~algorytmie usunięty został stan, w~którym oba pojazdy przyspieszyły o~dwie jednostki. Został natomiast wybrany stan gdzie jeden z~samochodów przyspieszył o~dwie jednostki, a~drugi o~jedną jednostką, ponieważ prowadzi to, do najszybszego opuszczenia skrzyżowania przez pojazdy.
 \begin{figure}[H]
     \includegraphics[width=1.0\textwidth]{collision-avoidance-crossroads.png}
   \caption{Unikanie kolizji na skrzyżowaniu}
@@ -81,14 +81,14 @@ Unikanie kolizji na skrzyżowaniach polega na eliminacji stanów, w których co 
 
 \section{Format danych wejściowych}
 
-Zaprezentowane rozwiązanie potrzebuje dane na temat skrzyżowań, samochodów oraz ograniczeń parametrów samochodów. Skrzyżowania reprezentowane są w pliku CSV \footnote{CSV - wartości rozdzielone przecinkiem. Format przechowywania danych w pliku tekstowym, gdzie pierwszy wiersz opisuje wartości. Następne wiersze to wartości atrybutów opisanych w wierszu pierwszym. } posiadającym atrybuty: numer drogi, rozmiar, przecięcia, kierunek. Przecięcie reprezentowane są przez dwie liczby. Na przykład 5 7 - oznacza, że droga przecina drogę o numerze 5 w pozycji 7. Kolejne przecięcia oddzielane są średnikami. Stany samochodów zapisane są w pliku CSV posiadającym atrybuty: numer samochodu, numer drogi samochodu, pozycję na drodze, pozycję końcową. Ograniczenia przechowywane są w osobnym pliku CSV posiadającym atrybuty: maksymalna prędkość, parametr bezpieczeństwa, wartości przyspieszeń.
+Zaprezentowane rozwiązanie potrzebuje dane na temat skrzyżowań, samochodów oraz ograniczeń parametrów samochodów. Skrzyżowania reprezentowane są w~pliku CSV \footnote{CSV - wartości rozdzielone przecinkiem. Format przechowywania danych w~pliku tekstowym, gdzie pierwszy wiersz opisuje wartości. Następne wiersze to wartości atrybutów opisanych w~wierszu pierwszym. } posiadającym atrybuty: numer drogi, rozmiar, przecięcia, kierunek. Przecięcie reprezentowane są przez dwie liczby. Na przykład 5 7 - oznacza, że droga przecina drogę o~numerze 5 w~pozycji 7. Kolejne przecięcia oddzielane są średnikami. Stany samochodów zapisane są w~pliku CSV posiadającym atrybuty: numer samochodu, numer drogi samochodu, pozycję na drodze, pozycję końcową. Ograniczenia przechowywane są w~osobnym pliku CSV posiadającym atrybuty: maksymalna prędkość, parametr bezpieczeństwa, wartości przyspieszeń.
 
 \section{Funkcja heurystyki}
 
 Funkcja heurystyki dla algorytmu A* jest to suma kroków czasowych, po których wszystkie auta przekroczą ostatnie skrzyżowanie - czyli osiągną cel. Funkcja liczona jest, przy założeniu, że wszystkie samochody maksymalnie przyspieszają.
 \newline
 \indent
-W opracowanym rozwiązaniu każdy samochód ma wyznaczoną pozycję, na której musi się znaleźć lub ją przekroczyć (jest to pozycja za ostatnim skrzyżowaniem). Poniżej przedstawiony jest przykład liczonej funkcji heurystyki dla dwóch stanów opisujących położenia samochodów na skrzyżowaniu.
+W~opracowanym rozwiązaniu każdy samochód ma wyznaczoną pozycję, na której musi się znaleźć lub ją przekroczyć (jest to pozycja za ostatnim skrzyżowaniem). Poniżej przedstawiony jest przykład liczonej funkcji heurystyki dla dwóch stanów opisujących położenia samochodów na skrzyżowaniu.
 \newpage
 \begin{table}[t]
     \begin{tabular}{|c|c|c|c|c|}
@@ -125,7 +125,7 @@ W opracowanym rozwiązaniu każdy samochód ma wyznaczoną pozycję, na której 
     \label{SecondState}
 \end{table}
 \newpage
-Dla stanu opisanego w tabeli \ref{FirstState} funkcja heurystyki jest liczona następująco:
+Dla stanu opisanego w~tabeli \ref{FirstState} funkcja heurystyki jest liczona następująco:
 \newline
 \newline
 \textbf{Dla pojazdów 1-4:}
@@ -157,10 +157,10 @@ Razem 2 kroki czasowe dla jednego pojazdu. Dla wszystkich czterech pojazdów - 8
 \newline
 \newline
 \newline
-Dla stanu opisanego w tabeli \ref{SecondState} funkcja heurystyki jest liczona następująco:
+Dla stanu opisanego w~tabeli \ref{SecondState} funkcja heurystyki jest liczona następująco:
 \newline
 \newline
-\textbf{Dla pojazdów 1 i 3}
+\textbf{Dla pojazdów 1 i~3}
 \newline
 \newline
 \underline{1 krok czasowy}:
@@ -196,10 +196,10 @@ pozycja = (pozycja) 4 + (prędkość) 3 = 7
 Pojazd znajduje się na pozycji 7, która jest za pozycją końcową 6.
 \newline
 \newline
-Razem 3 kroki czasowe dla jednego pojazdu. Dla pojazdów 1 i 3 - 6 kroków czasowych.
+Razem 3 kroki czasowe dla jednego pojazdu. Dla pojazdów 1 i~3 - 6 kroków czasowych.
 \newline
 \newline
-\textbf{Dla pojazdów 2 i 4:}
+\textbf{Dla pojazdów 2 i~4:}
 \newline
 \newline
 \underline{1 krok czasowy}:
@@ -224,47 +224,47 @@ pozycja = (pozycja) 3 + (prędkość) 3 = 6
 Pojazd znajduje się na pozycji 6, która jest równa pozycji końcowej.
 \newline
 \newline
-Razem 2 kroki czasowe dla jednego pojazdu. Dla pojazdów 2 i 4 - 4 kroki czasowe.
+Razem 2 kroki czasowe dla jednego pojazdu. Dla pojazdów 2 i~4 - 4 kroki czasowe.
 \newline
 \newline
 Razem dla wszystkich pojazdów - 10 kroków czasowych.
 \newline
 \newline
 \newline
-Podsumowując, dla stanu opisanego w tabeli \ref{FirstState} funkcja heurystyki zwróci wartość 8 (osiem kroków czasowych), a dla stanu opisanego w tabeli \ref{SecondState} funkcja heurystyki zwróci wartość 10 (dziesięć kroków czasowych). Algorytm w pierwszej kolejności wybierze wartość minimalną - czyli wybierze stan opisany w tabeli \ref{FirstState}.
+Podsumowując, dla stanu opisanego w~tabeli \ref{FirstState} funkcja heurystyki zwróci wartość 8 (osiem kroków czasowych), a~dla stanu opisanego w~tabeli \ref{SecondState} funkcja heurystyki zwróci wartość 10 (dziesięć kroków czasowych). Algorytm w~pierwszej kolejności wybierze wartość minimalną - czyli wybierze stan opisany w~tabeli \ref{FirstState}.
 
 \section{Złożoność rozwiązania}
 
-W przedstawionym modelu stan jednego samochodu to (p, v), gdzie p to pozycja na drodze oraz v to prędkość pojazdu w odcinkach drogi na krok czasowy. Pozostałe parametry, czyli numer drogi, na której znajduje się samochód i pozycja końcowa, czy przyspieszenie się nie zmieniają. Dla wartości przyspieszeń ze zbioru \{-1, 0, 1\} dla samochodu powstają następujące stany:
+W~przedstawionym modelu stan jednego samochodu to (p, v), gdzie p~to pozycja na drodze oraz v~to prędkość pojazdu w~odcinkach drogi na krok czasowy. Pozostałe parametry, czyli numer drogi, na której znajduje się samochód i~pozycja końcowa, czy przyspieszenie się nie zmieniają. Dla wartości przyspieszeń ze zbioru \{-1, 0, 1\} dla samochodu powstają następujące stany:
 \begin{enumerate}
 \item (p + v, v) - dla przyspieszenia 0
-\item (p + v + 1, v + 1) - dla przyspieszenia 1
-\item (p + v - 1, v - 1) - dla przyspieszenia 1
+\item (p + v~+ 1, v~+ 1) - dla przyspieszenia 1
+\item (p + v~- 1, v~- 1) - dla przyspieszenia 1
 \end{enumerate}
-Dla jednego pojazdu z każdym krokiem czasowym powstają 3 stany. Mając na skrzyżowaniu 12 pojazdów, otrzymujemy 531441 możliwości w jednym kroku czasowym. Algorytm nie musi przechodzić przez wszystkie możliwości, jeżeli wcześniej znajdzie rozwiązanie.
+Dla jednego pojazdu z~każdym krokiem czasowym powstają 3 stany. Mając na skrzyżowaniu 12 pojazdów, otrzymujemy 531441 możliwości w~jednym kroku czasowym. Algorytm nie musi przechodzić przez wszystkie możliwości, jeżeli wcześniej znajdzie rozwiązanie.
 \newline
 \indent
-Największym obciążeniem algorytmu jest unikanie kolizji. Zajmuje ono około 60 \% czasu znajdowania rozwiązania. Jest to spowodowane tym, że dla każdego stanu, którym jest położenie wszystkich pojazdów na skrzyżowaniu, algorytm przeprowadza dwie weryfikacje w każdym kroku czasowym:
+Największym obciążeniem algorytmu jest unikanie kolizji. Zajmuje ono około 60 \% czasu znajdowania rozwiązania. Jest to spowodowane tym, że dla każdego stanu, którym jest położenie wszystkich pojazdów na skrzyżowaniu, algorytm przeprowadza dwie weryfikacje w~każdym kroku czasowym:
 \begin{enumerate}
-\item Czy istnieją dwa pojazdy, które w tym samym czasie przekroczyły skrzyżowanie
+\item Czy istnieją dwa pojazdy, które w~tym samym czasie przekroczyły skrzyżowanie
 \item Czy odcinki zajęte przez dwa pojazdy na jednym pasie się przecinają
 \end{enumerate}
-Powyższe stany eliminowane są z rozwiązania co zapewnia unikanie kolizji.
+Powyższe stany eliminowane są z~rozwiązania co zapewnia unikanie kolizji.
 \newline
 \indent
-Dla zbioru przyspieszeń \{-2, -1, 0, 1, 2\} dla każdego pojazdu powstaje 5 stanów. Mając na skrzyżowaniu 12 pojazdów mamy 244140625 możliwości w jednym kroku czasowym. Możliwości przypadające na krok czasowy są silnie związane z czasem wykonania algorytmu. Wraz ze wzrostem liczby pojazdów na skrzyżowaniach, a co za tym idzie dodatkowych możliwości, czas wykonania rośnie ekspotencjalnie.
+Dla zbioru przyspieszeń \{-2, -1, 0, 1, 2\} dla każdego pojazdu powstaje 5 stanów. Mając na skrzyżowaniu 12 pojazdów mamy 244140625 możliwości w~jednym kroku czasowym. Możliwości przypadające na krok czasowy są silnie związane z~czasem wykonania algorytmu. Wraz ze wzrostem liczby pojazdów na skrzyżowaniach, a~co za tym idzie dodatkowych możliwości, czas wykonania rośnie ekspotencjalnie.
 \section{Reprezentacja graficzna wyników}
 
-W celu graficznej reprezentacji wyników zaimplementowany został moduł graficzny. Działanie modułu graficznego oparte jest na rysowaniu grafów z wykorzystaniem biblioteki Graphviz \footnote{Graphviz - to zestaw narzędzi do tworzenia diagramów za pomocą grafów. Jest rozwijany jako otwarte oprogramowanie i udostępniany na licencji CPL} oraz jej implementacji w języku Ruby. Skrzyżowanie jest reprezentowane za pomocą grafu. Wierzchołkami grafu są poszczególne odcinki dróg. Krawędziami grafu są połączenia pomiędzy odcinkami. Samochody poruszające się po tej samej drodze są zaznaczone grubszym obwodem oraz mają ten sam kolor. Samochody można rozróżnić poprzez unikatowy numer na nich napisany. Kolejne kroki czasowe reprezentowane są poprzez następne grafy z kolejnymi ułożeniami samochodów. Efektem jest stworzony GIF z następujących po sobie grafów przy użyciu biblioteki 'rmagick' dla języka Ruby.
+W~celu graficznej reprezentacji wyników zaimplementowany został moduł graficzny. Działanie modułu graficznego oparte jest na rysowaniu grafów z~wykorzystaniem biblioteki Graphviz \footnote{Graphviz - to zestaw narzędzi do tworzenia diagramów za pomocą grafów. Jest rozwijany jako otwarte oprogramowanie i~udostępniany na licencji CPL} oraz jej implementacji w~języku Ruby. Skrzyżowanie jest reprezentowane za pomocą grafu. Wierzchołkami grafu są poszczególne odcinki dróg. Krawędziami grafu są połączenia pomiędzy odcinkami. Samochody poruszające się po tej samej drodze są zaznaczone grubszym obwodem oraz mają ten sam kolor. Samochody można rozróżnić poprzez unikatowy numer na nich napisany. Kolejne kroki czasowe reprezentowane są poprzez następne grafy z~kolejnymi ułożeniami samochodów. Efektem jest stworzony GIF z~następujących po sobie grafów przy użyciu biblioteki 'rmagick' dla języka Ruby.
 \newline
 \indent
-Moduł graficzny wczytuje wszystkie dane wejściowe: pozycję samochodów, dane skrzyżowania oraz ograniczenia. Kolejno na wejście otrzymuje plik zawierający JSON \footnote{JSON - lekki format tekstowy wymiany danych komputerowych}, który reprezentuje wszystkie stany samochodów na skrzyżowaniach od momentu startu, aż do opuszczenia skrzyżowań przez wszystkie samochody. Plik powstaje w wyniku wykonania zaprezentowanego algorytmu A*. Moduł wczytując dane początkowe tworzy graf bazowy. Graf bazowy przedstawia skrzyżowanie wraz z pojazdami. Kolory dla dróg oraz samochodów są losowane i przetrzymywane w zbiorze tak, aby żaden z kolorów się nie powtórzył. Następnie moduł, posiadający kolejne stany w kolejnych krokach czasowych, korzysta z grafu bazowego i zmienia pozycję samochodów. Po każdym kroku czasowym zapisywane jest zdjęcie grafu z numerem kroku czasowego.
+Moduł graficzny wczytuje wszystkie dane wejściowe: pozycję samochodów, dane skrzyżowania oraz ograniczenia. Kolejno na wejście otrzymuje plik zawierający JSON \footnote{JSON - lekki format tekstowy wymiany danych komputerowych}, który reprezentuje wszystkie stany samochodów na skrzyżowaniach od momentu startu, aż do opuszczenia skrzyżowań przez wszystkie samochody. Plik powstaje w~wyniku wykonania zaprezentowanego algorytmu A*. Moduł wczytując dane początkowe tworzy graf bazowy. Graf bazowy przedstawia skrzyżowanie wraz z~pojazdami. Kolory dla dróg oraz samochodów są losowane i~przetrzymywane w~zbiorze tak, aby żaden z~kolorów się nie powtórzył. Następnie moduł, posiadający kolejne stany w~kolejnych krokach czasowych, korzysta z~grafu bazowego i~zmienia pozycję samochodów. Po każdym kroku czasowym zapisywane jest zdjęcie grafu z~numerem kroku czasowego.
 \newline
 \indent
-W module znajduje się także dodatkowe sprawdzanie kolizji. Jeżeli kolizja wystąpi, w danym kroku czasowym na zdjęciu dodany zostanie napis "Collision". Dzięki temu można zobaczyć prawdopodobieństwo kolizji w przypadku, gdy jeden z pojazdów nie zastosuje się do planu.
+W~module znajduje się także dodatkowe sprawdzanie kolizji. Jeżeli kolizja wystąpi, w~danym kroku czasowym na zdjęciu dodany zostanie napis "Collision". Dzięki temu można zobaczyć prawdopodobieństwo kolizji w~przypadku, gdy jeden z~pojazdów nie zastosuje się do planu.
 \newline
 \indent
-Na rysunku \ref{graphical-framework} zaprezentowane jest działanie modułu graficznego dla skrzyżowania czterech dróg i ośmiu pojazdów. Na 11 elemencie rysunku widać, że wszystkie samochody opuściły wszystkie skrzyżowania po 11 krokach czasowych.
+Na rysunku \ref{graphical-framework} zaprezentowane jest działanie modułu graficznego dla skrzyżowania czterech dróg i~ośmiu pojazdów. Na 11 elemencie rysunku widać, że wszystkie samochody opuściły wszystkie skrzyżowania po 11 krokach czasowych.
 \begin{figure}[H]
     \includegraphics[width=1.0\textwidth]{graphical_module_2.png}
   \caption{Wynik działania modułu graficznego}
