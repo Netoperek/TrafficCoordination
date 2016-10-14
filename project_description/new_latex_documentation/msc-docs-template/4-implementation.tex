@@ -20,7 +20,7 @@ Samochody na drogach są opisane przez:
 Samochody poruszają się po drogach w krokach czasowych. Prędkość samochodu wyrażana jest w liczbie odcinków drogi na jeden krok czasowy.
 \newline
 \indent
-W systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden krok czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu. Wynika to z faktu, iż wraz ze wzrostem ilośći możliwych przyspieszeń, rośnie ilość możliwych stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
+W systemie można wybrać maksymalne przyspieszenia ujemne oraz dodatnie samochodów z następujących możliwości \{-2, -1, 0, 1, 2\}. Oznacza to, że w następnym stanie pojazd może przyspieszyć o 1 lub 2 odcinki drogi na jeden krok czasowy. Dla wartości 0 pojazd utrzymuje swoją prędkość. Dla wartości ujemnych pojazd zwalnia o 1 lub 2 odcinki drogi na jeden krok czasowym. Ilość możliwych dla samochodu przyspieszeń znacznie wpływa na złożoność czasową algorytmu. Wynika to z faktu, iż wraz ze wzrostem ilości możliwych przyspieszeń, rośnie ilość możliwych stanów sąsiednich dla samochodu, przez które algorytm musi przejść.        
 \newline
 \indent
 Do modelu przekazać należy także maksymalną prędkość, którą wszystkie samochody mogą osiągnąć oraz parametr bezpieczeństwa, czyli liczbę pozyji będącą dystansem trzymanym między pojazdami. W rozwiązaniu brane są pod uwage pomyłki pojazdów, które polegają na niezastosowaniu się do planu. Dzięki parametrowi bezpieczeństwa maleje prawdopodobieństwo kolizji, kiedy taka pomyłka będzie miała miejsce.
@@ -241,7 +241,7 @@ W przedstawionym modelu stan jednego samochodu to (p, v), gdzie p to pozycyja na
 \item (p + v + 1, v + 1) - dla przyspieszenia 1
 \item (p + v - 1, v - 1) - dla przyspieszenia 1
 \end{enumerate}
-Dla jednego pojazdu z każdym krokiem czasowym powstają 3 stany. Mając na skrzyżowaniu 12 pojazdów, otrzymujemy 531441 możliwości w jednym kroku czasowym. Algorytm nie musi przechodzić przez wszystie możliwości, jeżeli wcześniej znajdzie rozwiązanie.
+Dla jednego pojazdu z każdym krokiem czasowym powstają 3 stany. Mając na skrzyżowaniu 12 pojazdów, otrzymujemy 531441 możliwości w jednym kroku czasowym. Algorytm nie musi przechodzić przez wszystkie możliwości, jeżeli wcześniej znajdzie rozwiązanie.
 \newline
 \indent
 Największym obciążeniem algorytmu jest unikanie kolizji. Zajmuje ono około 60 \% czasu znajdowania rozwiązania. Jest to spowodowane tym, że dla każdego stanu, którym jest położenie wszystkich pojazdów na skrzyżowaniu, algorytm przeprowadza dwie weryfikacje w każdym kroku czasowym:

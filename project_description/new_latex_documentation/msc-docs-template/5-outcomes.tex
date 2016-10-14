@@ -81,7 +81,7 @@ Liczba kroków czasowych na skrzyżowaniu ośmiu dróg jest mniejsza niż na skr
 W celu przetestowania bezpieczeństwa rozwiązania, zostały przeprowadzone pomiary prawdopodobieństwa kolizji w przypadku pomyłek pojazdów. Pomyłka polega na niezastosowaniu się pojazdu do planu. W rozwiązaniu zaimplementowane zostało symulowanie kolizji pojazdów z określonym prawdopodobieństwem. W każdym kroku czasowym, każdy z pojazdów myli się z podanym wcześniej prawdopodobieństwem. Wynikiem pomiarów jest zależność prawdopodobieństwa kolizji od prawdopodobieństwa pomyłki. Zmierzone zostało prawdopodobieństwo kolizji w razie pomyłek pojazdów z następującymi prawdopodobieństwami \{0.001, 0.005, 0.01\}
 \newline
 \indent
-W obliczeniach pod uwagę wzięty został także parametr bezpieczeństwa. Pomiary zostały wykonane dla skrzyżowania 8 dróg, na których znajdowało się 10 pojazdów. Program uruchomiony został 30 razy dla parametru bezpieczeństwa równego 0 oraz 30 razy dla parametru bezpieczeństwa równego 1, aby pokazać jakie bezpieczeństwo gwarantuje użycie parametru bezpieczeństwa.
+W obliczeniach pod uwagę wzięty został także parametr bezpieczeństwa. Pomiary zostały wykonane dla skrzyżowania 8 dróg, na których znajdowało się 10 pojazdów. Program uruchomiony został 30 razy dla parametru bezpieczeństwa równego 0 oraz 30 razy dla parametru bezpieczeństwa równego 1, aby pokazać jakie bezpieczeństwo gwarantuje użycie tego parametru.
 \newline
 \newline
 Wyniki z parametrem bezpieczeństwa równym 0 zareprezentowane są w tabeli \ref{firstCollision}
@@ -115,7 +115,7 @@ Jak pokazują wyniki w tabelach \ref{firstCollision}, \ref{secondCollision} para
 
 \section{Porównanie wyników z rozwiązaniem ze światłami drogowymi}
 
-W celu zweryfikowania szybkości podejścia z wykorzystaniem algorytmu A*, wyniki zostały porównane z rozwiązaniem polegającym na optymalizacji świateł drogowych przedstawionym w pracy \cite{slakomy}. Porównywane rozwiązanie także jest oparte o kroki czasowe. Drogi także są dyskretne, mierzone w odcinach, a prędkość też mierzona jest w ilości odcinków drogi na krok czasowy.
+W celu zweryfikowania szybkości podejścia z wykorzystaniem algorytmu A*, wyniki zostały porównane z rozwiązaniem polegającym na optymalizacji świateł drogowych przedstawionym w pracy \cite{slakomy}. Porównywane rozwiązanie także jest oparte o kroki czasowe. Drogi także są dyskretne, mierzone w odcinkach, a prędkość też mierzona jest w ilości odcinków drogi na krok czasowy.
 \newline
 \indent
 Rozwiązania różnią się modelami danych, które reprezentują skrzyżowania oraz znajdujące się na nich pojazdy. W jednym rozwiązaniu położenie i droga aut jest określona za pomocą grafu oraz wierzchołków grafu, przez które auta będą przechodzić. W opisywanym w tej pracy, rozwiązaniu drogi są opisywane poprzez ich rozmiar oraz przecięcia z innymi drogami. Położenia samochodów natomiast poprzez numer drogi oraz numer odcinka drogi na której się znajdują.
