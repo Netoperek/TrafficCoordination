@@ -24,3 +24,5 @@ The goal of this project is to use A Start algorithm in order to solve the follo
 ## Example output
 
 ![Alt text](https://media.giphy.com/media/3o6EhMdCqWV1fOqhPO/giphy.gif)
+
+![Alt text](https://media.giphy.com/media/3oD3Ylmw0CSTmo4Z2M/giphy.gif)
