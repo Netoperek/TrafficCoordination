@@ -21,6 +21,6 @@ The goal of this project is to use A Start algorithm in order to solve the follo
 1. The algorithm looks for the situation where all of the cars have reach their final positions
 1. Cars move on WITHOUT collisions
 
-## Documentation
+## Example output
 
-The documentation can be found in the project_description folder
+![Alt text](https://media.giphy.com/media/3o6EhMdCqWV1fOqhPO/giphy.gif)
